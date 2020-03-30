@@ -1,0 +1,164 @@
+<section class="container-fluide">
+  <h2 class="">{{'payer' | translate}}</h2><br>
+  <section class="row">
+      <section class="col-md-3  dash">
+          <form class="search-form" #form="ngForm" (ngSubmit)="Payer(form.value)">
+       
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'name' | translate}}" name="pname" required [(ngModel)]="pname">
+            </mat-form-field><br>
+            <mat-form-field>
+              <mat-select placeholder="{{'active' | translate}}" name="pactive" required [(ngModel)]="pactive">
+                <mat-option value="3">{{'all' | translate}}</mat-option>
+                <mat-option value="1">{{'yes' | translate}}</mat-option>
+                <mat-option value="0">{{'no' | translate}}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+            <mat-form-field>
+              <mat-select placeholder="{{'category' | translate}}" name="ecategory" required [(ngModel)]="category">
+                <mat-option *ngFor="let categories of ecategory" [value]="categories.ID" >{{categories.Name}}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+            <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
+          </form><br>
+          <button class="success-bg btn-block log"(click)="openSm(content)" mat-raised-button >{{'Add' | translate}}</button>
+          
+          <ng-template #content let-modal>
+            <div role="document">
+            <div class="modal-header">
+              <h4 class="modal-title" style="text-align: center;">{{'Add' | translate}}</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form #addform="ngForm" (ngSubmit)="addPayer(addform.value)">
+            <div class="modal-body ">
+              <section class="row justify-content-center">
+                <section class="col-md-5">
+                  
+              <div class="form-group row">
+                <label>{{'id' | translate}}</label>
+                  <input class="form-control" readonly name="payerid" required [(ngModel)]="payerid">
+            
+              </div>
+              <div class="form-group row">
+                <label>{{'name' | translate}}</label>
+                  <input class="form-control" placeholder="Enter Name" name="payername" required [(ngModel)]="payername">
+                </div>
+            
+                <!-- <div class="form-group row">
+                  <label class="col-form-label">{{'pricelist' | translate}}</label>
+                    <select class="form-control" name="payerpricelist" [(ngModel)]="payerpricelist">
+                      <option >{{'all' | translate}}</option>
+                      <option >{{'yes' | translate}}</option>
+                      <option >{{'no' | translate}}</option>
+                    </select>
+                   </div> -->
+                   <div class="form-group row">
+                    <label class="col-form-label ">{{'pricelist' | translate}}</label>
+                     <select class="form-control" name="payerpricelist" [(ngModel)]="payerpricelist">
+                        <option *ngFor="let price of payerpricelist" [value]="price.ID">{{price.Name}}</option>
+                      </select>
+                      </div>
+              
+              <div class="form-group row">
+                <label>{{'currency' | translate}}</label>
+                  <input  class="form-control" placeholder="Enter Currency" name="payercurrency" required [(ngModel)]="payercurrency">
+              </div>
+              <div class="form-group row">
+                <label>{{'dicount' | translate}}</label>
+                  <input  class="form-control" placeholder="Enter Dicount" name="payerdiscount" required [(ngModel)]="payerdiscount">
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label">{{'active' | translate}}</label>
+                  <select class="form-control" name="payeractive" [(ngModel)]="payeractive">
+                    <!-- <option >{{'all' | translate}}</option> -->
+                    <option >{{'yes' | translate}}</option>
+                    <option >{{'no' | translate}}</option>
+                  </select>
+                 </div>
+            </section>
+            <section class="col-md-5 ml-3">
+              <!-- <div class="form-group row">
+                <label class="col-form-label">{{'category' | translate}}</label>
+                  <select class="form-control" name="payercategory" [(ngModel)]="payercategory">
+                    <option >{{'all' | translate}}</option>
+                    <option >{{'yes' | translate}}</option>
+                    <option >{{'no' | translate}}</option>
+                  </select>
+                 </div> -->
+                 <div class="form-group row">
+                  <label class="col-form-label ">{{'category' | translate}}</label>
+                   <select class="form-control" name="payercategory" [(ngModel)]="payercategory">
+                      <option *ngFor="let category of payercategory" [value]="category.ID">{{category.Name}}</option>
+                    </select>
+                    </div>
+                   
+              <div class="form-group row">
+                <label>{{'weblogin' | translate}}</label>
+                  <input  class="form-control" placeholder="Enter login ID" name="payerweblogin" required [(ngModel)]="payerweblogin">
+              </div>
+              <div class="form-group row">
+                <label>{{'webpass' | translate}}</label>
+                  <input  class="form-control" placeholder="" name="payerwebpassword" required [(ngModel)]="payerwebpassword">
+              </div>
+              <div class="form-group row">
+                <label>{{'allowdiscount' | translate}}</label>
+                  <input  class="form-control" placeholder="Enter dicount" name="payerallow" required [(ngModel)]="payerallow">
+              </div>
+              <div class="form-group row">
+                <label>{{'advancedamt' | translate}}</label>
+                  <input  class="form-control" placeholder="" name="payeradvanced" required [(ngModel)]="payeradvanced">
+              </div>
+            </section>
+          </section>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" >{{'save' | translate}}</button>
+            </div>
+            </form>
+        
+          </div>
+          </ng-template>
+         
+  <br><br>
+      </section>
+      <section class="col-md-9 first scroll">
+          <table class="table table-hover" >
+              <thead>
+                <tr>
+                  <th scope="col">{{'payerid' | translate}}</th>
+                  <th scope="col">{{'payername' | translate}}</th>
+                  <th scope="col">{{'category' | translate}}</th>
+                  <th scope="col">{{'gross' | translate}}</th>
+                  <th scope="col">{{'discount' | translate}}</th>
+                  <th scope="col">{{'currency' | translate}}</th>
+                  <th scope="col">{{'active' | translate}}</th>
+                  <th scope="col">{{'webloginid' | translate}}</th>
+                  <th scope="col">{{'webloginname' | translate}}</th>
+                  <th scope="col">{{'createdt' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody> 
+                <tr *ngFor="let payer of payers">
+                  <th scope="row">{{payer.PayerID}}</th>
+                  <td>{{payer.payerName}}</td>
+                  <td>{{payer.CategoryName}}</td>
+                  <td>{{payer.GrossPriceList}}</td>
+                  <td>{{payer.Discount}}</td>
+                  <th>{{payer.currency}}</th>
+                  <td>{{payer.Active}}</td>
+                  <td>{{payer.Web_User}}</td>
+                  <td>{{payer.Web_Password}}</td>
+                  <td>{{payer.CreateDT}}</td>
+                </tr>
+              </tbody>
+            </table>
+      </section>
+  </section>
+</section>
+
+
+
+
+

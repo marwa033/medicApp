@@ -1,0 +1,81 @@
+<section class="container-fluide">
+  <h2 class="">{{'sbills' | translate}}</h2><br>
+  <section class="row">
+      <section class="col-md-3 dash">
+          <form class="search-form" #form="ngForm" (ngSubmit)="Sinvoice(form.value)">
+       
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'bfrom' | translate}}" type="date" name="sfrom" required [(ngModel)]="sfrom">
+            </mat-form-field><br>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'bto' | translate}}" type="date" name="sto" required [(ngModel)]="sto">
+            </mat-form-field><br>
+             <mat-form-field>
+            <!--  <mat-select placeholder="{{'payer' | translate}}" name="spayer" required [(ngModel)]="spayer">
+                <mat-option value="option">Option</mat-option>
+              </mat-select>
+            </mat-form-field><br> -->
+            <mat-select placeholder="{{'payer' | translate}}" name="payer" required [(ngModel)]="selectedpayer">
+              <mat-option *ngFor="let payer of gpayer" [value]="payer.ID" >{{payer.Name}}</mat-option>
+            </mat-select>
+          </mat-form-field><br>
+
+
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'bid' | translate}}" name="bid" required [(ngModel)]="bid">
+            </mat-form-field><br>
+            <mat-form-field>
+              <mat-select placeholder="{{'active' | translate}}" name="active" required [(ngModel)]="active">
+                <mat-option value="option">Yes</mat-option>
+                <mat-option value="option">No</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+            <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
+          </form>
+  <br><br>
+      </section>
+      <section class="col-md-9">
+        <section class="first scroll">
+          <table class="table table-hover" >
+              <thead>
+                <tr>
+                  <th scope="col">{{'bid' | translate}}</th>
+                  <th scope="col">{{'bdate' | translate}}</th>
+                  <th scope="col">{{'payer' | translate}}</th>
+                  <th scope="col">{{'pfrom' | translate}}</th>
+                  <th scope="col">{{'pto' | translate}}</th>
+                  <th scope="col">{{'total' | translate}}</th>
+                  <th scope="col">{{'dicount' | translate}}</th>
+                  <th scope="col">{{'recieved' | translate}}</th>
+                  <th scope="col">{{'remaining' | translate}}</th>
+                  <th scope="col">{{'active' | translate}}</th>
+                  <th scope="col">{{'createuid' | translate}}</th>
+                  <th scope="col">{{'createdt' | translate}}</th>
+                  <th scope="col">{{'modifyuid' | translate}}</th>
+                  <th scope="col">{{'modifydt' | translate}}</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let search of searching">
+                  <th scope="row">{{search.BillID}}</th>
+                  <td>{{search.Date}}</td>
+                  <td>{{search.payerName}}</td>
+                  <td>{{search.periodFrom}}</td>
+                  <td>{{search.periodTo}}</td>
+                  <td>{{search.Total}}</td>
+                  <th>{{search.Discount}}</th>
+                  <td>{{search.Received}}</td>
+                  <td>{{search.Remaining}}</td>
+                  <td>{{search.active}}</td>
+                  <td>{{search.CreateUID}}</td>
+                  <td>{{search.CreateDT}}</td>
+                  <td>{{search.ModifyUID}}</td>
+                  <td>{{search.ModifyDT}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+      </section>
+  </section>
+</section>

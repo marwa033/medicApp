@@ -1,0 +1,94 @@
+<section class="container-fluide">
+  <h2 class="">{{'sampletype' | translate}}</h2><br>
+  <section class="row">
+      <section class="col-md-3 dash">
+          <form class="search-form" #form="ngForm" (ngSubmit)="Sample(form.value)">
+       
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'name' | translate}}"  name="samplename" required [(ngModel)]="testname">
+            </mat-form-field><br>
+            <!-- <mat-form-field>
+              <mat-select placeholder="{{'container' | translate}}" name="container" required [(ngModel)]="container">
+                <mat-option value="option">{{'all' | translate}}</mat-option>
+                <mat-option value="option">{{'yes' | translate}}</mat-option>
+                <mat-option value="option">{{'no' | translate}}</mat-option>
+              </mat-select>
+            </mat-form-field><br> -->
+            <mat-form-field>
+            <mat-select placeholder="{{'container' | translate}}" name="container" required [(ngModel)]="selectedcontainer">
+              <mat-option *ngFor="let containers of container" [value]="containers.ID" >{{containers.Name}}</mat-option>
+            </mat-select>
+          </mat-form-field><br>
+            <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
+          </form><br>
+          <button class="success-bg btn-block log" (click)="openSm(content)" mat-raised-button >{{'Add' | translate}}</button>
+
+          <ng-template #content let-modal>
+            <div role="document">
+            <div class="modal-header">
+              <h4 class="modal-title" style="text-align: center;">{{'Add' | translate}}</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form #addform="ngForm" (ngSubmit)="addSample(addform.value)">
+            <div class="modal-body ">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{'id' | translate}}</label>
+                <div v class="col-sm-8">
+                  <input class="form-control" placeholder="Enter ID" name="sampleid" required [(ngModel)]="sampleid">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{'name' | translate}}</label>
+                <div class="col-sm-8">
+                  <input  class="form-control" placeholder="Enter Name" name="samplename2" required [(ngModel)]="samplename2">
+              </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{'container' | translate}}</label>
+                <div class="col-sm-8">
+                  <select class="form-control" name="samplecontainer" [(ngModel)]="samplecontainer">
+                    <option *ngFor="let containers of container" [value]="containers.ID" >{{containers.Name}}</option>
+                  </select>
+                 </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" >{{'save' | translate}}</button>
+            </div>
+            </form>
+          </div>
+          </ng-template>
+         
+  <br><br>
+      </section>
+      <section class="col-md-9 first scroll">
+          <table class="table table-hover" >
+              <thead>
+                <tr>
+                  <th scope="col">{{'sampleid' | translate}}</th>
+                  <th scope="col">{{'samplename' | translate}}</th>
+                  <th scope="col">{{'containername' | translate}}</th>
+                  <th scope="col">{{'createdt' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <tr *ngFor="let sample of samples">
+                  <th scope="row">{{sample.SampleType_ID}}</th>
+                  <td>{{sample.SampleType_Name}}</td>
+                  <td>{{sample.Container_Name}}</td>
+                  <td>{{sample.SampleType_CreateDT}}</td>
+
+                </tr>
+              </tbody>
+            </table>
+      </section>
+  </section>
+</section>
+
+
+
+
+

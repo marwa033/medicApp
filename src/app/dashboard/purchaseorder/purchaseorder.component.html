@@ -1,0 +1,185 @@
+<!-- <head>
+  <link href="assets\bootstrap\bootstrap.css" rel="stylesheet">
+  <link href="assets\bootstrap\bootstrap.min.css" rel="stylesheet">
+</head> -->
+<section class="container-fluide">
+    <h2 class="">{{'purchaseorder' | translate}}</h2><br>
+    <section class="row">
+        <section class="col-md-3 dash">
+            <form class="search-form" #form="ngForm" (ngSubmit)="Order(form.value)">
+         
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="{{'from' | translate}}" type="date" name="from" required [(ngModel)]="from">
+              </mat-form-field><br>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="{{'to' | translate}}" type="date" name="to" required [(ngModel)]="to">
+              </mat-form-field><br>
+   
+              <mat-form-field>
+                <mat-select placeholder="{{'supplier' | translate}}" name="supplier" required [(ngModel)]="selectedsupplier">
+                  <mat-option *ngFor="let supply of supplier" [value]="supply.ID">{{supply.Name}}</mat-option>
+                </mat-select>
+              </mat-form-field><br>
+              <mat-form-field>
+                <mat-select placeholder="{{'status' | translate}}" name="status" required [(ngModel)]="status">
+                  <mat-option value="option">{{'all' | translate}}</mat-option>
+                </mat-select>
+              </mat-form-field><br>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="{{'poid' | translate}}" name="poid" required [(ngModel)]="poid">
+              </mat-form-field><br>
+              <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
+            </form><br>
+              <button class="success-bg btn-block log"(click)="openSm(content)" mat-raised-button >{{'Add' | translate}}</button>
+            
+              <ng-template #content let-modal>
+                <div role="document">
+                <div class="modal-header">
+                  <h4 class="modal-title" style="text-align: center;">{{'Add' | translate}}</h4>
+                  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form #addform="ngForm" (ngSubmit)="AddOrder(addform.value)">
+                <div class="modal-body row">
+                    <section class="col-md-5 ml-4">
+                        <div class="form-group row">
+                            <label>{{'id' | translate}}</label>
+                              <input  class="form-control" readonly name="addid" required [(ngModel)]="addid">
+                          </div>
+                          <div class="form-group row">
+                            <label>{{'status' | translate}}</label>
+                              <input  class="form-control" readonly name="addstatus" required [(ngModel)]="addstatus">
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-form-label">{{'supplier' | translate}}</label>
+                              <select class="form-control" name="supplier" [(ngModel)]="selectedsupplier">
+                                <option *ngFor="let supply of supplier" [value]="supply.ID">{{supply.Name}}</option>
+                                <!-- <mat-option *ngFor="let supply of supplier" [value]="supply.ID">{{supply.Name}}</mat-option> -->
+                              </select>
+                             </div>
+                             <div class="form-group row">
+                                <label>{{'comment' | translate}}</label>
+                                  <textarea  class="form-control" row='2' name="comment" required [(ngModel)]="comment"></textarea>
+                              </div>
+
+                    </section>
+                    <section class="col-md-5 ml-3">
+                        <div class="form-group row">
+                            <label class="col-form-label">{{'item' | translate}}</label>
+                              <select class="form-control" name="additem" [(ngModel)]="selecteditem">
+                                <option *ngFor="let item of additem"[value]="item.ID">{{item.Name}}</option>
+                              </select>
+                             </div>
+                             <div class="form-group row">
+                                <label>{{'ref' | translate}}</label>
+                                  <input  class="form-control" readonly name="addref" required [(ngModel)]="addref">
+                              </div>
+                              <div class="form-group row">
+                                <label>{{'packsize' | translate}}</label>
+                                  <input  class="form-control" readonly name="addpacksize" required [(ngModel)]="addpacksize">
+                              </div>
+                              <!-- <div class="row">
+                                <div class="form-group row">
+                                    <label>{{'quntity' | translate}}</label>
+                                    <input  class="form-control" name="addquntity" required [(ngModel)]="addquntity">
+                                </div>
+                                <div class="form-group row">
+                                    <label>{{'packsize' | translate}}</label>
+                                    <input  class="form-control" name="packsize2" required [(ngModel)]="packsize2">
+                                </div>
+                                </div> -->
+                                <div class="form-group row">
+                                    <label class="col-sm-6 col-form-label">{{'quntity' | translate}}</label>
+                                    <div  class="col-sm-5 ml-3">
+                                        <input  class="form-control" name="addquntity" required [(ngModel)]="addquntity">
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label class="col-sm-6 col-form-label">{{'packsize' | translate}}</label>
+                                    <div  class="col-sm-5 ml-3">
+                                        <input  class="form-control" name="packsize2" required [(ngModel)]="packsize2">
+                                    </div>
+                                  </div>
+                              
+                         
+                    </section>
+                </div>
+                <section class="row">
+                    <section class="col-md-6"></section>
+                    <section class="col-md-6">
+                        <button class="success-bg btn-block " (click)="selectName(item)" mat-raised-button >{{'Add' | translate}}</button>
+                    </section>
+                </section><br>
+                <table class="table table-hover" >
+                    <thead>
+                      <tr>
+                        <th scope="col">{{'name' | translate}}</th>
+                        <th scope="col">{{'quntity' | translate}}</th>
+                        <th scope="col">{{'unitprice' | translate}}</th>
+                        <th scope="col">{{'subtotal' | translate}}</th>
+                        <th scope="col">{{'recieved' | translate}}</th>
+                        <th scope="col">{{'packsize' | translate}}</th>
+                
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let list of Lists">
+                        <th scope="row">{{list.Name}}</th>
+                        <td>{{list.Name}}</td>
+                        <td>{{list.Quantity}}</td>
+                        <td>{{list.Price}}</td>
+                        <td>{{list.Quantity}}</td>
+                        <td>{{list.Quantity}}</td>
+                       
+    
+                      </tr>
+                    </tbody>
+                  </table>
+                <div class="modal-footer">
+                  <button class="btn btn-primary" >{{'save' | translate}}</button>
+                </div>
+                </form>
+              </div>
+              </ng-template>
+           
+    <br><br>
+        </section>
+        <section class="col-md-9 first scroll">
+            <table class="table table-hover" >
+                <thead>
+                  <tr>
+                    <th scope="col">{{'dbid' | translate}}</th>
+                    <th scope="col">{{'id' | translate}}</th>
+                    <th scope="col">{{'supplier' | translate}}</th>
+                    <th scope="col">{{'total' | translate}}</th>
+                    <th scope="col">{{'status' | translate}}</th>
+                    <th scope="col">{{'createuid' | translate}}</th>
+                    <th scope="col">{{'createdt' | translate}}</th>
+                    <th scope="col">{{'modifyuid' | translate}}</th>
+                    <th scope="col">{{'modifydt' | translate}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let order of orders">
+                    <th scope="row">{{order.ID}}</th>
+                    <td>{{order.ID}}</td>
+                    <td>{{order.Name}}</td>
+                    <td>{{order.Total}}</td>
+                    <td>{{order.statusName}}</td>
+                    <td>{{order.CreateUID}}</td>
+                    <td>{{order.CreateDT}}</td>
+                    <td>{{order.ModifyUID}}</td>
+                    <td>{{order.ModifyDT}}</td>
+
+                  </tr>
+                </tbody>
+              </table>
+        </section>
+    </section>
+</section>
+
+
+
+
+

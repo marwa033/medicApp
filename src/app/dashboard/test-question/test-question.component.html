@@ -1,0 +1,75 @@
+<section class="container-fluide">
+  <h2 class="">{{'tquestion' | translate}}</h2><br>
+  <section class="row">
+      <section class="col-md-3 dash">
+          <form class="search-form" #form="ngForm" (ngSubmit)="Question(form.value)">
+       
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'question' | translate}}"  name="question" required [(ngModel)]="question">
+            </mat-form-field><br>
+            <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
+          </form><br>
+            <button class="success-bg btn-block log" (click)="openSm(content)"  mat-raised-button >{{'Add' | translate}}</button>
+
+         
+            <ng-template #content let-modal>
+              <div role="document">
+              <div class="modal-header">
+                <h4 class="modal-title" style="text-align: center;">{{'Add' | translate}}</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form #addform="ngForm" (ngSubmit)="addQuestion(addform.value)">
+              <div class="modal-body ">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">{{'id' | translate}}</label>
+                  <div v class="col-sm-8">
+                    <input class="form-control" readonly name="tid" required [(ngModel)]="tid">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">{{'question' | translate}}</label>
+                  <div class="col-sm-8">
+                    <textarea  class="form-control"  rows="3" name="tquestion" required [(ngModel)]="tquestion"></textarea>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="modal-footer">
+                <button class="btn btn-primary" >{{'save' | translate}}</button>
+              </div>
+              </form>
+          
+            </div>
+            </ng-template>
+
+         
+  <br><br>
+      </section>
+      <section class="col-md-9 first scroll">
+          <table class="table table-hover" >
+              <thead>
+                <tr>
+                  <th scope="col">{{'Questionid' | translate}}</th>
+                  <th scope="col">{{'question' | translate}}</th>
+                  <th scope="col">{{'createdt' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <tr *ngFor="let question of questions">
+                    <th scope="row">{{question.ID}}</th>
+                    <td>{{question.Question}}</td>
+                  <td>{{question.CreateDT}}</td>
+                </tr>
+              </tbody>
+            </table>
+      </section>
+  </section>
+</section>
+
+
+
+
+

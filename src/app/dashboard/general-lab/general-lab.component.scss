@@ -1,0 +1,49 @@
+
+.dash{
+    border-right: 2px solid red;
+}
+.first{
+    overflow-x: auto;
+    overflow-y: auto;
+    // padding-bottom: 200px;
+    height: 300px;
+}
+table{
+    background-color: white;
+}
+h1{
+    text-align: center;
+}
+.scroll{
+    overflow-y: auto;
+    // padding-bottom: 200px;
+    height: 300px;
+}
+h3{
+    text-align: left;
+    border: 1px solid rgb(3, 6, 41);
+    border-radius: 15px;
+    padding: 5px;
+    width: 27%;
+    color:  rgb(3, 6, 41);
+}
+.container-fluide{
+    padding: 20px;
+}
+i{
+// padding-left: 2px;
+    color: red;
+    cursor: pointer;
+}
+.right{
+    display: none;
+}
+h2,h4{
+    font-size: larger;
+    text-align: center;
+    }
+    th{
+        font-size: small;
+        font-weight: bold;
+        color: rgba(22, 21, 21, 0.644);
+    }

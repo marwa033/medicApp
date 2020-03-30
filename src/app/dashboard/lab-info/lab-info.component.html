@@ -1,0 +1,61 @@
+<section class="container-fluide">
+    <h2 class="">{{'labinfo' | translate}}</h2><br>
+    <div class="card ml-3"  style="width: 70rem;">
+        <div class="card-body">
+     
+    <section class="row justify-content-center">
+        <section class="col-md-3">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="{{'name' | translate}}" name="labname" required [(ngModel)]="labname">
+              </mat-form-field><br>
+              <mat-form-field >
+                <textarea matInput placeholder="{{'address' | translate}}" name="labaddress" required [(ngModel)]="labaddress"></textarea>
+              </mat-form-field><br>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="{{'website' | translate}}" name="website" required [(ngModel)]="website">
+              </mat-form-field><br>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="{{'webresult' | translate}}" name="webresult" required [(ngModel)]="webresult">
+              </mat-form-field><br>
+        </section>
+        <section class="col-md-3">
+            <mat-form-field class="example-full-width">
+                <textarea matInput placeholder="{{'labincharge' | translate}}" name="labincharge" required [(ngModel)]="labincharge"></textarea>
+              </mat-form-field><br>
+              <mat-form-field >
+                <textarea matInput placeholder="{{'legaldetail' | translate}}" name="legaldetail" required [(ngModel)]="legaldetail"></textarea>
+              </mat-form-field><br>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="{{'hotline' | translate}}" name="hotline" required [(ngModel)]="hotline">
+              </mat-form-field><br>
+
+        </section>
+        <section class="col-md-3">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="{{'phone' | translate}}" name="labphone" required [(ngModel)]="labphone">
+              </mat-form-field><br>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="{{'fax' | translate}}" name="labfax" required [(ngModel)]="labfax">
+              </mat-form-field><br>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="{{'mobile' | translate}}" name="labmobile" required [(ngModel)]="labmobile">
+              </mat-form-field><br>
+  
+        </section>
+    </section>
+    <section class="row">
+        <section class="col-md-6"></section>
+        <section class="col-md-6">
+            <button class="secondary-bg " mat-raised-button >{{'cancle' | translate}}</button>
+            <button class="success-bg btn-block " mat-raised-button >{{'update' | translate}}</button>
+
+        </section>
+
+    </section>
+
+        </div>
+      </div>
+
+
+
+</section>

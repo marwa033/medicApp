@@ -1,0 +1,71 @@
+<section class="container-fluide">
+  <h2 class="">{{'speciality' | translate}}</h2><br>
+  <section class="row">
+      <section class="col-md-3 dash">
+          <form class="search-form" #form="ngForm" (ngSubmit)="Speciality(form.value)">
+       
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'name' | translate}}" name="rsname" required [(ngModel)]="rsname">
+            </mat-form-field><br>
+            <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
+          </form><br>
+          <button class="success-bg btn-block log"(click)="openSm(content)" mat-raised-button >{{'Add' | translate}}</button>
+          
+          <ng-template #content let-modal>
+            <div role="document">
+            <div class="modal-header">
+              <h4 class="modal-title" style="text-align: center;">{{'Add' | translate}}</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form #addform="ngForm" (ngSubmit)="addSpeciality(addform.value)">
+            <div class="modal-body ">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{'id' | translate}}</label>
+                <div class="col-sm-8">
+                  <input class="form-control" placeholder="Enter ID" name="idss" required [(ngModel)]="idss">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">{{'name' | translate}}</label>
+                <div class="col-sm-8">
+                  <input  class="form-control" placeholder="Enter Name" name="namess" required [(ngModel)]="namess">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" >{{'save' | translate}}</button>
+            </div>
+            </form>
+        
+          </div>
+          </ng-template>
+         
+  <br><br>
+      </section>
+      <section class="col-md-9 first scroll">
+          <table class="table table-hover" >
+              <thead>
+                <tr>
+                  <th scope="col">{{'specialityid' | translate}}</th>
+                  <th scope="col">{{'specialityname' | translate}}</th>
+                  <th scope="col">{{'createdt' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let speciality of specialities">
+                  <th scope="row">{{speciality.ID}}</th>
+                  <td>{{speciality.Name}}</td>
+                  <td>{{speciality.CreateDT}}</td>
+                </tr>
+              </tbody>
+            </table>
+      </section>
+  </section>
+</section>
+
+
+
+
+

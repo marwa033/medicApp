@@ -1,0 +1,139 @@
+<section class="container-fluide">
+    <h2 class="">{{'supplier' | translate}}</h2><br>
+    <section class="row">
+        <section class="col-md-3  dash">
+            <form class="search-form" #form="ngForm" (ngSubmit)="Supply(form.value)">
+         
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="{{'name' | translate}}" name="supplyname" required [(ngModel)]="supplyname">
+              </mat-form-field><br>
+              <mat-form-field>
+                <mat-select placeholder="{{'active' | translate}}" name="supplysactive" required [(ngModel)]="supplysactive">
+                  <mat-option value="option">{{'all' | translate}}</mat-option>
+                  <mat-option value="option">{{'yes' | translate}}</mat-option>
+                  <mat-option value="option">{{'no' | translate}}</mat-option>
+                </mat-select>
+              </mat-form-field><br>
+              <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
+            </form><br>
+            <button class="success-bg btn-block log"(click)="openSm(content)" mat-raised-button >{{'Add' | translate}}</button>
+            
+            <ng-template #content let-modal>
+              <div role="document">
+              <div class="modal-header">
+                <h4 class="modal-title" style="text-align: center;">{{'Add' | translate}}</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form #addform="ngForm" (ngSubmit)="AddSupply(addform.value)">
+              <div class="modal-body ">
+                <section class="row justify-content-center">
+                  <section class="col-md-5">
+                    
+                <div class="form-group row">
+                  <label>{{'id' | translate}}</label>
+                    <input class="form-control" readonly name="supplyid" required [(ngModel)]="supplyid">
+                </div>
+                <div class="form-group row">
+                  <label>{{'name' | translate}}</label>
+                    <input class="form-control" placeholder="Enter name" name="addname" required [(ngModel)]="addname">
+                  </div>
+              
+                <div class="form-group row">
+                  <label>{{'address' | translate}}</label>
+                    <textarea  class="form-control" row="2" name="supplyaddress" required [(ngModel)]="supplyaddress">
+                 </textarea>
+                    </div>
+                
+                <div class="form-group row">
+                  <label>{{'vatRegoNo' | translate}}</label>
+                    <input  class="form-control" placeholder="Enter the way" name="vat" required [(ngModel)]="vat">
+                </div>
+                <div class="form-group row">
+                  <label>{{'contactname' | translate}}</label>
+                    <input  class="form-control" placeholder="Enter short name" name="contanctname" required [(ngModel)]="contanctname">
+                </div>
+                <div class="form-group row">
+                    <label>{{'phone' | translate}}</label>
+                      <input  class="form-control" placeholder="Enter Phone" name="supplyphone" required [(ngModel)]="supplyphone">
+                  </div>
+              </section>
+              <section class="col-md-5 ml-3">
+                  <div class="form-group row">
+                    <label>{{'email' | translate}}</label>
+                      <input  class="form-control" placeholder="Enter short name" name="supplymail" required [(ngModel)]="supplymail">
+                  </div>
+                <div class="form-group row">
+                  <label class="col-form-label">{{'paymenttype' | translate}}</label>
+                    <select class="form-control" name="supplypayment" [(ngModel)]="supplypayment">
+                      <option >{{'cash' | translate}}</option>
+                      <option >{{'cheque' | translate}}</option>
+                      <option >{{'transfer' | translate}}</option>
+                    </select>
+                   </div>
+                   <div class="form-group row">
+                    <label>{{'paymentname' | translate}}</label>
+                      <input  class="form-control" placeholder="Enter short name" name="supplypname" required [(ngModel)]="supplypname">
+                  </div>
+                <div class="form-group row">
+                  <label class="col-form-label">{{'currency' | translate}}</label>
+                    <select class="form-control" name="currencies" [(ngModel)]="selectedcurrency">
+                      <option *ngFor="let currency of currencies" [value]="currency.ID">{{currency.Name}}</option>
+                    </select>
+                   </div>
+                
+                     <div class="form-group row">
+                      <label class="col-form-label">{{'active' | translate}}</label>
+                        <select class="form-control" name="supplyactive" [(ngModel)]="supplyactive">
+                          <!-- <option >{{'all' | translate}}</option> -->
+                          <option >{{'yes' | translate}}</option>
+                          <option >{{'no' | translate}}</option>
+                        </select>
+                       </div>
+                    
+              </section>
+            </section>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-primary" >{{'save' | translate}}</button>
+              </div>
+              </form>
+          
+            </div>
+            </ng-template>
+           
+           
+
+
+    <br><br>
+        </section>
+        <section class="col-md-9 first scroll">
+            <table class="table table-hover" >
+                <thead>
+                  <tr>
+                    <th scope="col">{{'supplierid' | translate}}</th>
+                    <th scope="col">{{'suppliername' | translate}}</th>
+                    <th scope="col">{{'contactname' | translate}}</th>
+                    <th scope="col">{{'active' | translate}}</th>
+                    <th scope="col">{{'createdt' | translate}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let supply of supplies">
+                    <th scope="row">{{supply.ID}}</th>
+                    <td>{{supply.Name}}</td>
+                    <td>{{supply.ContactName}}</td>
+                    <td>{{supply.Active}}</td>
+                    <td>{{supply.CreateDT}}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </section>
+    </section>
+</section>
+
+
+
+
+

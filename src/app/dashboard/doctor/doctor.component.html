@@ -1,0 +1,146 @@
+<section class="container-fluide">
+  <h2 class="">{{'doctor' | translate}}</h2><br>
+  <section class="row">
+      <section class="col-md-3  dash">
+          <form class="search-form" #form="ngForm" (ngSubmit)="Doctor(form.value)">
+       
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'name' | translate}}" name="rdname" required [(ngModel)]="rdname">
+            </mat-form-field><br>
+            <mat-form-field>
+              <mat-select placeholder="{{'active' | translate}}" name="rdactive" required [(ngModel)]="rdactive">
+                <mat-option value="3">{{'all' | translate}}</mat-option>
+                <mat-option value="1">{{'yes' | translate}}</mat-option>
+                <mat-option value="0">{{'no' | translate}}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+            <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
+          </form><br>
+          <button class="success-bg btn-block log"(click)="openSm(content)" mat-raised-button >{{'Add' | translate}}</button>
+          
+          <ng-template #content let-modal>
+            <div role="document">
+            <div class="modal-header">
+              <h4 class="modal-title" style="text-align: center;">{{'Add' | translate}}</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form #addform="ngForm" (ngSubmit)="addDoctor(addform.value)">
+            <div class="modal-body ">
+              <section class="row justify-content-center">
+                <section class="col-md-5">
+                  
+              <div class="form-group row">
+                <label>{{'id' | translate}}</label>
+                  <input class="form-control" readonly name="doctorid" required [(ngModel)]="doctorid">
+            
+              </div>
+              <div class="form-group row">
+                <label>{{'fname' | translate}}</label>
+                  <input class="form-control" placeholder="Enter First Name" name="firstname" required [(ngModel)]="firstname">
+                </div>
+            
+              <div class="form-group row">
+                <label>{{'mname' | translate}}</label>
+                  <input  class="form-control" placeholder="Enter The Middle Name" name="middlename" required [(ngModel)]="middlename">
+                </div>
+              
+              <div class="form-group row">
+                <label>{{'lname' | translate}}</label>
+                  <input  class="form-control" placeholder="Enter Last Name" name="lastname" required [(ngModel)]="lastname">
+              </div>
+              <div class="form-group row">
+                <label>{{'fax' | translate}}</label>
+                  <input  class="form-control" placeholder="Enter Fax" name="fax" required [(ngModel)]="fax">
+              </div>
+              <div class="form-group row">
+                <label>{{'email' | translate}}</label>
+                  <input  class="form-control" placeholder="example@example.com" name="email" required [(ngModel)]="email">
+              </div>
+            </section>
+            <section class="col-md-5 ml-3">
+              <div class="form-group row">
+                <label>{{'address' | translate}}</label>
+                  <textarea class="form-control" rows="1" name="address" required [(ngModel)]="address"></textarea>
+              </div>
+              <div class="form-group row">
+                <label>{{'phone' | translate}}</label>
+                  <input  class="form-control" placeholder="Enter Phone Number" name="phone" required [(ngModel)]="phone">
+              </div>
+              <!-- <div class="form-group row">
+                <label class="col-form-label">{{'speciality' | translate}}</label>
+                  <select class="form-control" name="doctorspeciality" [(ngModel)]="doctorspeciality">
+                    <option >{{'all' | translate}}</option>
+                    <option >{{'yes' | translate}}</option>
+                    <option >{{'no' | translate}}</option>
+                  </select>
+                 </div> -->
+                 <div class="form-group row">
+                  <label class="col-form-label">{{'speciailty' | translate}}</label>
+                    <select class="form-control" name="doctorspeciality" [(ngModel)]="doctorspeciality">
+                      <option *ngFor="let speciality of doctorspeciality" [value]="speciality.ID">{{speciality.Name}}</option>
+                    </select>
+                   </div>
+              <div class="form-group row">
+                <label class="col-form-label">{{'active' | translate}}</label>
+                  <select class="form-control" name="doctoractive" [(ngModel)]="doctoractive">
+                    <option >{{'all' | translate}}</option>
+                    <option >{{'yes' | translate}}</option>
+                    <option >{{'no' | translate}}</option>
+                  </select>
+                 </div>
+              <div class="form-group row">
+                <label>{{'weblogin' | translate}}</label>
+                  <input  class="form-control" placeholder="Enter login ID" name="weblogin" required [(ngModel)]="weblogin">
+              </div>
+              <div class="form-group row">
+                <label>{{'webpass' | translate}}</label>
+                  <input  class="form-control" placeholder="" name="webpassword" required [(ngModel)]="webpassword">
+              </div>
+            </section>
+          </section>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" >{{'save' | translate}}</button>
+            </div>
+            </form>
+        
+          </div>
+          </ng-template>
+         
+  <br><br>
+      </section>
+      <section class="col-md-9 first scroll">
+          <table class="table table-hover" >
+              <thead>
+                <tr>
+                  <th scope="col">{{'doctorid' | translate}}</th>
+                  <th scope="col">{{'doctorname' | translate}}</th>
+                  <th scope="col">{{'speciailty' | translate}}</th>
+                  <th scope="col">{{'active' | translate}}</th>
+                  <th scope="col">{{'webloginid' | translate}}</th>
+                  <th scope="col">{{'webpassword' | translate}}</th>
+                  <th scope="col">{{'createdt' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let doctor of doctors">
+                  <th scope="row">{{doctor.ID}}</th>
+                  <td>{{doctor.Name}}</td>
+                  <td>{{doctor.SpecialityID}}</td>
+                  <td>{{doctor.Active}}</td>
+                  <td>{{doctor.WebUID}}</td>
+                  <td>{{doctor.WebPass}}</td>
+                  <td>{{doctor.CreateDT}}</td>
+                </tr>
+              </tbody>
+            </table>
+      </section>
+  </section>
+</section>
+
+
+
+
+

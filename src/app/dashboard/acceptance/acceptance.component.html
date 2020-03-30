@@ -1,0 +1,62 @@
+<section class="container-fluide">
+  <h2 class="">{{'sacceptance' | translate}}</h2><br>
+  <section class="row">
+      <section class="col-md-3 dash">
+          <form class="search-form" #form="ngForm" (ngSubmit)="Acceptance(form.value)">
+              <mat-form-field class="example-full-width">
+                  <input matInput placeholder="{{'fcollection' | translate}}" type="date" name="fcollection" required [(ngModel)]="fcollection">
+                </mat-form-field><br>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'tcollection' | translate}}" type="date" name="tcollection" required [(ngModel)]="tcollection">
+            </mat-form-field><br>
+            <mat-form-field>
+              <mat-select placeholder="{{'status' | translate}}" name="status2" required [(ngModel)]="selectedstatus">
+                <mat-option *ngFor="let statuss of status2" [value]="statuss.ID" >{{statuss.Name}}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+            <mat-form-field>
+              <mat-select placeholder="{{'center' | translate}}" name="center2" required [(ngModel)]="selectedcenter">
+                <mat-option *ngFor="let centerss of center2" [value]="centerss.ID" >{{centerss.Name}}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'visite' | translate}}" name="visite2" required [(ngModel)]="visite2">
+            </mat-form-field><br>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'sample' | translate}}" name="sample2" required [(ngModel)]="sample2">
+            </mat-form-field><br>
+            <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
+          </form>
+  <br><br>
+      </section>
+      <section class="col-md-9  scroll">
+          <table class="table table-hover" >
+              <thead>
+                <tr>
+                  <th scope="col">{{'sample' | translate}}</th>
+                  <th scope="col">{{'status' | translate}}</th>
+                  <th scope="col">{{'center' | translate}}</th>
+                  <th scope="col">{{'pname' | translate}}</th>
+                  <th scope="col">{{'dob' | translate}}</th>
+                  <th scope="col">{{'gender' | translate}}</th>
+                  <th scope="col">{{'payer' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let accept of acceptance">
+                  <th scope="row">{{accept.SampleID}}</th>
+                  <td>{{accept.Status}}</td>
+                  <td>{{accept.RegCenter}}</td>
+                  <td>{{accept.PatientName}}</td>
+                  <td>{{accept.DateOfBirth}}</td>
+                  <td>{{accept.gender_Name}}</td>
+                  <td>{{accept.payer}}</td>
+
+                </tr>
+          </tbody>
+            </table>
+      </section>
+  </section>
+  
+</section>

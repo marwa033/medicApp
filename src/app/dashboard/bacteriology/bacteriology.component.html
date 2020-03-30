@@ -1,0 +1,154 @@
+<section class="container-fluide">
+  <h2 class="">{{'bacteriology' | translate}}</h2><br>
+  <section class="row">
+      <section class="col-md-3  dash">
+          <form class="search-form" #form="ngForm" (ngSubmit)="Bacteria(form.value)">
+       
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'afrom' | translate}}" type="date" name="bfrom" required [(ngModel)]="bfrom">
+            </mat-form-field><br>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'ato' | translate}}" type="date" name="bto" required [(ngModel)]="bto">
+            </mat-form-field><br>
+            <mat-form-field>
+              <mat-select placeholder="{{'center' | translate}}" name="bcenter" required [(ngModel)]="selectedcenter">
+                <mat-option *ngFor="let centers of bcenter" [value]="centers.ID" >{{centers.Name}}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+              <mat-form-field>
+                <mat-select placeholder="{{'wcenter' | translate}}" name="bwcenter" required [(ngModel)]="selectedwcenter">
+                  <mat-option *ngFor="let wcenters of bwcenter" [value]="wcenters.ID" >{{wcenters.Name}}</mat-option>
+                </mat-select>
+              </mat-form-field><br>
+              <mat-form-field>
+                <mat-select placeholder="{{'category' | translate}}" name="bcategory" required [(ngModel)]="category">
+                  <mat-option *ngFor="let categories of bcategory" [value]="categories.ID" >{{categories.Name}}</mat-option>
+                </mat-select>
+              </mat-form-field><br>
+            <mat-form-field>
+              <mat-select placeholder="{{'Test' | translate}}" name="btest" required [(ngModel)]="selectedtest">
+                <mat-option *ngFor="let gtest of btest" [value]="gtest.ID" >{{gtest.Name}}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+            <mat-form-field>
+              <mat-select placeholder="{{'minstatus' | translate}}" name="bminstatus" required [(ngModel)]="selectedeminstatus">
+                <mat-option *ngFor="let low of bminstatus" [value]="low.ID" >{{low.Name}}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+            <mat-form-field>
+              <mat-select placeholder="{{'maxstatus' | translate}}" name="bmaxstatus" required [(ngModel)]="selectedemaxstatus">
+                <mat-option *ngFor="let high of bmaxstatus" [value]="high.ID" >{{high.Name}}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+            <mat-form-field>
+              <mat-select placeholder="{{'clinic' | translate}}" name="clinic" required [(ngModel)]="selectedclient">
+                <mat-option *ngFor="let clinics of clinic" [value]="clinics.ID" >{{clinics.Name}}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+            <mat-form-field>
+              <mat-select placeholder="{{'priority' | translate}}" name="bpriority" required [(ngModel)]="selectedpriority">
+                <mat-option *ngFor="let priorities of bpriority" [value]="priorities.ID" >{{priorities.Name}}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'visite' | translate}}" name="bvisitid" required [(ngModel)]="bvisitid">
+            </mat-form-field><br>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'sample' | translate}}" name="bsampleid" required [(ngModel)]="bsampleid">
+            </mat-form-field><br>
+            <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
+          </form>
+  <br><br>
+      </section>
+      <section class="col-md-9">         
+        <h5>{{'sampleids' | translate}}
+          <i class="fa fa-chevron-right ml-4 right" aria-hidden="true"></i>
+          <i class="fa fa-chevron-down ml-4 down" aria-hidden="true"></i>
+        </h5><br>
+        <section class="scroll sample">
+        <table class="table table-hover " >
+              <thead>
+                <tr>
+                  <th scope="col">{{'visite' | translate}}</th>
+                  <th scope="col">{{'sample' | translate}}</th>
+                  <th scope="col">{{'name' | translate}}</th>
+                  <th scope="col">{{'progress' | translate}}</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let bacteriology of bacteriologies" (click)="selectedRow(bacteriology)">
+                  <th scope="row">{{bacteriology.VisitId}}</th>
+                  <td>{{bacteriology.SampleId}}</td>
+                  <td>{{bacteriology.Name}}</td>
+                  <td>{{bacteriology.Progress}}</td>
+                  
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="row">
+            <div class="col-md-4 ">
+              <mat-form-field>
+              <mat-select placeholder="{{'selecttest' | translate}}" readonly name="selecttest" required [(ngModel)]="selecttest">
+                <mat-option  > ay7agaa</mat-option>
+              </mat-select>
+            </mat-form-field>
+            </div>
+            <div class="col-md-4 ">
+              <mat-form-field class="example-full-width">
+                <input matInput  name="visitt" readonly [(ngModel)]="visit">
+              </mat-form-field>
+            </div>
+            <div class="col-md-4 ">
+              <mat-form-field class="example-full-width">
+                <input matInput  name="pnamee" readonly [(ngModel)]="pname">
+              </mat-form-field>
+            </div>
+    
+          </section>
+          <section class="first">
+            <table class="table table-hover" >
+                <thead>
+                  <tr>
+                    <th scope="col">{{'Test' | translate}}</th>
+                    <th scope="col">{{'result' | translate}}</th>
+                    <th scope="col">{{'helpvalue' | translate}}</th>
+                    <th scope="col">{{'hln' | translate}}</th>
+                    <th scope="col">{{'unit' | translate}}</th>
+                    <th scope="col">{{'low' | translate}}</th>
+                    <th scope="col">{{'high' | translate}}</th>
+                    <th scope="col">{{'range' | translate}}</th>
+                    <th scope="col">{{'remark' | translate}}</th>
+                    <th scope="col">{{'uid' | translate}}</th>
+                    <th scope="col">{{'createdt' | translate}}</th>
+                    <th scope="col">{{'instname' | translate}}</th>
+                    <th scope="col">{{'instresult' | translate}}</th>
+                    <th scope="col">{{'prevresult' | translate}}</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let detail of detials">
+                    <th scope="row">{{detail.TestName}}</th>
+                    <td>{{detail.ResultFieldName}}</td>
+                    <td>{{detail.Name}}</td>
+                    <td>{{detail.HLN}}</td>
+                    <td>{{detail.Unit}}</td>
+                    <td>{{detail.Low}}</td>
+                    <td>{{detail.High}}</td>
+                    <td>{{detail.PrintRange}}</td>
+                    <td>{{detail.Remark}}</td>
+                    <td>{{detail.UserUID}}</td>
+                    <td>{{detail.SampleId}}</td>
+                    <td>{{detail.InstrumentName}}</td>
+                    <td>{{detail.InstrumentResult}}</td>
+                    <td>{{detail.PreviousResult}}</td>
+                    </tr>
+           </tbody>
+              </table>
+            </section>    
+
+      </section>
+  </section>
+</section>

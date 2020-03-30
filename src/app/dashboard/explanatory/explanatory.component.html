@@ -1,0 +1,122 @@
+
+
+<section class="container-fluide">
+  <h2 class="">{{'explanatory' | translate}}</h2><br>
+  <section class="row">
+      <section class="col-md-3 dash">
+          <form class="search-form" #form="ngForm" (ngSubmit)="Explan(form.value)">
+       
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'afrom' | translate}}" type="date" name="efrom" required [(ngModel)]="efrom">
+            </mat-form-field><br>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'ato' | translate}}" type="date" name="eto" required [(ngModel)]="eto">
+            </mat-form-field><br>
+            <mat-form-field>
+              <mat-select placeholder="{{'center' | translate}}" name="ecenter" required [(ngModel)]="selectedcenter">
+                <mat-option *ngFor="let centers of ecenter" [value]="centers.ID" >{{centers.Name}}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+              <mat-form-field>
+                <mat-select placeholder="{{'wcenter' | translate}}" name="ewcenter" required [(ngModel)]="selectedwcenter">
+                  <mat-option *ngFor="let wcenters of ewcenter" [value]="wcenters.ID" >{{wcenters.Name}}</mat-option>
+                </mat-select>
+              </mat-form-field><br>
+              <mat-form-field>
+                <mat-select placeholder="{{'category' | translate}}" name="ecategory" required [(ngModel)]="category">
+                  <mat-option *ngFor="let categories of ecategory" [value]="categories.ID" >{{categories.Name}}</mat-option>
+                </mat-select>
+              </mat-form-field><br>
+            <mat-form-field>
+              <mat-select placeholder="{{'Test' | translate}}" name="etest" required [(ngModel)]="selectedtest">
+                <mat-option *ngFor="let gtest of etest" [value]="gtest.ID" >{{gtest.Name}}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+            <mat-form-field>
+              <mat-select placeholder="{{'minstatus' | translate}}" name="eminstatus" required [(ngModel)]="selectedeminstatus">
+                <mat-option *ngFor="let low of eminstatus" [value]="low.ID" >{{low.Name}}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+            <mat-form-field>
+              <mat-select placeholder="{{'maxstatus' | translate}}" name="emaxstatus" required [(ngModel)]="selectedemaxstatus">
+                <mat-option *ngFor="let high of emaxstatus" [value]="high.ID" >{{high.Name}}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+            <mat-form-field>
+              <mat-select placeholder="{{'clinic' | translate}}" name="clinic" required [(ngModel)]="selectedclient">
+                <mat-option *ngFor="let clinics of clinic" [value]="clinics.ID" >{{clinics.Name}}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+            <mat-form-field>
+              <mat-select placeholder="{{'priority' | translate}}" name="epriority" required [(ngModel)]="selectedpriority">
+                <mat-option *ngFor="let priorities of epriority" [value]="priorities.ID" >{{priorities.Name}}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'visite' | translate}}" name="evisitid" required [(ngModel)]="evisitid">
+            </mat-form-field><br>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'sample' | translate}}" name="esampleid" required [(ngModel)]="esampleid">
+            </mat-form-field><br>
+            <!-- <mat-form-field>
+              <mat-select placeholder="{{'sample' | translate}}" name="esampleid" required [(ngModel)]="esampleid">
+                <mat-option value="option">Option</mat-option>
+              </mat-select>
+            </mat-form-field><br> -->
+            <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
+          </form>
+  <br><br> 
+      </section>
+      <section class="col-md-9">
+        <h4>{{'sampleids' | translate}}
+          <i class="fa fa-chevron-right ml-4 right" aria-hidden="true"></i>
+          <i class="fa fa-chevron-down ml-4 down" aria-hidden="true"></i>
+        </h4><br>
+        <section class="scroll sample">
+        <table class="table table-hover" >
+          <thead>
+            <tr>
+              <th scope="col">{{'visite' | translate}}</th>
+              <th scope="col">{{'sample' | translate}}</th>
+              <th scope="col">{{'name' | translate}}</th>
+              <th scope="col">{{'progress' | translate}}</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let explan of Explanatory" (click)="selectedRow(explan)">
+              <th scope="row">{{explan.VisitId}}</th>
+              <td>{{explan.SampleId}}</td>
+              <td>{{explan.Name}}</td>
+              <td>{{explan.Progress}}</td>
+
+            </tr>
+           </tbody>
+        </table>
+      </section>
+      <section class="row">
+        <div class="col-md-4 ">
+          <mat-form-field>
+          <mat-select placeholder="{{'selecttest' | translate}}" readonly name="selecttest" required [(ngModel)]="selecttest">
+            <mat-option  > ay7agaa</mat-option>
+          </mat-select>
+        </mat-form-field>
+        </div>
+        <div class="col-md-4 ">
+          <mat-form-field class="example-full-width">
+            <input matInput  name="visitt" readonly [(ngModel)]="visit">
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 ">
+          <mat-form-field class="example-full-width">
+            <input matInput  name="pnamee" readonly [(ngModel)]="pname">
+          </mat-form-field>
+        </div>
+
+      </section>
+          <section >
+            <!-- <ejs-documenteditorcontainer #documenteditor_default [serviceUrl]='serviceLink' style="display:block;height:600px"></ejs-documenteditorcontainer>                  </section><br> -->
+            <ejs-documenteditorcontainer #documenteditor_default [serviceUrl]='serviceLink' style="display:block;height:600px"></ejs-documenteditorcontainer>
+      </section>
+  </section>
+</section>

@@ -1,0 +1,297 @@
+
+  <section class="container-fluide">
+    <p class="cooo" data-toggle="collapse" data-target="#collapseExample">
+      <i class="fa fa-arrow-left" aria-hidden="true"></i>
+    </p>
+    <!-- <p>
+  
+      <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Button with data-target
+      </button>
+    </p>
+    <div class="collapse" id="collapseExample">
+      <div class="card card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+      </div>
+    </div> -->
+      <section class="row">
+          <section class="col-md-3 dash" id="collapseExample" >
+            <!-- <i class="fa fa-arrow-left" aria-hidden="true"></i> -->
+
+              <h2 >{{'search' | translate}}</h2>
+              <form class="search-form" #form="ngForm" (ngSubmit)="Search(form.value)">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="{{'namepl' | translate}}" name="name" required [(ngModel)]="name">
+                </mat-form-field><br>
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="{{'contactpl' | translate}}" name="contactno" required [(ngModel)]="contactno">
+                </mat-form-field><br>
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="{{'Patientlabpl' | translate}}" name="patientlab" required [(ngModel)]="patientlab">
+                </mat-form-field><br>
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="{{'idnopl' | translate}}" name="idnumber" required [(ngModel)]="idnumber">
+                </mat-form-field><br>
+                <button type="button" class="btn btn-outline-secondary btn-block visit" >Visit</button><br>
+                <section class="rest">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="{{'from' | translate}}" type="date" name="from"  [(ngModel)]="from">
+                </mat-form-field><br>
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="{{'to' | translate}}" type="date" name="to"  [(ngModel)]="to">
+                </mat-form-field><br>
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="{{'mrn' | translate}}" name="mrn"  [(ngModel)]="mrn">
+                </mat-form-field><br>
+              </section>
+                <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
+              </form>
+                        
+         <button class="success-bg btn-block add mt-2" mat-raised-button >{{'Add' | translate}}</button>   
+  
+      <br><br>
+          </section>
+          <section class="col-md-9 first">
+              <h2 class="mr-5 center">{{'searchOutput' | translate}}</h2><br>
+              <section class="scroll">
+                  <table class="table table-hover">
+                    <thead >
+                      <tr>
+                        <th  scope="col">Patient Name</th>
+                        <th  scope="col">DOB</th>
+                        <th  scope="col"> Mobile</th>
+                        <th  scope="col">Phone</th>
+                        <th  scope="col">ID Number</th>
+                        <th  scope="col">Lab ID</th>
+                        <th  scope="col"></th>
+                      </tr>
+                    </thead>
+                  <tbody >
+                    <tr *ngFor="let table of results" >
+                      <!-- <td><input type="checkbox" name="name1" />&nbsp;</!--> 
+                      <td>{{table.PatientName}}</td>
+                      <td> {{table.Date_Of_Birth}}</td>
+                      <td> {{table.Mobile}}</td>
+                      <td> {{table.Phone}}</td>
+                      <td> {{table.custom_id}}</td>
+                      <td > {{table.PatientID}}</td>
+                      <td>
+                        <a [routerLink]="['/dashboard/orderentry',table.PatientID]">  
+                          <i class="fa fa-first-order" aria-hidden="true" title="Order Entry"></i>
+                        </a> 
+                        <a>  
+                          <i class="fa fa-first-order"(click)="openSm(content)"aria-hidden="true" (click)="selectedItem(table)"
+                          title="Order History"></i>
+                        </a> 
+                      </td>
+                    </tr>
+                  </tbody> 
+                </table>
+              </section>
+   
+          </section>
+          <section class="col-md-8 two">
+              <h2 class="ml-5 center">{{'newPatient' | translate}}</h2><br>
+              <form  #addform="ngForm"  (ngSubmit)="Add(addform.value)" class="card addborder"><br>
+            <section>
+                <section class="row ml-5">
+                  <section class="col-md-4">
+                    <mat-form-field >
+                      <input matInput placeholder=" {{'Patientlabpl' | translate}}" readonly value=""name="plabID"  [(ngModel)]="plabID">
+                    </mat-form-field>
+                  
+                      </section>
+                      <section class="col-md-4">
+                         
+                            <mat-form-field>
+                              <mat-select placeholder="{{'gender' | translate}}" name="gender" required [(ngModel)]="selectedgender">
+                                <mat-option *ngFor="let genders of gender"(click)="selectOne(genders)" [value]="genders.ID" >{{genders.Name}}</mat-option>
+                              </mat-select>
+                          </mat-form-field>
+                          </section>
+                          <section class="col-md-4">
+                            <mat-form-field>
+                              <mat-select placeholder="{{'title' | translate}}" name="title" required [(ngModel)]="selectedtitle">
+                                   <mat-option *ngFor="let titles of title" [value]="titles.ID" >{{titles.Name}}</mat-option>
+                                 </mat-select>
+                               </mat-form-field>
+                          </section>
+              </section>
+              <section class="row ml-5">
+                <section class="col-md-4">
+                          <mat-form-field class="example-full-width">
+                          <input matInput placeholder="{{'fname' | translate}}" value=""name="fname" required [(ngModel)]="fname">
+                        </mat-form-field> 
+                </section>
+                <section class="col-md-4">
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="{{'mname' | translate}}" value=""name="mname" required [(ngModel)]="mname">
+                            </mat-form-field>
+                </section>
+                  <section class="col-md-4">
+                      <mat-form-field class="example-full-width">
+                          <input matInput placeholder=" {{'lname' | translate}}" value=""name="lname" required [(ngModel)]="lname">
+                        </mat-form-field>
+                      </section>
+                    
+              </section>
+              <section class="row ml-5">
+                  <section class="col-md-4">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="{{'dob' | translate}}" type="date" value=""name="dob" required [(ngModel)]="dob">
+                    </mat-form-field>
+                      </section>
+                      <section class="col-md-4">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder=" {{'age' | translate}}" value=""name="age" required [(ngModel)]="age">
+                        </mat-form-field>
+                      </section>
+                      <section class="col-md-4">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="{{'idnopl' | translate}}" type="text" value=""name="idno" required [(ngModel)]="idno">
+                        </mat-form-field>
+                          </section>
+              </section>
+              <h5 class="ml-5 left">{{'address' | translate}}</h5>
+              <section class="row ml-5">
+                  <section class="col-md-4">
+<!--                        
+                    <mat-form-field>
+                      <mat-select placeholder="{{'country' | translate}}" name="country" required [(ngModel)]="selectedcountry">
+                        <mat-option *ngFor="let countries of country" [value]="countries.ID" >{{countries.Name}}</mat-option>
+                      </mat-select>
+                    </mat-form-field> -->
+                    <mat-form-field class="example-full-width">
+                      <input matInput readonly placeholder="{{'country' | translate}}"name="country"  [(ngModel)]="selectedcountry">
+                      United Arab Emirates	
+                    </mat-form-field>
+                      </section>
+                      <section class="col-md-4">
+                        <mat-form-field>
+                          <mat-select placeholder="{{'state' | translate}}" name="state" required [(ngModel)]="selectedstate">
+                            <mat-option *ngFor="let astate of state" [value]="astate.ID" >{{astate.Name}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                          </section>
+                          <section class="col-md-4">
+                            <mat-form-field>
+                              <mat-select placeholder="{{'city' | translate}}" name="city" required [(ngModel)]="selectedcity">
+                                <mat-option *ngFor="let ccity of city" [value]="ccity.ID" >{{ccity.Name}}</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </section>
+              </section>
+              <section class="row ml-5">
+                 <section class="col-md-6">
+                    <mat-form-field style="width: 28rem;">
+                          <textarea matInput  placeholder="{{'detials' | translate}}"name="detials" rows="3" cols="8" required [(ngModel)]="detials"></textarea>
+                    </mat-form-field>
+              </section>
+              </section>
+              <section class="row ml-5">
+                  <section class="col-md-4">
+                      <mat-form-field class="example-full-width">
+                          <input matInput placeholder="{{'mnumber' | translate}}" value=""name="mnumber" required [(ngModel)]="mnumber">
+                        </mat-form-field>
+                      </section>
+                      <section class="col-md-4">
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="{{'pnumber' | translate}}" value=""name="pnumber" required [(ngModel)]="pnumber">
+                            </mat-form-field>
+                          </section>
+                          <section class="col-md-4">
+                            <mat-form-field>
+                              <mat-select placeholder="{{'nation' | translate}}" name="nation" required [(ngModel)]="selectednationality">
+                                <mat-option *ngFor="let national of nation" [value]="national.ID" >{{national.Description}}</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </section>
+              </section>
+              <section class="row ml-5">
+                  <section class="col-md-4">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="{{'passport' | translate}}" value=""name="passportno" required [(ngModel)]="passportno">
+                    </mat-form-field>
+                      </section>
+                      <section class="col-md-4">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="{{'email' | translate}}" type="email" value=""name="email" required [(ngModel)]="email">
+                        </mat-form-field>
+                          </section>
+                          <section class="col-md-4">
+               
+                            <mat-form-field>
+                              <mat-select placeholder="{{'bgroup' | translate}}" name="bgroup" required [(ngModel)]="selectedbloodgroup">
+                                <mat-option *ngFor="let bloodgroup of bgroup" [value]="bloodgroup.ID" >{{bloodgroup.Name}}</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </section>
+              </section>
+   
+              <h5 class="ml-5 left">{{'billing' | translate}}</h5>
+              <section class="row ml-5">
+                <section class="col-md-6">
+                  <div class="custom-control custom-radio">
+                    <input type="radio" class="custom-control-input walk" id="customRadio" name="walkin" value="customEx">
+                    <label class="custom-control-label custom" for="customRadio">{{'cash' | translate}}</label>
+                  </div>
+                  </section>
+                  <section class="col-md-6">
+                    <div class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input type" id="customRadio2" name="walkin" value="customEx">
+                      <label class="custom-control-label custom" for="customRadio2">{{'insured' | translate}}</label>
+                    </div>
+                    </section>
+              </section> 
+               <br>
+            </section>
+              <section class="row mr-5 justify-content-center">
+              <button class="success-bg " mat-raised-button>{{'save' | translate}}</button>
+            </section><br><br>
+          </form>
+      </section>
+        </section>
+  
+        <ng-template #content let-modal>
+          <div role="document">
+          <div class="modal-header">
+            <h4 class="modal-title" style="text-align: center;">{{'orderhistory' | translate}}</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <section class="horizontal">
+          <table class="table table-hover" >
+            <thead>
+              <tr>
+                <th scope="col" class="try" >{{'center' | translate}}</th>
+                <th scope="col" class="try">{{'visitid' | translate}}</th>
+                <th scope="col" class="try"> {{'visitdate' | translate}}</th>
+                <th scope="col" class="try">{{'billingtype' | translate}}</th>
+                <th scope="col" class="try">{{'uid' | translate}}</th>
+                <th scope="col" class="try">{{'client|policy' | translate}}</th>
+                <th scope="col" class="try">{{'remaining' | translate}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of history"  >
+                <th >{{order.Branch}}</th>
+                <td> {{order.VisitID}}</td>
+                <td> {{order.VisitDate}}</td>
+                <td> {{order.BillingType}}</td>
+                <td> {{order.Remaining}}</td>
+                <td> {{order.Client}}</td>
+                <td> {{order.Remaining}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+          <!-- <div class="modal-footer">
+            <button class="btn btn-primary" >{{'ok' | translate}}</button>
+          </div> -->
+        </div>
+        </ng-template>
+  
+  
+      </section>
+      

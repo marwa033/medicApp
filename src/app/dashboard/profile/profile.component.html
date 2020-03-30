@@ -1,0 +1,115 @@
+<section class="container-fluide">
+  <h2 class="">{{'profile' | translate}}</h2><br>
+  <section class="row">
+      <div class="col-md-3 dash">
+          <form class="search-form" #form="ngForm" (ngSubmit)="Profile(form.value)">
+       
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'name' | translate}}" name="pname" required [(ngModel)]="pname">
+            </mat-form-field><br>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'cpt' | translate}}"  name="pcpt" required [(ngModel)]="pcpt">
+            </mat-form-field><br>
+            <mat-form-field>
+              <mat-select placeholder="{{'active' | translate}}" name="pactive" required [(ngModel)]="pactive">
+                <mat-option value="3">{{'all' | translate}}</mat-option>
+                <mat-option value="1">{{'yes' | translate}}</mat-option>
+                <mat-option value="0">{{'no' | translate}}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+            <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
+          </form><br>
+          <button class="success-bg btn-block log"(click)="openSm(content)" mat-raised-button >{{'Add' | translate}}</button>           
+         </div>
+         
+          <ng-template #content let-modal>
+            <div role="document">
+            <div class="modal-header">
+              <h4 class="modal-title" style="text-align: center;">{{'Add' | translate}}</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form #addform="ngForm" (ngSubmit)="addProfile(addform.value)">
+            <div class="modal-body ">
+              <section class="row justify-content-center">
+                <section class="col-md-5 mt-2">
+                  
+              <div class="form-group row">
+                <label>{{'id' | translate}}</label>
+                  <input class="form-control" readonly name="idprofile" required [(ngModel)]="idprofile">
+              </div>
+              <div class="form-group row">
+                <label>{{'cpt' | translate}}</label>
+                  <input class="form-control"  name="cptprofile" required [(ngModel)]="cptprofile">
+              </div>
+              <div class="form-group row">
+                <label>{{'name' | translate}}</label>
+                  <input class="form-control" placeholder="Enter Name" name="nameprofile" required [(ngModel)]="nameprofile">
+                </div>
+            </section>
+            <section class="col-md-5 ml-3">
+                <div class="form-group row">
+                  <label class="col-form-label">{{'gender' | translate}}</label>
+                    <select class="form-control" name="genderprofile" [(ngModel)]="genderprofile">
+                      <option >{{'all' | translate}}</option>
+                      <option >{{'yes' | translate}}</option>
+                      <option >{{'no' | translate}}</option>
+                    </select>
+                   </div>
+              <div class="form-group row">
+                <label class="col-form-label">{{'active' | translate}}</label>
+                  <select class="form-control" name="activeprofile" [(ngModel)]="activeprofile">
+                    <!-- <option >{{'all' | translate}}</option> -->
+                    <option >{{'yes' | translate}}</option>
+                    <option >{{'no' | translate}}</option>
+                  </select>
+                 </div>
+          
+              <div class="form-group row">
+                <label>{{'printas' | translate}}</label>
+                  <input  class="form-control" placeholder="Enter the way to print" name="printprofile" required [(ngModel)]="printprofile">
+              </div>
+            </section>
+            </section>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" >{{'save' | translate}}</button>
+            </div>
+            </form>
+        
+          </div>
+          </ng-template> 
+         
+  <br><br>
+      
+      <section class="col-md-9 first scroll">
+          <table class="table table-hover" >
+              <thead>
+                <tr>
+                  <th scope="col">{{'profileid' | translate}}</th>
+                  <th scope="col">{{'profilename' | translate}}</th>
+                  <th scope="col">{{'cpt' | translate}}</th>
+                  <th scope="col">{{'active' | translate}}</th>
+                  <th scope="col">{{'createdt' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let profile of profiles">
+                  <th scope="row">{{profile.ID}}</th>
+                  <td>{{profile.Name}}</td>
+                  <td>{{profile.HIS_Code}}</td>
+                  <td>{{profile.Active}}</td>
+                  <td>{{profile.CreateDT}}</td>
+
+                </tr>
+              </tbody>
+            </table>
+      </section>
+  </section>
+</section>
+
+
+
+
+

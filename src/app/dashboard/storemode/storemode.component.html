@@ -1,0 +1,91 @@
+<!-- <head>
+  <link href="assets\bootstrap\bootstrap.css" rel="stylesheet">
+  <link href="assets\bootstrap\bootstrap.min.css" rel="stylesheet">
+</head> -->
+<section class="container-fluide">
+    <h2 class="">{{'storemode' | translate}}</h2><br>
+    <section class="row">
+        <section class="col-md-3 dash">
+            <form class="search-form" #form="ngForm" (ngSubmit)="Store(form.value)">
+         
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="{{'name' | translate}}"  name="modename" required [(ngModel)]="modename">
+              </mat-form-field><br>
+              <mat-form-field>
+                <mat-select placeholder="{{'active' | translate}}" name="modeactive" required [(ngModel)]="modeactive">
+                  <mat-option value="3">{{'all' | translate}}</mat-option>
+                  <mat-option value="1">{{'yes' | translate}}</mat-option>
+                  <mat-option value="0">{{'no' | translate}}</mat-option>
+                </mat-select>
+              </mat-form-field><br>
+              <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
+            </form><br>
+              <button class="success-bg btn-block log"(click)="openSm(content)" mat-raised-button >{{'Add' | translate}}</button>
+            
+              <ng-template #content let-modal>
+                <div role="document">
+                <div class="modal-header">
+                  <h4 class="modal-title" style="text-align: center;">{{'Add' | translate}}</h4>
+                  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form #addform="ngForm" (ngSubmit)="addStore(addform.value)">
+                <div class="modal-body ">
+                  <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">{{'id' | translate}}</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" readonly name="storeid" required [(ngModel)]="storeid">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">{{'name' | translate}}</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" placeholder="Enter Name" name="storename" required [(ngModel)]="storename">
+                    </div>
+                  </div>
+                 <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">{{'active' | translate}}</label>
+                    <div class="col-sm-8">
+                      <select class="form-control" name="storeactive" [(ngModel)]="storeactive">
+                        <!-- <option>{{'all' | translate}}</option> -->
+                        <option>{{'yes' | translate}}</option>
+                        <option>{{'no' | translate}}</option>
+                      </select>
+                     </div>
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <button class="btn btn-primary" >{{'save' | translate}}</button>
+                </div>
+                </form>
+              </div>
+              </ng-template>
+           
+    <br><br>
+        </section>
+        <section class="col-md-9 first scroll">
+            <table class="table table-hover" >
+                <thead>
+                  <tr>
+                    <th scope="col">{{'storeid' | translate}}</th>
+                    <th scope="col">{{'storename' | translate}}</th>
+                    <th scope="col">{{'active' | translate}}</th>
+                    <th scope="col">{{'createdt' | translate}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let store of stores">
+                    <th scope="row">{{store.ID}}</th>
+                    <td>{{store.Name}}</td>
+                    <td>{{store.Active}}</td>
+                    <td>{{store.CreateDT}}</td>
+
+                  </tr>
+                </tbody>
+              </table>
+        </section>
+    </section>
+</section>
+

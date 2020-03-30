@@ -1,0 +1,421 @@
+<section class="container-fluide">
+  <h2 class="">{{'test' | translate}}</h2><br>
+  <section class="row">
+      <section class="col-md-3 dash">
+          <form class="search-form" #form="ngForm" (ngSubmit)="Test(form.value)">
+       
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'name' | translate}}" name="tname" required [(ngModel)]="tname">
+            </mat-form-field><br>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'cpt' | translate}}"  name="cpt" required [(ngModel)]="cpt">
+            </mat-form-field><br>
+            <!-- <mat-form-field>
+              <mat-select placeholder="{{'category' | translate}}" name="testcategory" required [(ngModel)]="testcategory">
+                <mat-option value="option">{{'all' | translate}}</mat-option>
+                <mat-option value="option">{{'yes' | translate}}</mat-option>
+                <mat-option value="option">{{'no' | translate}}</mat-option>
+              </mat-select>
+            </mat-form-field><br> -->
+            <mat-form-field>
+              <mat-select placeholder="{{'category' | translate}}" name="testcategory" required [(ngModel)]="selectedcategory">
+                <mat-option *ngFor="let category of testcategory" [value]="category.ID" >{{category.Name}}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+            <mat-form-field>
+              <mat-select placeholder="{{'active' | translate}}" name="tactive" required [(ngModel)]="tactive">
+                <mat-option value="3">{{'all' | translate}}</mat-option>
+                <mat-option value="1">{{'yes' | translate}}</mat-option>
+                <mat-option value="0">{{'no' | translate}}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+            <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
+          </form><br>
+          <!-- <button class="success-bg btn-block log"(click)="openSm(content)" mat-raised-button >{{'Add' | translate}}</button> -->
+          <button class="success-bg btn-block addd" mat-raised-button >{{'Add' | translate}}</button>
+          <ng-template #content let-modal>
+            <div role="document">
+            <div class="modal-header">
+              <h4 class="modal-title" style="text-align: center;">{{'Add' | translate}}</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form #addform="ngForm" (ngSubmit)="addTest(addform.value)">
+            <div class="modal-body ">
+              <section class="row justify-content-center">
+                <section class="col-md-5 mt-2">
+                  
+              <div class="form-group row">
+                <label>{{'id' | translate}}</label>
+                  <input class="form-control" readonly name="testid" required [(ngModel)]="testid">
+              </div>
+              <div class="form-group row">
+                <label>{{'cpt' | translate}}</label>
+                  <input class="form-control" placeholder="Enter CPT" name="testcpt" required [(ngModel)]="testcpt">
+                </div>
+            
+              <div class="form-group row">
+                <label>{{'name' | translate}}</label>
+                  <input  class="form-control" placeholder="Enter Name" name="testname" required [(ngModel)]="testname">
+                </div>
+              
+              <div class="form-group row">
+                <label>{{'printas' | translate}}</label>
+                  <input  class="form-control" placeholder="Enter the way" name="testprint" required [(ngModel)]="testprint">
+              </div>
+              <div class="form-group row">
+                <label>{{'shortname' | translate}}</label>
+                  <input  class="form-control" placeholder="Enter short name" name="testshort" required [(ngModel)]="testshort">
+              </div>
+              <div class="form-group row">
+                <label>{{'footer' | translate}}</label>
+                  <input  class="form-control" placeholder="Enter Footer" name="testfooter" required [(ngModel)]="testfooter">
+              </div>
+              <div class="form-group row">
+                <label>{{'instructor' | translate}}</label>
+                  <textarea class="form-control" rows="2" name="testinstructor" required [(ngModel)]="testindtructor"></textarea>
+              </div>
+              <div class="form-group row">
+                <label>{{'barcodecopies' | translate}}</label>
+                  <input  class="form-control" placeholder="Enter Barcode" name="testbar" required [(ngModel)]="testbar">
+              </div>
+              <div class="form-group row">
+                <label>{{'resultdays' | translate}}</label>
+                  <input  class="form-control" placeholder="Enter Result Days" name="testresult" required [(ngModel)]="testresult">
+              </div>
+              <div class="form-group row">
+                <label>{{'displayorder' | translate}}</label>
+                  <input  class="form-control" placeholder="Enter Display Order" name="testdisplay" required [(ngModel)]="testdisplay">
+              </div>
+            </section>
+            <section class="col-md-5 ml-3">
+              <div class="form-group row">
+                <label class="col-form-label">{{'category' | translate}}</label>
+                  <select class="form-control" name="testcategory" [(ngModel)]="selectedcategory">
+                    <option *ngFor="let category of testcategory" [value]="category.ID">{{category.Name}}</option>
+                  </select>
+                 </div>
+              <div class="form-group row">
+                <label class="col-form-label">{{'subcategory' | translate}}</label>
+                  <select class="form-control" name="testsub" [(ngModel)]="testsub">
+                    <option *ngFor="let subcategory of testsub" [value]="subcategory.ID">{{subcategory.Name}}</option>
+                  </select>
+                 </div>
+                 <div class="form-group row">
+                  <label class="col-form-label">{{'gender' | translate}}</label>
+                    <select class="form-control" name="testgender" [(ngModel)]="testgender">
+                      <option *ngFor="let gender of testgender" [value]="gender.ID">{{gender.Name}}</option>
+                    </select>
+                   </div>
+                <div class="form-group row">
+                  <label class="col-form-label">{{'sampletype' | translate}}</label>
+                    <select class="form-control" name="testsample" [(ngModel)]="testsample">
+                      <option *ngFor="let sample of testsample" [value]="sample.ID">{{sample.Name}}</option>
+                    </select>
+                   </div>
+                   <div class="form-group row">
+                    <label class="col-form-label">{{'resulttype' | translate}}</label>
+                      <select class="form-control" name="testtype" [(ngModel)]="testtype">
+                        <!-- <option >{{'all' | translate}}</option> -->
+                        <option >{{'yes' | translate}}</option>
+                        <option >{{'no' | translate}}</option>
+                      </select>
+                     </div>
+                  <div class="form-group row">
+                    <label class="col-form-label">{{'resultreport' | translate}}</label>
+                      <select class="form-control" name="testreport" [(ngModel)]="testreport">
+                        <option *ngFor="let report of testreport" [value]="report.ID">{{report.Name}}</option>
+                      </select>
+                     </div>
+                     <div class="form-group row">
+                      <label class="col-form-label">{{'resultprevious' | translate}}</label>
+                        <select class="form-control" name="testprevious" [(ngModel)]="testprevious">
+                          <!-- <option >{{'all' | translate}}</option> -->
+                          <option >{{'yes' | translate}}</option>
+                          <option >{{'no' | translate}}</option>
+                        </select>
+                       </div>
+                       <div class="form-group row">
+                        <label class="col-form-label">{{'active' | translate}}</label>
+                          <select class="form-control" name="testactive" [(ngModel)]="testactive">
+                            <!-- <option >{{'all' | translate}}</option> -->
+                            <option >{{'yes' | translate}}</option>
+                            <option >{{'no' | translate}}</option>
+                          </select>
+                         </div>
+                         <div class="form-group row">
+                          <label class="col-form-label">{{'requestable' | translate}}</label>
+                            <select class="form-control" name="testrequest" [(ngModel)]="testrequest">
+                              <!-- <option >{{'all' | translate}}</option> -->
+                              <option >{{'yes' | translate}}</option>
+                              <option >{{'no' | translate}}</option>
+                            </select>
+                           </div>
+                           <div class="form-group row">
+                            <label class="col-form-label">{{'suppressname' | translate}}</label>
+                              <select class="form-control" name="testsup" [(ngModel)]="testsup">
+                                <!-- <option >{{'all' | translate}}</option> -->
+                                <option >{{'yes' | translate}}</option>
+                                <option >{{'no' | translate}}</option>
+                              </select>
+                             </div>
+                             <div class="form-group row">
+                              <label class="col-form-label">{{'sepreatepage' | translate}}</label>
+                                <select class="form-control" name="testpage" [(ngModel)]="testpage">
+                                  <!-- <option >{{'all' | translate}}</option> -->
+                                  <option >{{'yes' | translate}}</option>
+                                  <option >{{'no' | translate}}</option>
+                                </select>
+                               </div>
+            </section>
+          </section>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" >{{'save' | translate}}</button>
+            </div>
+            </form>
+        
+          </div>
+          </ng-template>
+         
+         
+
+
+  <br><br>
+      </section>
+      <section class="col-md-9 first ">
+        <section class="scroll one">
+          <table class="table table-hover" >
+              <thead>
+                <tr>
+                  <th scope="col">{{'testid' | translate}}</th>
+                  <th scope="col">{{'testname' | translate}}</th>
+                  <th scope="col">{{'cpt' | translate}}</th>
+                  <th scope="col">{{'active' | translate}}</th>
+                  <th scope="col">{{'createdt' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let test of tests">
+                  <th scope="row">{{test.ID}}</th>
+                  <td>{{test.Name}}</td>
+                  <td>{{test.HIS_Code}}</td>
+                  <td>{{test.Active}}</td>
+                  <td>{{test.CreateDT}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <div class="second">
+     <h4>{{'testdetials' | translate}}</h4>
+     <mat-divider></mat-divider>
+     <section class="row">
+       <section class="col-md-4">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="{{'id' | translate}}"  readonly name="testid" [(ngModel)]="testid">
+        </mat-form-field>
+       </section>
+     </section>
+     <section class="row">
+       <section class="col-md-3">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="{{'cpt' | translate}}"  name="testcpt" required [(ngModel)]="testcpt">
+        </mat-form-field>
+       </section>
+       <section class="col-md-3">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="{{'name' | translate}}"   name="testname" required [(ngModel)]="testname">
+        </mat-form-field>
+       </section>
+       <section class="col-md-3">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="{{'printas' | translate}}"  name="testprint" required [(ngModel)]="testprint">
+        </mat-form-field>
+       </section>
+       <section class="col-md-3">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="{{'shortname' | translate}}"  name="testshort" required [(ngModel)]="testshort">
+        </mat-form-field>
+       </section>
+     </section>
+
+     <section class="row">
+      <section class="col-md-3">
+       <mat-form-field class="example-full-width">
+         <input matInput placeholder="{{'footer' | translate}}"  name="testfooter" required [(ngModel)]="testfooter">
+       </mat-form-field>
+      </section>
+      <section class="col-md-3">
+       <mat-form-field class="example-full-width">
+         <input matInput placeholder="{{'instructor' | translate}}"   name="testinstructor" required [(ngModel)]="testindtructor">
+       </mat-form-field>
+      </section>
+      <section class="col-md-3">
+        <mat-form-field>
+          <mat-select placeholder="{{'category' | translate}}" name="testcategory" required [(ngModel)]="selectedcategory">
+            <mat-option *ngFor="let category of testcategory" [value]="category.ID" >{{category.Name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </section>
+      <section class="col-md-3">
+        <mat-form-field>
+          <mat-select placeholder="{{'category' | translate}}" name="testsub" [(ngModel)]="testsub">
+            <mat-option *ngFor="let subcategory of testsub" [value]="subcategory.ID">{{subcategory.Name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </section>
+    </section>
+
+    <section class="row">
+      <section class="col-md-3">
+        <mat-form-field>
+          <mat-select placeholder="{{'gender' | translate}}" name="testgender" [(ngModel)]="testgender">
+            <mat-option *ngFor="let gender of testgender" [value]="gender.ID">{{gender.Name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </section>
+      <section class="col-md-3">
+        <mat-form-field>
+          <mat-select placeholder="{{'sampletype' | translate}}" name="testsample" [(ngModel)]="testsample">
+            <mat-option *ngFor="let sample of testsample" [value]="sample.ID">{{sample.Name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </section>
+      <section class="col-md-3">
+        <mat-form-field>
+          <mat-select placeholder="{{'resulttype' | translate}}" name="testtype" [(ngModel)]="testtype">
+            <mat-option>{{'descriptive' | translate}}</mat-option>
+            <mat-option>{{'generallab' | translate}}</mat-option>
+            <mat-option>{{'micrbiology' | translate}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </section>
+      <section class="col-md-3">
+        <mat-form-field>
+          <mat-select placeholder="{{'resultreport' | translate}}" name="testreport" [(ngModel)]="testreport">
+            <mat-option *ngFor="let report of testreport" [value]="report.ID">{{report.Name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </section>
+    </section>
+
+    <section class="row">
+      <section class="col-md-3">
+        <mat-form-field>
+          <mat-select placeholder="{{'printpervious' | translate}}" name="testprevious" [(ngModel)]="testprevious">
+            <mat-option>{{'yes' | translate}}</mat-option>
+            <mat-option>{{'no' | translate}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </section>
+      <section class="col-md-3">
+        <mat-form-field>
+          <mat-select placeholder="{{'active' | translate}}" name="testactive" [(ngModel)]="testactive">
+            <mat-option>{{'yes' | translate}}</mat-option>
+            <mat-option>{{'no' | translate}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </section>
+      <section class="col-md-3">
+        <mat-form-field>
+          <mat-select placeholder="{{'requestable' | translate}}"name="testrequest" [(ngModel)]="testrequest">
+            <mat-option>{{'yes' | translate}}</mat-option>
+            <mat-option>{{'no' | translate}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </section>
+      <section class="col-md-3">
+        <mat-form-field>
+          <mat-select placeholder="{{'suppressname' | translate}}" name="testsup" [(ngModel)]="testsup">
+            <mat-option>{{'yes' | translate}}</mat-option>
+            <mat-option>{{'no' | translate}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </section>
+    </section>
+
+    <section class="row">
+      <section class="col-md-3">
+        <mat-form-field>
+          <mat-select placeholder="{{'sepreatepage' | translate}}" name="testpage" [(ngModel)]="testpage">
+            <mat-option>{{'yes' | translate}}</mat-option>
+            <mat-option>{{'no' | translate}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </section>
+      <section class="col-md-3">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="{{'barcodecopies' | translate}}"  name="testbar" required [(ngModel)]="testbar">
+        </mat-form-field>
+      </section>
+      <section class="col-md-3">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="{{'resultdays' | translate}}"  name="testresult" required [(ngModel)]="testresult">
+        </mat-form-field>
+      </section>
+      <section class="col-md-3">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="{{'displayorder' | translate}}"  name="testdisplay" required [(ngModel)]="testdisplay">
+        </mat-form-field>
+      </section>
+    </section>
+    <section class="row">
+      <section class="col-md-9"></section>
+      <section class="col-md-3">
+        <!-- <button class="btn btn-primary" >{{'save' | translate}}</button> -->
+        <button class="primary-bg btn-block " mat-raised-button >{{'save' | translate}}</button>
+      </section>
+    </section><br>
+    <section class="row">
+      <section class="col-md-6">
+        <section class="scroll">
+          <table class="table table-hover" >
+              <thead>
+                <tr>
+                  <th scope="col">{{'id' | translate}}</th>
+                  <th scope="col">{{'resultfield' | translate}}</th>
+           
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let test of tests">
+                  <th>{{test.ID}}</th>
+                  <td>{{test.Name}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </section> 
+      </section>
+      
+      <section class="col-md-6">
+        <section class="scroll">
+          <table class="table table-hover" >
+              <thead>
+                <tr>
+                  <th scope="col">{{'id' | translate}}</th>
+                  <th scope="col">{{'name' | translate}}</th>
+                  <th scope="col">{{'order' | translate}}</th>
+           
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let test of tests">
+                  <th>{{test.ID}}</th>
+                  <td>{{test.Name}}</td>
+                  <td>{{test.Name}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </section> 
+      </section>
+    </section>
+    </div>
+    </section>
+  </section>
+</section>
+
+
+
+
+

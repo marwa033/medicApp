@@ -1,0 +1,32 @@
+
+.dash{
+    border-right: 2px solid red;
+}
+table{
+    background-color: white;
+}
+h1{
+    text-align: center;
+
+}
+.scroll{
+    overflow-y: auto;
+    // padding-bottom: 200px;
+    height: 300px;
+}
+.container-fluide{
+    padding: 20px;
+}
+.second{
+    display: none;
+}
+
+h2{
+    font-size: larger;
+    text-align: center;
+    }
+    th{
+        font-size: small;
+        font-weight: bold;
+        color: rgba(22, 21, 21, 0.644);
+    }

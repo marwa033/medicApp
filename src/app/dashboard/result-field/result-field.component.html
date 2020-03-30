@@ -1,0 +1,41 @@
+<section class="container-fluide">
+  <h2 class="">{{'rfield' | translate}}</h2><br>
+  <section class="row">
+      <section class="col-md-3  dash">
+          <form class="search-form" #form="ngForm" (ngSubmit)="Result(form.value)">
+       
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'name' | translate}}" name="rname" required [(ngModel)]="rname">
+            </mat-form-field><br>
+            <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
+          </form><br>
+            <button class="success-bg btn-block log"(click)="openDialog()" mat-raised-button >{{'Add' | translate}}</button>
+
+         
+  <br><br>
+      </section>
+      <section class="col-md-9 first scroll">
+          <table class="table table-hover" >
+              <thead>
+                <tr>
+                  <th scope="col">{{'resultid' | translate}}</th>
+                  <th scope="col">{{'resultname' | translate}}</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <tr *ngFor="let result of fresults">
+                    <th scope="row">{{result.ID}}</th>
+                    <td>{{result.Name}}</td>
+                </tr>
+              </tbody>
+            </table>
+      </section>
+  </section>
+</section>
+
+
+
+
+

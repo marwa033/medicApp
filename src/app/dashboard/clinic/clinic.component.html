@@ -1,0 +1,156 @@
+<section class="container-fluide">
+  <h2 class="">{{'clinic' | translate}}</h2><br>
+  <section class="row">
+      <section class="col-md-3 dash">
+          <form class="search-form" #form="ngForm" (ngSubmit)="Clinic(form.value)">
+       
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'name' | translate}}" name="rcname" required [(ngModel)]="rcname">
+            </mat-form-field><br>
+            <mat-form-field>
+              <mat-select placeholder="{{'active' | translate}}" name="active" required [(ngModel)]="rcactive">
+                <mat-option value="2 ">{{'all' | translate}}</mat-option>
+                <mat-option value="1">{{'yes' | translate}}</mat-option>
+                <mat-option value="0">{{'no' | translate}}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+            <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
+          </form><br>
+          <button class="success-bg btn-block log"(click)="openSm(content)" mat-raised-button >{{'Add' | translate}}</button>
+          
+          <ng-template #content let-modal>
+            <div role="document">
+            <div class="modal-header">
+              <h4 class="modal-title" style="text-align: center;">{{'Add' | translate}}</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form #addform="ngForm" (ngSubmit)="addClinic(addform.value)">
+            <div class="modal-body ">
+              <section class="row justify-content-center">
+                <section class="col-md-5">
+                  
+              <div class="form-group row">
+                <label>{{'id' | translate}}</label>
+                  <input class="form-control" readonly name="clinicid" required [(ngModel)]="clinicid">
+            
+              </div>
+              <div class="form-group row">
+                <label>{{'name' | translate}}</label>
+                  <input class="form-control" placeholder="Enter Name" name="clinicname" required [(ngModel)]="clinicname">
+                </div>
+            
+              <div class="form-group row">
+                <label>{{'docincharge' | translate}}</label>
+                  <input  class="form-control" placeholder="Enter Doctor Incharge" name="clinicincharge" required [(ngModel)]="clinicincharge">
+                </div>
+              
+              <div class="form-group row">
+                <label>{{'phone' | translate}}</label>
+                  <input  class="form-control" placeholder="Enter The Phone" name="clinicphone" required [(ngModel)]="clinicphone">
+              </div>
+              <div class="form-group row">
+                <label>{{'fax' | translate}}</label>
+                  <input  class="form-control" placeholder="Enter Fax" name="clinicfax" required [(ngModel)]="clinicfax">
+              </div>
+              <div class="form-group row">
+                <label>{{'email' | translate}}</label>
+                  <input  class="form-control" placeholder="example@example.com" name="clinicemail" required [(ngModel)]="clinicemail">
+              </div>
+            </section>
+            <section class="col-md-5 ml-3">
+              <div class="form-group row">
+                <label>{{'address' | translate}}</label>
+                  <textarea class="form-control" rows="1" name="clinicaddress" required [(ngModel)]="clinicaddress"></textarea>
+              </div>
+              <!-- <div class="form-group row">
+                <label class="col-form-label">{{'speciailty' | translate}}</label>
+                  <select class="form-control" name="clinicspeciality" [(ngModel)]="clinicspeciality">
+                    <option >{{'all' | translate}}</option>
+                    <option >{{'yes' | translate}}</option>
+                    <option >{{'no' | translate}}</option>
+                  </select>
+                 </div> -->
+                 <div class="form-group row">
+                  <label class="col-form-label">{{'speciailty' | translate}}</label>
+                    <select class="form-control" name="clinicspeciality" [(ngModel)]="clinicspeciality">
+                      <option *ngFor="let speciality of clinicspeciality" [value]="speciality.ID">{{speciality.Name}}</option>
+                    </select>
+                   </div>
+              <!-- <div class="form-group row">
+                <label class="col-form-label">{{'priority' | translate}}</label>
+                  <select class="form-control" name="clinicpriority" [(ngModel)]="clinicpriority">
+                    <option >{{'all' | translate}}</option>
+                    <option >{{'yes' | translate}}</option>
+                    <option >{{'no' | translate}}</option>
+                  </select>
+                 </div> -->
+                 <div class="form-group row">
+                  <label class="col-form-label">{{'priority' | translate}}</label>
+                    <select class="form-control" name="clinicpriority" [(ngModel)]="clinicpriority">
+                      <option *ngFor="let priority of clinicpriority" [value]="priority.ID">{{priority.Name}}</option>
+                    </select>
+                   </div>
+              <div class="form-group row">
+                <label class="col-form-label">{{'active' | translate}}</label>
+                  <select class="form-control" name="clinicactive2" [(ngModel)]="clinicactive2">
+                    <!-- <option >{{'all' | translate}}</option> -->
+                    <option >{{'yes' | translate}}</option>
+                    <option >{{'no' | translate}}</option>
+                  </select>
+                 </div>
+              <div class="form-group row">
+                <label>{{'weblogin' | translate}}</label>
+                  <input  class="form-control" placeholder="Enter login ID" name="clinicweblogin" required [(ngModel)]="clinicweblogin">
+              </div>
+              <div class="form-group row">
+                <label>{{'webpass' | translate}}</label>
+                  <input  class="form-control" placeholder="" name="clinicwebpassword" required [(ngModel)]="clinicwebpassword">
+              </div>
+            </section>
+          </section>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" >{{'save' | translate}}</button>
+            </div>
+            </form>
+        
+          </div>
+          </ng-template>
+         
+  <br><br>
+      </section>
+      <section class="col-md-96 first scroll">
+          <table class="table table-hover" >
+              <thead>
+                <tr>
+                  <th scope="col">{{'clinicid' | translate}}</th>
+                  <th scope="col">{{'clinicname' | translate}}</th>
+                  <th scope="col">{{'speciailty' | translate}}</th>
+                  <th scope="col">{{'priority' | translate}}</th>
+                  <th scope="col">{{'webloginid' | translate}}</th>
+                  <th scope="col">{{'webpassword' | translate}}</th>
+                  <th scope="col">{{'createdt' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let clinic of clinics">
+                  <th scope="row">{{clinic.ID}}</th>
+                  <td>{{clinic.Name}}</td>
+                  <td>{{clinic.SpecialityID}}</td>
+                  <td>{{clinic.PriorityID}}</td>
+                  <td>{{clinic.WebUID}}</td>
+                  <td>{{clinic.WebPass}}</td>
+                  <td>{{clinic.CreateDT}}</td>
+                </tr>
+              </tbody>
+            </table>
+      </section>
+  </section>
+</section>
+
+
+
+
+
