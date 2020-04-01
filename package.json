@@ -12,7 +12,7 @@
      "prod-build-dev": "ng build --prod --build-optimizer",
     "prod-build-staging": "ng build --prod --configuration=staging --build-optimizer"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@agm/core": "^1.0.0-beta.6",
     "@angular/animations": "^8.0.0",
