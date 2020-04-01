@@ -36,7 +36,7 @@ steps:
   displayName: 'Build Angular'
   inputs:
     command: custom
-    customCommand: run build2 -- $(ngBuildConfiguration)
+    customCommand: run build
     workingDir: 
 
 - task: PublishPipelineArtifact@0
