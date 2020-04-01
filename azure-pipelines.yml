@@ -30,14 +30,14 @@ steps:
   displayName: 'npm install'
   inputs:
     command: install
-    workingDir: /
+    workingDir: 
 
 - task: Npm@1
   displayName: 'Build Angular'
   inputs:
     command: custom
     customCommand: run build -- $(ngBuildConfiguration)
-    workingDir: /
+    workingDir: 
 
 - task: PublishPipelineArtifact@0
   inputs:
