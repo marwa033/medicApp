@@ -1,12 +1,16 @@
-<div class="gene-login gene-session pad-y-xl">
+<div class="gene-login gene-session">
    <div fxLayout="row" fxLayoutAlign="center start">
-      <div fxLayout="column" fxFlex.xl="540px" fxFlex.lg="540px" fxFlex.md="540px" fxFlex.sm="540px" fxFlex.xs="100">
+      <div fxLayout="column" fxFlex.xl="440px" fxFlex.lg="440px" fxFlex.md="440px" fxFlex.sm="440px" fxFlex.xs="70">
          <mat-card class="gene-login-wrapper">
             <div>
                <div fxLayout="column" fxLayoutAlign="center center mrgn-b-md">
                   <div class="login-logo justify-content">
-                     <img src="assets/img/logo.png" class="ml-4" width="150" height="150">
-                     <h5>Please enter your user information</h5>
+                     <img src="assets/img/logo.png" class="ml-4" width="130" height="130">
+                     <h5>Copyright © 2015,2019 HPS.</h5>
+                     <h6>All rights reserved</h6>
+                     <a class="ml-3" href="https://hps-global.net/">www.hps-global.net</a><br>
+                     <label>Licensed to :</label>
+                     <h5 style="text-align: center;">Please,Log in below</h5>
                   </div>
                </div>
                <form #form="ngForm" (ngSubmit)="login(form.value)" class="one" >

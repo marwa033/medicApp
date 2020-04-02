@@ -19,8 +19,9 @@
             </mat-form-field><br>
             <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
           </form><br>
-          <button class="success-bg btn-block log"(click)="openSm(content)" mat-raised-button >{{'Add' | translate}}</button>           
-         </div>
+          <button class="success-bg btn-block "(click)="openSm(content)" mat-raised-button >{{'Add' | translate}}</button>           
+          <button class="success-bg btn-block addd" mat-raised-button >{{'Add' | translate}}</button>            
+        </div>
          
           <ng-template #content let-modal>
             <div role="document">
@@ -83,7 +84,8 @@
          
   <br><br>
       
-      <section class="col-md-9 first scroll">
+      <section class="col-md-9 first ">
+        <section class="scroll one">
           <table class="table table-hover" >
               <thead>
                 <tr>
@@ -105,8 +107,95 @@
                 </tr>
               </tbody>
             </table>
-      </section>
-  </section>
+          </section>
+          <section class="second">
+            <form #addform="ngForm" (ngSubmit)="addProfile(addform.value)">
+            <h4>{{'profiledetials' | translate}}</h4>
+            <section class="row">
+              <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'id' | translate}}"  readonly name="idprofile" [(ngModel)]="id">
+                  </mat-form-field>
+            </section>
+          </section>
+          <section class="row">
+            <section class="col-md-3">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="{{'cpt' | translate}}"  name="cptprofile" [(ngModel)]="cpt">
+              </mat-form-field>
+            </section>
+            <section class="col-md-3">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="{{'name' | translate}}"  name="nameprofile" [(ngModel)]="name">
+              </mat-form-field>
+            </section>
+            <section class="col-md-3">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="{{'printas' | translate}}"  name="printprofile" [(ngModel)]="printas">
+              </mat-form-field>
+            </section>
+            <section class="col-md-3">
+              <mat-form-field>
+                <mat-select placeholder="{{'gender' | translate}}" name="genderprofile" [(ngModel)]="gender">
+                  <mat-option *ngFor="let gender of genderprofile" [value]="gender.ID">{{gender.Name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </section>
+          </section>
+          <section class="row">
+            <section class="col-md-3">
+              <mat-form-field>
+                <mat-select placeholder="{{'active' | translate}}" name="activeprofile"  [(ngModel)]="active">
+                  <mat-option value="1">{{'yes' | translate}}</mat-option>
+                  <mat-option value="0">{{'no' | translate}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </section>
+            <section class="col-md-5"></section>
+            <section class="col-md-4">
+              <button class="primary-bg btn-block " mat-raised-button >{{'Add' | translate}}</button>
+            </section>
+          </section>
+        </form> <br>
+        
+        <section class="row">
+          <section class="col-md-6 scroll">
+              <table class="table table-hover" >
+                  <thead>
+                    <tr>
+                      <th scope="col">{{'cpt' | translate}}</th>
+                      <th scope="col">{{'name' | translate}}</th>
+                    
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let profile of profiles">
+                      <th>{{profile.ID}}</th>
+                      <td>{{profile.Name}}</td>   
+                    </tr>
+                  </tbody>
+                </table>
+          </section>
+          <section class="col-md-6 scroll">
+            <table class="table table-hover" >
+                <thead>
+                  <tr>
+                    <th scope="col">{{'cpt' | translate}}</th>
+                    <th scope="col">{{'name' | translate}}</th>
+                  
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let profile of profiles">
+                    <th>{{profile.ID}}</th>
+                    <td>{{profile.Name}}</td>   
+                  </tr>
+                </tbody>
+              </table>
+        </section>
+        </section>
+        </section>
+        </section>
 </section>
 
 

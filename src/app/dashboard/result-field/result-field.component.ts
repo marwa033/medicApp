@@ -14,20 +14,22 @@ export class ResultFieldComponent implements OnInit {
   rname= '';
   // fresults: any;
   public fresults: Observable<any>;
+  testgender: any;
+  centers: any;
 
 
   constructor(public translate: TranslateService,
     public authService: AuthService,
    private pageTitleService: PageTitleService) { }
 
-//    Result(value) {
-//     this.authService.ResultField(value);
-
-//     this.fresults = this.authService.ResultSearch;
-//     console.log( 'results is :  ' + this.fresults);
-//     console.log(  this.fresults);
-//  }
-
+   async TestGender(value) {
+    await this.authService.AddGender(value);
+    this.testgender = this.authService.genders.genders;
+   }
+   async Center(value) {
+    await this.authService.Branch(value);
+    this.centers = this.authService.branches.branches;
+   }
 Result(value) {
   if (value.rname == undefined || value.rname =='') {
   value.rname = ' ';
@@ -39,6 +41,22 @@ Result(value) {
   });
 }
   ngOnInit() {
+    this.TestGender('input');
+    this.Center('input');
+
+
+    $(document).ready(function() {
+
+      $('.addd').click(function() {
+         $('.one').hide();
+         $('.second').show();
+       });
+ 
+       $('.log').click(function() {
+        $('.second').hide();
+        $('.one').show();
+      });
+    });
   }
 
 }

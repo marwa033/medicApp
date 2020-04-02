@@ -67,7 +67,7 @@ export class TestComponent implements OnInit {
      }
      async TestGender(value) {
       await this.authService.AddGender(value);
-      this.testgender = this.authService.genders;
+      this.testgender = this.authService.genders.genders;
      }
      async TestSample(value) {
       await this.authService.TestSample(value);

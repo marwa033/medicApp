@@ -2,9 +2,9 @@ body .gene-login-wrapper {
     padding-top: 2rem;
     padding-bottom: 2rem;
     .login-logo {
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
         img {
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
     }
     button {
@@ -15,6 +15,10 @@ body .gene-login-wrapper {
 .justify-content {
     justify-content: center;
 }
-.two{
-    display: none;
+
+h6{
+    text-align: center;
+}
+.link{
+    text-align: center;
 }

@@ -2,6 +2,9 @@
 .dash{
     border-right: 2px solid red;
 }
+.dashh{
+    border-right: 1px solid dodgerblue;
+}
 table{
     background-color: white;
 }
@@ -12,12 +15,21 @@ h1{
 .container-fluide{
     padding: 20px;
 }
+.second{
+    display: none
+}
 .scroll{
     overflow-y: auto;
     // padding-bottom: 200px;
     height: 300px;
 }
-h2,h4{
+.bg-danger{
+    color: white;
+}
+h5{
+    color: dodgerblue;
+}
+h2{
     font-size: larger;
     text-align: center;
     }

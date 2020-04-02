@@ -9,12 +9,13 @@
             </mat-form-field><br>
             <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
           </form><br>
-            <button class="success-bg btn-block log"(click)="openDialog()" mat-raised-button >{{'Add' | translate}}</button>
+            <button class="success-bg btn-block addd"(click)="openDialog()" mat-raised-button >{{'Add' | translate}}</button>
 
          
   <br><br>
       </section>
-      <section class="col-md-9 first scroll">
+      <section class="col-md-9 first">
+        <section class="scroll one">
           <table class="table table-hover" >
               <thead>
                 <tr>
@@ -31,6 +32,168 @@
                 </tr>
               </tbody>
             </table>
+          </section>
+          <section class="second">
+            <h4>{{'resultfield' | translate}}  </h4>
+            
+            <section class="row">
+              
+              <section class="col-md-6 dashh">
+                <form>
+                <h5>{{'resultfielddata' | translate}} </h5>
+                <section class="row">
+             
+                  <section class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="{{'id' | translate}}"  readonly name="addid" [(ngModel)]="addid">
+                    </mat-form-field>
+                  </section>
+                </section>
+                <section class="row">
+                  <section class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="{{'name' | translate}}"  name="addname" required [(ngModel)]="addname">
+                    </mat-form-field>
+                  </section>
+                  <section class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="{{'printas' | translate}}"  name="printas" required [(ngModel)]="printas">
+                    </mat-form-field>
+                  </section>
+                </section>
+                <section class="row">
+                  <section class="col-md-6">
+                    <mat-form-field>
+                      <mat-select placeholder="{{'type' | translate}}" name="addtype" [(ngModel)]="addtype">
+                        <mat-option value="1">{{'resultfield' | translate}}</mat-option>
+                        <mat-option value="2">{{'header' | translate}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </section>
+                  <section class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="{{'unit' | translate}}"  name="addunit" required [(ngModel)]="addunit">
+                    </mat-form-field>
+                  </section>
+                </section>
+                <section class="row">
+                  <section class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="{{'precision' | translate}}"  name="precision" required [(ngModel)]="precision">
+                    </mat-form-field>
+                  </section>
+                  <section class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="{{'default' | translate}}"  name="default" required [(ngModel)]="default">
+                    </mat-form-field>
+                  </section>
+                </section>
+                <section class="row">
+                  <section class="col-md-8">
+                    <mat-form-field>
+                      <mat-select placeholder="{{'resultreport' | translate}}" name="testreport" [(ngModel)]="selectreport">
+                        <mat-option *ngFor="let report of testreport" [value]="report.ID">{{report.Name}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </section>
+                  <section class="col-md-4">
+                    <button class="primary-bg btn-block " mat-raised-button >{{'save' | translate}}</button>
+
+                  </section>
+                </section>
+                 </form>
+            
+                </section>
+           
+              <section class="col-md-6">
+                <h5>{{'referencerange' | translate}} </h5>
+                <section class="row">
+                  <section class="col-md-6">
+                    <mat-form-field>
+                      <mat-select placeholder="{{'gender' | translate}}" name="testgender" [(ngModel)]="resultgender">
+                        <mat-option *ngFor="let gender of testgender" [value]="gender.ID">{{gender.Name}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </section>
+                  <section class="col-md-6">
+                    <mat-form-field class="full-wid mrgn-b-md">
+                      <mat-select placeholder="Branch" name="center" required [(ngModel)]="resultbranch">
+                            <mat-option *ngFor="let center of centers " [value]="center.id">{{center.name}}</mat-option>
+                      </mat-select>
+                      </mat-form-field>
+                  </section>
+                </section>
+                <section class="row ">
+                  <section class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="{{'minage' | translate}}"  name="minage" required [(ngModel)]="minage">
+                    </mat-form-field>
+                  </section>
+                  <section class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="{{'maxage' | translate}}"  name="maxage" required [(ngModel)]="maxage">
+                    </mat-form-field>
+                  </section>
+                </section>
+                <section class="row">
+                  <section class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="{{'low' | translate}}"  name="addlow" required [(ngModel)]="addlow">
+                    </mat-form-field>
+                  </section>
+                  <section class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="{{'high' | translate}}"  name="addhigh" required [(ngModel)]="addhigh">
+                    </mat-form-field>
+                  </section>
+                </section>
+                <section class="row">
+                  <section class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <textarea matInput  placeholder="{{'printas' | translate}}"name="addprintas" rows="3" cols="8" required [(ngModel)]="addprintas"></textarea>
+                    </mat-form-field>
+                  </section>
+
+                </section>
+            <section class="row">
+              <section class="col-md-4"></section>
+              <section class="col-md-4">
+                <button class="bg-danger btn-block " mat-raised-button >{{'delete' | translate}}</button>
+              </section>
+              <section class="col-md-4">
+                <button class="primary-bg btn-block " mat-raised-button >{{'Add' | translate}}</button>
+              </section>
+            </section>
+              </section>
+            </section><br>
+            <section class="scroll ">
+              <table class="table table-hover" >
+                  <thead>
+                    <tr>
+                      <th scope="col">{{'branch' | translate}}</th>
+                      <th scope="col">{{'gender' | translate}}</th>
+                      <th scope="col">{{'minage' | translate}}</th>
+                      <th scope="col">{{'maxage' | translate}}</th>
+                      <th scope="col">{{'low' | translate}}</th>
+                      <th scope="col">{{'high' | translate}}</th>
+    
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <tr *ngFor="let result of fresults">
+                        <th >{{result.ID}}</th>
+                        <td>{{result.Name}}</td>
+                        <td>{{result.ID}}</td>
+                        <td>{{result.Name}}</td>
+                        <td>{{result.ID}}</td>
+                        <td>{{result.Name}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+          </section>
+          
       </section>
   </section>
 </section>

@@ -112,6 +112,7 @@ export class AuthService {
   Cspeciality: any;
   generaldetials : any;
   loadprofileresult: any;
+  branches: any;
 
   // search result :any; ===> searchresult: new Observable<any>();
 
@@ -3210,7 +3211,7 @@ async CenterCollection(value) {
 const data = {  };
 const bodyobj = JSON.stringify(data);
 
-const request = new Request(baseURL + 'Branch/GetBranch', {
+const request = new Request(baseURL + 'Center/get', {
 method: 'POSt',
 body: bodyobj
 });
@@ -3229,6 +3230,33 @@ getcenterrsponse( resposne) {
 console.log(resposne);
 console.log('from function state');
 this.centers = resposne;
+}
+/////////////////////////////////////////
+async Branch(value) {
+  // this.userData = JSON.parse(localStorage.getItem('userProfile'));
+
+const data = {  };
+const bodyobj = JSON.stringify(data);
+
+const request = new Request(baseURL + 'Branch/GetBranch', {
+method: 'POSt',
+body: bodyobj
+});
+request.headers.delete('Content-Type');
+request.headers.append('Content-Type', 'application/json');
+
+await fetch( request)
+.then(response => response.json())
+.then(json => this.getbranchrsponse(json))
+.catch(err => {
+ this.toastr.error(err.message);
+});
+
+}
+getbranchrsponse( resposne) {
+console.log(resposne);
+console.log('from function state');
+this.branches = resposne;
 }
 
 /////////////////////////////////////////

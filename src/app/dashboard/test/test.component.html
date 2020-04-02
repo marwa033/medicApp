@@ -10,13 +10,7 @@
             <mat-form-field class="example-full-width">
               <input matInput placeholder="{{'cpt' | translate}}"  name="cpt" required [(ngModel)]="cpt">
             </mat-form-field><br>
-            <!-- <mat-form-field>
-              <mat-select placeholder="{{'category' | translate}}" name="testcategory" required [(ngModel)]="testcategory">
-                <mat-option value="option">{{'all' | translate}}</mat-option>
-                <mat-option value="option">{{'yes' | translate}}</mat-option>
-                <mat-option value="option">{{'no' | translate}}</mat-option>
-              </mat-select>
-            </mat-form-field><br> -->
+   
             <mat-form-field>
               <mat-select placeholder="{{'category' | translate}}" name="testcategory" required [(ngModel)]="selectedcategory">
                 <mat-option *ngFor="let category of testcategory" [value]="category.ID" >{{category.Name}}</mat-option>
@@ -210,6 +204,8 @@
           <div class="second">
      <h4>{{'testdetials' | translate}}</h4>
      <mat-divider></mat-divider>
+     <form #addform="ngForm" (ngSubmit)="addTest(addform.value)">
+
      <section class="row">
        <section class="col-md-4">
         <mat-form-field class="example-full-width">
@@ -253,14 +249,14 @@
       </section>
       <section class="col-md-3">
         <mat-form-field>
-          <mat-select placeholder="{{'category' | translate}}" name="testcategory" required [(ngModel)]="selectedcategory">
+          <mat-select placeholder="{{'category' | translate}}" name="testcategory" required [(ngModel)]="selectcategory">
             <mat-option *ngFor="let category of testcategory" [value]="category.ID" >{{category.Name}}</mat-option>
           </mat-select>
         </mat-form-field>
       </section>
       <section class="col-md-3">
         <mat-form-field>
-          <mat-select placeholder="{{'category' | translate}}" name="testsub" [(ngModel)]="testsub">
+          <mat-select placeholder="{{'subcategory' | translate}}" name="testsub" [(ngModel)]="selectsub">
             <mat-option *ngFor="let subcategory of testsub" [value]="subcategory.ID">{{subcategory.Name}}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -270,30 +266,30 @@
     <section class="row">
       <section class="col-md-3">
         <mat-form-field>
-          <mat-select placeholder="{{'gender' | translate}}" name="testgender" [(ngModel)]="testgender">
+          <mat-select placeholder="{{'gender' | translate}}" name="testgender" [(ngModel)]="selectgender">
             <mat-option *ngFor="let gender of testgender" [value]="gender.ID">{{gender.Name}}</mat-option>
           </mat-select>
         </mat-form-field>
       </section>
       <section class="col-md-3">
         <mat-form-field>
-          <mat-select placeholder="{{'sampletype' | translate}}" name="testsample" [(ngModel)]="testsample">
+          <mat-select placeholder="{{'sampletype' | translate}}" name="testsample" [(ngModel)]="selectsample">
             <mat-option *ngFor="let sample of testsample" [value]="sample.ID">{{sample.Name}}</mat-option>
           </mat-select>
         </mat-form-field>
       </section>
       <section class="col-md-3">
         <mat-form-field>
-          <mat-select placeholder="{{'resulttype' | translate}}" name="testtype" [(ngModel)]="testtype">
-            <mat-option>{{'descriptive' | translate}}</mat-option>
-            <mat-option>{{'generallab' | translate}}</mat-option>
-            <mat-option>{{'micrbiology' | translate}}</mat-option>
+          <mat-select placeholder="{{'resulttype' | translate}}" name="testtype" [(ngModel)]="selecttype">
+            <mat-option value="1">{{'descriptive' | translate}}</mat-option>
+            <mat-option value="2">{{'generallab' | translate}}</mat-option>
+            <mat-option value="3">{{'micrbiology' | translate}}</mat-option>
           </mat-select>
         </mat-form-field>
       </section>
       <section class="col-md-3">
         <mat-form-field>
-          <mat-select placeholder="{{'resultreport' | translate}}" name="testreport" [(ngModel)]="testreport">
+          <mat-select placeholder="{{'resultreport' | translate}}" name="testreport" [(ngModel)]="selectreport">
             <mat-option *ngFor="let report of testreport" [value]="report.ID">{{report.Name}}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -304,32 +300,32 @@
       <section class="col-md-3">
         <mat-form-field>
           <mat-select placeholder="{{'printpervious' | translate}}" name="testprevious" [(ngModel)]="testprevious">
-            <mat-option>{{'yes' | translate}}</mat-option>
-            <mat-option>{{'no' | translate}}</mat-option>
+            <mat-option value="1">{{'yes' | translate}}</mat-option>
+            <mat-option value="2">{{'no' | translate}}</mat-option>
           </mat-select>
         </mat-form-field>
       </section>
       <section class="col-md-3">
         <mat-form-field>
           <mat-select placeholder="{{'active' | translate}}" name="testactive" [(ngModel)]="testactive">
-            <mat-option>{{'yes' | translate}}</mat-option>
-            <mat-option>{{'no' | translate}}</mat-option>
+            <mat-option value="1">{{'yes' | translate}}</mat-option>
+            <mat-option value="2">{{'no' | translate}}</mat-option>
           </mat-select>
         </mat-form-field>
       </section>
       <section class="col-md-3">
         <mat-form-field>
           <mat-select placeholder="{{'requestable' | translate}}"name="testrequest" [(ngModel)]="testrequest">
-            <mat-option>{{'yes' | translate}}</mat-option>
-            <mat-option>{{'no' | translate}}</mat-option>
+            <mat-option value="1">{{'yes' | translate}}</mat-option>
+            <mat-option value="2">{{'no' | translate}}</mat-option>
           </mat-select>
         </mat-form-field>
       </section>
       <section class="col-md-3">
         <mat-form-field>
           <mat-select placeholder="{{'suppressname' | translate}}" name="testsup" [(ngModel)]="testsup">
-            <mat-option>{{'yes' | translate}}</mat-option>
-            <mat-option>{{'no' | translate}}</mat-option>
+            <mat-option value="1">{{'yes' | translate}}</mat-option>
+            <mat-option value="2">{{'no' | translate}}</mat-option>
           </mat-select>
         </mat-form-field>
       </section>
@@ -339,9 +335,10 @@
       <section class="col-md-3">
         <mat-form-field>
           <mat-select placeholder="{{'sepreatepage' | translate}}" name="testpage" [(ngModel)]="testpage">
-            <mat-option>{{'yes' | translate}}</mat-option>
-            <mat-option>{{'no' | translate}}</mat-option>
+            <mat-option value="1">{{'yes' | translate}}</mat-option>
+            <mat-option value="2">{{'no' | translate}}</mat-option>
           </mat-select>
+
         </mat-form-field>
       </section>
       <section class="col-md-3">
@@ -360,6 +357,7 @@
         </mat-form-field>
       </section>
     </section>
+  
     <section class="row">
       <section class="col-md-9"></section>
       <section class="col-md-3">
@@ -367,6 +365,7 @@
         <button class="primary-bg btn-block " mat-raised-button >{{'save' | translate}}</button>
       </section>
     </section><br>
+     </form>
     <section class="row">
       <section class="col-md-6">
         <section class="scroll">
