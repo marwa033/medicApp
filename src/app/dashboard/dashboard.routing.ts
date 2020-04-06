@@ -42,6 +42,7 @@ import { PurchaseorderComponent } from './purchaseorder/purchaseorder.component'
 import { StoremodeComponent } from './storemode/storemode.component';
 import { UomComponent } from './uom/uom.component';
 import { LabInfoComponent } from './lab-info/lab-info.component';
+import { BranchComponent } from './branch/branch.component';
 
 export const DashboardRoutes: Routes = [
    {
@@ -211,6 +212,10 @@ export const DashboardRoutes: Routes = [
          {
             path: 'labinfo',
             component : LabInfoComponent
+         },
+         {
+            path: 'branch',
+            component : BranchComponent
          }
       ]
    }

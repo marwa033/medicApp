@@ -113,6 +113,11 @@ export class AuthService {
   generaldetials : any;
   loadprofileresult: any;
   branches: any;
+  getBranch: any;
+  providers: any;
+  GetLab: any;
+  addBranch: any;
+  Branches: any;
 
   // search result :any; ===> searchresult: new Observable<any>();
 
@@ -804,7 +809,7 @@ this.getstatus = resposne;
 ////////////////////////////////////////
 async GeneralPriority(value) {
   this.userData = JSON.parse(localStorage.getItem('userProfile'));
-const data = { LabId: 1 };
+const data = { };
 const bodyobj = JSON.stringify(data);
 
 const request = new Request(baseURL + 'Priority/Get', {
@@ -1071,6 +1076,7 @@ const responsebackdata = await response.json();
 this.bacteriology = responsebackdata.searchValidtions;
 return this.bacteriology;
 }
+
 /////////////////////////////////////////////
 
 async Explanatory(value) {
@@ -1613,9 +1619,36 @@ this.toastr.success('Successfully Added!');
 this.addCurency = resposne;
 }
 
+//////////////////////////////////
+async AddBranch(value) {
+  const data = {branch: {id : value.id , 
+    country_id: value.countries , state_id : value.states , 
+    city_id : value.cities , name : value.name}};
+  const bodyobj = JSON.stringify(data);
+const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+const request = new Request(baseURL + 'Branch/Post',
+                   {
+method: 'POST',
+body: bodyobj
+});
+request.headers.delete('Content-Type');
+request.headers.append('Content-Type', 'application/json');
+await fetch( request)
+.then(response => response.json())
+.then(json => this.getBranchResponse(json))
+.catch(err => {
+ this.toastr.error(err.message);
+});
+}
+getBranchResponse( resposne) {
+console.log(resposne);
+console.log('from function');
+this.toastr.success('Successfully Added!');
+this.addBranch = resposne;
+
+}
 
 //////////////////////////////////
-
 async addclientCategory(value) {
   console.log(value.clientid);
   console.log(value.clientname);
@@ -2766,21 +2799,27 @@ const responseclientdata = await response.json();
 this.ClientCategoryResult = responseclientdata.clientCategoryModels;
 return this.ClientCategoryResult;
 }
-// await fetch( request)
-// .then(response => response.json())
-// .then(json => this.getclientcategoryrsponse(json.clientCategoryModels))
-// .catch(err => {
-//  this.toastr.error(err.message);
-// });
 
-// }
-// getclientcategoryrsponse( resposne) {
-// console.log(resposne);
-// console.log('from function');
-// this.ClientCategoryResult = resposne;
-// console.log(this.ClientCategoryResult);
-// }
 
+//////////////////////////////////////////
+async SearchBranch(value) {
+  console.log(value.name);
+
+const data = {Name: value.name , Active: value.active};
+const bodyobj = JSON.stringify(data);
+
+const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+const request = new Request(baseURL + 'Branch/SearchBranch', {
+method: 'POST',
+body: bodyobj
+});
+request.headers.delete('Content-Type');
+request.headers.append('Content-Type', 'application/json');
+const response = await fetch( request);
+const responsebranches = await response.json();
+this.Branches = responsebranches.searches;
+return this.Branches;
+}
 //////////////////////////////////////////
 async ReferralDoctor(value) {
   console.log(value.rdname);
@@ -3233,7 +3272,6 @@ this.centers = resposne;
 }
 /////////////////////////////////////////
 async Branch(value) {
-  // this.userData = JSON.parse(localStorage.getItem('userProfile'));
 
 const data = {  };
 const bodyobj = JSON.stringify(data);
@@ -3258,7 +3296,59 @@ console.log(resposne);
 console.log('from function state');
 this.branches = resposne;
 }
+/////////////////////////////////////////
+async SystemProviders(value) {
 
+  const data = {  };
+  const bodyobj = JSON.stringify(data);
+  
+  const request = new Request(baseURL + 'System_Provider/get', {
+  method: 'POSt',
+  body: bodyobj
+  });
+  request.headers.delete('Content-Type');
+  request.headers.append('Content-Type', 'application/json');
+  
+  await fetch( request)
+  .then(response => response.json())
+  .then(json => this.systemresponse(json))
+  .catch(err => {
+   this.toastr.error(err.message);
+  });
+  
+  }
+  systemresponse( resposne) {
+  console.log(resposne);
+  console.log('from function state');
+  this.providers = resposne;
+  }
+  /////////////////////////////////////////
+async Lab(value) {
+
+  const data = {  };
+  const bodyobj = JSON.stringify(data);
+  
+  const request = new Request(baseURL + 'Lab/get', {
+  method: 'POSt',
+  body: bodyobj
+  });
+  request.headers.delete('Content-Type');
+  request.headers.append('Content-Type', 'application/json');
+  
+  await fetch( request)
+  .then(response => response.json())
+  .then(json => this.GetLabResponse(json))
+  .catch(err => {
+   this.toastr.error(err.message);
+  });
+  
+  }
+  GetLabResponse( resposne) {
+  console.log(resposne);
+  console.log('from function state');
+  this.GetLab = resposne;
+  }
+  
 /////////////////////////////////////////
 async SampleCollection(value) {
   console.log(value.center2);
@@ -3490,7 +3580,7 @@ async SearchPatient(value) {
       console.log(value.password);
       console.log(value.centers);
 
-      const data = {username: value.username, password: value.password, branch_id: value.center};
+      const data = {login_id: value.username, login_password: value.password, branch_id: value.center};
       const bodyobj = JSON.stringify(data);
       const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
       const request = new Request(baseURL + 'Login/login', {

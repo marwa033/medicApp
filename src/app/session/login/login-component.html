@@ -3,16 +3,22 @@
       <div fxLayout="column" fxFlex.xl="440px" fxFlex.lg="440px" fxFlex.md="440px" fxFlex.sm="440px" fxFlex.xs="70">
          <mat-card class="gene-login-wrapper">
             <div>
+               <section > 
                <div fxLayout="column" fxLayoutAlign="center center mrgn-b-md">
-                  <div class="login-logo justify-content">
-                     <img src="assets/img/logo.png" class="ml-4" width="130" height="130">
-                     <h5>Copyright © 2015,2019 HPS.</h5>
-                     <h6>All rights reserved</h6>
-                     <a class="ml-3" href="https://hps-global.net/">www.hps-global.net</a><br>
-                     <label>Licensed to :</label>
+                  <div class="login-logo justify-content" *ngFor="let system of systems">
+                     <section class="ml-4">
+                     <img src="assets/img/logo.png" class="ml-5" width="130" height="130">
+                  </section>
+                     <h5>{{system.copyright}}</h5>
+                     <!-- <h6>All rights reserved</h6> -->
+                     <a class="ml-5 pl-4" href="https://hps-global.net/">{{system.website}}</a><br>
+                       <section *ngFor="let lab of labs">
+                     <label class="ml-4">Licensed to : <span>{{lab.name}}</span></label>
+                  </section>
                      <h5 style="text-align: center;">Please,Log in below</h5>
                   </div>
                </div>
+                     </section>
                <form #form="ngForm" (ngSubmit)="login(form.value)" class="one" >
                <div fxLayout="column" fxLayoutAlign="start stretch">
                   <!-- <mat-form-field class="full-wid mrgn-b-md ">

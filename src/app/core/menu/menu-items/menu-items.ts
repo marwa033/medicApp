@@ -125,7 +125,6 @@ const MENUITEMS = [
        {  state: 'test', name: 'Test', type: 'sub'},
        {  state: 'resultfield', name: 'Result Field', type: 'sub'},]},
       {state: 'profile', name: 'Profile', type: 'sub'},
-      {state: 'labinfo', name: 'Lab Info', type: 'sub'},
       {state: 'crm', name: 'Pricing', type: 'sub2',
       children:[
         {state: 'currency', name: 'Currency', type: 'sub'},
@@ -136,8 +135,8 @@ const MENUITEMS = [
       },
       {state: 'crm', name: 'Lab', type: 'sub2',
       children:[
-        {state: 'crm', name: 'Lab Information', type: 'sub'},
-        {state: 'crm', name: 'Branch', type: 'sub'},
+        {state: 'labinfo', name: 'Lab Information', type: 'sub'},
+        {state: 'branch', name: 'Branch', type: 'sub'},
       ]
       },
       {state: 'crm', name: 'Address', type: 'sub2',

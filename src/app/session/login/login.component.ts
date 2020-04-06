@@ -19,7 +19,9 @@ export class LoginComponent {
    accountno: string ='';
       centers ;
    selectedcenter;
+   systems: any;
    public UserData: any;
+   labs: any;
   constructor( public authService: AuthService,
               private router: Router,
                public translate: TranslateService ) { }
@@ -27,6 +29,14 @@ export class LoginComponent {
                async Center(value) {
                   await this.authService.Branch(value);
                   this.centers = this.authService.branches.branches;
+                 }
+                 async Providers(value) {
+                  await this.authService.SystemProviders(value);
+                  this.systems = this.authService.providers.system_Providers;
+                 }
+                 async GetLab(value) {
+                  await this.authService.Lab(value);
+                  this.labs = this.authService.GetLab.labs;
                  }
    async login(value) {
       this.UserData = null;
@@ -38,6 +48,8 @@ export class LoginComponent {
    // tslint:disable-next-line: use-life-cycle-interface
    ngOnInit() {
       this.Center('input');
+      this.Providers('input');
+      this.GetLab('input');
 
       $(document).ready(function() {
          $('.log').click(function() {

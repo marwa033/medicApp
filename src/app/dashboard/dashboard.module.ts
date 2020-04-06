@@ -78,6 +78,7 @@ import { UomComponent } from './uom/uom.component';
 import { PurchaseorderComponent } from './purchaseorder/purchaseorder.component';
 import { ArchivingComponent } from './archiving/archiving.component';
 import { LabInfoComponent } from './lab-info/lab-info.component';
+import { BranchComponent } from './branch/branch.component';
 
 
 @NgModule({
@@ -121,7 +122,8 @@ import { LabInfoComponent } from './lab-info/lab-info.component';
 		UomComponent,
 		PurchaseorderComponent,
 		ArchivingComponent,
-		LabInfoComponent
+		LabInfoComponent,
+		BranchComponent
 	],
 	imports: [ GridModule,
 		ButtonModule,

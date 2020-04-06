@@ -221,7 +221,7 @@ selectType(){
         $('.drop').hide();
       });
       $('.collect').click(function() {
-        $('.date').prop('disabled', false)
+        $('.date').prop('readonly', false)
             });
 
     })
