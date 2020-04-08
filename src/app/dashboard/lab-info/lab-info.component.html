@@ -1,60 +1,86 @@
+
 <section class="container-fluide">
+
     <h2 class="">{{'labinfo' | translate}}</h2><br>
     <div class="card"  >
         <div class="card-body">
-     
+          <form class="search-form" #form="ngForm" (ngSubmit)="UpLab(form.value)">
+            <!-- <section class="row">
+              <section class="col-md-3">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="{{'id' | translate}}" name="labid" class="able" disabled [(ngModel)]="labid">
+                </mat-form-field>
+              </section>
+            </section> -->
+<section class="row  justify-content-center">
+<section class="col-md-3">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="{{'name' | translate}}" name="labname" class="able"  [(ngModel)]="labname">
+  </mat-form-field>
+</section>
+<section class="col-md-3">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="{{'website' | translate}}" name="website" class="able"   [(ngModel)]="website">
+  </mat-form-field>
+</section>
+<section class="col-md-3">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="{{'webresult' | translate}}" name="webresult" class="able"  [(ngModel)]="webresult">
+  </mat-form-field>
+</section>
+<section class="col-md-3">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="{{'hotline' | translate}}" name="hotline" class="able"  [(ngModel)]="hotline">
+  </mat-form-field>
+</section>
+</section> 
+<section class="row  justify-content-center">
+  <section class="col-md-3">
+    <mat-form-field >
+      <textarea matInput placeholder="{{'address' | translate}}" name="labaddress" class="able"  [(ngModel)]="labaddress"></textarea>
+    </mat-form-field>
+  </section>
+  <section class="col-md-3">
+    <mat-form-field class="example-full-width">
+      <textarea matInput placeholder="{{'labincharge' | translate}}" name="labincharge" class="able"  [(ngModel)]="labincharge"></textarea>
+    </mat-form-field>
+  </section>
+  <section class="col-md-3">
+    <mat-form-field >
+      <textarea matInput placeholder="{{'legaldetail' | translate}}" name="legaldetail" class="able"  [(ngModel)]="legaldetail"></textarea>
+    </mat-form-field>
+  </section>
+  <section class="col-md-3">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="{{'fax' | translate}}" name="labfax" class="able"   [(ngModel)]="labfax">
+    </mat-form-field>
+  </section>
+  </section>   
+  <section class="row  justify-content-center">
+    <section class="col-md-3">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="{{'phone' | translate}}" name="labphone" class="able"  [(ngModel)]="labphone">
+      </mat-form-field>
+    </section>
+    <section class="col-md-3">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="{{'mobile' | translate}}" name="labmobile" class="able"   [(ngModel)]="labmobile">
+      </mat-form-field>
+    </section>
+    <section class="col-md-3">
+
+    </section>
+    <section class="col-md-3">
+      <button class="success-bg btn-block done" mat-raised-button >{{'done' | translate}}</button>
+    </section>
+    </section>  
+  </form> 
     <section class="row justify-content-center">
-        <section class="col-md-3">
-            <mat-form-field class="example-full-width">
-                <input matInput placeholder="{{'name' | translate}}" name="labname" required [(ngModel)]="labname">
-              </mat-form-field><br>
-              <mat-form-field >
-                <textarea matInput placeholder="{{'address' | translate}}" name="labaddress" required [(ngModel)]="labaddress"></textarea>
-              </mat-form-field><br>
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="{{'website' | translate}}" name="website" required [(ngModel)]="website">
-              </mat-form-field><br>
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="{{'webresult' | translate}}" name="webresult" required [(ngModel)]="webresult">
-              </mat-form-field><br>
-        </section>
-        <section class="col-md-3">
-            <mat-form-field class="example-full-width">
-                <textarea matInput placeholder="{{'labincharge' | translate}}" name="labincharge" required [(ngModel)]="labincharge"></textarea>
-              </mat-form-field><br>
-              <mat-form-field >
-                <textarea matInput placeholder="{{'legaldetail' | translate}}" name="legaldetail" required [(ngModel)]="legaldetail"></textarea>
-              </mat-form-field><br>
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="{{'hotline' | translate}}" name="hotline" required [(ngModel)]="hotline">
-              </mat-form-field><br>
-
-        </section>
-        <section class="col-md-3">
-            <mat-form-field class="example-full-width">
-                <input matInput placeholder="{{'phone' | translate}}" name="labphone" required [(ngModel)]="labphone">
-              </mat-form-field><br>
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="{{'fax' | translate}}" name="labfax" required [(ngModel)]="labfax">
-              </mat-form-field><br>
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="{{'mobile' | translate}}" name="labmobile" required [(ngModel)]="labmobile">
-              </mat-form-field><br>
-  
-        </section>
-    </section>
-    <section class="row">
-        <section class="col-md-8"></section>
-        <section class="col-md-4">
-            <button class="success-bg btn-block " mat-raised-button >{{'update' | translate}}</button>
-
-        </section>
-
-    </section>
+      <section class="col-md-9"></section>
+      <section class="col-md-3">
+        <button class="primary-bg btn-block up" mat-raised-button >{{'update' | translate}}</button>
+      </section>
+    </section>  
 
         </div>
       </div>
-
-
-
-</section>

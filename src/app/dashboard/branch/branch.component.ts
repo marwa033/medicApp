@@ -17,6 +17,17 @@ export class BranchComponent implements OnInit {
   branches: any;
   name: string ='';
   active: false;
+  editid: any;
+  editname: any;
+  searchName: any;
+  selectedcountry: any;
+  selectedcity: any;
+  selectedstate: any;
+  editactive: any;
+  searcActive: any;
+  selectedactive: any;
+  newbranch: any;
+  upbranches: any;
 
   constructor(public translate: TranslateService,
     public authService: AuthService,
@@ -39,14 +50,26 @@ export class BranchComponent implements OnInit {
      openSm(content) {
       this.modalService.open(content, { size: 'lg' });
     } 
+    openLg  (edit) {
+      this.modalService.open(edit, { size: 'lg' });
+    }
     async City(value) {
       await this.authService.AddCity(value);
       this.cities = this.authService.cities.cities;
      }
      AddBranch(value) {
-      this.authService.AddBranch(value);
-     
+     this.authService.AddBranch(value);
+
      }
+  
+     UpBranch(value) {
+      // this.authService.UpdateBranch(value);
+      this.authService.UpdateBranch(value).then(
+        getupBranchResponse => {this.upbranches = getupBranchResponse;
+         console.log( this.upbranches );
+      });
+    }
+ 
      Branch(value) {
       if(value.name == undefined|| value.name=="")
       value.name=' ';
@@ -55,6 +78,16 @@ export class BranchComponent implements OnInit {
         responsebranches => {this.branches = responsebranches;
          console.log( this.branches );
       });
+    }
+    editRow(branch){
+      console.log("///*************//////////");
+      this.editid = branch.ID;
+      this.editname = branch.Name;
+      this.selectedcountry = branch.CountryID;
+      this.selectedcity = branch.CityID;
+      this.selectedstate = branch.StateID;
+      this.selectedactive = branch.Active;
+      // this.searcActive = branch.Active;
     }
 
   ngOnInit() {

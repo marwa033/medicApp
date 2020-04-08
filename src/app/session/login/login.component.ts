@@ -22,6 +22,7 @@ export class LoginComponent {
    systems: any;
    public UserData: any;
    labs: any;
+   labname: any;
   constructor( public authService: AuthService,
               private router: Router,
                public translate: TranslateService ) { }
@@ -34,10 +35,20 @@ export class LoginComponent {
                   await this.authService.SystemProviders(value);
                   this.systems = this.authService.providers.system_Providers;
                  }
-                 async GetLab(value) {
-                  await this.authService.Lab(value);
-                  this.labs = this.authService.GetLab.labs;
-                 }
+               //   async GetLab(value) {
+               //    await this.authService.Lab(value);
+               //    this.labs = this.authService.GetLab.labs;
+               //   }
+               LabOnformation(value) {
+
+                  this.authService.GetLabInformation(value).then( LabInformationrespnse => {
+                     this.labs = LabInformationrespnse.labs;
+                     console.log( this.labs );
+                     // this.labname = this.labs[0].name;
+
+                  });
+                  // this.labname = this.labs.name;
+                }
    async login(value) {
       this.UserData = null;
       await this.authService.loginUser(value);
@@ -49,7 +60,7 @@ export class LoginComponent {
    ngOnInit() {
       this.Center('input');
       this.Providers('input');
-      this.GetLab('input');
+      this.LabOnformation('input');
 
       $(document).ready(function() {
          $('.log').click(function() {

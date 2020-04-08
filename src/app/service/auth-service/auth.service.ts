@@ -118,6 +118,12 @@ export class AuthService {
   GetLab: any;
   addBranch: any;
   Branches: any;
+  labinfo: any;
+  upBranch: any;
+  Labs: any;
+  getlab: any;
+  noarray: any;
+  uplab: any;
 
   // search result :any; ===> searchresult: new Observable<any>();
 
@@ -561,9 +567,9 @@ this.bloodGroups = resposne;
 
 ////////////////////////////////////////
 async AddState(value) {
-  this.userData = JSON.parse(localStorage.getItem('userProfile'));
+  // this.userData = JSON.parse(localStorage.getItem('userProfile'));
 
-const data = { LabId: 1 };
+const data = { };
 const bodyobj = JSON.stringify(data);
 
 const request = new Request(baseURL + 'State/get', {
@@ -669,9 +675,9 @@ this.cities = resposne;
 
 ////////////////////////////////////////
 async AddCountry(value) {
-  this.userData = JSON.parse(localStorage.getItem('userProfile'));
+  // this.userData = JSON.parse(localStorage.getItem('userProfile'));
 
-const data = { LabId: 1 };
+const data = { };
 const bodyobj = JSON.stringify(data);
 
 const request = new Request(baseURL + 'Country/get', {
@@ -694,7 +700,85 @@ console.log(resposne);
 console.log('from function state');
 this.countries = resposne;
 }
+
 //////////////////////////////////
+// async GetLabInformation(value) {
+//   // this.userData = JSON.parse(localStorage.getItem('userProfile'));
+
+// const data = { };
+// const bodyobj = JSON.stringify(data);
+
+// const request = new Request(baseURL + 'Lab/get', {
+// method: 'POST',
+// body: bodyobj
+// });
+// request.headers.delete('Content-Type');
+// request.headers.append('Content-Type', 'application/json');
+
+// await fetch( request)
+// .then(response => response.json())
+// .then(json => this.LabInformationrespnse(json))
+// .catch(err => {
+//  this.toastr.error(err.message);
+// });
+
+// }
+// LabInformationrespnse( resposne) {
+// console.log(resposne);
+// this.getlab = resposne;
+// }
+
+
+/////////////////////////////////////////
+async GetLabInformation(value) {
+
+
+  const data = {labs:{ id : 1}};
+
+  const bodyobj = JSON.stringify(data);
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'Lab/get', {
+    method: 'POST',
+    body: bodyobj
+});
+ request.headers.delete('Content-Type');
+request.headers.append('Content-Type', 'application/json');
+const response = await fetch( request);
+const LabInformationrespnse = await response.json();
+this.getlab
+ = LabInformationrespnse;
+return this.getlab;
+}
+
+////////////////////////////////////////
+async LabWithOutArray(value) {
+  // this.userData = JSON.parse(localStorage.getItem('userProfile'));
+
+const data = { };
+const bodyobj = JSON.stringify(data);
+
+const request = new Request(baseURL + 'Lab/GetOneRowLab', {
+method: 'POST',
+body: bodyobj
+});
+request.headers.delete('Content-Type');
+request.headers.append('Content-Type', 'application/json');
+
+await fetch( request)
+.then(response => response.json())
+.then(json => this.responsewithoutarray (json))
+.catch(err => {
+ this.toastr.error(err.message);
+});
+
+}
+responsewithoutarray( resposne) {
+console.log(resposne);
+this.noarray = resposne;
+}
+
+
+//////////////////////////////
 async AddPatient(value) {
       console.log(value.fname);
       console.log(value.mname);
@@ -1621,23 +1705,24 @@ this.addCurency = resposne;
 
 //////////////////////////////////
 async AddBranch(value) {
-  const data = {branch: {id : value.id , 
-    country_id: value.countries , state_id : value.states , 
-    city_id : value.cities , name : value.name}};
+const data = {branch: {id : value.upid , 
+  country_id: value.upcountries , state_id : value.upstates , 
+  city_id : value.upcities , name : value.upname , active : value.upactive}};
   const bodyobj = JSON.stringify(data);
+
 const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
-const request = new Request(baseURL + 'Branch/Post',
-                   {
+const request = new Request(baseURL + 'Branch/Post', {
 method: 'POST',
 body: bodyobj
 });
+
 request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
 await fetch( request)
 .then(response => response.json())
 .then(json => this.getBranchResponse(json))
 .catch(err => {
- this.toastr.error(err.message);
+this.toastr.error(err.message);
 });
 }
 getBranchResponse( resposne) {
@@ -1645,9 +1730,58 @@ console.log(resposne);
 console.log('from function');
 this.toastr.success('Successfully Added!');
 this.addBranch = resposne;
+}
+//////////////////////////////////
+async UpdateBranch(value) {
+const data = {branch: {id : value.upid , 
+      country_id: value.upcountries , state_id : value.upstates , 
+      city_id : value.upcities , name : value.upname , active : value.upactive}};const bodyobj = JSON.stringify(data);
 
+const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+const request = new Request(baseURL + 'Branch/Edit', {
+method: 'POST',
+body: bodyobj
+});
+request.headers.delete('Content-Type');
+request.headers.append('Content-Type', 'application/json');
+const response = await fetch( request);
+const getupBranchResponse = await response.json();
+this.upBranch = getupBranchResponse.branch;
+this.toastr.success('Successfully updated!');
+
+return this.upBranch;
 }
 
+
+//////////////////////////////////
+async UpdateLabInfo(value) {
+  const data = {Lab: { id: 1,
+    name: value.labname , 
+    address : value.labaddress , 
+    mobile : value.labmobile , 
+    phone : value.labphone ,
+    fax : value.labfax ,
+    hotline : value.hotline , 
+    website  : value.website ,
+    webresult : value.webresult}};
+        
+        const bodyobj = JSON.stringify(data);
+  
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'Lab/Edit', {
+  method: 'POST',
+  body: bodyobj
+  });
+  request.headers.delete('Content-Type');
+  request.headers.append('Content-Type', 'application/json');
+  const response = await fetch( request);
+  const getuplabResponse = await response.json();
+  this.uplab = getuplabResponse.Lab;
+  this.toastr.success('Successfully updated!');
+  
+  return this.uplab;
+  }
+  
 //////////////////////////////////
 async addclientCategory(value) {
   console.log(value.clientid);
@@ -1989,6 +2123,35 @@ console.log(resposne);
 console.log('from function');
 this.toastr.success('Successfully Added!');
 this.addPricelist = resposne;
+}
+//////////////////////////////////
+
+async AddLabInfo(value) {
+
+  const data = {Lab: {name: value.labname , website: value.website , webresult: value.webresult,
+    hotline: value.hotline , address :  value.labaddress , fax: value.labfax , phone: value.labphone,
+    mobile: value.labmobile}};
+  const bodyobj = JSON.stringify(data);
+const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+const request = new Request(baseURL + 'Lab/Post',
+                   {
+method: 'POST',
+body: bodyobj
+});
+request.headers.delete('Content-Type');
+request.headers.append('Content-Type', 'application/json');
+await fetch( request)
+.then(response => response.json())
+.then(json => this.getLabInforsponse(json))
+.catch(err => {
+ this.toastr.error(err.message);
+});
+}
+getLabInforsponse( resposne) {
+console.log(resposne);
+console.log('from function');
+this.toastr.success('Successfully Added!');
+this.labinfo = resposne;
 }
 //////////////////////////////////
 
@@ -2803,7 +2966,6 @@ return this.ClientCategoryResult;
 
 //////////////////////////////////////////
 async SearchBranch(value) {
-  console.log(value.name);
 
 const data = {Name: value.name , Active: value.active};
 const bodyobj = JSON.stringify(data);
@@ -3322,32 +3484,32 @@ async SystemProviders(value) {
   console.log('from function state');
   this.providers = resposne;
   }
-  /////////////////////////////////////////
-async Lab(value) {
+//   /////////////////////////////////////////
+// async Lab(value) {
 
-  const data = {  };
-  const bodyobj = JSON.stringify(data);
+//   const data = {  };
+//   const bodyobj = JSON.stringify(data);
   
-  const request = new Request(baseURL + 'Lab/get', {
-  method: 'POSt',
-  body: bodyobj
-  });
-  request.headers.delete('Content-Type');
-  request.headers.append('Content-Type', 'application/json');
+//   const request = new Request(baseURL + 'Lab/get', {
+//   method: 'POSt',
+//   body: bodyobj
+//   });
+//   request.headers.delete('Content-Type');
+//   request.headers.append('Content-Type', 'application/json');
   
-  await fetch( request)
-  .then(response => response.json())
-  .then(json => this.GetLabResponse(json))
-  .catch(err => {
-   this.toastr.error(err.message);
-  });
+//   await fetch( request)
+//   .then(response => response.json())
+//   .then(json => this.GetLabResponse(json))
+//   .catch(err => {
+//    this.toastr.error(err.message);
+//   });
   
-  }
-  GetLabResponse( resposne) {
-  console.log(resposne);
-  console.log('from function state');
-  this.GetLab = resposne;
-  }
+//   }
+//   GetLabResponse( resposne) {
+//   console.log(resposne);
+//   console.log('from function state');
+//   this.GetLab = resposne;
+//   }
   
 /////////////////////////////////////////
 async SampleCollection(value) {
