@@ -37,6 +37,11 @@ export class ExplanatoryComponent implements OnInit {
   Explanatory: any;
   visit: any;
   pname: any;
+  category: any;
+  selectedeminstatus: any;
+  selectedemaxstatus: any;
+  selecttest: any;
+
   // insertParagraph: any;
   constructor(public translate: TranslateService,
     public authService: AuthService,

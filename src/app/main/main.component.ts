@@ -25,7 +25,7 @@ const screenfull = require('screenfull');
 })
 
 export class MainComponent implements OnInit, OnDestroy {
-
+	chatList              : any;
 	currentUrl            : any;
 	root                  : any = 'ltr';
 	layout                : any = 'ltr';

@@ -12,7 +12,7 @@ styleUrls: ['./side-bar.component.scss']
 })
 
 export class SideBarComponent implements OnInit {
-
+   informations: any;
 @Input() menuList: any;
   @Input() verticalMenuStatus: boolean;
 

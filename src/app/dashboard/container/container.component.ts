@@ -16,6 +16,8 @@ export class ContainerComponent implements OnInit {
   idcontainer= '';
   namecontainer= '';
   capcontainer= '';
+  subname: any;
+  testname: any;
   // containers: any;
   public  containers: Observable<any>;
 

@@ -12,7 +12,7 @@ export class CountryComponent implements OnInit {
 
   country: string = '';
   active: string = '';
-
+  openDialog: any;
 
   constructor(public translate: TranslateService,
     public authService: AuthService,

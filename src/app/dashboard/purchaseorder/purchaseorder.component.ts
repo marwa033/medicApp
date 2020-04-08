@@ -14,6 +14,12 @@ export class PurchaseorderComponent implements OnInit {
   purchases: any;
   supplier: any;
   additem: any;
+  from: any;
+  to: any;
+  selectedsupplier: any;
+  status: any;
+  poid: any;
+  
 
   constructor(public translate: TranslateService,
     public authService: AuthService,

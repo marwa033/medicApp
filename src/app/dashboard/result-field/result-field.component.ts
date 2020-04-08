@@ -16,6 +16,23 @@ export class ResultFieldComponent implements OnInit {
   public fresults: Observable<any>;
   testgender: any;
   centers: any;
+  addid: any;
+  addname: any;
+  printas: any;
+  addtype: any;
+  addunit: any;
+  precision: any;
+  default: any;
+  selectreport: any;
+  testreport: any;
+  resultgender: any;
+  resultbranch: any;
+  minage: any;
+  maxage: any;
+  addlow: any;
+  addhigh: any;
+  addprintas: any;
+  openDialog: any;
 
 
   constructor(public translate: TranslateService,

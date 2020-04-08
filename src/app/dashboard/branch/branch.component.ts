@@ -28,6 +28,8 @@ export class BranchComponent implements OnInit {
   selectedactive: any;
   newbranch: any;
   upbranches: any;
+  searchActive: any;
+
 
   constructor(public translate: TranslateService,
     public authService: AuthService,

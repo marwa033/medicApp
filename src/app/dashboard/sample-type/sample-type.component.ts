@@ -18,6 +18,8 @@ export class SampleTypeComponent implements OnInit {
   container;
   selectedcontainer;
   UserData: any;
+  testname: any;
+  
   // samples: any
   public samples: Observable<any>;
 

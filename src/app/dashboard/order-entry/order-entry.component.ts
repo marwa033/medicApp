@@ -17,7 +17,22 @@ export class OrderEntryComponent implements OnInit {
 
   // toppings = new FormControl();
   // toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
-
+  selectedclinic: any;
+  selecteddoctor: any;
+  ordermrn: any;
+  selectedpayer: any;
+  selectedcontract: any;
+  showMe: any;
+  selectedcopayment: any;
+  selectedpercent: any;
+  comment: any;
+  collect: any;
+  total: any;
+  amt: any;
+  receivable: any;
+  cash: any;
+  outstanding: any;
+  
   payers= '';
   contracts= '';
   copayment= '';
@@ -115,10 +130,8 @@ Visit(value) {
 
  async GenerateClinic(value) {
   await this.authService.GenerateClinicInvoice(value);
-  this.UserData = this.authService.userData;
 
-  console.log(this.UserData);
-  this.clinicsss = this.UserData.ClinicList;
+  this.clinicsss = this.authService.clinic.ClinicList;
   console.log(this.clinicsss);
  }
  HideShow() {

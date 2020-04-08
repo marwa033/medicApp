@@ -22,7 +22,12 @@ export class ProfileComponent implements OnInit {
   UserData: any;
   // profiles: any;
   public profiles: Observable<any>;
-
+  id: any;
+  cpt: any;
+  name: any;
+  printas: any;
+  gender: any;
+  active: any;
 
   constructor(public translate: TranslateService,
     public authService: AuthService,

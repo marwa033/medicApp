@@ -32,8 +32,14 @@ export class BacteriologyComponent implements OnInit {
   bacteriologies: any;
   visit: any;
   pname: any;
+  selectedeminstatus: any;
+  category: any;
+  selectedemaxstatus: any;
+  selecttest: any;
+  detials: any;
 
-  
+
+
   constructor(public translate: TranslateService,
     public authService: AuthService,
    private pageTitleService: PageTitleService) { }

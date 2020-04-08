@@ -124,6 +124,7 @@ export class AuthService {
   getlab: any;
   noarray: any;
   uplab: any;
+  clinic: any;
 
   // search result :any; ===> searchresult: new Observable<any>();
 
@@ -150,11 +151,8 @@ export class AuthService {
    }
    ////////////////////////////////////////
    async OrderEntryDoctor(value) {
-    // console.log(value);
-    this.userData = JSON.parse(localStorage.getItem('userProfile'));
 
     const data = {clinicID: value.clinics.ID };
-    // const data = { LabId : this.userData.LabID };
    const bodyobj = JSON.stringify(data);
 
    const request = new Request(baseURL + 'ClinicDoctor/ClinicDoctor', {
@@ -2842,7 +2840,7 @@ this.clients = resposne;
 
 ///////////////////////////////////
 async GenerateClinicInvoice(value) {
-  console.log(value.clinic);
+  // console.log(value.clinic);
 
 const data = { ClinicList : { Name: value.clinic}};
 const bodyobj = JSON.stringify(data);
@@ -2865,7 +2863,7 @@ await fetch( request)
 getclinicrsponse( resposne) {
 console.log(resposne);
 console.log('from function generateclinic');
-this.userData = resposne;
+this.clinic = resposne;
 }
 
 

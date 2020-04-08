@@ -95,6 +95,9 @@ export class LabInfoComponent implements OnInit {
       $('.collect').click(function() {
         $('.date').prop('disabled', false)
             });
+            $('.done').click(function() {
+              $('.date').prop('disabled', true)
+                  });
 
     })
   }

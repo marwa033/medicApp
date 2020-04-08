@@ -34,6 +34,11 @@ export class GeneralLabComponent implements OnInit {
   public labs: Observable<any>;
   visit: any;
   pname: any;
+  category: any;
+  selectedminstatus: any;
+  selectedmaxstatus: any;
+  selectedpriority: any;
+  
 
 
   constructor(public translate: TranslateService,

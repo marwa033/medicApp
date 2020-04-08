@@ -38,7 +38,15 @@ export class TestComponent implements OnInit {
   testreport = '';
   testprevious = '';
   subcategory = '';
-
+  testindtructor: any;
+  selectcategory: any;
+  selectsub: any;
+  selectgender: any;
+  selectsample: any;
+  selecttype: any;
+  selectreport: any;
+  testpage: any;
+  
   UserData: any;
   // tests: any;
   public tests: Observable<any>;
