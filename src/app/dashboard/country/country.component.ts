@@ -19,7 +19,7 @@ export class CountryComponent implements OnInit {
    private pageTitleService: PageTitleService) { }
 
    Country(value) {
-    // this.authService.AddressCountry(value);
+    ////// this.authService.AddressCountry(value);
 }
 
   ngOnInit() {

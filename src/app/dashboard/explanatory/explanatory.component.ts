@@ -41,7 +41,7 @@ export class ExplanatoryComponent implements OnInit {
   selectedeminstatus: any;
   selectedemaxstatus: any;
   selecttest: any;
-
+///////////
   // insertParagraph: any;
   constructor(public translate: TranslateService,
     public authService: AuthService,

@@ -30,7 +30,7 @@ export class GeneralLabComponent implements OnInit {
   selectedtest;
   UserData: any;
   detials: any;
-  // labs: any;
+  // labs: any;//////////
   public labs: Observable<any>;
   visit: any;
   pname: any;

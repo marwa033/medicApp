@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./container.component.scss']
 })
 export class ContainerComponent implements OnInit {
-
+ 
   containername= '';
   idcontainer= '';
   namecontainer= '';
