@@ -82,17 +82,19 @@ export class LabInfoComponent implements OnInit {
     this.WithoutArray('input');
   
     $(document).ready(function() {
-      $('.up').click(function() {
+      $('.collect').click(function() {
         $('.done').show();
-        $('.up').hide();
+        $('.collect').hide();
       });
 
       $('.done').click(function() {
         $('.done').hide();
-        $('.up').show();
+        $('.collect').show();
       });
 
-
+      $('.collect').click(function() {
+        $('.date').prop('disabled', false)
+            });
 
     })
   }
