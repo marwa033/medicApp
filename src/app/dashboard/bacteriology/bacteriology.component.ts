@@ -46,51 +46,58 @@ export class BacteriologyComponent implements OnInit {
 
 
    async Center(value) {
-    await this.authService.CenterCollection(value);
-    this.bcenter = this.authService.centers.centers;
+    this.authService.CenterCollection(value).then( getcenterrsponse => {
+      this.bcenter = getcenterrsponse.centers;
+   });
    }
 
 
    async WorkCenter(value) {
-    await this.authService.GeneralWCenter(value);
-    this.bwcenter = this.authService.workcenters.workCenteres;
 
+    this.authService.GeneralWCenter(value).then( getWcenterrsponse => {
+      this.bwcenter = getWcenterrsponse.workCenteres;
+   });
    }
 
    async Test(value) {
-    await this.authService.GeneralTest(value);
-    this.btest = this.authService.tests.testModels;
+
+    this.authService.GeneralTest(value).then( gettestrsponse => {
+      this.btest = gettestrsponse.testModels;
+   });
    }
    async GenerateClinic(value) {
     await this.authService.GenerateClinicInvoice(value);
-    this.UserData = this.authService.userData;
+    this.clinic = this.authService.clinic.ClinicList;
   
-    console.log(this.UserData);
-    this.clinic = this.UserData.ClinicList;
-    console.log(this.clinic);
+ 
+  //   this.authService.GenerateClinicInvoice(value).then( getclinicrsponse => {
+  //     this.clinic = getclinicrsponse.ClinicList;
+  //  });
    }
    async Priority(value) {
-    await this.authService.GeneralPriority(value);
-    this.bpriority = this.authService.priorities.priorities;
+   
+    this.authService.GeneralPriority(value).then( getpriorityrsponse => {
+      this.bpriority = getpriorityrsponse.priorities;
+   });
    }
    async Category(value) {
-    await this.authService.GeneralGategory(value);
-    this.bcategory = this.authService.categories.clientCategoryModels;
+
+    this.authService.GeneralGategory(value).then( getgategoryrsponse => {
+      this.bcategory = getgategoryrsponse.clientCategoryModels;
+   });
    }
    async Minstatus(value) {
-    await this.authService.MinimumStatus(value);
-    this.bminstatus = this.authService.minstatus.testStatuses;
+
+    this.authService.MinimumStatus(value).then( getminstatusrsponse => {
+      this.bminstatus = getminstatusrsponse.testStatuses;
+   });
    }
    async Maxstatus(value) {
-    await this.authService.MaximumStatus(value);
-    this.bmaxstatus = this.authService.maxstatus.testStatuses;
+
+    this.authService.MaximumStatus(value).then( getmaxstatusrsponse => {
+      this.bmaxstatus = getmaxstatusrsponse.testStatuses;
+   });
    }
-//    Bacteria(value) {
-//     this.authService.Bacteriology(value);
-//     this.bacteriologies = this.authService.bacteriology;
-//     console.log( 'results is :  ' + this.bacteriologies);
-//     console.log(  this.bacteriologies);
-//  }
 Bacteria(value) {
   if (value.bfrom == undefined || value.bfrom == '') {
     value.bfrom = ' ';

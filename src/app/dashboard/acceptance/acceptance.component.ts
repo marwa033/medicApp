@@ -26,28 +26,23 @@ export class AcceptanceComponent implements OnInit {
    private pageTitleService: PageTitleService) { }
 
    async Center(value) {
-    await this.authService.CenterCollection(value);
-    this.center2 = this.authService.centers.centers;
+    // await this.authService.CenterCollection(value);
+    // this.center2 = this.authService.centers.centers;
+    this.authService.CenterCollection(value).then( getcenterrsponse => {
+      this.center2 = getcenterrsponse.centers;
+   });
 
-    // console.log(this.UserData);
-    // this.center2 = this.UserData.centers;
-    // console.log(this.center2);
    }
 
 
    async Status(value) {
-    await this.authService.GetStatus(value);
-    this.status2 = this.authService.getstatus.testStatuses;
+    // await this.authService.GetStatus(value);
+    // this.status2 = this.authService.getstatus.testStatuses;
+    this.authService.GetStatus(value).then( getgetstatusrsponse => {
+      this.status2 = getgetstatusrsponse.testStatuses;
+   });
    }
 
-  // Acceptance(value) {
-  //   this.authService.SampleAcceptance(value);
-
-  //   this.acceptance = this.authService.AcceptanceResult;
-  //   console.log( 'results is :  ' + this.acceptance);
-  //   console.log(  this.acceptance);
-
-  // }
   Acceptance(value) {
     if (value.sample2 == undefined || value.sample2 =='') {
     value.sample2='0';

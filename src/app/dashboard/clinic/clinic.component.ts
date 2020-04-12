@@ -45,12 +45,18 @@ export class ClinicComponent implements OnInit {
       this.authService.AddReferralClinic(value);
      }
      async ClinicPriority(value) {
-      await this.authService.GetClinicPriority(value);
-      this.clinicpriority = this.authService.Cpriority.priorities;
+      // await this.authService.GetClinicPriority(value);
+      // this.clinicpriority = this.authService.Cpriority.priorities;
+      this.authService.GeneralPriority(value).then( getpriorityrsponse => {
+        this.clinicpriority = getpriorityrsponse.priorities;
+     });
      }
      async ClinicSpeciality(value) {
-      await this.authService.GetClinicSpeciality(value);
-      this.clinicspeciality = this.authService.Cspeciality.specialities;
+      // await this.authService.GetClinicSpeciality(value);
+      // this.clinicspeciality = this.authService.Cspeciality.specialities;
+      this.authService.GetClinicSpeciality(value).then( getclinicspecrsponse => {
+        this.clinicspeciality = getclinicspecrsponse.specialities;
+     });
      }
 
 

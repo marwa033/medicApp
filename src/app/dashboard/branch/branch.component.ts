@@ -29,6 +29,8 @@ export class BranchComponent implements OnInit {
   newbranch: any;
   upbranches: any;
   searchActive: any;
+  clinics: any;
+  payers: any;
 
 
   constructor(public translate: TranslateService,
@@ -40,13 +42,15 @@ export class BranchComponent implements OnInit {
 
 
      async Country(value) {
-      await this.authService.AddCountry(value);
-      this.countries = this.authService.countries.country;
+      this.authService.AddCountry(value).then( getcountryrsponse => {
+        this.countries = getcountryrsponse.country;
+     });
      }
 
      async State(value) {
-      await this.authService.AddState(value);
-      this.states = this.authService.states.states;
+      this.authService.AddState(value).then( getstatersponse => {
+        this.states = getstatersponse.states;
+     });
      }
     
      openSm(content) {
@@ -56,8 +60,10 @@ export class BranchComponent implements OnInit {
       this.modalService.open(edit, { size: 'lg' });
     }
     async City(value) {
-      await this.authService.AddCity(value);
-      this.cities = this.authService.cities.cities;
+  
+      this.authService.AddCity(value).then( getcityrsponse => {
+         this.cities = getcityrsponse.cities;
+      });
      }
      AddBranch(value) {
      this.authService.AddBranch(value);
@@ -91,11 +97,24 @@ export class BranchComponent implements OnInit {
       this.selectedactive = branch.Active;
       // this.searcActive = branch.Active;
     }
+    async GeneratePayer(value) {
+      this.authService.GeneratePayerInvoice(value).then( getpayerrsponse => {
+        this.payers = getpayerrsponse.clients;
+     });
+     }
+     
+      async GenerateClinic(value) {
+        await this.authService.GenerateClinicInvoice(value);
+        this.clinics = this.authService.clinic.ClinicList;
+        // console.log(this.clinicsss);
+       }
 
   ngOnInit() {
     this.Country('input');
     this.City('input');
     this.State('input');
+    this.GeneratePayer('input');
+    this.GenerateClinic('input');
   }
 
 }

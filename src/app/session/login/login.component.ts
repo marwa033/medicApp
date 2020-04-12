@@ -28,8 +28,9 @@ export class LoginComponent {
                public translate: TranslateService ) { }
 
                async Center(value) {
-                  await this.authService.Branch(value);
-                  this.centers = this.authService.branches.branches;
+                  this.authService.Branch(value).then( getbranchrsponse => {
+                     this.centers = getbranchrsponse.branches;
+                  });
                  }
                  async Providers(value) {
                   await this.authService.SystemProviders(value);

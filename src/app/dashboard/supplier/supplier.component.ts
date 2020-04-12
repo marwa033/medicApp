@@ -42,13 +42,7 @@ public supplies: Observable<any>;
     AddSupply(value) {
       this.authService.AddSupplyInventry(value);
      }
-  //   Supply(value) {
-  //     this.authService.SupplierInventry(value);
-
-  //     this.supplies = this.authService.supplyresult;
-  //     console.log( 'results is :  ' + this.supplies);
-  //     console.log(  this.supplies);
-  //  }
+ 
   Supply(value) {
     if (value.supplyname == undefined || value.supplyname =='') {
     value.supplyname=' ';
@@ -63,8 +57,11 @@ public supplies: Observable<any>;
     });
   }
    async Currancy(value) {
-    await this.authService.GetCurrancy(value);
-    this.currencies = this.authService.getcurrancy.currencyModels;
+    // await this.authService.GetCurrancy(value);
+    // this.currencies = this.authService.getcurrancy.currencyModels;
+    this.authService.GetCurrancy(value).then( getcurrancyresponse => {
+      this.currencies = getcurrancyresponse.currencyModels;
+   });
    }
 
   ngOnInit() {

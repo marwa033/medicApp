@@ -30,13 +30,15 @@ export class CollectionComponent implements OnInit {
    private pageTitleService: PageTitleService) { }
 
    async Center(value) {
-    await this.authService.CenterCollection(value);
-    this.center2 = this.authService.centers.centers;
+    this.authService.CenterCollection(value).then( getcenterrsponse => {
+      this.center2 = getcenterrsponse.centers;
+   });
    }
    
    async Status(value) {
-    await this.authService.GetStatus(value);
-    this.status = this.authService.getstatus.testStatuses;
+    this.authService.GetStatus(value).then( getgetstatusrsponse => {
+      this.status = getgetstatusrsponse.testStatuses;
+   });
    }
 
 

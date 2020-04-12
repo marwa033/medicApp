@@ -87,41 +87,53 @@ export class SaasComponent implements OnInit  {
 
 
               async Nationality(value) {
-               await this.authService.AddNationality(value);
-               this.nation = this.authService.nationalities.nationalities;
-
-               console.log(this.UserData);
-               // this.nation = this.UserData.nationalities;
-               console.log(this.nation);
+               // await this.authService.AddNationality(value);
+               // this.nation = this.authService.nationalities.nationalities;
+               // console.log(this.nation);
+               this.authService.AddNationality(value).then( getNationalrsponse => {
+                  this.nation = getNationalrsponse.nationalities;
+               });
               }
 
               async BloodGroup(value) {
-               await this.authService.AddBloodGroup(value);
-               this.bgroup = this.authService.bloodGroups.bloodGroups;
-
-               console.log(this.UserData);
-               // this.bgroup = this.UserData.bloodGroups;
-               console.log(this.bgroup);
+               // await this.authService.AddBloodGroup(value);
+               // this.bgroup = this.authService.bloodGroups.bloodGroups;
+               // console.log(this.bgroup);
+               this.authService.AddBloodGroup(value).then( getbloodgrouprsponse => {
+                  this.bgroup = getbloodgrouprsponse.bloodGroups;
+               });
               }
               async Country(value) {
-               await this.authService.AddCountry(value);
-               this.country = this.authService.countries.country;
+               // await this.authService.AddCountry(value);
+               // this.country = this.authService.countries.country;
+               this.authService.AddCountry(value).then( getcountryrsponse => {
+                  this.country = getcountryrsponse.country;
+               });
               }
 
               async State(value) {
-               await this.authService.AddState(value);
-               this.state = this.authService.states.states;
+               // await this.authService.AddState(value);
+               // this.state = this.authService.states.states;
+               this.authService.AddState(value).then( getstatersponse => {
+                  this.state = getstatersponse.states;
+               });
               }
               async Title(item) {
    
               }
               async Gender(value) {
-               await this.authService.AddGender(value);
-               this.gender = this.authService.genders.genders;
+               // await this.authService.AddGender(value);
+               // this.gender = this.authService.genders.genders;
+               this.authService.AddGender(value).then( getGenderrsponse => {
+                  this.gender = getGenderrsponse.genders;
+               });
               }
               async City(value) {
-               await this.authService.AddCity(value);
-               this.city = this.authService.cities.cities;
+               // await this.authService.AddCity(value);
+               // this.city = this.authService.cities.cities;
+               this.authService.AddCity(value).then( getcityrsponse => {
+                  this.city = getcityrsponse.cities;
+               });
               }
                Add(value) {
                   // value.gpayer = this.selectednationality;
@@ -168,10 +180,12 @@ export class SaasComponent implements OnInit  {
 
     
   async selectOne(item) {
-   console.log("****************************");
- 
-   var obj = await this.authService.AddTitle(item);
-   this.title = this.authService.titles.titles;
+   
+   // var obj = await this.authService.AddTitle(item);
+   // this.title = this.authService.titles.titles;
+   var obj = this.authService.AddTitle(item).then( gettitlersponse => {
+      this.title = gettitlersponse.titles;
+   });
  }
  async selectedItem(item) {
    var obj = await this.authService.OrderHistory(item).then(

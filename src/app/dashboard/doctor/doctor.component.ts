@@ -43,8 +43,11 @@ export class DoctorComponent implements OnInit {
       this.authService.AddReferralDoctor(value);
      }
      async ClinicSpeciality(value) {
-      await this.authService.GetClinicSpeciality(value);
-      this.doctorspeciality = this.authService.Cspeciality.specialities;
+      // await this.authService.GetClinicSpeciality(value);
+      // this.doctorspeciality = this.authService.Cspeciality.specialities;
+      this.authService.GetClinicSpeciality(value).then( getclinicspecrsponse => {
+        this.doctorspeciality = getclinicspecrsponse.specialities;
+     });
      }
 
 //    Doctor(value) {

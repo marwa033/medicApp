@@ -55,7 +55,7 @@
         <section class="col-md-4">
           <mat-form-field >
             <mat-select placeholder="{{'clinic' | translate}}" name="clinicsss" required [(ngModel)]="selectedclinic">
-              <mat-option *ngFor="let clinics of clinicsss" [value]="clinics.ID" >{{clinics.Name}}</mat-option>
+              <mat-option *ngFor="let clinics of clinicsss"(click)="selectDoctor(clinics)" [value]="clinics.ID" >{{clinics.Name}}</mat-option>
             </mat-select>
         </mat-form-field>
         </section>

@@ -48,23 +48,21 @@ export class PayerComponent implements OnInit {
      }
 
      async Category(value) {
-      await this.authService.GeneralGategory(value);
-      this.ecategory = this.authService.categories.clientCategoryModels;
-      this.payercategory = this.authService.categories.clientCategoryModels;
+  
+      this.authService.GeneralGategory(value).then( getgategoryrsponse => {
+        this.ecategory = getgategoryrsponse.clientCategoryModels;
+        this.payercategory = getgategoryrsponse.clientCategoryModels;
+
+     });
      }
 
      async PriceList(value) {
-      await this.authService.GetPriceList(value);
-      this.payerpricelist = this.authService.GetPrice.pricelistModels;
+
+      this.authService.GetPriceList(value).then( getpricersponse => {
+        this.payerpricelist = getpricersponse.pricelistModels;
+     });
      }
 
-
-//    Payer(value) {
-//      this.authService.PricingPayer(value);
-//      this.payers = this.authService.PayerResult;
-//      console.log( 'results is :  ' + this.payers);
-//      console.log(  this.payers);
-//  }
 Payer(value) {
   if (value.pname == undefined || value.pname =='') {
   value.pname=' ';

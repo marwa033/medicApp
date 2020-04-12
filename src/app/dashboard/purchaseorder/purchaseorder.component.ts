@@ -31,13 +31,19 @@ export class PurchaseorderComponent implements OnInit {
       this.modalService.open(content, { size: 'lg' });
     } 
     async Supplier(value) {
-      await this.authService.PurchaseSupply(value);
-      this.supplier = this.authService.SupplyOrder.supplieres;
+      // await this.authService.PurchaseSupply(value);
+      // this.supplier = this.authService.SupplyOrder.supplieres;
+      this.authService.PurchaseSupply(value).then( getsupplyorderrsponse => {
+        this.supplier = getsupplyorderrsponse.supplieres;
+     });
      }
 
      async Item(value) {
-      await this.authService.PurchaseItem(value);
-      this.additem = this.authService.ItemOrder.inventory_Items;
+      // await this.authService.PurchaseItem(value);
+      // this.additem = this.authService.ItemOrder.inventory_Items;
+      this.authService.PurchaseItem(value).then( getitemorderrsponse => {
+        this.additem = getitemorderrsponse.inventory_Items;
+     });
      }
 
     Order(value) {

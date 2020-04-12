@@ -40,12 +40,23 @@ export class ResultFieldComponent implements OnInit {
    private pageTitleService: PageTitleService) { }
 
    async TestGender(value) {
-    await this.authService.AddGender(value);
-    this.testgender = this.authService.genders.genders;
+    this.authService.AddGender(value).then( getGenderrsponse => {
+      this.testgender = getGenderrsponse.genders;
+   });
    }
    async Center(value) {
-    await this.authService.Branch(value);
-    this.centers = this.authService.branches.branches;
+    // await this.authService.Branch(value);
+    // this.centers = this.authService.branches.branches;
+    this.authService.Branch(value).then( getbranchrsponse => {
+      this.centers = getbranchrsponse.branches;
+   });
+   }
+   async resultReport(value) {
+    // await this.authService.ResultReport(value);
+    // this.testreport = this.authService.result.resultReports;
+    this.authService.ResultReport(value).then( getresultreportrsponse => {
+      this.testreport = getresultreportrsponse.resultReports;
+   });
    }
 Result(value) {
   if (value.rname == undefined || value.rname =='') {
@@ -60,6 +71,7 @@ Result(value) {
   ngOnInit() {
     this.TestGender('input');
     this.Center('input');
+    this.resultReport('input');
 
 
     $(document).ready(function() {

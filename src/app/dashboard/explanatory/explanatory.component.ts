@@ -46,46 +46,60 @@ export class ExplanatoryComponent implements OnInit {
   constructor(public translate: TranslateService,
     public authService: AuthService,
    private pageTitleService: PageTitleService) { }
+  
    async Center(value) {
-    await this.authService.CenterCollection(value);
-    this.ecenter = this.authService.centers.centers;
+    this.authService.CenterCollection(value).then( getcenterrsponse => {
+      this.ecenter = getcenterrsponse.centers;
+   });
    }
 
 
    async WorkCenter(value) {
-    await this.authService.GeneralWCenter(value);
-    this.ewcenter = this.authService.workcenters.workCenteres;
+
+    this.authService.GeneralWCenter(value).then( getWcenterrsponse => {
+      this.ewcenter = getWcenterrsponse.workCenteres;
+   });
    }
 
    async Test(value) {
-    await this.authService.GeneralTest(value);
-    this.etest = this.authService.tests.testModels;
+
+    this.authService.GeneralTest(value).then( gettestrsponse => {
+      this.etest = gettestrsponse.testModels;
+   });
    }
    async GenerateClinic(value) {
     await this.authService.GenerateClinicInvoice(value);
-    this.UserData = this.authService.userData;
-
-    console.log(this.UserData);
-    this.clinic = this.UserData.ClinicList;
-    console.log(this.clinic);
+    this.clinic = this.authService.clinic.ClinicList;
+  
+ 
+  //   this.authService.GenerateClinicInvoice(value).then( getclinicrsponse => {
+  //     this.clinic = getclinicrsponse.ClinicList;
+  //  });
    }
    async Priority(value) {
-    await this.authService.GeneralPriority(value);
-    this.epriority = this.authService.priorities.priorities;
+   
+    this.authService.GeneralPriority(value).then( getpriorityrsponse => {
+      this.epriority = getpriorityrsponse.priorities;
+   });
    }
    async Category(value) {
-    await this.authService.GeneralGategory(value);
-    this.ecategory = this.authService.categories.clientCategoryModels;
+
+    this.authService.GeneralGategory(value).then( getgategoryrsponse => {
+      this.ecategory = getgategoryrsponse.clientCategoryModels;
+   });
    }
    async Minstatus(value) {
-    await this.authService.MinimumStatus(value);
-    this.eminstatus = this.authService.minstatus.testStatuses;
+
+    this.authService.MinimumStatus(value).then( getminstatusrsponse => {
+      this.eminstatus = getminstatusrsponse.testStatuses;
+   });
    }
    async Maxstatus(value) {
-    await this.authService.MaximumStatus(value);
-    this.emaxstatus = this.authService.maxstatus.testStatuses;
-   }
 
+    this.authService.MaximumStatus(value).then( getmaxstatusrsponse => {
+      this.emaxstatus = getmaxstatusrsponse.testStatuses;
+   });
+   }
    Explan(value) {
     if (value.efrom == undefined || value.efrom == '') {
     value.efrom = ' ';

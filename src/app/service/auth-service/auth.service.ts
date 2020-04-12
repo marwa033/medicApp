@@ -150,30 +150,23 @@ export class AuthService {
       }
    }
    ////////////////////////////////////////
-   async OrderEntryDoctor(value) {
+   async OrderEntryDoctor(item) {
 
-    const data = {clinicID: value.clinics.ID };
-   const bodyobj = JSON.stringify(data);
+    const data = {clinicID: item.ID };
+    const bodyobj = JSON.stringify(data);
 
-   const request = new Request(baseURL + 'ClinicDoctor/ClinicDoctor', {
-   method: 'POST',
-   body: bodyobj
-   });
-   request.headers.delete('Content-Type');
-   request.headers.append('Content-Type', 'application/json');
+    const request = new Request(baseURL + 'ClinicDoctor/ClinicDoctor', {
+    method: 'POST',
+    body: bodyobj
+    });
+    request.headers.delete('Content-Type');
+    request.headers.append('Content-Type', 'application/json');
+    const response = await fetch( request);
+ const getorderdoctorrsponse = await response.json();
+ this.GetOrderDoctor = getorderdoctorrsponse;
+ return this.GetOrderDoctor;
+ }
 
-   await fetch( request)
-   .then(response => response.json())
-   .then(json => this.getorderdoctorrsponse(json))
-   .catch(err => {
-    this.toastr.error(err.message);
-   });
-
-   }
-   getorderdoctorrsponse( resposne) {
-   console.log('from function get notionality' + resposne);
-   this.GetOrderDoctor = resposne;
-   }
    ////////////////////////////////////////
 
    async CollectionDetials(item) {
@@ -238,18 +231,6 @@ const responsegeneraldetialsdata = await response.json();
 this.generaldetials = responsegeneraldetialsdata.loadTests;
 return this.generaldetials;
 }
-  //  await fetch( request)
-  //  .then(response => response.json())
-  //  .then(json => this.getloaddetialsrsponse(json))
-  //  .catch(err => {
-  //   this.toastr.error(err.message);
-  //  });
-
-  //  }
-  //  getloaddetialsrsponse( resposne) {
-  //  console.log('Second Table in Sample Collection' + resposne);
-  //  this.detialsResult = resposne;
-  //  }
 
      ////////////////////////////////////////
 
@@ -260,36 +241,25 @@ return this.generaldetials;
   // this.userData = JSON.parse(localStorage.getItem('userProfile'));
 
   const data = { };
-  // const data = { LabId : this.userData.LabID };
- const bodyobj = JSON.stringify(data);
+  const bodyobj = JSON.stringify(data);
 
- const request = new Request(baseURL + 'Contract/Get', {
- method: 'POST',
- body: bodyobj
- });
- request.headers.delete('Content-Type');
- request.headers.append('Content-Type', 'application/json');
-
- await fetch( request)
- .then(response => response.json())
- .then(json => this.getcontractrsponse(json))
- .catch(err => {
-  this.toastr.error(err.message);
- });
-
+  const request = new Request(baseURL + 'Contract/Get', {
+  method: 'POST',
+  body: bodyobj
+  });
+  request.headers.delete('Content-Type');
+  request.headers.append('Content-Type', 'application/json');
+  const response = await fetch( request);
+ const getcontractrsponse = await response.json();
+ this.contractresult = getcontractrsponse;
+ return this.contractresult;
  }
- getcontractrsponse( resposne) {
- console.log('from function get notionality' + resposne);
- this.contractresult = resposne;
- }
+
  ////////////////////////////////////////
 async GetCurrancy(value) {
-  // console.log(value);
-  // this.userData = JSON.parse(localStorage.getItem('userProfile'));
 
   const data = { };
-  // const data = { LabId : this.userData.LabID };
- const bodyobj = JSON.stringify(data);
+  const bodyobj = JSON.stringify(data);
 
  const request = new Request(baseURL + 'Currency/get', {
  method: 'POST',
@@ -297,18 +267,12 @@ async GetCurrancy(value) {
  });
  request.headers.delete('Content-Type');
  request.headers.append('Content-Type', 'application/json');
+ const response = await fetch( request);
+const getcurrancyresponse = await response.json();
+this.getcurrancy = getcurrancyresponse;
+return this.getcurrancy;
+}
 
- await fetch( request)
- .then(response => response.json())
- .then(json => this.getcurrancyresponse(json))
- .catch(err => {
-  this.toastr.error(err.message);
- });
- }
- getcurrancyresponse( resposne) {
- console.log('from function get notionality' + resposne);
- this.getcurrancy = resposne;
- }
 //////////////////////////////////////////
 async PurchaseOrder(value) {
   // console.log(value.pname);
@@ -333,33 +297,6 @@ return this.purchaseorder;
 }
 
   ////////////////////////////////////////
-// async PurchaseOrder(value) {
-//   // console.log(value);
-
-//   const data = { From: value.from , To: value.to , P_O_ID: value.poid , SupplierID: value.supplier ,
-//      StatusID: value.status };
-//   // const data = { LabId : this.userData.LabID };
-//  const bodyobj = JSON.stringify(data);
-
-//  const request = new Request(baseURL + 'PurchaseOrder/Search_PurchaseOrder', {
-//  method: 'POST',
-//  body: bodyobj
-//  });
-//  request.headers.delete('Content-Type');
-//  request.headers.append('Content-Type', 'application/json');
-
-//  await fetch( request)
-//  .then(response => response.json())
-//  .then(json => this.getpurchaseresponse(json.pO_Searches))
-//  .catch(err => {
-//   this.toastr.error(err.message);
-//  });
-
-//  }
-//  getpurchaseresponse( resposne) {
-//  console.log('from function get notionality' + resposne);
-//  this.purchaseorder = resposne;
-//  }
 
 /////////////////////////////////////////
  async AddPurchaseOrder(value) {
@@ -391,93 +328,67 @@ return this.purchaseorder;
  }
  ////////////////////////////////////////
 async GetStoreMode(value) {
-  this.userData = JSON.parse(localStorage.getItem('userProfile'));
+//   this.userData = JSON.parse(localStorage.getItem('userProfile'));
   const data = { };
-  // const data = { LabId : this.userData.LabID };
- const bodyobj = JSON.stringify(data);
+const bodyobj = JSON.stringify(data);
 
- const request = new Request(baseURL + 'StoreMode/get', {
- method: 'POST',
- body: bodyobj
- });
- request.headers.delete('Content-Type');
- request.headers.append('Content-Type', 'application/json');
+const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+const request = new Request(baseURL + 'StoreMode/get', {
+method: 'POST',
+body: bodyobj
+});
+request.headers.delete('Content-Type');
+request.headers.append('Content-Type', 'application/json');
+const response = await fetch( request);
+const getGetstorersponse = await response.json();
+this.StoreResult = getGetstorersponse;
+return this.StoreResult;
+}
 
- await fetch( request)
- .then(response => response.json())
- .then(json => this.getGetstorersponse(json))
- .catch(err => {
-  this.toastr.error(err.message);
- });
-
- }
- getGetstorersponse( resposne) {
- console.log('from function get notionality' + resposne);
- this.StoreResult = resposne;
- }
    ////////////////////////////////////////
 
    async PurchaseSupply(value) {
-    // this.userData = JSON.parse(localStorage.getItem('userProfile'));
-    const data = { };
-    // const data = { LabId : this.userData.LabID };
-   const bodyobj = JSON.stringify(data);
+  const data = {};
 
-   const request = new Request(baseURL + 'Supplier/get', {
-   method: 'POST',
-   body: bodyobj
-   });
-   request.headers.delete('Content-Type');
-   request.headers.append('Content-Type', 'application/json');
-
-   await fetch( request)
-   .then(response => response.json())
-   .then(json => this.getsupplyorderrsponse(json))
-   .catch(err => {
-    this.toastr.error(err.message);
-   });
-
-   }
-   getsupplyorderrsponse( resposne) {
-   console.log('from function get notionality' + resposne);
-   this.SupplyOrder = resposne;
-   }
-
+  const bodyobj = JSON.stringify(data);
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'Supplier/get', {
+    method: 'POST',
+    body: bodyobj
+  });
+  request.headers.delete('Content-Type');
+  request.headers.append('Content-Type', 'application/json');
+  const response = await fetch( request);
+  const getsupplyorderrsponse = await response.json();
+  this.SupplyOrder = getsupplyorderrsponse;
+  return this.SupplyOrder;
+  }
+  
  ////////////////////////////////////////
 
  async PurchaseItem(value) {
-  this.userData = JSON.parse(localStorage.getItem('userProfile'));
-  const data = {};
-  // const data = { LabId : this.userData.LabID };
- const bodyobj = JSON.stringify(data);
+const data = {};
 
- const request = new Request(baseURL + 'Item/get', {
- method: 'POST',
- body: bodyobj
- });
- request.headers.delete('Content-Type');
- request.headers.append('Content-Type', 'application/json');
-
- await fetch( request)
- .then(response => response.json())
- .then(json => this.getitemorderrsponse(json))
- .catch(err => {
-  this.toastr.error(err.message);
- });
-
- }
- getitemorderrsponse( resposne) {
- console.log('from function get notionality' + resposne);
- this.ItemOrder = resposne;
- }
-
+const bodyobj = JSON.stringify(data);
+const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+const request = new Request(baseURL + 'Item/get', {
+  method: 'POST',
+  body: bodyobj
+});
+request.headers.delete('Content-Type');
+request.headers.append('Content-Type', 'application/json');
+const response = await fetch( request);
+const getitemorderrsponse = await response.json();
+this.ItemOrder = getitemorderrsponse;
+return this.ItemOrder;
+}
 
  ////////////////////////////////////////
 
 
    async Doctor(value) {
   // console.log(value);
-  this.userData = JSON.parse(localStorage.getItem('userProfile'));
+  // this.userData = JSON.parse(localStorage.getItem('userProfile'));
 
   const data = { LabId : 1 };
   // const data = { LabId : this.userData.LabID };
@@ -506,226 +417,130 @@ async GetStoreMode(value) {
 
 ////////////////////////////////////////
 async AddNationality(value) {
- // console.log(value);
- this.userData = JSON.parse(localStorage.getItem('userProfile'));
+  const data = {};
 
- const data = { LabId : 1 };
- // const data = { LabId : this.userData.LabID };
-console.log('Get Nationality issss  :' + data);
-const bodyobj = JSON.stringify(data);
-console.log('Get Nationality issss  :' + bodyobj);
-
-const request = new Request(baseURL + 'Nationality/get', {
-method: 'POST',
-body: bodyobj
+  const bodyobj = JSON.stringify(data);
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'Nationality/get', {
+    method: 'POST',
+    body: bodyobj
 });
-request.headers.delete('Content-Type');
+ request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
-
-await fetch( request)
-.then(response => response.json())
-.then(json => this.getNationalrsponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-
+const response = await fetch( request);
+const getNationalrsponse = await response.json();
+this.nationalities = getNationalrsponse;
+return this.nationalities;
 }
-getNationalrsponse( resposne) {
-console.log('from function get notionality' + resposne);
-this.nationalities = resposne;
-}
+
 ////////////////////////////////////////
 async AddBloodGroup(value) {
- // console.log(value);
- this.userData = JSON.parse(localStorage.getItem('userProfile'));
+  const data = {};
 
- const data = { LabId : 1 };
-const bodyobj = JSON.stringify(data);
-
-const request = new Request(baseURL + 'BloodGroup/get', {
-method: 'POST',
- body: bodyobj
+  const bodyobj = JSON.stringify(data);
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'BloodGroup/get', {
+    method: 'POST',
+    body: bodyobj
 });
-request.headers.delete('Content-Type');
+ request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
-
-await fetch( request)
-.then(response => response.json())
-.then(json => this.getbloodgrouprsponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-
-}
-getbloodgrouprsponse( resposne) {
-console.log(resposne);
-console.log('from function blood group');
-this.bloodGroups = resposne;
+const response = await fetch( request);
+const getbloodgrouprsponse = await response.json();
+this.bloodGroups = getbloodgrouprsponse;
+return this.bloodGroups;
 }
 
 ////////////////////////////////////////
 async AddState(value) {
-  // this.userData = JSON.parse(localStorage.getItem('userProfile'));
+  const data = {};
 
-const data = { };
-const bodyobj = JSON.stringify(data);
-
-const request = new Request(baseURL + 'State/get', {
-method: 'POST',
-body: bodyobj
+  const bodyobj = JSON.stringify(data);
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'State/get', {
+    method: 'POST',
+    body: bodyobj
 });
-request.headers.delete('Content-Type');
+ request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
-
-await fetch( request)
-.then(response => response.json())
-.then(json => this.getstatersponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-
-}
-getstatersponse( resposne) {
-console.log(resposne);
-console.log('from function state');
-this.states = resposne;
+const response = await fetch( request);
+const getstatersponse = await response.json();
+this.states = getstatersponse;
+return this.states;
 }
 
 
 ////////////////////////////////////////
 async AddTitle(item) {
-  this.userData = JSON.parse(localStorage.getItem('userProfile'));
+  const data = {GenderID: item.ID};
 
-const data = { GenderID: item.ID };
-const bodyobj = JSON.stringify(data);
-
-const request = new Request(baseURL + 'Title/get', {
-method: 'POST',
-body: bodyobj
+  const bodyobj = JSON.stringify(data);
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'Title/get', {
+    method: 'POST',
+    body: bodyobj
 });
-request.headers.delete('Content-Type');
+ request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
+const response = await fetch( request);
+const gettitlersponse = await response.json();
+this.titles = gettitlersponse;
+return this.titles;
 
-await fetch( request)
-.then(response => response.json())
-.then(json => this.gettitlersponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-
-}
-gettitlersponse( resposne) {
-console.log(resposne);
-console.log('from function state');
-this.titles = resposne;
 }
 ////////////////////////////////////////
 async AddGender(value) {
-  this.userData = JSON.parse(localStorage.getItem('userProfile'));
+  const data = {};
 
-const data = { LabId: 1 };
-const bodyobj = JSON.stringify(data);
-const request = new Request(baseURL + 'Gender/get', {
-method: 'POST',
-body: bodyobj
+  const bodyobj = JSON.stringify(data);
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'Gender/get', {
+    method: 'POST',
+    body: bodyobj
 });
-request.headers.delete('Content-Type');
+ request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
-await fetch( request)
-.then(response => response.json())
-.then(json => this.getGenderrsponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-}
-getGenderrsponse( resposne) {
-console.log(resposne);
-console.log('from function state');
-this.genders = resposne;
+const response = await fetch( request);
+const getGenderrsponse = await response.json();
+this.genders = getGenderrsponse;
+return this.genders;
 }
 ////////////////////////////////////////
 async AddCity(value) {
-  this.userData = JSON.parse(localStorage.getItem('userProfile'));
+  const data = {};
 
-const data = { LabId: 1 };
-const bodyobj = JSON.stringify(data);
-
-const request = new Request(baseURL + 'City/get', {
-method: 'POST',
-body: bodyobj
+  const bodyobj = JSON.stringify(data);
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'City/get', {
+    method: 'POST',
+    body: bodyobj
 });
-request.headers.delete('Content-Type');
+ request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
-
-await fetch( request)
-.then(response => response.json())
-.then(json => this.getcityrsponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-
-}
-getcityrsponse( resposne) {
-console.log(resposne);
-console.log('from function state');
-this.cities = resposne;
+const response = await fetch( request);
+const getcityrsponse = await response.json();
+this.cities = getcityrsponse;
+return this.cities;
 }
 
 ////////////////////////////////////////
 async AddCountry(value) {
-  // this.userData = JSON.parse(localStorage.getItem('userProfile'));
+  const data = {};
 
-const data = { };
-const bodyobj = JSON.stringify(data);
-
-const request = new Request(baseURL + 'Country/get', {
-method: 'POST',
-body: bodyobj
+  const bodyobj = JSON.stringify(data);
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'Country/get', {
+    method: 'POST',
+    body: bodyobj
 });
-request.headers.delete('Content-Type');
+ request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
-
-await fetch( request)
-.then(response => response.json())
-.then(json => this.getcountryrsponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
+const response = await fetch( request);
+const getcountryrsponse = await response.json();
+this.countries = getcountryrsponse;
+return this.countries;
 
 }
-getcountryrsponse( resposne) {
-console.log(resposne);
-console.log('from function state');
-this.countries = resposne;
-}
-
-//////////////////////////////////
-// async GetLabInformation(value) {
-//   // this.userData = JSON.parse(localStorage.getItem('userProfile'));
-
-// const data = { };
-// const bodyobj = JSON.stringify(data);
-
-// const request = new Request(baseURL + 'Lab/get', {
-// method: 'POST',
-// body: bodyobj
-// });
-// request.headers.delete('Content-Type');
-// request.headers.append('Content-Type', 'application/json');
-
-// await fetch( request)
-// .then(response => response.json())
-// .then(json => this.LabInformationrespnse(json))
-// .catch(err => {
-//  this.toastr.error(err.message);
-// });
-
-// }
-// LabInformationrespnse( resposne) {
-// console.log(resposne);
-// this.getlab = resposne;
-// }
-
 
 /////////////////////////////////////////
 async GetLabInformation(value) {
@@ -834,143 +649,94 @@ getaddrsponse( resposne) {
 
 ////////////////////////////////////////
 async GeneralTest(value) {
-  this.userData = JSON.parse(localStorage.getItem('userProfile'));
 
-const data = { LabId : 1};
+const data = {};
+
 const bodyobj = JSON.stringify(data);
-
+const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
 const request = new Request(baseURL + 'Test/Get', {
-method: 'POST',
-body: bodyobj
+  method: 'POST',
+  body: bodyobj
 });
 request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
-
-await fetch( request)
-.then(response => response.json())
-.then(json => this.gettestrsponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-
+const response = await fetch( request);
+const gettestrsponse = await response.json();
+this.tests = gettestrsponse;
+return this.tests;
 }
-gettestrsponse( resposne) {
-console.log(resposne);
-console.log('from function state');
-this.tests = resposne;
-}
-
 ////////////////////////////////////////
 async GetStatus(value) {
-  this.userData = JSON.parse(localStorage.getItem('userProfile'));
+  const data = {};
 
-const data = { LabId : 1};
-const bodyobj = JSON.stringify(data);
-
-const request = new Request(baseURL + 'Status/get', {
-method: 'POST',
-body: bodyobj
+  const bodyobj = JSON.stringify(data);
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'Status/get', {
+    method: 'POST',
+    body: bodyobj
 });
-request.headers.delete('Content-Type');
+ request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
-
-await fetch( request)
-.then(response => response.json())
-.then(json => this.getgetstatusrsponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-
-}
-getgetstatusrsponse( resposne) {
-console.log(resposne);
-console.log('from function state');
-this.getstatus = resposne;
+const response = await fetch( request);
+const getgetstatusrsponse = await response.json();
+this.getstatus = getgetstatusrsponse;
+return this.getstatus;
 }
 
 ////////////////////////////////////////
 async GeneralPriority(value) {
-  this.userData = JSON.parse(localStorage.getItem('userProfile'));
-const data = { };
-const bodyobj = JSON.stringify(data);
+  const data = {};
 
-const request = new Request(baseURL + 'Priority/Get', {
-method: 'POST',
-body: bodyobj
+  const bodyobj = JSON.stringify(data);
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'Priority/Get', {
+    method: 'POST',
+    body: bodyobj
 });
-request.headers.delete('Content-Type');
+ request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
-
-await fetch( request)
-.then(response => response.json())
-.then(json => this.getpriorityrsponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-
+const response = await fetch( request);
+const getpriorityrsponse = await response.json();
+this.priorities = getpriorityrsponse;
+return this.priorities;
 }
-getpriorityrsponse( resposne) {
-console.log(resposne);
-console.log('from function state');
-this.priorities = resposne;
-}
-
 
 ////////////////////////////////////////
 async GeneralWCenter(value) {
-  this.userData = JSON.parse(localStorage.getItem('userProfile'));
 
-  const data = { LabId: 1 };
-const bodyobj = JSON.stringify(data);
+const data = {};
 
-const request = new Request(baseURL + 'WorkCenter/get', {
-method: 'POST',
-body: bodyobj
+  const bodyobj = JSON.stringify(data);
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'WorkCenter/get', {
+    method: 'POST',
+    body: bodyobj
 });
-request.headers.delete('Content-Type');
+ request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
-
-await fetch( request)
-.then(response => response.json())
-.then(json => this.getWcenterrsponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-
+const response = await fetch( request);
+const getWcenterrsponse = await response.json();
+this.workcenters = getWcenterrsponse;
+return this.workcenters;
 }
-getWcenterrsponse( resposne) {
-console.log(resposne);
-console.log('from function state');
-this.workcenters = resposne;
-}
-
 ////////////////////////////////////////
 async MaximumStatus(value) {
-  // this.userData = JSON.parse(localStorage.getItem('userProfile'));
+  const data = {};
 
-  const data = { LabId: 1 };
-const bodyobj = JSON.stringify(data);
-
-const request = new Request(baseURL + 'TestStatus/get', {
-method: 'POST',
-body: bodyobj
+  const bodyobj = JSON.stringify(data);
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'TestStatus/get', {
+    method: 'POST',
+    body: bodyobj
 });
-request.headers.delete('Content-Type');
+ request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
-
-await fetch( request)
-.then(response => response.json())
-.then(json => this.getmaxstatusrsponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-
+const response = await fetch( request);
+const getmaxstatusrsponse = await response.json();
+this.maxstatus = getmaxstatusrsponse;
+return this.maxstatus;
 }
-getmaxstatusrsponse( resposne) {
-console.log(resposne);
-console.log('from function state');
-this.maxstatus = resposne;
-}
+
 ////////////////////////////////////////
 async GetCurrency(value) {
   // this.userData = JSON.parse(localStorage.getItem('userProfile'));
@@ -1003,88 +769,57 @@ this.currency = resposne;
 
 
 async MinimumStatus(value) {
-  this.userData = JSON.parse(localStorage.getItem('userProfile'));
 
-  const data = { LabId: 1 };
+const data = {};
+
 const bodyobj = JSON.stringify(data);
-
+const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
 const request = new Request(baseURL + 'TestStatus/get', {
-method: 'POST',
-body: bodyobj
+  method: 'POST',
+  body: bodyobj
 });
 request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
-
-await fetch( request)
-.then(response => response.json())
-.then(json => this.getminstatusrsponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-
+const response = await fetch( request);
+const getminstatusrsponse = await response.json();
+this.minstatus = getminstatusrsponse;
+return this.minstatus;
 }
-getminstatusrsponse( resposne) {
-console.log(resposne);
-console.log('from function state');
-this.minstatus = resposne;
-}
-
 ////////////////////////////////////////
 async GeneralGategory(value) {
-  // this.userData = JSON.parse(localStorage.getItem('userProfile'));
 
-const data = {  };
+const data = {};
+
 const bodyobj = JSON.stringify(data);
-
+const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
 const request = new Request(baseURL + 'ClientCategory/get', {
-method: 'POST',
-body: bodyobj
+  method: 'POST',
+  body: bodyobj
 });
 request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
-
-await fetch( request)
-.then(response => response.json())
-.then(json => this.getgategoryrsponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-
+const response = await fetch( request);
+const getgategoryrsponse = await response.json();
+this.categories = getgategoryrsponse;
+return this.categories;
 }
-getgategoryrsponse( resposne) {
-console.log(resposne);
-console.log('from function state');
-this.categories = resposne;
-}
-
 ////////////////////////////////////////
 async GetPriceList(value) {
-  // this.userData = JSON.parse(localStorage.getItem('userProfile'));
+const data = {};
 
-const data = {  };
 const bodyobj = JSON.stringify(data);
-
+const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
 const request = new Request(baseURL + 'PriceList/get', {
-method: 'POST',
-body: bodyobj
+  method: 'POST',
+  body: bodyobj
 });
 request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
-
-await fetch( request)
-.then(response => response.json())
-.then(json => this.getpricersponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-
+const response = await fetch( request);
+const getpricersponse = await response.json();
+this.GetPrice = getpricersponse;
+return this.GetPrice;
 }
-getpricersponse( resposne) {
-console.log(resposne);
-console.log('from function state');
-this.GetPrice = resposne;
-}
-
 
 /////////////////////////////////////
 async GeneralLab(value) {
@@ -1703,9 +1438,12 @@ this.addCurency = resposne;
 
 //////////////////////////////////
 async AddBranch(value) {
-const data = {branch: {id : value.upid , 
-  country_id: value.upcountries , state_id : value.upstates , 
-  city_id : value.upcities , name : value.upname , active : value.upactive}};
+const data = {branch: {id : value.id , 
+  country_id: value.countries , state_id : value.states , 
+  city_id : value.cities , name : value.name , active : value.active,
+  Established_Date: value.date, address: value.address , Phone: value.phone, Fax: value.fax ,
+  Mail: value.mail , default_clinic_id: value.clinics , walkin_payer_id: value.payers,
+  processing_list_id: value.processingID , parent_branch_id: value.branchID}};
   const bodyobj = JSON.stringify(data);
 
 const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
@@ -1733,7 +1471,13 @@ this.addBranch = resposne;
 async UpdateBranch(value) {
 const data = {branch: {id : value.upid , 
       country_id: value.upcountries , state_id : value.upstates , 
-      city_id : value.upcities , name : value.upname , active : value.upactive}};const bodyobj = JSON.stringify(data);
+      city_id : value.upcities , name : value.upname , active : value.upactive,
+      Established_Date: value.update, address: value.upaddress ,
+       Phone: value.upphone, Fax: value.upfax ,
+      Mail: value.upmail , default_clinic_id: value.upclinics ,
+       walkin_payer_id: value.uppayers,
+      processing_list_id: value.upprocessingID , parent_branch_id: value.upbranchID}};
+      const bodyobj = JSON.stringify(data);
 
 const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
 const request = new Request(baseURL + 'Branch/Edit', {
@@ -1743,6 +1487,7 @@ body: bodyobj
 request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
 const response = await fetch( request);
+
 const getupBranchResponse = await response.json();
 this.upBranch = getupBranchResponse.branch;
 this.toastr.success('Successfully updated!');
@@ -2362,164 +2107,115 @@ return this.SampleResult;
 
 ////////////////////////////////////////
 async SampleContainer(value) {
-  this.userData = JSON.parse(localStorage.getItem('userProfile'));
-
-const data = { LabId: 1 };
+const data = {};
 const bodyobj = JSON.stringify(data);
 
-const request = new Request(baseURL + 'Container/Get', {
+const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+const request = new Request(baseURL + 'Container/Get',
+                   {
 method: 'POST',
 body: bodyobj
 });
 request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
-
-await fetch( request)
-.then(response => response.json())
-.then(json => this.getsamplecontainerrsponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-
+const response = await fetch( request);
+const getsamplecontainerrsponse = await response.json();
+this.containers = getsamplecontainerrsponse;
+return this.containers;
 }
-getsamplecontainerrsponse( resposne) {
-console.log(resposne);
-console.log('from function state');
-this.containers = resposne;
-}
-
 ////////////////////////////////////////
 async TestSubCategory(value) {
-  this.userData = JSON.parse(localStorage.getItem('userProfile'));
 
-const data = { LabId: 1 };
+const data = {};
+
 const bodyobj = JSON.stringify(data);
-
+const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
 const request = new Request(baseURL + 'TestSubCategory/get', {
-method: 'POST',
-body: bodyobj
+  method: 'POST',
+  body: bodyobj
 });
 request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
-
-await fetch( request)
-.then(response => response.json())
-.then(json => this.gettestsubcategoryrsponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-
+const response = await fetch( request);
+const gettestsubcategoryrsponse = await response.json();
+this.subcategory = gettestsubcategoryrsponse;
+return this.subcategory;
 }
-gettestsubcategoryrsponse( resposne) {
-console.log(resposne);
-console.log('from function state');
-this.subcategory = resposne;
-}
+
 ////////////////////////////////////////
 async TestSample(value) {
-  // this.userData = JSON.parse(localStorage.getItem('userProfile'));
+const data = {};
 
-const data = { LabId: 1 };
 const bodyobj = JSON.stringify(data);
-
+const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
 const request = new Request(baseURL + 'SampleType/get', {
-method: 'POST',
-body: bodyobj
+  method: 'POST',
+  body: bodyobj
 });
 request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
-
-await fetch( request)
-.then(response => response.json())
-.then(json => this.gettestsamplersponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-
+const response = await fetch( request);
+const gettestsamplersponse = await response.json();
+this.samples = gettestsamplersponse;
+return this.samples;
 }
-gettestsamplersponse( resposne) {
-console.log(resposne);
-console.log('from function state');
-this.samples = resposne;
-}
+
 ////////////////////////////////////////
 async ResultReport(value) {
-  // this.userData = JSON.parse(localStorage.getItem('userProfile'));
+const data = {};
 
-const data = { LabId: 1 };
 const bodyobj = JSON.stringify(data);
-
+const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
 const request = new Request(baseURL + 'ResultReport/get', {
-method: 'POST',
-body: bodyobj
+  method: 'POST',
+  body: bodyobj
 });
 request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
-
-await fetch( request)
-.then(response => response.json())
-.then(json => this.getresultreportrsponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-
-}
-getresultreportrsponse( resposne) {
-console.log(resposne);
-console.log('from function state');
-this.result = resposne;
+const response = await fetch( request);
+const getresultreportrsponse = await response.json();
+this.result = getresultreportrsponse;
+return this.result;
 }
 ////////////////////////////////////////
-async GetClinicPriority(value) {
-  // this.userData = JSON.parse(localStorage.getItem('userProfile'));
-
-const data = { };
-const bodyobj = JSON.stringify(data);
-
-const request = new Request(baseURL + 'Priority/get', {
-method: 'POST',
-body: bodyobj
-});
-request.headers.delete('Content-Type');
-request.headers.append('Content-Type', 'application/json');
-
-await fetch( request)
-.then(response => response.json())
-.then(json => this.getclinicpriorityrsponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-
-}
-getclinicpriorityrsponse( resposne) {
-console.log(resposne);
-console.log('from function state');
-this.Cpriority = resposne;
-}
 ////////////////////////////////////////
 async GetClinicSpeciality(value) {
 const data = { };
-const bodyobj = JSON.stringify(data);
 
+const bodyobj = JSON.stringify(data);
+const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
 const request = new Request(baseURL + 'Speciality/GetSpeciality', {
-method: 'POST',
-body: bodyobj
+  method: 'POST',
+  body: bodyobj
 });
 request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
+const response = await fetch( request);
+const getclinicspecrsponse = await response.json();
+this.Cspeciality = getclinicspecrsponse;
+return this.Cspeciality;
+}
+// const bodyobj = JSON.stringify(data);
 
-await fetch( request)
-.then(response => response.json())
-.then(json => this.getclinicspecrsponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-}
-getclinicspecrsponse( resposne) {
-console.log(resposne);
-console.log('from function state');
-this.Cspeciality = resposne;
-}
+// const request = new Request(baseURL + 'Speciality/GetSpeciality', {
+// method: 'POST',
+// body: bodyobj
+// });
+// request.headers.delete('Content-Type');
+// request.headers.append('Content-Type', 'application/json');
+
+// await fetch( request)
+// .then(response => response.json())
+// .then(json => this.getclinicspecrsponse(json))
+// .catch(err => {
+//  this.toastr.error(err.message);
+// });
+// }
+// getclinicspecrsponse( resposne) {
+// console.log(resposne);
+// console.log('from function state');
+// this.Cspeciality = resposne;
+// }
 ///////////////////////////////
 async ResultField(value) {
   console.log(value.rname);
@@ -2794,49 +2490,28 @@ const responsebilldata = await response.json();
 this.GenerateInvoiceResult = responsebilldata.searchBills;
 return this.GenerateInvoiceResult;
 }
-// await fetch( request)
-// .then(response => response.json())
-// .then(json => this.getgeneratersponse(json.searchBills))
-// .catch(err => {
-//  this.toastr.error(err.message);
-// });
 
-// }
-// getgeneratersponse( resposne) {
-// console.log(resposne);
-// console.log('from function');
-// this.GenerateInvoiceResult = resposne;
-// console.log(this.GenerateInvoiceResult);
-
-// }
 
 ///////////////////////////////////
 async GeneratePayerInvoice(value) {
-  this.userData = JSON.parse(localStorage.getItem('userProfile'));
 
 const data = {};
 const bodyobj = JSON.stringify(data);
 
-const request = new Request(baseURL + 'Client/get', {
+const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+const request = new Request(baseURL + 'Client/get',
+                   {
 method: 'POST',
 body: bodyobj
 });
 request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
-
-await fetch( request)
-.then(response => response.json())
-.then(json => this.getpayerrsponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-
+const response = await fetch( request);
+const getpayerrsponse = await response.json();
+this.clients = getpayerrsponse;
+return this.clients;
 }
-getpayerrsponse( resposne) {
-console.log(resposne);
-console.log('from function generatepayer');
-this.clients = resposne;
-}
+
 
 ///////////////////////////////////
 async GenerateClinicInvoice(value) {
@@ -3405,57 +3080,41 @@ this.logininfo = resposne;
 
 /////////////////////////////////////////
 async CenterCollection(value) {
-  // this.userData = JSON.parse(localStorage.getItem('userProfile'));
+  const data = {};
 
-const data = {  };
-const bodyobj = JSON.stringify(data);
-
-const request = new Request(baseURL + 'Center/get', {
-method: 'POSt',
-body: bodyobj
+  const bodyobj = JSON.stringify(data);
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'Center/get', {
+    method: 'POST',
+    body: bodyobj
 });
-request.headers.delete('Content-Type');
+ request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
-
-await fetch( request)
-.then(response => response.json())
-.then(json => this.getcenterrsponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-
+const response = await fetch( request);
+const getcenterrsponse = await response.json();
+this.centers = getcenterrsponse;
+return this.centers;
 }
-getcenterrsponse( resposne) {
-console.log(resposne);
-console.log('from function state');
-this.centers = resposne;
-}
+
 /////////////////////////////////////////
 async Branch(value) {
+  const data = {};
 
-const data = {  };
-const bodyobj = JSON.stringify(data);
-
-const request = new Request(baseURL + 'Branch/GetBranch', {
-method: 'POSt',
-body: bodyobj
+  const bodyobj = JSON.stringify(data);
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'Branch/GetBranch', {
+    method: 'POST',
+    body: bodyobj
 });
-request.headers.delete('Content-Type');
+ request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
-
-await fetch( request)
-.then(response => response.json())
-.then(json => this.getbranchrsponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-
+const response = await fetch( request);
+const getbranchrsponse = await response.json();
+this.branches = getbranchrsponse;
+return this.branches;
 }
-getbranchrsponse( resposne) {
-console.log(resposne);
-console.log('from function state');
-this.branches = resposne;
-}
+
+
 /////////////////////////////////////////
 async SystemProviders(value) {
 

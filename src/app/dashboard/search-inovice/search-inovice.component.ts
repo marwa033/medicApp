@@ -45,12 +45,15 @@ Sinvoice(value) {
   });
 }
  async GeneratePayer(value) {
-  await this.authService.GeneratePayerInvoice(value);
-  this.gpayer = this.authService.clients.clients;
+  // await this.authService.GeneratePayerInvoice(value);
+  // this.gpayer = this.authService.clients.clients;
 
-  console.log(this.UserData);
-  this.gpayer = this.UserData.clients;
-  console.log(this.gpayer);
+  // console.log(this.UserData);
+  // this.gpayer = this.UserData.clients;
+  // console.log(this.gpayer);
+  this.authService.GeneratePayerInvoice(value).then( getpayerrsponse => {
+    this.gpayer = getpayerrsponse.clients;
+ });
  }
 
   ngOnInit() {

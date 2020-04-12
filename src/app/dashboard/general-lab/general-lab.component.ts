@@ -44,46 +44,55 @@ export class GeneralLabComponent implements OnInit {
   constructor(public translate: TranslateService,
     public authService: AuthService,
    private pageTitleService: PageTitleService) { }
-   async Center(value) {
-    await this.authService.CenterCollection(value);
-    this.center = this.authService.centers.centers;
-   }
+  
    async GenerateClinic(value) {
     await this.authService.GenerateClinicInvoice(value);
-    this.UserData = this.authService.userData;
-
-    console.log(this.UserData);
-    this.clinic = this.UserData.ClinicList;
-    console.log(this.clinic);
+    this.clinic = this.authService.clinic.ClinicList;
    }
+   async Center(value) {
+    this.authService.CenterCollection(value).then( getcenterrsponse => {
+      this.center = getcenterrsponse.centers;
+   });
+   }
+
+
    async WorkCenter(value) {
-    await this.authService.GeneralWCenter(value);
-    this.wcenter = this.authService.workcenters.workCenteres;
+    this.authService.GeneralWCenter(value).then( getWcenterrsponse => {
+      this.wcenter = getWcenterrsponse.workCenteres;
+   });
    }
 
    async Test(value) {
-    await this.authService.GeneralTest(value);
-    this.test = this.authService.tests.testModels;
 
+    this.authService.GeneralTest(value).then( gettestrsponse => {
+      this.test = gettestrsponse.testModels;
+   });
    }
 
    async Priority(value) {
-    await this.authService.GeneralPriority(value);
-    this.priority = this.authService.priorities.priorities;
+   
+    this.authService.GeneralPriority(value).then( getpriorityrsponse => {
+      this.priority = getpriorityrsponse.priorities;
+   });
    }
    async Category(value) {
-    await this.authService.GeneralGategory(value);
-    this.ecategory = this.authService.categories.clientCategoryModels;
+
+    this.authService.GeneralGategory(value).then( getgategoryrsponse => {
+      this.ecategory = getgategoryrsponse.clientCategoryModels;
+   });
    }
    async Minstatus(value) {
-    await this.authService.MinimumStatus(value);
-    this.minstatus = this.authService.minstatus.testStatuses;
+
+    this.authService.MinimumStatus(value).then( getminstatusrsponse => {
+      this.minstatus = getminstatusrsponse.testStatuses;
+   });
    }
    async Maxstatus(value) {
-    await this.authService.MaximumStatus(value);
-    this.maxstatus = this.authService.maxstatus.testStatuses;
-   }
 
+    this.authService.MaximumStatus(value).then( getmaxstatusrsponse => {
+      this.maxstatus = getmaxstatusrsponse.testStatuses;
+   });
+   }
 General(value) {
   if (value.minstatus == undefined || value.minstatus =='') {
   value.minstatus='0';

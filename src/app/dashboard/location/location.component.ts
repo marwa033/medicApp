@@ -30,13 +30,17 @@ export class LocationComponent implements OnInit {
     config.keyboard = false; }
 
     async StoreMode(value) {
-      await this.authService.GetStoreMode(value);
-      this.stores = this.authService.StoreResult.inventory_StoreModes;
+      // await this.authService.GetStoreMode(value);
+      // this.stores = this.authService.StoreResult.inventory_StoreModes;
+      this.authService.GetStoreMode(value).then( getGetstorersponse => {
+        this.stores = getGetstorersponse.inventory_StoreModes;
+     });
      }
 
      async Center(value) {
-      await this.authService.CenterCollection(value);
-      this.centers = this.authService.centers.centers;
+      this.authService.CenterCollection(value).then( getcenterrsponse => {
+        this.centers = getcenterrsponse.centers;
+     });
      }
     Add(value) {
       this.authService.AddLocation(value);

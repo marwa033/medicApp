@@ -58,19 +58,19 @@ Generate(value) {
 }
 
  async GeneratePayer(value) {
-  await this.authService.GeneratePayerInvoice(value);
-  this.gpayer = this.authService.clients.clients;
+  // await this.authService.GeneratePayerInvoice(value);
+  // this.gpayer = this.authService.clients.clients;
+  this.authService.GeneratePayerInvoice(value).then( getpayerrsponse => {
+    this.gpayer = getpayerrsponse.clients;
+ });
  }
-
- async GenerateClinic(value) {
-  await this.authService.GenerateClinicInvoice(value);
-  this.UserData = this.authService.userData;
-
-  console.log(this.UserData);
-  this.gclinic = this.UserData.ClinicList;
-  console.log(this.gclinic);
- }
-
+ 
+  async GenerateClinic(value) {
+    await this.authService.GenerateClinicInvoice(value);
+    this.gclinic = this.authService.clinic.ClinicList;
+    // console.log(this.clinicsss);
+   }
+ 
   ngOnInit() {
     this.GeneratePayer('input');
     this.GenerateClinic('input');

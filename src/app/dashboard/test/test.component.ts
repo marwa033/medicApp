@@ -66,31 +66,39 @@ export class TestComponent implements OnInit {
       this.authService.AddTest(value);
      }
      async Category(value) {
-      await this.authService.GeneralGategory(value);
-      this.testcategory = this.authService.categories.clientCategoryModels;
+      // await this.authService.GeneralGategory(value);
+      // this.testcategory = this.authService.categories.clientCategoryModels;
+      this.authService.GeneralGategory(value).then( getgategoryrsponse => {
+        this.testcategory = getgategoryrsponse.clientCategoryModels;
+     });
      }
      async SubCategory(value) {
-      await this.authService.TestSubCategory(value);
-      this.testsub = this.authService.subcategory.testSubCategoryModels;
+      // await this.authService.TestSubCategory(value);
+      // this.testsub = this.authService.subcategory.testSubCategoryModels;
+      this.authService.TestSubCategory(value).then( gettestsubcategoryrsponse => {
+        this.testsub = gettestsubcategoryrsponse.testSubCategoryModels;
+     });
      }
      async TestGender(value) {
-      await this.authService.AddGender(value);
-      this.testgender = this.authService.genders.genders;
+      this.authService.AddGender(value).then( getGenderrsponse => {
+        this.testgender = getGenderrsponse.genders;
+     });
      }
      async TestSample(value) {
-      await this.authService.TestSample(value);
-      this.testsample = this.authService.samples.sampleTypeModels;
+      // await this.authService.TestSample(value);
+      // this.testsample = this.authService.samples.sampleTypeModels;
+      this.authService.TestSample(value).then( gettestsamplersponse => {
+        this.testsample = gettestsamplersponse.sampleTypeModels;
+     });
      }
      async resultReport(value) {
-      await this.authService.ResultReport(value);
-      this.testreport = this.authService.result.resultReports;
+      // await this.authService.ResultReport(value);
+      // this.testreport = this.authService.result.resultReports;
+      this.authService.ResultReport(value).then( getresultreportrsponse => {
+        this.testreport = getresultreportrsponse.resultReports;
+     });
      }
-//    Test(value) {
-//     this.authService.ConfigTest(value);
-//     this.tests = this.authService.TestResult;
-//     console.log( 'results is :  ' + this.tests);
-//     console.log(  this.tests);
-//  }
+
 
 Test(value) {
   if (value.tname == undefined || value.tname == '') {

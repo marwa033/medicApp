@@ -27,56 +27,86 @@
               </div>
               <form #addform="ngForm" (ngSubmit)="AddBranch(addform.value)">
               <div class="modal-body ">
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label">{{'id' | translate}}</label>
-                  <div v class="col-sm-8">
-                    <input class="form-control" readonly name="id" required [(ngModel)]="id">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label">{{'name' | translate}}</label>
-                  <div class="col-sm-8">
-                    <input  class="form-control" placeholder="Enter Name" name="name" required [(ngModel)]="name">
-                </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label">{{'country' | translate}}</label>
-                  <div class="col-sm-8">
-                    <select class="form-control" name="countries" [(ngModel)]="selectedcountry">
-                      <!-- <option >{{'all' | translate}}</option> -->
-                      <option *ngFor="let country of countries" [value]="country.ID" >{{country.Name}}</option>
-                      <!-- <option >{{'no' | translate}}</option> -->
-                    </select>
-                   </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">{{'city' | translate}}</label>
-                    <div class="col-sm-8">
-                      <select class="form-control" name="cities" [(ngModel)]="selectedcity">
-                        <!-- <option >{{'all' | translate}}</option> -->
-                        <option *ngFor="let city of cities" [value]="city.ID" >{{city.Name}}</option>
-                    </select>
-                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">{{'state' | translate}}</label>
-                    <div class="col-sm-8">
-                      <select class="form-control" name="states" [(ngModel)]="selectedstate">
-                        <!-- <option >{{'all' | translate}}</option> -->
-                        <option *ngFor="let state of states" [value]="state.ID" >{{state.Name}}</option>
-                    </select>
-                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">{{'active' | translate}}</label>
-                    <div class="col-sm-8">
-                      <select class="form-control" name="active" [(ngModel)]="active">
-                        <!-- <option >{{'all' | translate}}</option> -->
-                        <option value="true">{{'true' | translate}}</option>
-                        <option value="false">{{'false' | translate}}</option>
-                      </select>
-                     </div>
-                  </div>
+                <section class="row justify-content-center" >
+                  <section class="col-md-5 ml-3">
+                    <div class="form-group row">
+                      <label>{{'id' | translate}}</label>
+                        <input class="form-control" readonly name="id"  [(ngModel)]="id">
+                      </div>
+                      <div class="form-group row">
+                        <label>{{'name' | translate}}</label>
+                          <input class="form-control"  name="name"  [(ngModel)]="name">
+                        </div>
+                        <div class="form-group row">
+                          <label>{{'country' | translate}}</label>
+                          <select class="form-control" name="countries" [(ngModel)]="selectedcountry">
+                            <option *ngFor="let country of countries" [value]="country.ID" >{{country.Name}}</option>
+                          </select>
+                          </div>
+                          <div class="form-group row">
+                            <label>{{'state' | translate}}</label>
+                            <select class="form-control" name="states" [(ngModel)]="selectedstate">
+                              <option *ngFor="let state of states" [value]="state.ID" >{{state.Name}}</option>
+                          </select>
+                            </div>
+                            <div class="form-group row">
+                              <label>{{'city' | translate}}</label>
+                              <select class="form-control" name="cities" [(ngModel)]="selectedcity">
+                                <option *ngFor="let city of cities" [value]="city.ID" >{{city.Name}}</option>
+                            </select>
+                              </div>
+                              <div class="form-group row">
+                                <label>{{'clinic' | translate}}</label>
+                                <select class="form-control" name="clinics" [(ngModel)]="clinics">
+                                  <option *ngFor="let clinic of clinics" [value]="clinic.ID" >{{clinic.Name}}</option>
+                              </select>
+                                </div>
+                                <div class="form-group row">
+                                  <label>{{'client' | translate}}</label>
+                                  <select class="form-control" name="payers" [(ngModel)]="payers">
+                                    <option *ngFor="let payer of payers" [value]="payer.ID" >{{payer.Name}}</option>
+                                </select>
+                                  </div>
+                              <div class="form-group row">
+                                <label>{{'active' | translate}}</label>
+                                <select class="form-control" name="active" [(ngModel)]="active">
+                                  <option value="true">{{'true' | translate}}</option>
+                                  <option value="false">{{'false' | translate}}</option>
+                                </select>
+                                </div>    
+                  </section>
+                  <section class="col-md-5 ml-4">
+                    <div class="form-group row">
+                      <label>{{'address' | translate}}</label>
+                        <input class="form-control"  name="address"  [(ngModel)]="address">
+                      </div>
+                      <div class="form-group row">
+                        <label>{{'fax' | translate}}</label>
+                          <input class="form-control"  name="fax"  [(ngModel)]="fax">
+                        </div>
+                        <div class="form-group row">
+                          <label>{{'phone' | translate}}</label>
+                            <input class="form-control"  name="phone"  [(ngModel)]="phone">
+                          </div>
+                          <div class="form-group row">
+                            <label>{{'mail' | translate}}</label>
+                              <input class="form-control"  name="mail"  [(ngModel)]="mail">
+                            </div>
+                            <div class="form-group row">
+                              <label>{{'date' | translate}}</label>
+                                <input class="form-control"  name="date" type="date"  [(ngModel)]="date">
+                              </div>
+                              <div class="form-group row">
+                                <label>{{'branchID' | translate}}</label>
+                                  <input class="form-control"  name="branchID"  [(ngModel)]="branchID">
+                                </div>
+                                <div class="form-group row">
+                                  <label>{{'processingID' | translate}}</label>
+                                    <input class="form-control"  name="processingID"  [(ngModel)]="processingID">
+                                  </div>
+                  </section>
+                </section>
+              
               </div>
               <div class="modal-footer">
                 <button class="btn btn-primary" >{{'save' | translate}}</button>
@@ -142,7 +172,86 @@
     </div>
     <form #updateform="ngForm" (ngSubmit)="UpBranch(updateform.value)">
     <div class="modal-body ">
-      <div class="form-group row">
+      <section class="row justify-content-center" >
+        <section class="col-md-5 ml-3">
+          <div class="form-group row">
+            <label>{{'id' | translate}}</label>
+              <input class="form-control" readonly name="upid" required [(ngModel)]="editid">
+            </div>
+            <div class="form-group row">
+              <label>{{'name' | translate}}</label>
+                <input class="form-control"   name="upname"  [(ngModel)]="editname">
+              </div>
+              <div class="form-group row">
+                <label>{{'country' | translate}}</label>
+                <select class="form-control" name="upcountries" [(ngModel)]="selectedcountry">
+                  <option *ngFor="let country of countries" [value]="country.ID" >{{country.Name}}</option>
+                </select>
+                </div>
+                <div class="form-group row">
+                  <label>{{'state' | translate}}</label>
+                  <select class="form-control" name="upstates" [(ngModel)]="selectedstate">
+                    <option *ngFor="let state of states" [value]="state.ID" >{{state.Name}}</option>
+                </select>
+                  </div>
+                  <div class="form-group row">
+                    <label>{{'city' | translate}}</label>
+                    <select class="form-control" name="upcities" [(ngModel)]="selectedcity">
+                      <option *ngFor="let city of cities" [value]="city.ID" >{{city.Name}}</option>
+                  </select>
+                    </div>
+                    <div class="form-group row">
+                      <label>{{'clinic' | translate}}</label>
+                      <select class="form-control" name="upclinics" [(ngModel)]="upclinics">
+                        <option *ngFor="let clinic of clinics" [value]="clinic.ID" >{{clinic.Name}}</option>
+                    </select>
+                      </div>
+                      <div class="form-group row">
+                        <label>{{'client' | translate}}</label>
+                        <select class="form-control" name="uppayers" [(ngModel)]="uppayers">
+                          <option *ngFor="let payer of payers" [value]="payer.ID" >{{payer.Name}}</option>
+                      </select>
+                        </div>
+                    <div class="form-group row">
+                      <label>{{'active' | translate}}</label>
+                      <select class="form-control" name="upactive" [(ngModel)]="selectedactive">
+                        <option value="true">{{'true' | translate}}</option>
+                        <option value="false">{{'false' | translate}}</option>
+                      </select>
+                      </div>    
+        </section>
+        <section class="col-md-5 ml-4">
+          <div class="form-group row">
+            <label>{{'address' | translate}}</label>
+              <input class="form-control"  name="upaddress"  [(ngModel)]="upaddress">
+            </div>
+            <div class="form-group row">
+              <label>{{'fax' | translate}}</label>
+                <input class="form-control"  name="upfax"  [(ngModel)]="upfax">
+              </div>
+              <div class="form-group row">
+                <label>{{'phone' | translate}}</label>
+                  <input class="form-control"  name="upphone"  [(ngModel)]="upphone">
+                </div>
+                <div class="form-group row">
+                  <label>{{'mail' | translate}}</label>
+                    <input class="form-control"  name="upmail"  [(ngModel)]="upmail">
+                  </div>
+                  <div class="form-group row">
+                    <label>{{'date' | translate}}</label>
+                      <input class="form-control"  name="update" type="date"  [(ngModel)]="update">
+                    </div>
+                    <div class="form-group row">
+                      <label>{{'branchID' | translate}}</label>
+                        <input class="form-control"  name="upbranchID"  [(ngModel)]="upbranchID">
+                      </div>
+                      <div class="form-group row">
+                        <label>{{'processingID' | translate}}</label>
+                          <input class="form-control"  name="upprocessingID"  [(ngModel)]="upprocessingID">
+                        </div>
+        </section>
+      </section>
+      <!-- <div class="form-group row">
         <label class="col-sm-4 col-form-label">{{'id' | translate}}</label>
         <div v class="col-sm-8">
           <input class="form-control" readonly name="upid" required [(ngModel)]="editid">
@@ -151,16 +260,15 @@
       <div class="form-group row">
         <label class="col-sm-4 col-form-label">{{'name' | translate}}</label>
         <div class="col-sm-8">
-          <input  class="form-control" placeholder="Enter Name" name="upname" required [(ngModel)]="editname">
+          <input  class="form-control" placeholder="Enter Name" name="upname"  [(ngModel)]="editname">
       </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-4 col-form-label">{{'country' | translate}}</label>
         <div class="col-sm-8">
           <select class="form-control" name="upcountries" [(ngModel)]="selectedcountry" >
-            <!-- <option >{{'all' | translate}}</option> -->
             <option *ngFor="let country of countries" [value]="country.ID" >{{country.Name}} </option>
-            <!-- <option >{{'no' | translate}}</option> -->
+
           </select>
          </div>
       </div>
@@ -168,7 +276,7 @@
           <label class="col-sm-4 col-form-label">{{'city' | translate}}</label>
           <div class="col-sm-8">
             <select class="form-control" name="upcities" [(ngModel)]="selectedcity">
-              <!-- <option >{{'all' | translate}}</option> -->
+
               <option *ngFor="let city of cities" [value]="city.ID" >{{city.Name}}</option>
           </select>
            </div>
@@ -177,7 +285,7 @@
           <label class="col-sm-4 col-form-label">{{'state' | translate}}</label>
           <div class="col-sm-8">
             <select class="form-control" name="upstates" [(ngModel)]="selectedstate">
-              <!-- <option >{{'all' | translate}}</option> -->
+
               <option *ngFor="let state of states" [value]="state.ID" >{{state.Name}}</option>
           </select>
            </div>
@@ -186,12 +294,11 @@
           <label class="col-sm-4 col-form-label">{{'active' | translate}}</label>
           <div class="col-sm-8">
             <select class="form-control" name="upactive" [(ngModel)]="selectedactive">
-              <!-- <option >{{'all' | translate}}</option> -->
               <option value="true">{{'true' | translate}}</option>
               <option value="false">{{'false' | translate}}</option>
             </select>
            </div>
-        </div>
+        </div> -->
     </div>
     <div class="modal-footer">
       <button class="btn btn-primary" >{{'updated' | translate}}</button>

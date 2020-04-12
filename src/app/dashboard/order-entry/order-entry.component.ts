@@ -102,30 +102,31 @@ Visit(value) {
 
  }
  async OrderDoctor(value) {
-  await this.authService.OrderEntryDoctor(value);
-  this.doctors = this.authService.GetOrderDoctor.doctors;
+  // await this.authService.OrderEntryDoctor(value);
+  // this.doctors = this.authService.GetOrderDoctor.doctors;
+
  }
 
 
   async GetTable(value) {
-    // await this.authService.LoadVisit(value);
-    // this.tables = this.authService.loadvisitresult.loadVisitItems;
-  //   this.authService.LoadVisit(value).then( responsevisititemdata=>{
-  //     this.tables=responsevisititemdata;
-  //     console.log( this.tables );
-  //  });
-
+  
 }
 
 
  async GeneratePayer(value) {
-  await this.authService.GeneratePayerInvoice(value);
-  this.payers = this.authService.clients.clients;
+  // await this.authService.GeneratePayerInvoice(value);
+  // this.payers = this.authService.clients.clients;
+  this.authService.GeneratePayerInvoice(value).then( getpayerrsponse => {
+    this.payers = getpayerrsponse.clients;
+ });
  }
 
  async GetContract(value) {
-  await this.authService.OrderContract(value);
-  this.contracts = this.authService.contractresult.contracts;
+  // await this.authService.OrderContract(value);
+  // this.contracts = this.authService.contractresult.contracts;
+  this.authService.OrderContract(value).then( getcontractrsponse => {
+    this.contracts = getcontractrsponse.contracts;
+ });
  }
 
  async GenerateClinic(value) {
@@ -187,6 +188,11 @@ selectRow(item) {
   this.totalcredit = item.Covered;
   this.netcash = item.Covered;
   this.netcredit = item.Covered;
+}
+async selectDoctor(item) {
+  this.authService.OrderEntryDoctor(item).then( getorderdoctorrsponse => {
+    this.doctors = getorderdoctorrsponse.doctors;
+ });
 }
 selectType(){
   this.FilteredVisits=[];

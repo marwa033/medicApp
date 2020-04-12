@@ -66,8 +66,11 @@ if (value.pactive == undefined || value.pactive =='') {
   });
 }
 async TestGender(value) {
-  await this.authService.AddGender(value);
-  this.genderprofile = this.authService.genders.genders;
+  // await this.authService.AddGender(value);
+  // this.genderprofile = this.authService.genders.genders;
+  this.authService.AddGender(value).then( getGenderrsponse => {
+    this.genderprofile = getGenderrsponse.genders;
+ });
  }
   ngOnInit() {
     this.TestGender('input');

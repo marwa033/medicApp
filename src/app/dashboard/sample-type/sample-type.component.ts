@@ -40,8 +40,11 @@ export class SampleTypeComponent implements OnInit {
     }
 
    async Container(value) {
-    await this.authService.SampleContainer(value);
-    this.container = this.authService.containers.containerModels;
+    // await this.authService.SampleContainer(value);
+    // this.container = this.authService.containers.containerModels;
+    this.authService.SampleContainer(value).then( getsamplecontainerrsponse => {
+      this.container = getsamplecontainerrsponse.containerModels;
+   });
    }
 
 //    Sample(value) {
