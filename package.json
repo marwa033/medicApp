@@ -5,8 +5,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --prod --aot --build-optimizer",
-    "build2": "ng build --prod",
+    "build":  "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --prod --aot --build-optimizer",
+    "build2": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --prod --aot --build-optimizer --output-hashing none",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
