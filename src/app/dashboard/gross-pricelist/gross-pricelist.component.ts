@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'app/service/auth-service/auth.service';
 import { PageTitleService } from 'app/core/page-title/page-title.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'ms-gross-pricelist',
@@ -19,9 +20,17 @@ export class GrossPricelistComponent implements OnInit {
   idpricelist= '';
   UserData: any;
   currencypricelist: any;
+  selectedactive: any;
+  selectedcurrancy: any;
   // pricelists: any;
   currenyy: any;
   public pricelists: Observable<any>;
+  
+  dataSource: MatTableDataSource<unknown>;
+  displayedColumns: string[] = [ 'ID' ,'Name', 'CurrencyID','Active' , 'CreateDT'];
+  
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(public translate: TranslateService,
     public authService: AuthService,
@@ -46,8 +55,11 @@ export class GrossPricelistComponent implements OnInit {
 //     console.log(  this.pricelists);
 //  }
 async Currency(value) {
-  await this.authService.GetCurrency(value)
-  this.currenyy = this.authService.currency.currencyModels;
+  // await this.authService.GetCurrency(value)
+  // this.currenyy = this.authService.currency.currencyModels;
+  this.authService.GetCurrency(value).then( getcurrancygetrsponse => {
+    this.currencypricelist = getcurrancygetrsponse.currencyModels;
+ });
  }
 
 Gross(value) {
@@ -60,6 +72,9 @@ Gross(value) {
 
   this.authService.GrossPriseList(value).then(
     responsegrossdata => {this.pricelists = responsegrossdata;
+      this.dataSource = new MatTableDataSource(responsegrossdata);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
      console.log( this.pricelists );
   });
 }

@@ -1,7 +1,9 @@
 <section class="container-fluide">
   <h2 class="">{{'sbills' | translate}}</h2><br>
   <section class="row">
-      <section class="col-md-3 dash">
+      <section class="col-md-3 ">
+        <div class="card">
+          <div class="card-body">
           <form class="search-form" #form="ngForm" (ngSubmit)="Sinvoice(form.value)">
        
             <mat-form-field class="example-full-width">
@@ -32,27 +34,105 @@
             </mat-form-field><br>
             <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
           </form>
+          </div>
+          </div>
   <br><br>
       </section>
-      <section class="col-md-9">
+    
+      <section class="col-md-9 ">
+        <div class=" example-container">
+        <table mat-table [dataSource]="dataSource" matSort class=" mat-elevation-z8" >
+        
+          <ng-container matColumnDef="BillID">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'bid' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.BillID}} </td>
+          </ng-container>
+        
+          <!-- Name Column -->
+          <ng-container matColumnDef="Date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'bdate' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.Date}} </td>
+          </ng-container>
+        
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="payerName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'payer' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.payerName}} </td>
+          </ng-container>
+
+          <!--Column-->
+          <ng-container matColumnDef="periodFrom">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'pfrom' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.periodFrom}} </td>
+          </ng-container>
+        
+          <!-- Name Column -->
+          <ng-container matColumnDef="periodTo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'pto' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.periodTo}} </td>
+          </ng-container>
+        
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="Total">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'total' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.Total}} </td>
+          </ng-container>
+
+                    <!--Column-->
+                    <ng-container matColumnDef="Discount">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'dicount' | translate}} </th>
+                      <td mat-cell *matCellDef="let element"> {{element.Discount}} </td>
+                    </ng-container>
+                  
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="Received">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'recieved' | translate}} </th>
+                      <td mat-cell *matCellDef="let element"> {{element.Received}} </td>
+                    </ng-container>
+                  
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="Remaining">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'remaining' | translate}} </th>
+                      <td mat-cell *matCellDef="let element"> {{element.Remaining}} </td>
+                    </ng-container>
+        
+                    <!--Column-->
+                    <ng-container matColumnDef="Active">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'active' | translate}} </th>
+                      <td mat-cell *matCellDef="let element"> {{element.Active}} </td>
+                    </ng-container>
+                  
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="CreateUID">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'createuid' | translate}} </th>
+                      <td mat-cell *matCellDef="let element"> {{element.CreateUID}} </td>
+                    </ng-container>
+                  
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="CreateDT">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'createdt' | translate}} </th>
+                      <td mat-cell *matCellDef="let element"> {{element.CreateDT}} </td>
+                    </ng-container>
+                     <!-- Name Column -->
+                     <ng-container matColumnDef="ModifyUID">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'modifyuid' | translate}} </th>
+                      <td mat-cell *matCellDef="let element"> {{element.ModifyUID}} </td>
+                    </ng-container>
+                  
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="ModifyDT">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'modifydt' | translate}} </th>
+                      <td mat-cell *matCellDef="let element"> {{element.ModifyDT}} </td>
+                    </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator class="page" [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
+      </div>
+        <!-- <div class="card">
+          <div class="card-body" >
         <section class="first scroll">
-          <table class="table table-hover" >
-              <thead>
-                <tr>
-                  <th scope="col">{{'bid' | translate}}</th>
-                  <th scope="col">{{'bdate' | translate}}</th>
-                  <th scope="col">{{'payer' | translate}}</th>
-                  <th scope="col">{{'pfrom' | translate}}</th>
-                  <th scope="col">{{'pto' | translate}}</th>
-                  <th scope="col">{{'total' | translate}}</th>
-                  <th scope="col">{{'dicount' | translate}}</th>
-                  <th scope="col">{{'recieved' | translate}}</th>
-                  <th scope="col">{{'remaining' | translate}}</th>
-                  <th scope="col">{{'active' | translate}}</th>
-                  <th scope="col">{{'createuid' | translate}}</th>
-                  <th scope="col">{{'createdt' | translate}}</th>
-                  <th scope="col">{{'modifyuid' | translate}}</th>
-                  <th scope="col">{{'modifydt' | translate}}</th>
+   
                   
                 </tr>
               </thead>
@@ -75,7 +155,11 @@
                 </tr>
               </tbody>
             </table>
+          
           </section>
-      </section>
+
+    </div>
+  </div> -->
+</section>
   </section>
 </section>

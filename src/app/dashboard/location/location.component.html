@@ -1,114 +1,160 @@
 <section class="container-fluide">
-    <h2 class="">{{'location' | translate}}</h2><br>
-    <section class="row">
-        <section class="col-md-3 dash">
-            <form class="search-form" #form="ngForm" (ngSubmit)="Location(form.value)">
-         
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="{{'name' | translate}}" name="locationname" required [(ngModel)]="locationname">
-              </mat-form-field><br>
-              <mat-form-field>
-                <mat-select placeholder="{{'active' | translate}}" name="locationactive" required [(ngModel)]="locationactive">
-                  <mat-option value="3">{{'all' | translate}}</mat-option>
-                  <mat-option value="1">{{'yes' | translate}}</mat-option>
-                  <mat-option value="0">{{'no' | translate}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-              <mat-form-field>
-                <mat-select placeholder="{{'site' | translate}}" name="centers" required [(ngModel)]="locationsite">
-                <mat-option *ngFor="let center of centers" [value]="center.ID">{{center.Name}}</mat-option>
-                <!-- <option *ngFor="let center of centers" [value]="center.ID" ></option> -->
+  <h2 class="">{{'location' | translate}}</h2><br>
+  <section class="row">
+      <section class="col-md-3">
+        <div class="card">
+          <div class="card-body">
+          <form class="search-form" #form="ngForm" (ngSubmit)="Location(form.value)">
+       
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'name' | translate}}" name="locationname" required [(ngModel)]="locationname">
+            </mat-form-field><br>
+            <mat-form-field>
+              <mat-select placeholder="{{'active' | translate}}" name="locationactive" required [(ngModel)]="locationactive">
+                <mat-option value="3">{{'all' | translate}}</mat-option>
+                <mat-option value="1">{{'yes' | translate}}</mat-option>
+                <mat-option value="0">{{'no' | translate}}</mat-option>
               </mat-select>
             </mat-form-field><br>
-              <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
-            </form><br>
-            <button class="success-bg btn-block log" (click)="openSm(content)" mat-raised-button >{{'Add' | translate}}</button>
-
-            <ng-template #content let-modal>
-              <div role="document">
-              <div class="modal-header">
-                <h4 class="modal-title" style="text-align: center;">{{'Add' | translate}}</h4>
-                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <form #addform="ngForm" (ngSubmit)="Add(addform.value)">
-              <div class="modal-body ">
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label">{{'id' | translate}}</label>
-                  <div v class="col-sm-8">
-                    <input class="form-control" readonly name="addid" required [(ngModel)]="addid">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label">{{'name' | translate}}</label>
-                  <div class="col-sm-8">
-                    <input  class="form-control" placeholder="Enter Name" name="addname" required [(ngModel)]="addname">
-                </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">{{'site' | translate}}</label>
-                    <div class="col-sm-8">
-                      <select class="form-control" name="centers" [(ngModel)]="selectedcenter">
-                          <option *ngFor="let center of centers" [value]="center.ID" >{{center.Name}}</option>
-                      </select>
-                     </div>
-                  </div>
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">{{'active' | translate}}</label>
-                    <div class="col-sm-8">
-                      <select class="form-control" name="addactive" [(ngModel)]="addactive">
-                        <!-- <option >{{'all' | translate}}</option> -->
-                        <option >{{'yes' | translate}}</option>
-                        <option >{{'no' | translate}}</option>
-                      </select>
-                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">{{'storemode' | translate}}</label>
-                    <div class="col-sm-8">
-                      <select class="form-control" name="stores" [(ngModel)]="selectedstore">
-                        <option *ngFor="let store of stores" [value]="store.ID" >{{store.Name}}</option>
-                      </select>
-                     </div>
-                  </div>
-    
-              </div>
-              <div class="modal-footer">
-                <button class="btn btn-primary" >{{'save' | translate}}</button>
-              </div>
-              </form>
+            <mat-form-field>
+              <mat-select placeholder="{{'site' | translate}}" name="centers" required [(ngModel)]="locationsite">
+              <mat-option *ngFor="let center of centers" [value]="center.ID">{{center.Name}}</mat-option>
+              <!-- <option *ngFor="let center of centers" [value]="center.ID" ></option> -->
+            </mat-select>
+          </mat-form-field><br>
+            <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
+          </form><br>
+          <button class="success-bg btn-block log" (click)="openSm(content)" mat-raised-button >{{'Add' | translate}}</button>
+</div>
+</div>
+          <ng-template #content let-modal>
+            <div role="document">
+            <div class="modal-header">
+              <h4 class="modal-title" style="text-align: center;">{{'Add' | translate}}</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-            </ng-template>
-           
-    <br><br>
-        </section>
-        <section class="col-md-9 first scroll">
-            <table class="table table-hover" >
-                <thead>
-                  <tr>
-                    <th scope="col">{{'Locationid' | translate}}</th>
-                    <th scope="col">{{'locationname' | translate}}</th>
-                    <th scope="col">{{'site' | translate}}</th>
-                    <th scope="col">{{'storemode' | translate}}</th>
-                    <th scope="col">{{'active' | translate}}</th>
-                    <th scope="col">{{'createdt' | translate}}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let location of locations">
-                    <th scope="row">{{location.Location_ID}}</th>
-                    <td>{{location.Location_Name}}</td>
-                    <td>{{location.Site_Name}}</td>
-                    <td>{{location.StoreMode_Name}}</td>
-                    <td>{{location.Active}}</td>
-                    <td>{{location.CreateDT}}</td>
+            <form #addform="ngForm" (ngSubmit)="Add(addform.value)">
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'id' | translate}}"  readonly name="addid"  [(ngModel)]="addid">
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'fname' | translate}}"  name="addname"  [(ngModel)]="addname">
+                  </mat-form-field>
+                </section>
+              </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field>
+                    <mat-select placeholder="{{'site' | translate}}" name="centers" [(ngModel)]="selectedcenter">
+                      <mat-option *ngFor="let center of centers" [value]="center.ID" >{{center.Name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field>
+                    <mat-select placeholder="{{'active' | translate}}" name="storeactive" [(ngModel)]="storeactive">
+                      <mat-option value="yes">{{'yes' | translate}}</mat-option>
+                      <mat-option value="no">{{'no' | translate}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </section>
+              </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field>
+                    <mat-select placeholder="{{'storemode' | translate}}" name="stores" [(ngModel)]="selectedstore">
+                      <mat-option *ngFor="let store of stores" [value]="store.ID" >{{store.Name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </section>
+             
+              </section>
+      
+            <div class="modal-footer">
+              <button class="btn btn-primary" >{{'save' | translate}}</button>
+            </div>
+            </form>
+          </div>
+          </ng-template>
+         
+  <br><br>
+      </section>
+      <section class="col-md-9 first">
+        <div class=" example-container">
+        <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
+      
+          <ng-container matColumnDef="Location_ID">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'Locationid' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.Location_ID}} </td>
+          </ng-container>
+        
+          <!-- Name Column -->
+          <ng-container matColumnDef="Location_Name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'locationname' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.Location_Name}} </td>
+          </ng-container>
 
-                  </tr>
-                </tbody>
-              </table>
-        </section>
-    </section>
+          <ng-container matColumnDef="Site_Name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'site' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.Site_Name}} </td>
+          </ng-container>
+
+           <!-- Name Column -->
+           <!-- <ng-container matColumnDef="StoreMode_Name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'storemode' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.StoreMode_Name}} </td>
+          </ng-container>
+ -->
+          <ng-container matColumnDef="Active">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'active' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.Active}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="CreateDT">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'createdt' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.CreateDT}} </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
+        </div>
+        <!-- <div class="card">
+          <div class="card-body ">
+          <table class="table table-hover" >
+              <thead>
+                <tr>
+                  <th scope="col">{{'Locationid' | translate}}</th>
+                  <th scope="col">{{'locationname' | translate}}</th>
+                  <th scope="col">{{'site' | translate}}</th>
+                  <th scope="col">{{'storemode' | translate}}</th>
+                  <th scope="col">{{'' | translate}}</th>
+                  <th scope="col">{{'createdt' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let location of locations">
+                  <th scope="row">{{location.Location_ID}}</th>
+                  <td>{{location.Location_Name}}</td>
+                  <td>{{location.Site_Name}}</td>
+                  <td>{{location.StoreMode_Name}}</td>
+                  <td>{{location.Active}}</td>
+                  <td>{{location.CreateDT}}</td>
+
+                </tr>
+              </tbody>
+            </table>
+            </div>
+            </div> -->
+      </section>
+  </section>
 </section>
 
 

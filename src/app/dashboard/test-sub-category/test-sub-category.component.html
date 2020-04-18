@@ -1,7 +1,9 @@
 <section class="container-fluide">
   <h2 class="">{{'tsubcategory' | translate}}</h2><br>
   <section class="row">
-      <section class="col-md-3 dash">
+      <section class="col-md-3">
+        <div class="card">
+          <div class="card-body">
           <form class="search-form" #form="ngForm" (ngSubmit)="Sub(form.value)">
        
             <mat-form-field class="example-full-width">
@@ -10,7 +12,8 @@
             <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
           </form><br>
             <button class="success-bg btn-block log" (click)="openSm(content)" mat-raised-button >{{'Add' | translate}}</button>
-
+</div>
+</div>
          
             <ng-template #content let-modal>
               <div role="document">
@@ -22,31 +25,33 @@
               </div>
               <form #addform="ngForm" (ngSubmit)="addSubCategory(addform.value)">
               <div class="modal-body ">
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label">{{'id' | translate}}</label>
-                  <div class="col-sm-8">
-                    <input class="form-control" readonly name="subid" required [(ngModel)]="subid">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label">{{'name' | translate}}</label>
-                  <div class="col-sm-8">
-                    <input class="form-control" placeholder="Enter Name" name="subname2" required [(ngModel)]="subname2">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label">{{'printas' | translate}}</label>
-                  <div class="col-sm-8">
-                    <input  class="form-control" placeholder="Enter The Way" name="subprint" required [(ngModel)]="subprint">
-                  </div>
-                </div>
+                <section class="row">
+                  <section class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="{{'id' | translate}}" readonly name="subid" [(ngModel)]="subid">
+                    </mat-form-field>
+                  </section>
+                  <section class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="{{'name' | translate}}"  name="subname2"  [(ngModel)]="subname2">
+                    </mat-form-field>
+                  </section>
 
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label">{{'printorder' | translate}}</label>
-                  <div class="col-sm-8">
-                    <input  class="form-control" placeholder="Enter The Way" name="suborder" required [(ngModel)]="suborder">
-                  </div>
-                </div>
+                </section>
+                <section class="row">
+                  <section class="col-md-6">
+                 
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'printas' | translate}}"  name="subprint"  [(ngModel)]="subprint">
+            </mat-form-field>
+                  </section>
+                  <section class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="{{'printorder' | translate}}"  name="suborder"  [(ngModel)]="suborder">
+                    </mat-form-field>
+                  </section>
+
+                </section>
               </div>
               <div class="modal-footer">
                 <button class="btn btn-primary" >{{'save' | translate}}</button>
@@ -60,7 +65,9 @@
 
   <br><br>
       </section>
-      <section class="col-md-9 first scroll">
+      <section class="col-md-9">
+        <!-- <div class="card">
+          <div class="card-body ">
           <table class="table table-hover" >
               <thead>
                 <tr>
@@ -78,6 +85,39 @@
                 </tr>
               </tbody>
             </table>
+            </div>
+            </div> -->
+            <div class="mt-3 example-container">
+              <!-- <mat-form-field class="ml-3">
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+              </mat-form-field> -->
+            <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
+            
+              <ng-container matColumnDef="ID">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'testid' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
+              </ng-container>
+            
+              <!-- Name Column -->
+              <ng-container matColumnDef="Name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'testname' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+              </ng-container>
+            
+            
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="CreateDT">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'createdt' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.CreateDT}} </td>
+              </ng-container>
+            
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
+            </div><br><br>
       </section>
   </section>
 </section>

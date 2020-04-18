@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'app/service/auth-service/auth.service';
 import { PageTitleService } from 'app/core/page-title/page-title.service';
 import { ToolbarService } from '@syncfusion/ej2-angular-documenteditor';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 
 @Component({
@@ -14,6 +15,12 @@ import { ToolbarService } from '@syncfusion/ej2-angular-documenteditor';
 export class ExplanatoryComponent implements OnInit {
   public serviceLink: string;
 
+  
+  dataSource: MatTableDataSource<unknown>;
+  displayedColumns: string[] = [ 'VisitId' ,'SampleId', 'Name','Progress'];
+  
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   efrom = '';
   eto = '';
@@ -150,6 +157,9 @@ export class ExplanatoryComponent implements OnInit {
     }
     this.authService.Explanatory(value).then(
       responseexplandata => {this.Explanatory = responseexplandata;
+        this.dataSource = new MatTableDataSource(responseexplandata);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
        console.log( this.Explanatory );
     });
   }

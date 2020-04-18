@@ -1,7 +1,9 @@
 <section class="container-fluide">
   <h2 class="">{{'rfield' | translate}}</h2><br>
   <section class="row">
-      <section class="col-md-3  dash">
+      <section class="col-md-3 ">
+        <div class="card">
+          <div class="card-body">
           <form class="search-form" #form="ngForm" (ngSubmit)="Result(form.value)">
        
             <mat-form-field class="example-full-width">
@@ -10,12 +12,34 @@
             <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
           </form><br>
             <button class="success-bg btn-block addd"(click)="openDialog()" mat-raised-button >{{'Add' | translate}}</button>
-
-         
+</div>
+</div>         
   <br><br>
       </section>
-      <section class="col-md-9 first">
-        <section class="scroll one">
+      <section class="col-md-9 ">
+        <div class=" example-container one">
+        <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
+        
+          <ng-container matColumnDef="ID">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'resultid' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
+          </ng-container>
+        
+          <!-- Name Column -->
+          <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'resultname' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
+        </div>
+        <!-- <section class="scroll one">
+        <div class="card">
+          <div class="card-body">
+
           <table class="table table-hover" >
               <thead>
                 <tr>
@@ -32,7 +56,10 @@
                 </tr>
               </tbody>
             </table>
-          </section>
+    
+          </div>
+          </div>
+        </section> -->
           <section class="second">
             <h4>{{'resultfield' | translate}}  </h4>
             
@@ -117,7 +144,7 @@
                   </section>
                   <section class="col-md-6">
                     <mat-form-field class="full-wid mrgn-b-md">
-                      <mat-select placeholder="Branch" name="center" required [(ngModel)]="resultbranch">
+                      <mat-select placeholder="{{'branch' | translate}}" name="center" required [(ngModel)]="resultbranch">
                             <mat-option *ngFor="let center of centers " [value]="center.id">{{center.name}}</mat-option>
                       </mat-select>
                       </mat-form-field>
@@ -166,6 +193,9 @@
             </section>
               </section>
             </section><br>
+            <div class="card">
+              <div class="card-body">
+            
             <section class="scroll ">
               <table class="table table-hover" >
                   <thead>
@@ -192,6 +222,8 @@
                   </tbody>
                 </table>
               </section>
+            </div>
+          </div>
           </section>
           
       </section>

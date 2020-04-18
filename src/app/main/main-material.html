@@ -20,12 +20,7 @@
                <mat-icon>account_circle</mat-icon>
             </div>
          </button>
-         <!-- <button (click)="end.toggle()" mat-icon-button class="overflow-visible">
-            <mat-icon>notifications</mat-icon>
-         </button> -->
-         <!-- <button mat-icon-button class="overflow-visible" [matMenuTriggerFor]="appsmenu">
-            <mat-icon>apps</mat-icon>
-         </button> -->
+      
          <ms-language-drop-down></ms-language-drop-down>
       </div>
    </mat-toolbar>
@@ -105,7 +100,7 @@
       </div>
    </div>
 </mat-sidenav-container>
-<div class="gene-customizer">
+<!-- <div class="gene-customizer">
    <button class="customizer-toggle" (click)="customizerFunction()">
       <mat-icon class="fa-spin">settings</mat-icon>
    </button>
@@ -133,7 +128,7 @@
       
       </mat-card-content>
    </div>
-</div>
+</div> -->
 <div class="gene-chat-wrap" id ="gene-chat">
    <mat-card class="people-list">
       <mat-tab-group class="height-full">
@@ -297,18 +292,18 @@
 </div>
 </div>
 <mat-menu class="user-menu" x-position="before" y-position="below" #menu="matMenu">
-   <button mat-menu-item>
-      <mat-icon>account_circle</mat-icon>
-      <span>{{'Profile'|translate}}</span>
-   </button>
-   <button mat-menu-item>
-      <mat-icon>settings</mat-icon>
-      <span>{{'Settings'|translate}}</span>
-   </button>
-   <button mat-menu-item>
-      <mat-icon>help</mat-icon>
-      <span>{{'Help'|translate}}</span>
-   </button>
+      <!-- <button mat-menu-item>
+         <mat-icon>account_circle</mat-icon>
+         <span>{{'Profile'|translate}}</span>
+      </button>
+      <button mat-menu-item>
+         <mat-icon>settings</mat-icon>
+         <span>{{'Settings'|translate}}</span>
+      </button>
+      <button mat-menu-item>
+         <mat-icon>help</mat-icon>
+         <span>{{'Help'|translate}}</span>
+      </button> -->
    <mat-divider></mat-divider>
    <button (click)="logOut()" mat-menu-item>
       <mat-icon>exit_to_app</mat-icon>

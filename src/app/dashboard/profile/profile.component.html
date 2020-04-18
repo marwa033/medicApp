@@ -1,7 +1,9 @@
 <section class="container-fluide">
   <h2 class="">{{'profile' | translate}}</h2><br>
   <section class="row">
-      <div class="col-md-3 dash">
+      <div class="col-md-3">
+        <div class="card">
+          <div class="card-body ">
           <form class="search-form" #form="ngForm" (ngSubmit)="Profile(form.value)">
        
             <mat-form-field class="example-full-width">
@@ -22,7 +24,8 @@
           <button class="success-bg btn-block "(click)="openSm(content)" mat-raised-button >{{'Add' | translate}}</button>           
           <button class="success-bg btn-block addd" mat-raised-button >{{'Add' | translate}}</button>            
         </div>
-         
+         </div>
+         </div>
           <ng-template #content let-modal>
             <div role="document">
             <div class="modal-header">
@@ -32,48 +35,49 @@
               </button>
             </div>
             <form #addform="ngForm" (ngSubmit)="addProfile(addform.value)">
-            <div class="modal-body ">
-              <section class="row justify-content-center">
-                <section class="col-md-5 mt-2">
-                  
-              <div class="form-group row">
-                <label>{{'id' | translate}}</label>
-                  <input class="form-control" readonly name="idprofile" required [(ngModel)]="idprofile">
-              </div>
-              <div class="form-group row">
-                <label>{{'cpt' | translate}}</label>
-                  <input class="form-control"  name="cptprofile" required [(ngModel)]="cptprofile">
-              </div>
-              <div class="form-group row">
-                <label>{{'name' | translate}}</label>
-                  <input class="form-control" placeholder="Enter Name" name="nameprofile" required [(ngModel)]="nameprofile">
-                </div>
-            </section>
-            <section class="col-md-5 ml-3">
-                <div class="form-group row">
-                  <label class="col-form-label">{{'gender' | translate}}</label>
-                    <select class="form-control" name="genderprofile" [(ngModel)]="genderprofile">
-                      <option >{{'all' | translate}}</option>
-                      <option >{{'yes' | translate}}</option>
-                      <option >{{'no' | translate}}</option>
-                    </select>
-                   </div>
-              <div class="form-group row">
-                <label class="col-form-label">{{'active' | translate}}</label>
-                  <select class="form-control" name="activeprofile" [(ngModel)]="activeprofile">
-                    <!-- <option >{{'all' | translate}}</option> -->
-                    <option >{{'yes' | translate}}</option>
-                    <option >{{'no' | translate}}</option>
-                  </select>
-                 </div>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'id' | translate}}" readonly name="idprofile"  [(ngModel)]="idprofile">
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'cpt' | translate}}"  name="cptprofile"  [(ngModel)]="cptprofile">
+                  </mat-form-field>
+                </section>
+              </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'name' | translate}}" name="nameprofile"  [(ngModel)]="nameprofile">
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <mat-select placeholder="{{'gender' | translate}}"  name="genderprofile" [(ngModel)]="selectedgender">
+                      <mat-option *ngFor="let gender of genderprofile" [value]="gender.ID" >{{gender.Name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </section>
+              </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'printas' | translate}}" name="printprofile"  [(ngModel)]="printprofile">
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <mat-select placeholder="{{'active' | translate}}"  name="activeprofile" [(ngModel)]="selectedactive">
+                      <mat-option >{{'no' | translate}}</mat-option>
+                      <mat-option >{{'yes' | translate}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </section>
+              </section>
           
-              <div class="form-group row">
-                <label>{{'printas' | translate}}</label>
-                  <input  class="form-control" placeholder="Enter the way to print" name="printprofile" required [(ngModel)]="printprofile">
-              </div>
-            </section>
-            </section>
-            </div>
+     
             <div class="modal-footer">
               <button class="btn btn-primary" >{{'save' | translate}}</button>
             </div>
@@ -85,7 +89,45 @@
   <br><br>
       
       <section class="col-md-9 first ">
-        <section class="scroll one">
+        <div class=" example-container one">
+        <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
+        
+          <ng-container matColumnDef="ID">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'profileid' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
+          </ng-container>
+        
+          <!-- Name Column -->
+          <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'profilename' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="HIS_Code">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'cpt' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.HIS_Code}} </td>
+          </ng-container>
+        
+          <!-- Name Column -->
+          <ng-container matColumnDef="Active">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'active' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.Active}} </td>
+          </ng-container>
+          
+          <!-- Name Column -->
+          <ng-container matColumnDef="CreateDT">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'createdt' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.CreateDT}} </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
+        </div>
+        <!-- <section class="scroll one">
+          <div class="card">
+            <div class="card-body ">
           <table class="table table-hover" >
               <thead>
                 <tr>
@@ -107,9 +149,11 @@
                 </tr>
               </tbody>
             </table>
-          </section>
+            </div>
+            </div>
+          </section> -->
           <section class="second">
-            <form #addform="ngForm" (ngSubmit)="addProfile(addform.value)">
+            <form #addform="ngForm" (ngSubmit)="addProfile(addform.value)"><br>
             <h4>{{'profiledetials' | translate}}</h4>
             <section class="row">
               <section class="col-md-6">
@@ -159,7 +203,11 @@
         </form> <br>
         
         <section class="row">
-          <section class="col-md-6 scroll">
+          <section class="col-md-6 ">
+            <section class="scroll">
+              <div class="card">
+                <div class="card-body">
+              
               <table class="table table-hover" >
                   <thead>
                     <tr>
@@ -175,8 +223,14 @@
                     </tr>
                   </tbody>
                 </table>
+              </div>
+            </div>
+              </section>
           </section>
-          <section class="col-md-6 scroll">
+          <section class="col-md-6 ">
+            <section class="scroll">
+              <div class="card">
+                <div class="card-body">
             <table class="table table-hover" >
                 <thead>
                   <tr>
@@ -192,6 +246,9 @@
                   </tr>
                 </tbody>
               </table>
+              </div>
+              </div>
+              </section>
         </section>
         </section>
         </section>

@@ -1,0 +1,11 @@
+<div class="sample_container badge-list">
+  <ejs-listview id='lists' [dataSource]='dataSource' [fields]='fields' headerTitle='Inbox' [showHeader]='true'>
+      <ng-template #template let-dataSource="">
+          <div class="listWrapper" style="width: inherit;height: inherit;">
+              <span class="{{dataSource.icons}} list_svg">&nbsp;</span>
+              <span class="list_text">{{dataSource.text}} </span>
+              <span class="{{dataSource.badge}}" >{{dataSource.messages}}</span>
+          </div>
+      </ng-template>
+  </ejs-listview>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { PriceInvoiceComponent } from '../price-invoice/price-invoice.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -6,6 +6,13 @@ import { AuthService } from 'app/service/auth-service/auth.service';
 import { PageTitleService } from 'app/core/page-title/page-title.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
+import { MatTableDataSource } from '@angular/material';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+
+import { data } from 'jquery';
+// import { BsModalService, BsModalRef } from '@bit/valor-software.ngx-bootstrap.modal';
+
 
 
 @Component({
@@ -25,6 +32,12 @@ export class TestCategoryComponent implements OnInit {
   //  all: '0' '1'
 arr: [0, 1];
   public categories: Observable<any>;
+  dataSource: MatTableDataSource<unknown>;
+displayedColumns: string[] = ['ID', 'Name', 'Active', 'CreateDT'];
+
+@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+@ViewChild(MatSort, {static: true}) sort: MatSort;
+
 
   constructor(public translate: TranslateService,
     public authService: AuthService,
@@ -53,27 +66,24 @@ Category(value) {
 
   this.authService.TestCategory(value).then(
     responsecategorydata => {this.categories = responsecategorydata;
+      this.dataSource = new MatTableDataSource(responsecategorydata);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+
      console.log( this.categories );
   });
 }
-
+applyFilter(event: Event) {
+  const filterValue = (event.target as HTMLInputElement).value;
+  this.dataSource.filter = filterValue.trim().toLowerCase();
+}
  addTestCategory(value) {
   this.authService.addCategory(value);
   console.log(this.testname2);
  }
 
   ngOnInit() {
-    // const inputElement: HTMLInputElement = document.getElementById('i1') as HTMLInputElement
-    // const name: string = inputElement.value
 
-    // const name = (document.getElementById('i1')).value
-    // const active = document.getElementById('i2');
-    // if (name == "")
-    // {
-    //   this.testname = "%";
-    // }else{
-    //   this.testname = name;
-    // }
   }
 
 }

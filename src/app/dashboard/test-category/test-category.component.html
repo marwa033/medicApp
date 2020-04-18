@@ -5,7 +5,9 @@
 <section class="container-fluide">
   <h2 class="">{{'tcategory' | translate}}</h2><br>
   <section class="row">
-      <section class="col-md-3 dash">
+      <section class="col-md-3">
+        <div class="card mt-3">
+          <div class="card-body">
           <form class="search-form" #form="ngForm" (ngSubmit)="Category(form.value)">
        
             <mat-form-field class="example-full-width">
@@ -31,36 +33,37 @@
                 </button>
               </div>
               <form #addform="ngForm" (ngSubmit)="addTestCategory(addform.value)">
-              <div class="modal-body ">
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label">{{'id' | translate}}</label>
-                  <div class="col-sm-8">
-                    <input class="form-control" readonly name="testid" required [(ngModel)]="testid">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label">{{'name' | translate}}</label>
-                  <div class="col-sm-8">
-                    <input class="form-control" placeholder="Enter Name" name="testname2" required [(ngModel)]="testname2">
-                  </div>
-                </div>
-                
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label">{{'printas' | translate}}</label>
-                  <div class="col-sm-8">
-                    <input  class="form-control" placeholder="Enter The Way" name="testprint" required [(ngModel)]="testprint">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label">{{'active' | translate}}</label>
-                  <div class="col-sm-8">
-                    <select class="form-control" name="active2" [(ngModel)]="active2" >
-                      <!-- <option name="all">{{'all' | translate}}</option> -->
-                      <option value='1'>{{'yes' | translate}}</option>
-                      <option value='0'>{{'no' | translate}}</option>
-                    </select>
-                   </div>
-                </div>
+              <div class="modal-body ">            
+                    <section class="row ml-3">
+                      <section class="col-md-6">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="{{'id' | translate}}" readonly name="testid" [(ngModel)]="testid">
+                        </mat-form-field>
+                      </section>
+                      <section class="col-md-6">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="{{'name' | translate}}"  name="testname2"  [(ngModel)]="testname2">
+                        </mat-form-field>
+                      </section>
+
+                    </section>
+                    <section class="row ml-3">
+                      <section class="col-md-6">
+                     
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="{{'printas' | translate}}"  name="testprint"  [(ngModel)]="testprint">
+                </mat-form-field>
+                      </section>
+                      <section class="col-md-6">
+                        <mat-form-field>
+                          <mat-select placeholder="{{'active' | translate}}" id="i2" name="active2" required [(ngModel)]="active2">
+                            <mat-option value="1">{{'yes' | translate}}</mat-option>
+                            <mat-option value="0">{{'no' | translate}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </section>
+
+                    </section>
               </div>
 
               <div class="modal-footer">
@@ -69,10 +72,14 @@
               </form>
             </div>
             </ng-template>
-         
+         </div>
+         </div>
   <br><br>
       </section>
-      <section class="col-md-9 first scroll">
+ 
+      <section class="col-md-9 ">
+        <!-- <div class="">
+          <div class=" tableFixHead">
           <table class="table table-hover " >
               <thead>
                 <tr>
@@ -82,9 +89,9 @@
                   <th scope="col">{{'createdt' | translate}}</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody class="card-body">
                 <tr *ngFor="let category of categories">
-                  <th scope="row">{{category.ID}}</th>
+                  <td >{{category.ID}}</td>
                   <td>{{category.Name}}</td>
                   <td>{{category.Active}}</td>
                   <td>{{category.CreateDT}}</td>
@@ -92,11 +99,92 @@
                 </tr>
               </tbody>
             </table>
+       
+          </div>
+        </div> -->
+        <div class="mt-3 example-container">
+         
+        <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
+        
+          <ng-container matColumnDef="ID">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'testid' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
+          </ng-container>
+        
+          <!-- Name Column -->
+          <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'testname' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+          </ng-container>
+        
+          <!-- Weight Column -->
+          <ng-container matColumnDef="Active">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'active' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.Active}} </td>
+          </ng-container>
+        
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="CreateDT">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'createdt' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.CreateDT}} </td>
+          </ng-container>
+          <!-- <ng-container matColumnDef="symbol">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'actions' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> 
+              <mat-icon style="color: dodgerblue;"> edit</mat-icon>
+              <mat-icon matTooltip="My tooltip">delete</mat-icon>
+            </td>
+          </ng-container> -->
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
+        </div><br><br>
       </section>
+      
+  </section>
+</section> 
+<section class="row">
+  <section class="col-md-3"></section>
+  <section class="col-md-9">
+    <!-- <div >
+      <mat-form-field class="ml-3">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+      </mat-form-field>
+    <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
+    
+      <ng-container matColumnDef="ID">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'testid' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
+      </ng-container>
+    
+      
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'testname' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+      </ng-container>
+    
+
+      <ng-container matColumnDef="Active">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'active' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.Active}} </td>
+      </ng-container>
+    
+
+      <ng-container matColumnDef="CreateDT">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'createdt' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.CreateDT}} </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
+    </div><br><br> -->
   </section>
 </section>
-
-
 
 
 

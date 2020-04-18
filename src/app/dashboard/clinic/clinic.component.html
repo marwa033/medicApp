@@ -1,7 +1,9 @@
 <section class="container-fluide">
   <h2 class="">{{'clinic' | translate}}</h2><br>
   <section class="row">
-      <section class="col-md-3 dash">
+      <section class="col-md-3 ">
+        <div class="card">
+          <div class="card-body">
           <form class="search-form" #form="ngForm" (ngSubmit)="Clinic(form.value)">
        
             <mat-form-field class="example-full-width">
@@ -17,7 +19,8 @@
             <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
           </form><br>
           <button class="success-bg btn-block log"(click)="openSm(content)" mat-raised-button >{{'Add' | translate}}</button>
-          
+          </div>
+          </div>
           <ng-template #content let-modal>
             <div role="document">
             <div class="modal-header">
@@ -27,65 +30,98 @@
               </button>
             </div>
             <form #addform="ngForm" (ngSubmit)="addClinic(addform.value)">
-            <div class="modal-body ">
-              <section class="row justify-content-center">
-                <section class="col-md-5">
-                  
-              <div class="form-group row">
-                <label>{{'id' | translate}}</label>
-                  <input class="form-control" readonly name="clinicid" required [(ngModel)]="clinicid">
-            
-              </div>
-              <div class="form-group row">
-                <label>{{'name' | translate}}</label>
-                  <input class="form-control" placeholder="Enter Name" name="clinicname" required [(ngModel)]="clinicname">
-                </div>
-            
-              <div class="form-group row">
-                <label>{{'docincharge' | translate}}</label>
-                  <input  class="form-control" placeholder="Enter Doctor Incharge" name="clinicincharge" required [(ngModel)]="clinicincharge">
-                </div>
-              
-              <div class="form-group row">
-                <label>{{'phone' | translate}}</label>
-                  <input  class="form-control" placeholder="Enter The Phone" name="clinicphone" required [(ngModel)]="clinicphone">
-              </div>
-              <div class="form-group row">
-                <label>{{'fax' | translate}}</label>
-                  <input  class="form-control" placeholder="Enter Fax" name="clinicfax" required [(ngModel)]="clinicfax">
-              </div>
-              <div class="form-group row">
-                <label>{{'email' | translate}}</label>
-                  <input  class="form-control" placeholder="example@example.com" name="clinicemail" required [(ngModel)]="clinicemail">
-              </div>
-            </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'id' | translate}}"  readonly name="clinicid"  [(ngModel)]="clinicid">
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'name' | translate}}"  name="clinicname"  [(ngModel)]="clinicname">
+                  </mat-form-field>
+                </section>
+              </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'phone' | translate}}"   name="clinicphone"  [(ngModel)]="clinicphone">
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'docincharge' | translate}}"  name="clinicincharge"  [(ngModel)]="clinicincharge">
+                  </mat-form-field>
+                </section>
+              </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'email' | translate}}"   name="clinicemail"  [(ngModel)]="clinicemail">
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'weblogin' | translate}}"  name="clinicweblogin"  [(ngModel)]="clinicweblogin">
+                  </mat-form-field>
+                </section>
+              </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'fax' | translate}}"   name="clinicfax"  [(ngModel)]="clinicfax">
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <!-- <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'webpass | translate}}"  name="clinicwebpassword"  [(ngModel)]="clinicwebpassword">
+                  </mat-form-field> -->
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'webpass' | translate}}"   name="clinicwebpassword"  [(ngModel)]="clinicwebpassword">
+                  </mat-form-field>
+                </section>
+              </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field>
+                    <mat-select placeholder="{{'speciailty' | translate}}"  name="clinicspeciality" [(ngModel)]="selectedclinicspeciality">
+                      <mat-option *ngFor="let speciality of clinicspeciality" [value]="speciality.ID">{{speciality.Name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field>
+                    <mat-select placeholder="{{'priority' | translate}}" name="clinicpriority" [(ngModel)]="selectedclinicpriority">
+                      <mat-option *ngFor="let priority of clinicpriority" [value]="priority.ID">{{priority.Name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </section>
+              </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field>
+                    <mat-select placeholder="{{'active' | translate}}"  name="clinicactive2" [(ngModel)]="clinicactive2">
+                      <mat-option value="1">{{'yes' | translate}}</mat-option>
+                      <mat-option value="0">{{'no' | translate}}</mat-option>         
+                    </mat-select>
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <textarea matInput placeholder="{{'address' | translate}}" name="clinicaddress"  [(ngModel)]="clinicaddress"></textarea>
+                  </mat-form-field>
+                </section>
+              </section>
+            <!-- <div class="modal-body ">
+  
             <section class="col-md-5 ml-3">
               <div class="form-group row">
                 <label>{{'address' | translate}}</label>
-                  <textarea class="form-control" rows="1" name="clinicaddress" required [(ngModel)]="clinicaddress"></textarea>
+                  <textarea class="form-control" rows="1" name="clinicaddress"  [(ngModel)]="clinicaddress"></textarea>
               </div>
-              <!-- <div class="form-group row">
-                <label class="col-form-label">{{'speciailty' | translate}}</label>
-                  <select class="form-control" name="clinicspeciality" [(ngModel)]="clinicspeciality">
-                    <option >{{'all' | translate}}</option>
-                    <option >{{'yes' | translate}}</option>
-                    <option >{{'no' | translate}}</option>
-                  </select>
-                 </div> -->
-                 <div class="form-group row">
-                  <label class="col-form-label">{{'speciailty' | translate}}</label>
-                    <select class="form-control" name="clinicspeciality" [(ngModel)]="clinicspeciality">
-                      <option *ngFor="let speciality of clinicspeciality" [value]="speciality.ID">{{speciality.Name}}</option>
-                    </select>
+            
                    </div>
-              <!-- <div class="form-group row">
-                <label class="col-form-label">{{'priority' | translate}}</label>
-                  <select class="form-control" name="clinicpriority" [(ngModel)]="clinicpriority">
-                    <option >{{'all' | translate}}</option>
-                    <option >{{'yes' | translate}}</option>
-                    <option >{{'no' | translate}}</option>
-                  </select>
-                 </div> -->
+         
                  <div class="form-group row">
                   <label class="col-form-label">{{'priority' | translate}}</label>
                     <select class="form-control" name="clinicpriority" [(ngModel)]="clinicpriority">
@@ -95,22 +131,14 @@
               <div class="form-group row">
                 <label class="col-form-label">{{'active' | translate}}</label>
                   <select class="form-control" name="clinicactive2" [(ngModel)]="clinicactive2">
-                    <!-- <option >{{'all' | translate}}</option> -->
                     <option >{{'yes' | translate}}</option>
                     <option >{{'no' | translate}}</option>
                   </select>
                  </div>
-              <div class="form-group row">
-                <label>{{'weblogin' | translate}}</label>
-                  <input  class="form-control" placeholder="Enter login ID" name="clinicweblogin" required [(ngModel)]="clinicweblogin">
-              </div>
-              <div class="form-group row">
-                <label>{{'webpass' | translate}}</label>
-                  <input  class="form-control" placeholder="" name="clinicwebpassword" required [(ngModel)]="clinicwebpassword">
-              </div>
+        
             </section>
           </section>
-            </div>
+            </div>  -->
             <div class="modal-footer">
               <button class="btn btn-primary" >{{'save' | translate}}</button>
             </div>
@@ -121,7 +149,55 @@
          
   <br><br>
       </section>
-      <section class="col-md-9 first scroll">
+      <section class="col-md-9 first">
+        <div class=" example-container">
+          <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
+          
+            <ng-container matColumnDef="ID">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'clinicid' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
+            </ng-container>
+          
+  
+            <ng-container matColumnDef="Name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'clinicname' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="SpecialityID">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'speciality' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.SpecialityID}} </td>
+            </ng-container>
+         
+            <ng-container matColumnDef="PriorityID">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'priority' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.PriorityID}} </td>
+            </ng-container>
+          
+  
+            <ng-container matColumnDef="WebUID">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'webloginid' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.WebUID}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="WebPass">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'webpassword' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.WebPass}} </td>
+            </ng-container>
+            
+            
+            <ng-container matColumnDef="CreateDT">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'createdt' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.CreateDT}} </td>
+            </ng-container>
+                    
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
+          </div>
+        <!-- <div class="card">
+          <div class="card-body ">
           <table class="table table-hover" >
               <thead>
                 <tr>
@@ -146,6 +222,8 @@
                 </tr>
               </tbody>
             </table>
+            </div>
+            </div> -->
       </section>
   </section>
 </section>

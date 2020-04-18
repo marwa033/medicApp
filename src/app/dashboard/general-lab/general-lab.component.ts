@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'app/service/auth-service/auth.service';
 import { PageTitleService } from 'app/core/page-title/page-title.service';
 import * as $ from 'jquery';
 import { Observable } from 'rxjs';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 
 @Component({
@@ -39,7 +40,16 @@ export class GeneralLabComponent implements OnInit {
   selectedmaxstatus: any;
   selectedpriority: any;
   
-
+  dataSource: MatTableDataSource<unknown>;
+  displayedColumns: string[] = [ 'VisitId' ,'SampleId', 'Name','Progress'];
+    
+  data: MatTableDataSource<unknown>;
+  displayedColumn: string[] = ['TestName','ResultFieldName', 'Name' ,'HLN', 'Unit','Low',
+  'High' ,'PrintRange', 'Remark','UserUID',
+  'SampleId' ,'InstrumentName', 'InstrumentResult','PreviousResult'];
+  
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(public translate: TranslateService,
     public authService: AuthService,
@@ -143,16 +153,22 @@ General(value) {
   } 
   this.authService.GeneralLab(value).then(
     responsegeneraldata => {this.labs = responsegeneraldata;
+      this.dataSource = new MatTableDataSource(responsegeneraldata);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
      console.log( this.labs );
   });
 }
-async selectCompany(item) {
+async selectCompany(element) {
   console.log("****************************");
-  this.visit = item.VisitId;
-  this.pname = item.Name;
+  this.visit = element.VisitId;
+  this.pname = element.Name;
 
-  var obj = await this.authService.GeneralDetials(item).then(
+  var obj = await this.authService.GeneralDetials(element).then(
     responsegeneraldetialsdata => {this.detials = responsegeneraldetialsdata;
+      this.data = new MatTableDataSource(responsegeneraldetialsdata);
+      this.data.paginator = this.paginator;
+      this.data.sort = this.sort;
    console.log( this.detials );
   });
 }

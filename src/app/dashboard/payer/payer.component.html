@@ -1,7 +1,9 @@
 <section class="container-fluide">
   <h2 class="">{{'payer' | translate}}</h2><br>
   <section class="row">
-      <section class="col-md-3  dash">
+      <section class="col-md-3">
+        <div class="card">
+          <div class="card-body ">
           <form class="search-form" #form="ngForm" (ngSubmit)="Payer(form.value)">
        
             <mat-form-field class="example-full-width">
@@ -22,7 +24,9 @@
             <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
           </form><br>
           <button class="success-bg btn-block log"(click)="openSm(content)" mat-raised-button >{{'Add' | translate}}</button>
+          </div>
           
+          </div>
           <ng-template #content let-modal>
             <div role="document">
             <div class="modal-header">
@@ -32,61 +36,99 @@
               </button>
             </div>
             <form #addform="ngForm" (ngSubmit)="addPayer(addform.value)">
-            <div class="modal-body ">
-              <section class="row justify-content-center">
-                <section class="col-md-5">
-                  
-              <div class="form-group row">
-                <label>{{'id' | translate}}</label>
-                  <input class="form-control" readonly name="payerid" required [(ngModel)]="payerid">
-            
-              </div>
-              <div class="form-group row">
-                <label>{{'name' | translate}}</label>
-                  <input class="form-control" placeholder="Enter Name" name="payername" required [(ngModel)]="payername">
-                </div>
-            
-                <!-- <div class="form-group row">
-                  <label class="col-form-label">{{'pricelist' | translate}}</label>
-                    <select class="form-control" name="payerpricelist" [(ngModel)]="payerpricelist">
-                      <option >{{'all' | translate}}</option>
-                      <option >{{'yes' | translate}}</option>
-                      <option >{{'no' | translate}}</option>
-                    </select>
-                   </div> -->
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'id' | translate}}" readonly name="payerid"  [(ngModel)]="payerid">
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'name' | translate}}"  name="payername"  [(ngModel)]="payername">
+                  </mat-form-field>
+                </section>
+              </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'currency' | translate}}" name="payercurrency"  [(ngModel)]="payercurrency">
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'dicount' | translate}}"  name="payerdiscount"  [(ngModel)]="payerdiscount">
+                  </mat-form-field>
+                </section>
+              </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'weblogin' | translate}}" name="payerweblogin"  [(ngModel)]="payerweblogin">
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'webpass' | translate}}"  name="payerwebpassword"  [(ngModel)]="payerwebpassword">
+                  </mat-form-field>
+                </section>
+              </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'allowdiscount' | translate}}" name="payerallow"  [(ngModel)]="payerallow">
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'advancedamt' | translate}}"  name="payeradvanced"  [(ngModel)]="payeradvanced">
+                  </mat-form-field>
+                </section>
+              </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field>
+                    <mat-select placeholder="{{'category' | translate}}"  name="payercategory" [(ngModel)]="selectedcategory">
+                      <mat-option *ngFor="let categories of payercategory" [value]="categories.ID" >{{categories.Name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field>
+                    <mat-select placeholder="{{'pricelist' | translate}}"  name="payerpricelist" [(ngModel)]="selectedprice">
+                      <mat-option  *ngFor="let price of payerpricelist" [value]="price.ID">{{price.Name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </section>
+              </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field>
+                    <mat-select placeholder="{{'active' | translate}}"  name="payeractive" [(ngModel)]="payeractive">
+                      <mat-option value="1">{{'yes' | translate}}</mat-option>
+                      <mat-option value="0">{{'no' | translate}}</mat-option>         
+                    </mat-select>
+                  </mat-form-field>
+                </section>
+               
+              </section>
+            <!-- 
+             
                    <div class="form-group row">
                     <label class="col-form-label ">{{'pricelist' | translate}}</label>
                      <select class="form-control" name="payerpricelist" [(ngModel)]="payerpricelist">
                         <option *ngFor="let price of payerpricelist" [value]="price.ID">{{price.Name}}</option>
                       </select>
                       </div>
-              
-              <div class="form-group row">
-                <label>{{'currency' | translate}}</label>
-                  <input  class="form-control" placeholder="Enter Currency" name="payercurrency" required [(ngModel)]="payercurrency">
-              </div>
-              <div class="form-group row">
-                <label>{{'dicount' | translate}}</label>
-                  <input  class="form-control" placeholder="Enter Dicount" name="payerdiscount" required [(ngModel)]="payerdiscount">
-              </div>
+  
               <div class="form-group row">
                 <label class="col-form-label">{{'active' | translate}}</label>
                   <select class="form-control" name="payeractive" [(ngModel)]="payeractive">
-                    <!-- <option >{{'all' | translate}}</option> -->
                     <option >{{'yes' | translate}}</option>
                     <option >{{'no' | translate}}</option>
                   </select>
                  </div>
             </section>
             <section class="col-md-5 ml-3">
-              <!-- <div class="form-group row">
-                <label class="col-form-label">{{'category' | translate}}</label>
-                  <select class="form-control" name="payercategory" [(ngModel)]="payercategory">
-                    <option >{{'all' | translate}}</option>
-                    <option >{{'yes' | translate}}</option>
-                    <option >{{'no' | translate}}</option>
-                  </select>
-                 </div> -->
                  <div class="form-group row">
                   <label class="col-form-label ">{{'category' | translate}}</label>
                    <select class="form-control" name="payercategory" [(ngModel)]="payercategory">
@@ -96,23 +138,23 @@
                    
               <div class="form-group row">
                 <label>{{'weblogin' | translate}}</label>
-                  <input  class="form-control" placeholder="Enter login ID" name="payerweblogin" required [(ngModel)]="payerweblogin">
+                  <input  class="form-control" placeholder="Enter login ID" name="payerweblogin"  [(ngModel)]="payerweblogin">
               </div>
               <div class="form-group row">
                 <label>{{'webpass' | translate}}</label>
-                  <input  class="form-control" placeholder="" name="payerwebpassword" required [(ngModel)]="payerwebpassword">
+                  <input  class="form-control" placeholder="" name="payerwebpassword"  [(ngModel)]="payerwebpassword">
               </div>
               <div class="form-group row">
                 <label>{{'allowdiscount' | translate}}</label>
-                  <input  class="form-control" placeholder="Enter dicount" name="payerallow" required [(ngModel)]="payerallow">
+                  <input  class="form-control" placeholder="Enter dicount" name="payerallow"  [(ngModel)]="payerallow">
               </div>
               <div class="form-group row">
                 <label>{{'advancedamt' | translate}}</label>
-                  <input  class="form-control" placeholder="" name="payeradvanced" required [(ngModel)]="payeradvanced">
+                  <input  class="form-control" placeholder="" name="payeradvanced"  [(ngModel)]="payeradvanced">
               </div>
             </section>
           </section>
-            </div>
+            </div> -->
             <div class="modal-footer">
               <button class="btn btn-primary" >{{'save' | translate}}</button>
             </div>
@@ -124,6 +166,72 @@
   <br><br>
       </section>
       <section class="col-md-9 first scroll">
+        <div class="example-container">
+          <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
+        
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="PayerID">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'payerid' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.PayerID}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="payerName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'payername' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.payerName}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="CategoryName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'category' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.CategoryName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="GrossPriceList">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'gross' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.GrossPriceList}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="Discount">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'discount' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.Discount}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="currency">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'currency' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.currency}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Active">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'active' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.Active}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="Web_User">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'webloginid' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.Web_User}} </td>
+            </ng-container>
+                 <!-- Name Column -->
+                 <ng-container matColumnDef="Web_Password">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'webloginname' | translate}} </th>
+                  <td mat-cell *matCellDef="let element"> {{element.Web_Password}} </td>
+                </ng-container>
+
+                     <!-- Name Column -->
+            <ng-container matColumnDef="CreateDT">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'createdt' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.CreateDT}} </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
+          </div>
+        <!-- <div class="card">
+          <div class="card-body">
           <table class="table table-hover" >
               <thead>
                 <tr>
@@ -154,6 +262,8 @@
                 </tr>
               </tbody>
             </table>
+            </div>
+            </div> -->
       </section>
   </section>
 </section>

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'app/service/auth-service/auth.service';
 import { PageTitleService } from 'app/core/page-title/page-title.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'ms-sample-type',
@@ -22,6 +23,11 @@ export class SampleTypeComponent implements OnInit {
   
   // samples: any
   public samples: Observable<any>;
+  dataSource: MatTableDataSource<unknown>;
+  displayedColumns: string[] = ['SampleType_Name', 'SampleType_ID', 'Container_Name', 'SampleType_CreateDT'];
+  
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
 
   constructor(public translate: TranslateService,
@@ -64,6 +70,9 @@ if (value.container == undefined || value.container =='') {
 
   this.authService.SampleType(value).then(
     responsesampledata => {this.samples = responsesampledata;
+      this.dataSource = new MatTableDataSource(responsesampledata);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
      console.log( this.samples );
   });
 }

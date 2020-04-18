@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'app/service/auth-service/auth.service';
 import { PageTitleService } from 'app/core/page-title/page-title.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
+import { MatTableDataSource } from '@angular/material';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'ms-test-sub-category',
@@ -18,7 +21,11 @@ export class TestSubCategoryComponent implements OnInit {
   subprint = '';
   suborder = '';
   public subcategories: Observable<any>;
+  dataSource: MatTableDataSource<unknown>;
+displayedColumns: string[] = ['ID', 'Name', 'CreateDT'];
 
+@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+@ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(public translate: TranslateService,
     public authService: AuthService,
@@ -27,13 +34,6 @@ export class TestSubCategoryComponent implements OnInit {
     config.backdrop = 'static';
     config.keyboard = false; }
 
-//    Sub(value) {
-//     this.authService.SubCategory(value);
-
-//     this.subcategories = this.authService.SubCategoryResult;
-//     console.log( 'results is :  ' + this.subcategories);
-//     console.log(  this.subcategories);
-//  }
 
 Sub(value) {
   if (value.subname == undefined || value.subname == '') {
@@ -41,6 +41,9 @@ Sub(value) {
   }
   this.authService.SubCategory(value).then(
     responsesubcategorydata => {this.subcategories = responsesubcategorydata;
+      this.dataSource = new MatTableDataSource(responsesubcategorydata);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
      console.log( this.subcategories );
   });
 }

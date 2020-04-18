@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'app/service/auth-service/auth.service';
 import { PageTitleService } from 'app/core/page-title/page-title.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'ms-purchaseorder',
@@ -20,6 +21,11 @@ export class PurchaseorderComponent implements OnInit {
   status: any;
   poid: any;
   
+  dataSource: MatTableDataSource<unknown>;
+  displayedColumns: string[] = ['Name', 'ID' ,'statusName' , 'Total' , 'CreateDT' , 'CreateUID' , 'ModifyDT' , 'ModifyUID'];
+  
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(public translate: TranslateService,
     public authService: AuthService,
@@ -70,6 +76,9 @@ export class PurchaseorderComponent implements OnInit {
       // console.log(  this.orders);
       this.authService.PurchaseOrder(value).then(
         responsepayerdata => {this.orders = responsepayerdata;
+          this.dataSource = new MatTableDataSource(responsepayerdata);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
          console.log( this.orders );
       });
    }

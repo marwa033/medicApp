@@ -1,180 +1,301 @@
 <section class="container-fluide">
-    <h2 class="">{{'item' | translate}}</h2><br>
-    <section class="row">
-        <section class="col-md-3  dash">
-            <form class="search-form" #form="ngForm" (ngSubmit)="Item(form.value)">
-         
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="{{'name' | translate}}" name="nameitem" required [(ngModel)]="nameitem">
-              </mat-form-field><br>
-              <mat-form-field>
-                <mat-select placeholder="{{'active' | translate}}" name="activeitem" required [(ngModel)]="activeitem">
-                  <mat-option value="3">{{'all' | translate}}</mat-option>
-                  <mat-option value="1">{{'yes' | translate}}</mat-option>
-                  <mat-option value="0">{{'no' | translate}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-              <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
-            </form><br>
-            <button class="success-bg btn-block log"(click)="openSm(content)" mat-raised-button >{{'Add' | translate}}</button>
-            
-            <ng-template #content let-modal>
-              <div role="document">
-              <div class="modal-header">
-                <h4 class="modal-title" style="text-align: center;">{{'Add' | translate}}</h4>
-                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <form #addform="ngForm" (ngSubmit)="AddSupply(addform.value)">
-              <div class="modal-body ">
-                <section class="row justify-content-center">
-                  <section class="col-md-5">
-                    
-                <div class="form-group row">
-                  <label>{{'id' | translate}}</label>
-                    <input class="form-control" readonly name="id" required [(ngModel)]="id">
-                </div>
-                <div class="form-group row">
-                  <label>{{'name' | translate}}</label>
-                    <input class="form-control" placeholder="Enter name" name="addname" required [(ngModel)]="addname">
-                  </div>
-              
-                <div class="form-group row">
-                  <label>{{'description' | translate}}</label>
-                    <textarea  class="form-control" row="2" name="description" required [(ngModel)]="description">
-                 </textarea>
-                    </div>
-              
-                <div class="form-group row">
-                  <label>{{'refno' | translate}}</label>
-                    <input  class="form-control" placeholder="Enter short name" name="refno" required [(ngModel)]="refno">
-                </div>
-
-                <div class="form-group row">
-                  <label class="col-form-label">{{'defaultsupplier' | translate}}</label>
-                    <select class="form-control" name="supplier" [(ngModel)]="supplier">
-                      <option *ngFor="let currency of currencies" [value]="currency.ID">{{currency.Name}}</option>
-                    </select>
-                   </div>
-                   <div class="form-group row">
-                    <label>{{'listprice' | translate}}</label>
-                      <input  class="form-control" placeholder="Enter short name" name="listprice" required [(ngModel)]="listprice">
-                  </div>
-                     <div class="form-group row">
-                      <label class="col-form-label">{{'active' | translate}}</label>
-                        <select class="form-control" name="supplyactive" [(ngModel)]="supplyactive">
-                          <option >{{'all' | translate}}</option>
-                          <option >{{'yes' | translate}}</option>
-                          <option >{{'no' | translate}}</option>
-                        </select>
-                       </div>
-                    
+  <h2 class="">{{'item' | translate}}</h2><br>
+  <section class="row">
+      <section class="col-md-3">
+        <div class="card">
+          <div class="card-body">
+          <form class="search-form" #form="ngForm" (ngSubmit)="Item(form.value)">
+       
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'name' | translate}}" name="nameitem" required [(ngModel)]="nameitem">
+            </mat-form-field><br>
+            <mat-form-field>
+              <mat-select placeholder="{{'active' | translate}}" name="activeitem" required [(ngModel)]="activeitem">
+                <mat-option value="3">{{'all' | translate}}</mat-option>
+                <mat-option value="1">{{'yes' | translate}}</mat-option>
+                <mat-option value="0">{{'no' | translate}}</mat-option>
+              </mat-select>
+            </mat-form-field><br>
+            <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
+          </form><br>
+          <button class="success-bg btn-block log"(click)="openSm(content)" mat-raised-button >{{'Add' | translate}}</button>
+          </div>
+          </div>
+          <ng-template #content let-modal>
+            <div role="document">
+            <div class="modal-header">
+              <h4 class="modal-title" style="text-align: center;">{{'Add' | translate}}</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form #addform="ngForm" (ngSubmit)="AddSupply(addform.value)">
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'id' | translate}}"  readonly name="id"  [(ngModel)]="id">
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'name' | translate}}" name="addname"  [(ngModel)]="addname">
+                  </mat-form-field>
+                </section>
               </section>
-              <section class="col-md-6 ml-2">
-                <div class="form-group">
-                  <label>{{'packsize' | translate}}</label>
-                  <div class="row">
-                    <input class="form-control col-md-4" placeholder="Enter short name" name="packsize" required [(ngModel)]="packsize">
-               <div class="col-md-8">
-                <select class="form-control" name="primary" [(ngModel)]="primary">
-                  <option>{{'box' | translate}}</option>
-                  <option>{{'kit' | translate}}</option>
-                  <option>{{'l' | translate}}</option>
-                  <option>{{'ml' | translate}}</option>
-                  <option>{{'test' | translate}}</option>
-                </select>
-               </div>
-               </div>
-              </div>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'listprice' | translate}}"  name="listprice"  [(ngModel)]="listprice">
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'refno' | translate}}" name="refno"  [(ngModel)]="refno">
+                  </mat-form-field>
+                </section>
+              </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field>
+                    <mat-select placeholder="{{'defaultsupplier' | translate}}"  name="supplier" [(ngModel)]="selectedaddsupplier">
+                      <mat-option *ngFor="let supply of supplier" [value]="supply.ID">{{supply.Name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field>
+                    <mat-select placeholder="{{'active' | translate}}"  name="supplyactive" [(ngModel)]="supplyactive">
+                      <mat-option value="yes">{{'yes' | translate}}</mat-option>
+                      <mat-option value="no">{{'no' | translate}}</mat-option>
 
-              <div class="form-group">
-                <label>{{'factor' | translate}}</label>
-                <div class="row">
-                  <input class="form-control col-md-4" placeholder="Enter short name" name="factor" required [(ngModel)]="factor">
-             <div class="col-md-8">
-              <select class="form-control" name="secondry" [(ngModel)]="secondry">
-                <option>{{'box' | translate}}</option>
-                <option>{{'kit' | translate}}</option>
-                <option>{{'l' | translate}}</option>
-                <option>{{'ml' | translate}}</option>
-                <option>{{'test' | translate}}</option>
-              </select>
-             </div>
-             </div>
-            </div>
+                    </mat-select>
+                  </mat-form-field>
+                </section>
+              </section>
+              <section class="row ml-3 ">
+                <section class="col-md-6">
+                  <section class="row">
+                    <section class="col-md-6"></section>
+                  </section>
+                  <mat-form-field class="example-full-width " >
+                    <input matInput placeholder="{{'packsize' | translate}}"  name="packsize"  [(ngModel)]="packsize">
+                  </mat-form-field>
+                  <mat-form-field >
+                    <mat-select placeholder="{{'primary' | translate}}"  name="primary" [(ngModel)]="primary">
+                      <mat-option value="box">{{'box' | translate}}</mat-option>
+                      <mat-option value="kit">{{'kit' | translate}}</mat-option>
+                      <mat-option value="l">{{'l' | translate}}</mat-option>
+                      <mat-option value="ml">{{'ml' | translate}}</mat-option>
+                      <mat-option value="test">{{'test' | translate}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'factor' | translate}}" name="factor"  [(ngModel)]="factor">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-select placeholder="{{'secondry' | translate}}"  name="secondry" [(ngModel)]="secondry">
+                      <mat-option value="box">{{'box' | translate}}</mat-option>
+                      <mat-option value="kit">{{'kit' | translate}}</mat-option>
+                      <mat-option value="l">{{'l' | translate}}</mat-option>
+                      <mat-option value="ml">{{'ml' | translate}}</mat-option>
+                      <mat-option value="test">{{'test' | translate}}</mat-option>
+                      
+                    </mat-select>
+                  </mat-form-field>
+                </section>
+              </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <!-- <mat-form-field>
+                    <mat-select placeholder="{{'primary' | translate}}"  name="primary" [(ngModel)]="primary">
+                      <mat-option value="box">{{'box' | translate}}</mat-option>
+                      <mat-option value="kit">{{'kit' | translate}}</mat-option>
+                      <mat-option value="l">{{'l' | translate}}</mat-option>
+                      <mat-option value="ml">{{'ml' | translate}}</mat-option>
+                      <mat-option value="test">{{'test' | translate}}</mat-option>
+                    </mat-select>
+                  </mat-form-field> -->
+                </section>
+                <section class="col-md-6">
+                  <!-- <mat-form-field>
+                    <mat-select placeholder="{{'secondry' | translate}}"  name="secondry" [(ngModel)]="secondry">
+                      <mat-option value="box">{{'box' | translate}}</mat-option>
+                      <mat-option value="kit">{{'kit' | translate}}</mat-option>
+                      <mat-option value="l">{{'l' | translate}}</mat-option>
+                      <mat-option value="ml">{{'ml' | translate}}</mat-option>
+                      <mat-option value="test">{{'test' | translate}}</mat-option>
+                      
+                    </mat-select>
+                  </mat-form-field> -->
+                </section>
+              </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'minlevel' | translate}}"  name="minlevel"  [(ngModel)]="minlevel">
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'securitylevel' | translate}}" name="securitylevel"  [(ngModel)]="securitylevel">
+                  </mat-form-field>
+                </section>
+              </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'description' | translate}}"  name="description"  [(ngModel)]="description">
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'openbalance' | translate}}" name="openbalance" readonly  [(ngModel)]="openbalance">
+                  </mat-form-field>
+                </section>
+              </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <div class="custom-control custom-radio">
+                    <input type="radio" class="custom-control-input walk" id="customRadio" name="walkin" value="customEx">
+                    <label class="custom-control-label custom" for="customRadio">{{'expiration' | translate}}</label>
+                  </div>
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'days' | translate}}"  name="days"  [(ngModel)]="days">
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <div class="custom-control custom-radio">
+                    <input type="radio" class="custom-control-input walk" id="customRadio" name="walkin" value="customEx">
+                    <label class="custom-control-label custom" for="customRadio">{{'lot' | translate}}</label>
+                  </div>
+                </section>
+              </section>
 
-            <div class="form-group row">
-              <label>{{'openbalance' | translate}}</label>
-                <input class="form-control" readonly name="openbalance" required [(ngModel)]="openbalance">
-            </div>
 
-            <div class="form-group row">
-              <label>{{'minlevel' | translate}}</label>
-                <input class="form-control"  name="minlevel" required [(ngModel)]="minlevel">
-            </div>
-            
-            <div class="form-group row">
-              <label>{{'securitylevel' | translate}}</label>
-                <input class="form-control"  name="securitylevel" required [(ngModel)]="securitylevel">
-            </div>
-
-            <div class="custom-control custom-radio ">
-              <div class="col-md-7">
-              <input type="radio" class="custom-control-input " id="customRadio" name="lot" value="customEx">
-              <label class="custom-control-label " for="customRadio">{{'expiration' | translate}}</label>
-            </div>
-              <div class="col-md-4">
-              <input class="form-control "  name="days" required [(ngModel)]="days">
-            </div>
-          </div>
-          <div class="custom-control custom-radio ">
-            <input type="radio" class="custom-control-input " id="customRadio" name="lot" value="customlot">
-            <label class="custom-control-label " for="customRadio">{{'lot' | translate}}</label>
-          </div>
-            </section>
-            </section>
-              </div>
-              <div class="modal-footer">
-                <button class="btn btn-primary" >{{'save' | translate}}</button>
-              </div>
-              </form>
+         
+            <!-- <div class="modal-body ">
           
+              <div class="form-group row">
+                <label>{{'description' | translate}}</label>
+                  <textarea  class="form-control" row="2" name="description" required [(ngModel)]="description">
+               </textarea>
+                  </div>
+     
+
+          <div class="form-group row">
+            <label>{{'openbalance' | translate}}</label>
+              <input class="form-control" readonly name="openbalance" required [(ngModel)]="openbalance">
+          </div>
+
+
+          <div class="custom-control custom-radio ">
+            <div class="col-md-7">
+            <input type="radio" class="custom-control-input " id="customRadio" name="lot" value="customEx">
+            <label class="custom-control-label " for="customRadio">{{'expiration' | translate}}</label>
+          </div>
+            <div class="col-md-4">
+            <input class="form-control "  name="days" required [(ngModel)]="days">
+          </div>
+        </div>
+        <div class="custom-control custom-radio ">
+          <input type="radio" class="custom-control-input " id="customRadio" name="lot" value="customlot">
+          <label class="custom-control-label " for="customRadio">{{'lot' | translate}}</label>
+        </div>
+          </section>
+          </section>
+            </div> -->
+            <div class="modal-footer">
+              <button class="btn btn-primary" >{{'save' | translate}}</button>
             </div>
-            </ng-template>
-           
-           
+            </form>
+        
+          </div>
+          </ng-template>
+         
+         
 
 
-    <br><br>
-        </section>
-        <section class="col-md-9 first scroll">
-            <table class="table table-hover" >
-                <thead>
-                  <tr>
-                    <th scope="col">{{'itemid' | translate}}</th>
-                    <th scope="col">{{'itmenname' | translate}}</th>
-                    <th scope="col">{{'refrenceNo' | translate}}</th>
-                    <th scope="col">{{'price' | translate}}</th>
-                    <th scope="col">{{'packsize' | translate}}</th>
-                    <th scope="col">{{'active' | translate}}</th>
-                    <th scope="col">{{'createdt' | translate}}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of items">
-                    <th scope="row">{{item.ID}}</th>
-                    <td>{{item.Name}}</td>
-                    <td>{{item.ReferenceNo}}</td>
-                    <td>{{item.Price}}</td>
-                    <td>{{item.PackSize}}</td>
-                    <td>{{item.Active}}</td>
-                    <td>{{item.CreateDT}}</td>
-                  </tr>
-                </tbody>
-              </table>
-        </section>
-    </section>
+  <br><br>
+      </section>
+      <section class="col-md-9 first">
+        <div class=" example-container">
+        <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
+      
+          <ng-container matColumnDef="ID">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'itemid' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
+          </ng-container>
+        
+          <!-- Name Column -->
+          <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'itmenname' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="ReferenceNo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'refrenceNo' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.ReferenceNo}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Price">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'price' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.Price}} </td>
+          </ng-container>
+        
+          <!-- Name Column -->
+          <ng-container matColumnDef="PackSize">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'packsize' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.PackSize}} </td>
+          </ng-container>
+          
+          <!-- Name Column -->
+          <ng-container matColumnDef="Active">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'active' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.Active}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="CreateDT">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'createdt' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.CreateDT}} </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
+        </div>
+        <!-- <div class="card">
+          <div class="card-body ">
+          <table class="table table-hover" >
+              <thead>
+                <tr>
+                  <th scope="col">{{'itemid' | translate}}</th>
+                  <th scope="col">{{'itmenname' | translate}}</th>
+                  <th scope="col">{{'refrenceNo' | translate}}</th>
+                  <th scope="col">{{'price' | translate}}</th>
+                  <th scope="col">{{'packsize' | translate}}</th>
+                  <th scope="col">{{'active' | translate}}</th>
+                  <th scope="col">{{'createdt' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of items">
+                  <th scope="row">{{item.ID}}</th>
+                  <td>{{item.Name}}</td>
+                  <td>{{item.ReferenceNo}}</td>
+                  <td>{{item.Price}}</td>
+                  <td>{{item.PackSize}}</td>
+                  <td>{{item.Active}}</td>
+                  <td>{{item.CreateDT}}</td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+            </div> -->
+      </section>
+  </section>
 </section>
 
 

@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'app/service/auth-service/auth.service';
 import { PageTitleService } from 'app/core/page-title/page-title.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
+import { MatTableDataSource } from '@angular/material';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'ms-uom',
@@ -19,6 +22,11 @@ export class UomComponent implements OnInit {
   addid = '';
   addname = '';
   addactive = '';
+  dataSource: MatTableDataSource<unknown>;
+  displayedColumns: string[] = ['ID', 'Name', 'Active', 'CreateDT'];
+  
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(public translate: TranslateService,
     public authService: AuthService,
@@ -47,6 +55,9 @@ UOM(value) {
 
   this.authService.InventryUOM(value).then(
     responseuomdata => {this.tries = responseuomdata;
+      this.dataSource = new MatTableDataSource(responseuomdata);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
      console.log( this.tries );
   });
 }

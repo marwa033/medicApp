@@ -2,10 +2,30 @@
 .dash{
     border-right: 2px solid red;
 }
+
 table{
-    background-color: white;
-    // position: relative;
-    // bottom:50px
+    transition: none !important;
+    box-shadow: none !important;
+}
+.example-container{
+    overflow: auto;
+}
+
+.mat-header-cell{
+    color: rgb(158, 155, 155);
+    font-weight: normal;
+}
+.mat-header-cell, .mat-cell {
+    min-width: 130px;
+    word-wrap: break-word;
+}
+
+.try{
+    min-width: 60px;
+
+}
+.pointer{
+    cursor: pointer;
 }
 .two{
     display: none;
@@ -13,7 +33,7 @@ table{
 .scroll{
     overflow-y: auto;
     // padding-bottom: 200px;
-    height: 500px;
+    height: 300px;
 }
 .container-fluide{
     padding: 20px;

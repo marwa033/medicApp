@@ -3,7 +3,8 @@
     border-right: 2px solid red;
 }
 table{
-    background-color: white;
+    transition: none !important;
+    box-shadow: none !important;
 }
 h1{
     text-align: center;
@@ -16,6 +17,10 @@ h1{
     overflow-y: auto;
     // padding-bottom: 200px;
     height: 300px;
+}
+.mat-header-cell{
+    color: rgb(158, 155, 155);
+    font-weight: normal;
 }
 h2,h4{
     font-size: larger;

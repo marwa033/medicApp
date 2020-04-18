@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'app/service/auth-service/auth.service';
 import { PageTitleService } from 'app/core/page-title/page-title.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'ms-profile',
@@ -28,6 +29,14 @@ export class ProfileComponent implements OnInit {
   printas: any;
   gender: any;
   active: any;
+  selectedgender: any;
+  selectedactive: any;
+
+  dataSource: MatTableDataSource<unknown>;
+  displayedColumns: string[] = [ 'ID', 'Name' , 'HIS_Code' , 'Active' , 'CreateDT' ];
+  
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(public translate: TranslateService,
     public authService: AuthService,
@@ -62,6 +71,9 @@ if (value.pactive == undefined || value.pactive =='') {
 
   this.authService.ConfigProfile(value).then(
     responseprofiledata => {this.profiles = responseprofiledata;
+      this.dataSource = new MatTableDataSource(responseprofiledata);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
      console.log( this.profiles );
   });
 }

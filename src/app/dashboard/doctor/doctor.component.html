@@ -1,7 +1,9 @@
 <section class="container-fluide">
   <h2 class="">{{'doctor' | translate}}</h2><br>
   <section class="row">
-      <section class="col-md-3  dash">
+      <section class="col-md-3 ">
+        <div class="card">
+          <div class="card-body">
           <form class="search-form" #form="ngForm" (ngSubmit)="Doctor(form.value)">
        
             <mat-form-field class="example-full-width">
@@ -17,7 +19,8 @@
             <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
           </form><br>
           <button class="success-bg btn-block log"(click)="openSm(content)" mat-raised-button >{{'Add' | translate}}</button>
-          
+          </div>
+          </div>
           <ng-template #content let-modal>
             <div role="document">
             <div class="modal-header">
@@ -27,55 +30,78 @@
               </button>
             </div>
             <form #addform="ngForm" (ngSubmit)="addDoctor(addform.value)">
-            <div class="modal-body ">
-              <section class="row justify-content-center">
-                <section class="col-md-5">
-                  
-              <div class="form-group row">
-                <label>{{'id' | translate}}</label>
-                  <input class="form-control" readonly name="doctorid" required [(ngModel)]="doctorid">
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'id' | translate}}"  readonly name="doctorid"  [(ngModel)]="doctorid">
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'fname' | translate}}"  name="firstname"  [(ngModel)]="firstname">
+                  </mat-form-field>
+                </section>
+              </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'mname' | translate}}"  name="middlename"  [(ngModel)]="middlename">
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'lname' | translate}}"  name="lastname"  [(ngModel)]="lastname">
+                  </mat-form-field>
+                </section>
+              </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'phone' | translate}}"  name="phone"  [(ngModel)]="phone">
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'weblogin' | translate}}"  name="weblogin"  [(ngModel)]="weblogin">
+                  </mat-form-field>
+                </section>
+              </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="{{'webpass' | translate}}"  name="webpassword"  [(ngModel)]="webpassword">
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <textarea matInput placeholder="{{'address' | translate}}" name="address"  [(ngModel)]="address"></textarea>
+                  </mat-form-field>
+                </section>
+              </section>
+              <section class="row ml-3">
+                <section class="col-md-6">
+                  <mat-form-field>
+                    <mat-select placeholder="{{'speciailty' | translate}}"  name="doctorspeciality" [(ngModel)]="doctorspecialityy">
+                      <mat-option *ngFor="let speciality of doctorspeciality" [value]="speciality.ID">{{speciality.Name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                  <mat-form-field>
+                    <mat-select placeholder="{{'active' | translate}}" name="doctoractive" [(ngModel)]="doctoractive">
+                      <mat-option value="yes">{{'yes' | translate}}</mat-option>
+                      <mat-option value="no">{{'no' | translate}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </section>
+              </section>
+            <!--                   
             
-              </div>
-              <div class="form-group row">
-                <label>{{'fname' | translate}}</label>
-                  <input class="form-control" placeholder="Enter First Name" name="firstname" required [(ngModel)]="firstname">
-                </div>
-            
-              <div class="form-group row">
-                <label>{{'mname' | translate}}</label>
-                  <input  class="form-control" placeholder="Enter The Middle Name" name="middlename" required [(ngModel)]="middlename">
-                </div>
-              
-              <div class="form-group row">
-                <label>{{'lname' | translate}}</label>
-                  <input  class="form-control" placeholder="Enter Last Name" name="lastname" required [(ngModel)]="lastname">
-              </div>
-              <div class="form-group row">
-                <label>{{'fax' | translate}}</label>
-                  <input  class="form-control" placeholder="Enter Fax" name="fax" required [(ngModel)]="fax">
-              </div>
-              <div class="form-group row">
-                <label>{{'email' | translate}}</label>
-                  <input  class="form-control" placeholder="example@example.com" name="email" required [(ngModel)]="email">
-              </div>
-            </section>
             <section class="col-md-5 ml-3">
               <div class="form-group row">
                 <label>{{'address' | translate}}</label>
-                  <textarea class="form-control" rows="1" name="address" required [(ngModel)]="address"></textarea>
-              </div>
-              <div class="form-group row">
-                <label>{{'phone' | translate}}</label>
-                  <input  class="form-control" placeholder="Enter Phone Number" name="phone" required [(ngModel)]="phone">
-              </div>
-              <!-- <div class="form-group row">
-                <label class="col-form-label">{{'speciality' | translate}}</label>
-                  <select class="form-control" name="doctorspeciality" [(ngModel)]="doctorspeciality">
-                    <option >{{'all' | translate}}</option>
-                    <option >{{'yes' | translate}}</option>
-                    <option >{{'no' | translate}}</option>
-                  </select>
-                 </div> -->
+                  <textarea class="form-control" rows="1" name="address"  [(ngModel)]="address"></textarea>
+ 
                  <div class="form-group row">
                   <label class="col-form-label">{{'speciailty' | translate}}</label>
                     <select class="form-control" name="doctorspeciality" [(ngModel)]="doctorspeciality">
@@ -90,17 +116,14 @@
                     <option >{{'no' | translate}}</option>
                   </select>
                  </div>
-              <div class="form-group row">
-                <label>{{'weblogin' | translate}}</label>
-                  <input  class="form-control" placeholder="Enter login ID" name="weblogin" required [(ngModel)]="weblogin">
-              </div>
+         
               <div class="form-group row">
                 <label>{{'webpass' | translate}}</label>
                   <input  class="form-control" placeholder="" name="webpassword" required [(ngModel)]="webpassword">
               </div>
             </section>
           </section>
-            </div>
+            </div> -->
             <div class="modal-footer">
               <button class="btn btn-primary" >{{'save' | translate}}</button>
             </div>
@@ -111,7 +134,56 @@
          
   <br><br>
       </section>
-      <section class="col-md-9 first scroll">
+      <section class="col-md-9 first ">
+        <div class=" example-container">
+        <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
+        
+          <ng-container matColumnDef="ID">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'doctorid' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
+          </ng-container>
+        
+          <!-- Name Column -->
+          <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'doctorname' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="SpecialityID">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'speciality' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.SpecialityID}} </td>
+          </ng-container>
+          
+          <!-- Name Column -->
+          <ng-container matColumnDef="Active">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'active' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.Active}} </td>
+          </ng-container>
+                  
+          <!-- Name Column -->
+          <ng-container matColumnDef="WebUID">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'webloginid' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.WebUID}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="WebPass">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'webpassword' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.WebPass}} </td>
+          </ng-container>
+          
+          <!-- Name Column -->
+          <ng-container matColumnDef="CreateDT">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'createdt' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.CreateDT}} </td>
+          </ng-container>
+          
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
+        </div>
+        <!-- <div class="card">
+          <div class="card-body ">
           <table class="table table-hover" >
               <thead>
                 <tr>
@@ -136,6 +208,8 @@
                 </tr>
               </tbody>
             </table>
+            </div>
+            </div> -->
       </section>
   </section>
 </section>

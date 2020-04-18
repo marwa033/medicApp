@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'app/service/auth-service/auth.service';
 import { PageTitleService } from 'app/core/page-title/page-title.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'ms-speciality',
@@ -17,6 +18,11 @@ export class SpecialityComponent implements OnInit {
   namess = '';
   // specialities: any;
   public specialities: Observable<any>;
+  dataSource: MatTableDataSource<unknown>;
+  displayedColumns: string[] = ['ID', 'Name', 'CreateDT'];
+  
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(public translate: TranslateService,
     public authService: AuthService,
@@ -45,6 +51,9 @@ Speciality(value) {
 
   this.authService.ReferralSpeciality(value).then(
     responsespecialitydata => {this.specialities = responsespecialitydata;
+      this.dataSource = new MatTableDataSource(responsespecialitydata);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
      console.log( this.specialities );
   });
 }

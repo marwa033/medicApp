@@ -14,7 +14,10 @@ table{
 .container-fluide{
     padding: 20px;
 }
-
+.mat-header-cell{
+    color: rgb(158, 155, 155);
+    font-weight: normal;
+}
 .dropdown {
     position: absolute;
     border: 1px solid grey;

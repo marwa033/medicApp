@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { PageTitleService } from '../../core/page-title/page-title.service';
 import {fadeInAnimation} from '../../core/route-animation/route.animation';
@@ -10,6 +10,7 @@ import { app } from 'firebase';
 // import { fas } from '@fortawesome/free-solid-svg-icons'
 import { Observable } from 'rxjs';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
    selector: 'ms-dashboard',
@@ -51,26 +52,18 @@ export class SaasComponent implements OnInit  {
    state= '';
    city= '';
    detials= '';
-   public data: object[];
-
-   // selectednationality;
-   //  selectedstate;
-   //  selectedBloodGroup;
-   //  selectedcity;
-   // selectedcountry;
-   public UserData: any;
-   // public results: any;
    selectedpatient: any;
    public results: Observable<any>;
    public history: Observable<any>;
+   public acceptance: Observable<any>;
 
-            //                         //   this.results = authService.getsearchResults();
-            //   public RequestOrder = function(value)
-            //    {
-            //       console.log(value);
-            //    }
 
-   public isCollapsed = false;
+   dataSource: MatTableDataSource<unknown>;
+   displayedColumns: string[] = [ 'PatientName', 'Mobile' , 'Phone' ,
+    'Date_Of_Birth' ,'custom_id',  'PatientID' , 'symbol'];
+   
+   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+   // @ViewChild(MatSort, {static: true}) sort: MatSort;
 
 
    constructor(public translate: TranslateService,
@@ -78,8 +71,7 @@ export class SaasComponent implements OnInit  {
               private pageTitleService: PageTitleService ,
                 config: NgbModalConfig,
                  private modalService: NgbModal) {
-               // config.backdrop = 'static';
-               // config.keyboard = false;
+         
                }
                openSm(content) {
                  this.modalService.open(content, { size: 'lg' });
@@ -87,33 +79,26 @@ export class SaasComponent implements OnInit  {
 
 
               async Nationality(value) {
-               // await this.authService.AddNationality(value);
-               // this.nation = this.authService.nationalities.nationalities;
-               // console.log(this.nation);
+
                this.authService.AddNationality(value).then( getNationalrsponse => {
                   this.nation = getNationalrsponse.nationalities;
                });
               }
 
               async BloodGroup(value) {
-               // await this.authService.AddBloodGroup(value);
-               // this.bgroup = this.authService.bloodGroups.bloodGroups;
-               // console.log(this.bgroup);
+             
                this.authService.AddBloodGroup(value).then( getbloodgrouprsponse => {
                   this.bgroup = getbloodgrouprsponse.bloodGroups;
                });
               }
               async Country(value) {
-               // await this.authService.AddCountry(value);
-               // this.country = this.authService.countries.country;
+            
                this.authService.AddCountry(value).then( getcountryrsponse => {
                   this.country = getcountryrsponse.country;
                });
               }
 
               async State(value) {
-               // await this.authService.AddState(value);
-               // this.state = this.authService.states.states;
                this.authService.AddState(value).then( getstatersponse => {
                   this.state = getstatersponse.states;
                });
@@ -122,24 +107,17 @@ export class SaasComponent implements OnInit  {
    
               }
               async Gender(value) {
-               // await this.authService.AddGender(value);
-               // this.gender = this.authService.genders.genders;
                this.authService.AddGender(value).then( getGenderrsponse => {
                   this.gender = getGenderrsponse.genders;
                });
               }
               async City(value) {
-               // await this.authService.AddCity(value);
-               // this.city = this.authService.cities.cities;
                this.authService.AddCity(value).then( getcityrsponse => {
                   this.city = getcityrsponse.cities;
                });
               }
                Add(value) {
-                  // value.gpayer = this.selectednationality;
-
                   this.authService.AddPatient(value);
-                  // console.log(this.selectednationality);
                }
 
                		// Changed for Double click ////
@@ -165,24 +143,18 @@ export class SaasComponent implements OnInit  {
                         if (value.mrn == undefined || value.mrn =='') {
                         value.mrn=' ';
                         }
-                        // this.results=  this.authService.SearchPatient(value);
-                        this.authService.SearchPatient(value).then( responsedata => {
-                           this.results = responsedata;
+                        this.authService.SearchPatient(value).
+                        then( responsedata => { this.results = responsedata;
+                           this.dataSource = new MatTableDataSource(responsedata);
+                           this.dataSource.paginator = this.paginator;
+                           // this.dataSource.sort = this.sort; 
                            console.log( this.results );
                         });
                      }
 
-                  
-   RequestOrder(value) {
-      // this.router.navigate(['/']);
-      console.log('marwaaaaaaaaaaaaaaaaaaa');
-    }
 
-    
-  async selectOne(item) {
-   
-   // var obj = await this.authService.AddTitle(item);
-   // this.title = this.authService.titles.titles;
+
+  async selectOne(item) {   
    var obj = this.authService.AddTitle(item).then( gettitlersponse => {
       this.title = gettitlersponse.titles;
    });
@@ -193,7 +165,9 @@ export class SaasComponent implements OnInit  {
      console.log( this.history );
     });
  }
-
+ toggleSidebar() {
+   this.coreService.sidenavOpen = !this.coreService.sidenavOpen;
+}
    ngOnInit() {
 
 
@@ -205,9 +179,6 @@ export class SaasComponent implements OnInit  {
       this.Title('input');
       this.Gender('input');
 
-
-
-      this.pageTitleService.setTitle('Home');
 
       $(document).ready(function() {
 

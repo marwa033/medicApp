@@ -19,7 +19,7 @@ export class AuthService {
 	userData: any;
    isLoggedIn = false;
    nationalities: any;
-   searchresult: Observable<any>;
+   searchresult: any;
    collectionresult: any;
    AcceptanceResult: any;
    LabResult: any;
@@ -741,29 +741,28 @@ return this.maxstatus;
 async GetCurrency(value) {
   // this.userData = JSON.parse(localStorage.getItem('userProfile'));
 
-  const data = { LabId: 1 };
-const bodyobj = JSON.stringify(data);
-
-const request = new Request(baseURL + 'Currency/get', {
-method: 'POST',
-body: bodyobj
+  const data = { };
+  const bodyobj = JSON.stringify(data);
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'Currency/get', {
+    method: 'POST',
+    body: bodyobj
 });
-request.headers.delete('Content-Type');
+ request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
-
-await fetch( request)
-.then(response => response.json())
-.then(json => this.getcurrancygetrsponse(json))
-.catch(err => {
- this.toastr.error(err.message);
-});
-
+const response = await fetch( request);
+const getcurrancygetrsponse = await response.json();
+this.currency = getcurrancygetrsponse;
+return this.currency;
 }
-getcurrancygetrsponse( resposne) {
-console.log(resposne);
-console.log('from function state');
-this.currency = resposne;
-}
+
+
+// }
+// getcurrancygetrsponse( resposne) {
+// console.log(resposne);
+// console.log('from function state');
+// this.currency = resposne;
+// }
 //////////////////////////
 
 

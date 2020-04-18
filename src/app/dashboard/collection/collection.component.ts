@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'app/service/auth-service/auth.service';
 import { PageTitleService } from 'app/core/page-title/page-title.service';
 import { Observable } from 'rxjs';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'ms-collection',
@@ -24,6 +25,19 @@ export class CollectionComponent implements OnInit {
   UserData: any;
   detials: any;
   public collections: Observable<any>;
+
+  dataSource: MatTableDataSource<unknown>;
+
+  displayedColumns: string[] = [ 'VisitId' , 'date', 'DOB', 'gender_Name' , 'outSideCollectionDT'];
+
+  data: MatTableDataSource<unknown>;
+
+  displayedColumn: string[] = [ 'SampleID', 'TestName' , 'Category', 'ProcCenter', 'ResultDate' , 'StatusName'];
+
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
 
   constructor(public translate: TranslateService,
     public authService: AuthService,
@@ -80,24 +94,24 @@ Collection(value) {
     }
   this.authService.SampleCollection(value).then(
       responsecollectiondata => {this.collections = responsecollectiondata;
+        this.dataSource = new MatTableDataSource(responsecollectiondata);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
      console.log( this.collections );
   });
 }
-// OrderDetials(value) {
-//   this.authService.CollectionDetials(value).then(
-//       responsecollectiondetialsdata => {this.detials = responsecollectiondetialsdata;
-//      console.log( this.detials );
-//   });
-// }
+
 async OrderDetials(value) {
   
 }
 
-  async selectCompany(item) {
-  console.log("****************************");
-
-  var obj = await this.authService.CollectionDetials(item).then(
+async cellClicked(element) {
+  console.log(element.VisitId + ' cell clicked');
+  var obj = await this.authService.CollectionDetials(element).then(
     responsecollectiondetialsdata => {this.detials = responsecollectiondetialsdata;
+      this.data = new MatTableDataSource(responsecollectiondetialsdata);
+      this.data.paginator = this.paginator;
+      this.data.sort = this.sort;
    console.log( this.detials );
   });
 }

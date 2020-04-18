@@ -6,13 +6,24 @@
     overflow-x: auto;
 }
 table{
-    background-color: white;
+    transition: none !important;
+    box-shadow: none !important;
+}
+.example-container{
+    overflow: auto;
+}
+.mat-header-cell, .mat-cell {
+    min-width: 110px;
 }
 h1{
     text-align: center;
 
 }
-h2,h4{
+.mat-header-cell{
+    color: rgb(158, 155, 155);
+    font-weight: normal;
+}
+h2{
     font-size: larger;
     text-align: center;
     }
@@ -29,13 +40,14 @@ h2,h4{
     // padding-bottom: 200px;
     height: 300px;
 }
-h3{
-    text-align: left;
+h5{
+    text-align: center;
     border: 1px solid rgb(3, 6, 41);
     border-radius: 15px;
     padding: 5px;
     width: 27%;
     color:  rgb(3, 6, 41);
+    font-weight: normal;
 }
 i{
 // padding-left: 2px;

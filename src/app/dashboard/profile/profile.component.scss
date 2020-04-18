@@ -3,11 +3,23 @@
     border-right: 2px solid red;
 }
 table{
-    background-color: white;
+    transition: none !important;
+    box-shadow: none !important;
+}
+.example-container{
+    overflow: auto;
+}
+.mat-header-cell, .mat-cell {
+    min-width: 120px;
+    word-wrap: break-word;
 }
 h1{
     text-align: center;
 
+}
+.mat-header-cell{
+    color: rgb(158, 155, 155);
+    font-weight: normal;
 }
 .scroll{
     overflow-y: auto;

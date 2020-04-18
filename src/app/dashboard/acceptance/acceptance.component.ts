@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'app/service/auth-service/auth.service';
 import { PageTitleService } from 'app/core/page-title/page-title.service';
 import { Observable } from 'rxjs';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'ms-acceptance',
@@ -20,6 +21,13 @@ export class AcceptanceComponent implements OnInit {
   sample2= '';
   UserData: any;
   public acceptance: Observable<any>;
+
+  dataSource: MatTableDataSource<unknown>;
+  displayedColumns: string[] = [ 'SampleID', 'Status' , 'RegCenter' , 'PatientName' ,
+   'DateOfBirth' , 'gender_Name' , 'payer'];
+  
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(public translate: TranslateService,
     public authService: AuthService,
@@ -65,6 +73,9 @@ export class AcceptanceComponent implements OnInit {
     // this.acceptance =  this.authService.SampleAcceptance(value);
     this.authService.SampleAcceptance(value).
     then( responseacceptdata => {this.acceptance = responseacceptdata;
+              this.dataSource = new MatTableDataSource(responseacceptdata);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
        console.log( this.acceptance );
     });
  }

@@ -79,6 +79,9 @@ import { PurchaseorderComponent } from './purchaseorder/purchaseorder.component'
 import { ArchivingComponent } from './archiving/archiving.component';
 import { LabInfoComponent } from './lab-info/lab-info.component';
 import { BranchComponent } from './branch/branch.component';
+// import { ModalModule } from '@bit/valor-software.ngx-bootstrap.modal';
+// import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ListViewModule } from '@syncfusion/ej2-angular-lists';
 
 
 @NgModule({
@@ -126,6 +129,8 @@ import { BranchComponent } from './branch/branch.component';
 		BranchComponent
 	],
 	imports: [ GridModule,
+		ListViewModule ,
+		MatTableModule ,
 		ButtonModule,
 		MatDatepickerModule,
 		ChartModule ,

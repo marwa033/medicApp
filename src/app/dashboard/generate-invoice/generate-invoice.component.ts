@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'app/service/auth-service/auth.service';
 import { PageTitleService } from 'app/core/page-title/page-title.service';
 import { Observable } from 'rxjs';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'ms-generate-invoice',
@@ -20,6 +21,11 @@ export class GenerateInvoiceComponent implements OnInit {
   public invoices: Observable<any>;
   public UserData: any;
 
+  dataSource: MatTableDataSource<unknown>;
+  displayedColumns: string[] = [ 'visitID' ,'patient', 'Date','payerName' , 'clinicName' , 'Amount'];
+  
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(public translate: TranslateService,
     public authService: AuthService,
@@ -53,6 +59,9 @@ Generate(value) {
     }
   this.authService.GenerateInvoice(value).then(
       responsecollectiondata => {this.invoices = responsecollectiondata;
+        this.dataSource = new MatTableDataSource(responsecollectiondata);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
      console.log( this.invoices );
   });
 }

@@ -1,7 +1,9 @@
 <section class="container-fluide">
     <h2 class="">{{'archiving' | translate}}</h2><br>
     <section class="row">
-        <section class="col-md-3 dash">
+        <section class="col-md-3 ">
+          <div class="card">
+            <div class="card-body ">
             <form class="search-form" #form="ngForm" (ngSubmit)="Rack(form.value)">
          
               <mat-form-field class="example-full-width">
@@ -19,8 +21,12 @@
               </mat-select>
             </mat-form-field><br>
               <button class="success-bg btn-block log" mat-raised-button >{{'search' | translate}}</button>
-            </form><br>
+            </form>   <br>
             <button class="success-bg btn-block log" (click)="openSm(content)" mat-raised-button >{{'Add' | translate}}</button>
+
+            </div>
+            </div>
+         
 
             <ng-template #content let-modal>
               <div role="document">
@@ -61,6 +67,8 @@
     <br><br>
         </section>
         <section class="col-md-9 first scroll">
+          <div class="card">
+            <div class="card-body ">
             <table class="table table-hover" >
                 <thead>
                   <tr>
@@ -83,6 +91,8 @@
                   </tr>
                 </tbody>
               </table>
+              </div>
+              </div>
         </section>
     </section>
 

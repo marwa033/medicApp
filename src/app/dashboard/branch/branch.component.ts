@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'app/service/auth-service/auth.service';
 import { PageTitleService } from 'app/core/page-title/page-title.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as $ from 'jquery';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'ms-branch',
@@ -31,7 +32,16 @@ export class BranchComponent implements OnInit {
   searchActive: any;
   clinics: any;
   payers: any;
+  selectedactivee: any;
+  selectedcountryy: any;
+  selectedcityy: any;
+  selectedstatee: any;
 
+  dataSource: MatTableDataSource<unknown>;
+  displayedColumns: string[] = [ 'Name', 'Country' , 'State' , 'City' , 'Established' , 'Active' , 'symbol'];
+  
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(public translate: TranslateService,
     public authService: AuthService,
@@ -74,7 +84,6 @@ export class BranchComponent implements OnInit {
       // this.authService.UpdateBranch(value);
       this.authService.UpdateBranch(value).then(
         getupBranchResponse => {this.upbranches = getupBranchResponse;
-         console.log( this.upbranches );
       });
     }
  
@@ -84,17 +93,19 @@ export class BranchComponent implements OnInit {
     
       this.authService.SearchBranch(value).then(
         responsebranches => {this.branches = responsebranches;
-         console.log( this.branches );
+          this.dataSource = new MatTableDataSource(responsebranches);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
       });
     }
-    editRow(branch){
+    editRow(element){
       console.log("///*************//////////");
-      this.editid = branch.ID;
-      this.editname = branch.Name;
-      this.selectedcountry = branch.CountryID;
-      this.selectedcity = branch.CityID;
-      this.selectedstate = branch.StateID;
-      this.selectedactive = branch.Active;
+      this.editid = element.ID;
+      this.editname = element.Name;
+      this.selectedcountryy = element.CountryID;
+      this.selectedcityy = element.CityID;
+      this.selectedstatee = element.StateID;
+      this.selectedactivee = element.Active;
       // this.searcActive = branch.Active;
     }
     async GeneratePayer(value) {

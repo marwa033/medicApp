@@ -1,7 +1,9 @@
 <section class="container-fluide">
   <h2 class="">{{'test' | translate}}</h2><br>
   <section class="row">
-      <section class="col-md-3 dash">
+      <section class="col-md-3">
+        <div class="card">
+          <div class="card-body">
           <form class="search-form" #form="ngForm" (ngSubmit)="Test(form.value)">
        
             <mat-form-field class="example-full-width">
@@ -27,6 +29,8 @@
           </form><br>
           <!-- <button class="success-bg btn-block log"(click)="openSm(content)" mat-raised-button >{{'Add' | translate}}</button> -->
           <button class="success-bg btn-block addd" mat-raised-button >{{'Add' | translate}}</button>
+        </div>
+        </div>
           <ng-template #content let-modal>
             <div role="document">
             <div class="modal-header">
@@ -172,14 +176,10 @@
         
           </div>
           </ng-template>
-         
-         
 
-
-  <br><br>
       </section>
-      <section class="col-md-9 first ">
-        <section class="scroll one">
+      <section class="col-md-9">
+        <!-- <section class="scroll one">
           <table class="table table-hover" >
               <thead>
                 <tr>
@@ -200,7 +200,50 @@
                 </tr>
               </tbody>
             </table>
-          </section>
+          </section> -->
+          <div class="example-container">
+            <!-- <mat-form-field class="ml-3">
+              <mat-label>Filter</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+            </mat-form-field> -->
+          <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
+          
+            <ng-container matColumnDef="ID">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'testid' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="Name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'testname' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+            </ng-container>
+            <!-- Weight Column -->
+            <ng-container matColumnDef="HIS_Code">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'cpt' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.HIS_Code}} </td>
+            </ng-container> 
+            <!-- Weight Column -->
+            <ng-container matColumnDef="Active">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'active' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.Active}} </td>
+            </ng-container>
+          
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="CreateDT">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'createdt' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.CreateDT}} </td>
+            </ng-container>
+          
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
+          </div><br><br>
+
+
+
           <div class="second">
      <h4>{{'testdetials' | translate}}</h4>
      <mat-divider></mat-divider>
@@ -369,6 +412,9 @@
     <section class="row">
       <section class="col-md-6">
         <section class="scroll">
+          
+        <div class="card">
+          <div class="card-body">
           <table class="table table-hover" >
               <thead>
                 <tr>
@@ -384,11 +430,16 @@
                 </tr>
               </tbody>
             </table>
+            </div>
+            </div>
           </section> 
       </section>
       
       <section class="col-md-6">
         <section class="scroll">
+
+        <div class="card">
+          <div class="card-body">
           <table class="table table-hover" >
               <thead>
                 <tr>
@@ -406,7 +457,10 @@
                 </tr>
               </tbody>
             </table>
-          </section> 
+   
+          </div>
+          </div>
+        </section> 
       </section>
     </section>
     </div>
