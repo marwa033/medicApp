@@ -82,6 +82,7 @@ import { BranchComponent } from './branch/branch.component';
 // import { ModalModule } from '@bit/valor-software.ngx-bootstrap.modal';
 // import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ListViewModule } from '@syncfusion/ej2-angular-lists';
+import { PrintComponent } from './print/print.component';
 
 
 @NgModule({
@@ -126,7 +127,8 @@ import { ListViewModule } from '@syncfusion/ej2-angular-lists';
 		PurchaseorderComponent,
 		ArchivingComponent,
 		LabInfoComponent,
-		BranchComponent
+		BranchComponent,
+		PrintComponent
 	],
 	imports: [ GridModule,
 		ListViewModule ,

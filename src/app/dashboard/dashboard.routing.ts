@@ -43,6 +43,7 @@ import { StoremodeComponent } from './storemode/storemode.component';
 import { UomComponent } from './uom/uom.component';
 import { LabInfoComponent } from './lab-info/lab-info.component';
 import { BranchComponent } from './branch/branch.component';
+import { PrintComponent } from './print/print.component';
 
 export const DashboardRoutes: Routes = [
    {
@@ -216,7 +217,12 @@ export const DashboardRoutes: Routes = [
          {
             path: 'branch',
             component : BranchComponent
+         },
+         {
+            path: 'print',
+            component : PrintComponent
          }
+
       ]
    }
 ];

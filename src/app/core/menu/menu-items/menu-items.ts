@@ -25,7 +25,7 @@ const MENUITEMS = [
     icon: '',
     children: [
       {state: 'saas', name: 'Patient' , type: 'sub'},
-      {state: 'saas', name: 'Print' , type: 'sub'},
+      {state: 'print', name: 'Print' , type: 'sub'},
       {state: 'saas', name: 'Monitor' , type: 'sub'}
 
     //   {state: 'saas', name: 'SAAS',     type: 'sub2',    icon: 'explore',

@@ -10,7 +10,10 @@ import { app } from 'firebase';
 // import { fas } from '@fortawesome/free-solid-svg-icons'
 import { Observable } from 'rxjs';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatPaginator, MatSort } from '@angular/material';
+import { SelectionModel } from '@angular/cdk/collections';
+import {MatTableDataSource} from '@angular/material/table';
+
 
 @Component({
    selector: 'ms-dashboard',
@@ -55,13 +58,13 @@ export class SaasComponent implements OnInit  {
    selectedpatient: any;
    public results: Observable<any>;
    public history: Observable<any>;
-   public acceptance: Observable<any>;
 
 
    dataSource: MatTableDataSource<unknown>;
-   displayedColumns: string[] = [ 'PatientName', 'Mobile' , 'Phone' ,
+   displayedColumns: string[] = ['PatientName', 'Mobile' , 'Phone' ,
     'Date_Of_Birth' ,'custom_id',  'PatientID' , 'symbol'];
-   
+
+
    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
    // @ViewChild(MatSort, {static: true}) sort: MatSort;
 
@@ -71,7 +74,6 @@ export class SaasComponent implements OnInit  {
               private pageTitleService: PageTitleService ,
                 config: NgbModalConfig,
                  private modalService: NgbModal) {
-         
                }
                openSm(content) {
                  this.modalService.open(content, { size: 'lg' });
@@ -168,6 +170,8 @@ export class SaasComponent implements OnInit  {
  toggleSidebar() {
    this.coreService.sidenavOpen = !this.coreService.sidenavOpen;
 }
+
+
    ngOnInit() {
 
 
