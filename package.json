@@ -85,6 +85,7 @@
     "ngx-slick-carousel": "^0.4.4",
     "ngx-sortable": "^1.0.1",
     "ngx-sortablejs": "^3.0.0",
+    "ngx-spinner": "^9.0.2",
     "ngx-toastr": "^10.0.2",
     "ngx-tour-core": "^4.0.1",
     "ngx-tour-md-menu": "^4.0.1",

@@ -1,0 +1,86 @@
+<section class="container">
+    <div class="card">
+        <div class="card-header">
+          {{'Add Promo Code' | translate}}
+        </div>
+        <form #form="ngForm" (ngSubmit)="Add(form.value)">
+        <div class="card-body ">
+            <div class="container ml-5">
+                <section class="row">
+                    <section class="col-md-6">
+                        
+                        <mat-form-field>
+                            <input matInput placeholder="{{'Code' | translate}}" name="Code" [(ngModel)] = "Code">
+                        </mat-form-field>
+                    </section>
+                    <section class="col-md-6">
+                        <!-- <mat-form-field>
+                            <input matInput placeholder="Start Date" type="date" name="Date" [(ngModel)] = "Date">
+                        </mat-form-field> -->
+                        <mat-form-field>
+                            <mat-label>{{'Start Date' | translate}}</mat-label>
+                            <input matInput [matDatepicker]="picker" name="Date" [(ngModel)] = "Date">
+                            <mat-datepicker-toggle matSuffix [for]="picker">
+                                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                              </mat-datepicker-toggle>
+                         <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+                    </section>
+                </section>
+        <section class="row">
+            <section class="col-md-6">
+                <mat-form-field>
+                    <input matInput placeholder="{{'Period' | translate}}" name="Period" type="number" [(ngModel)] = "Period">
+                </mat-form-field>
+            </section>
+            <section class="col-md-6">
+                <mat-form-field>
+                    <input matInput placeholder="{{'Max Number Of Users' | translate}}"  name="Users" type="number" [(ngModel)] = "Users">
+                </mat-form-field>
+            </section>
+        </section>
+        <section class="row">
+            <section class="col-md-6">
+                <mat-form-field>
+                    <input matInput placeholder="{{'Amount' | translate}}" name="Amount" type="number" [(ngModel)] = "Amount">
+                </mat-form-field>
+            </section>
+            <!-- <section class="col-md-6">
+                <mat-form-field>
+                    <input matInput placeholder="{{'Type' | translate}}" name="Type" [(ngModel)] = "Type">
+                </mat-form-field>
+            </section> -->
+        </section>
+        <!-- <section class="row">
+            <section class="col-md-6">
+                <mat-form-field>
+                  <mat-select  placeholder="All Clients" name="Client" [(ngModel)] = "Client">
+                    <mat-option value="True">True</mat-option>
+                    <mat-option value="False">False</mat-option>
+                  </mat-select>
+                </mat-form-field>
+            </section>
+            <section class="col-md-6">
+              <mat-form-field>
+                <mat-select  placeholder="All Doctors" name="Doctor" [(ngModel)] = "Doctor">
+                  <mat-option value="True">True</mat-option>
+                  <mat-option value="False">False</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </section>
+          </section> -->
+        
+    </div>
+        </div>
+        <div class="card-footer">
+            <section class="row">
+                <section class="col-md-9"></section>
+                <section class="col-md-3">
+                    <button class="primary-bg btn-block" mat-raised-button>{{'Save' | translate}}</button>
+                </section>
+            </section>
+            
+        </div>
+    </form>
+      </div>
+    </section>

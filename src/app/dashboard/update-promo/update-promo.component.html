@@ -1,0 +1,67 @@
+
+    <section class="container">
+        <div class="card">
+            <div class="card-header">
+              {{'Update Promo code' | translate}}
+            </div>
+            <form #form="ngForm" (ngSubmit)="Update(form.value)">
+            <div class="card-body ">
+                <div class="container ml-5">
+                    <section class="row rid">
+                        <section class="col-md-6">
+                          <mat-form-field>
+                            <input matInput placeholder="ID" readonly name="id" [(ngModel)] = "id">
+                        </mat-form-field> 
+                        </section>
+                      </section>
+                      <section class="row">
+                        <section class="col-md-6">
+                            <mat-form-field>
+                                <input matInput placeholder="{{'Code' | translate}}" name="upCode" [(ngModel)] = "editCode">
+                            </mat-form-field>
+                        </section>
+                        <section class="col-md-6">
+                            <mat-form-field>
+                                <mat-label>{{'Start Date' | translate}}</mat-label>
+                                <input matInput [matDatepicker]="picker" name="upDate"[(ngModel)] = "editDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker">
+                                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                                  </mat-datepicker-toggle>
+                                  <mat-datepicker #picker></mat-datepicker>
+                              </mat-form-field>
+                        </section>
+                    </section>
+                    <section class="row">
+                      <section class="col-md-6">
+                          <mat-form-field>
+                              <input matInput placeholder="{{'Days Period' | translate}}" name="upDays" type="number" [(ngModel)] = "editDays">
+                          </mat-form-field>
+                      </section>
+                      <section class="col-md-6">
+                          <mat-form-field>
+                              <input matInput placeholder="{{'Number of Users'  | translate}}" name="upUsers" type="number" [(ngModel)] = "editUsers">
+                          </mat-form-field>
+                      </section>
+                  </section>
+                  <section class="row">
+                    <section class="col-md-6">
+                        <mat-form-field>
+                            <input matInput placeholder="{{'Amount' | translate}}" name="upAmount" type="number" [(ngModel)] = "editAmount">
+                        </mat-form-field>
+                    </section>
+                  
+                </section>
+        </div>
+            </div>
+            <div class="card-footer">
+                <section class="row">
+                    <section class="col-md-9"></section>
+                    <section class="col-md-3">
+                        <button class="primary-bg btn-block" mat-raised-button>{{'Save' | translate}}</button>
+                    </section>
+                </section>
+                
+            </div>
+        </form>
+          </div>
+        </section>

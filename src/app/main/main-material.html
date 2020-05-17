@@ -100,7 +100,7 @@
       </div>
    </div>
 </mat-sidenav-container>
-<!-- <div class="gene-customizer">
+<div class="gene-customizer">
    <button class="customizer-toggle" (click)="customizerFunction()">
       <mat-icon class="fa-spin">settings</mat-icon>
    </button>
@@ -128,7 +128,7 @@
       
       </mat-card-content>
    </div>
-</div> -->
+</div>
 <div class="gene-chat-wrap" id ="gene-chat">
    <mat-card class="people-list">
       <mat-tab-group class="height-full">
@@ -292,11 +292,11 @@
 </div>
 </div>
 <mat-menu class="user-menu" x-position="before" y-position="below" #menu="matMenu">
-      <!-- <button mat-menu-item>
+    <button (click)="profile()" mat-menu-item>
          <mat-icon>account_circle</mat-icon>
-         <span>{{'Profile'|translate}}</span>
+         <span >{{'Profile'|translate}}</span>
       </button>
-      <button mat-menu-item>
+     <!-- <button mat-menu-item>
          <mat-icon>settings</mat-icon>
          <span>{{'Settings'|translate}}</span>
       </button>

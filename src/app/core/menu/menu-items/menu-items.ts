@@ -4,8 +4,8 @@ export interface ChildrenItems {
   state: string;
   name: string;
   type?: string;
-  icon?: string;
-  children?: ChildrenItems[];
+  // icon: string;
+  // children?: ChildrenItems[];
 
 }
 ///////
@@ -19,170 +19,94 @@ export interface Menu {
 
 const MENUITEMS = [
   {
-    state: 'dashboard',
-    name: 'Order',
-    type: 'sub',
-    icon: '',
-    children: [
-      {state: 'saas', name: 'Patient' , type: 'sub'},
-      {state: 'print', name: 'Print' , type: 'sub'},
-      {state: 'saas', name: 'Monitor' , type: 'sub'}
+    state:'',
+    name: 'Home',
+    type: 'button',
+    icon: 'home',
 
-    //   {state: 'saas', name: 'SAAS',     type: 'sub2',    icon: 'explore',
-    //   children: [
-    //     {state: 'crm', name: 'CRM2',     type: 'sub'},
-    //     {state: 'saas', name: 'SAAS2',     type: 'sub'} 
-    //   ]
-    // } 
+  },
+  {
+    state: 'dashboard',
+    name: 'Admins',
+    type: 'sub',
+    icon: 'account_box',
+    children: [
+      {state: 'showadmins', name: 'Show All' , type: 'sub', icon: 'menu'},
+      {state: 'addadmins', name: 'Add Admins' , type: 'sub', icon: 'menu'},
     ]
   },
   {
     state: 'dashboard',
-    name: 'Sampling',
+    name: 'Category',
     type: 'sub',
-    icon: '',
+    icon: 'category',
     children: [
-      {state: 'collection', name: 'Collection', type: 'sub'},
-      {state: 'acceptance', name: 'Acceptance', type: 'sub'},
+      {state: 'showcategory', name: 'Show All' , type: 'sub', icon: 'menu'},
+      {state: 'addcategory', name: 'Add Category' , type: 'sub', icon: 'menu'},
     ]
   },
   {
     state: 'dashboard',
-    name: 'Result Entry',
+    name: 'District',
     type: 'sub',
-    icon: '',
+    icon: 'account_balance',
     children: [
-      {state: 'generallab', name: 'General Lab', type: 'sub'},
-      {state: 'explanatory', name: 'Explanatory', type: 'sub'}, 
-      {state: 'bacteriology', name: 'Bacteriology', type: 'sub'},
+      {state: 'showdistrict', name: 'Show All' , type: 'sub', icon: 'menu'},
+      {state: 'adddistrict', name: 'Add District' , type: 'sub', icon: 'menu'},
     ]
   },
   {
     state: 'dashboard',
-    name: 'Invoicing',
+    name: 'Bookings',
     type: 'sub',
-    icon: '',
+    icon: 'booking',
     children: [
-      {state: 'generateinvoice', name: 'Generate Invoice', type: 'sub'},
-      {state: 'searchinvoice', name: 'Search Invoice', type: 'sub'}, 
-      {state: 'priceinvoice', name: 'Price Invoice', type: 'sub'},
+      {state: 'bookingdoctor', name: 'Doctors' , type: 'sub', icon: 'menu'},
+      {state: 'bookingclient', name: 'Clients' , type: 'sub', icon: 'menu'},
     ]
   },
   {
     state: 'dashboard',
-    name: 'Reporting',
+    name: 'Ads',
     type: 'sub',
-    icon: '',
+    icon: 'Ads',
     children: [
-      {state: 'saas', name: 'Income Report', type: 'sub'},
-      {state: 'crm', name: 'Test Statistics', type: 'sub'}, 
-      {state: 'crm', name: 'Pending Test', type: 'sub'},
+      {state: 'showads', name: 'Show Ads' , type: 'sub', icon: 'menu'},
+      {state: 'addads', name: 'Add Ads' , type: 'sub', icon: 'menu'},
     ]
   },
   {
     state: 'dashboard',
-    name: 'Help',
+    name: 'Subscriptions',
     type: 'sub',
-    icon: '',
+    icon: 'subscriptions',
     children: [
-      {state: 'crm', name: 'License Information', type: 'sub'},
+      {state: 'showsubscription', name: 'Show Subscription' , type: 'sub', icon: 'menu'},
+      {state: 'addsubscription', name: 'Add Subscription' , type: 'sub', icon: 'menu'},
     ]
   },
+  {
+    state: 'dashboard',
+    name: 'Promo Codes',
+    type: 'sub',
+    icon: 'money',
+    children: [
+      {state: 'showpromo', name: 'Show Promo Codes' , type: 'sub', icon: 'menu'},
+      {state: 'addpromo', name: 'Add Promo Codes' , type: 'sub', icon: 'menu'},
+    ]
+  },
+  {
+    state: 'dashboard',
+    name: 'Doctors',
+    type: 'sub',
+    icon: 'doctor',
+    children: [
+      {state: 'showdoctors', name: 'Show Doctors' , type: 'sub', icon: 'menu'},
+      {state: 'adddoctor', name: 'Add Doctor' , type: 'sub', icon: 'menu'},
+    ]
+  }
 
-  {
-    state: 'dashboard',
-    name: 'Tools',
-    type: 'sub',
-    icon: '',
-    children: [
-      {state: 'saas', name: 'Calculator', type: 'sub'},
-      {state: 'crm', name: 'Notepad', type: 'sub'}, 
-      {state: 'crm', name: 'Paint', type: 'sub'},
-    ]
-  },
-      //   {state: 'saas', name: 'SAAS',     type: 'sub2',    icon: 'explore',
-    //   children: [
-    //     {state: 'crm', name: 'CRM2',     type: 'sub'},
-    //     {state: 'saas', name: 'SAAS2', type: 'sub'} 
-    //   ]
-    // } 
-  {
-    state: 'dashboard',
-    name: 'Configuration',
-    type: 'sub',
-    icon: '',
-    children: [
-      {state: 'saas',
-       name: 'Test',
-       type: 'sub2',
-      children: [
-       {  state: 'testcategory', name: 'Test Category' , type: 'sub'},
-       {  state: 'testsubcategory', name: 'Test SubCategory', type: 'sub'},
-       {  state: 'testquestion', name: 'Test Question' , type: 'sub'},
-       {  state: 'testmethodology', name: 'Test Methodology', type: 'sub'},
-       {  state: 'container', name: 'Container', type: 'sub'},
-       {  state: 'sampletype', name: 'Sample Type', type: 'sub'},
-       {  state: 'test', name: 'Test', type: 'sub'},
-       {  state: 'resultfield', name: 'Result Field', type: 'sub'},]},
-      {state: 'profile', name: 'Profile', type: 'sub'},
-      {state: 'crm', name: 'Pricing', type: 'sub2',
-      children:[
-        {state: 'currency', name: 'Currency', type: 'sub'},
-        {state: 'grosspricelist', name: 'Gross PriceList', type: 'sub'},
-        {state: 'payer', name: 'Payer', type: 'sub'},
-        {state: 'clientcategory', name: 'Client Category', type: 'sub'},
-      ]
-      },
-      {state: 'crm', name: 'Lab', type: 'sub2',
-      children:[
-        {state: 'labinfo', name: 'Lab Information', type: 'sub'},
-        {state: 'branch', name: 'Branch', type: 'sub'},
-      ]
-      },
-      {state: 'crm', name: 'Address', type: 'sub2',
-      children:[
-        {state: 'crm', name: 'Country', type: 'sub'},
-        {state: 'crm', name: 'State', type: 'sub'},
-        {state: 'crm', name: 'City', type: 'sub'},
-      ]
-      },
-      {state: 'crm', name: 'Referral', type: 'sub2',
-      children:[
-        {state: 'priority', name: 'Priority', type: 'sub'},
-        {state: 'speciality', name: 'Speciality', type: 'sub'},
-        {state: 'clinic', name: 'Clinic', type: 'sub'},
-        {state: 'doctor', name: 'Doctor', type: 'sub'},
 
-      ]
-      },
-      {state: 'crm', name: 'System',
-      children:[
-        {state: 'crm', name: 'AutoMailer'},
-      ]
-      },
-    ]
-  },
-
-  {
-    state: 'dashboard',
-    name: 'Inventory',
-    type: 'sub',
-    icon: '',
-    children: [
-      {state: 'saas', name: 'Setup', type: 'sub2',
-     children:[
-      {state: 'storemode', name: 'Store Mode', type: 'sub'},
-      {state: 'location', name: 'Location', type: 'sub'},
-      {state: 'supplier', name: 'Supplier', type: 'sub'}, 
-      {state: 'uom', name: 'UOM', type: 'sub'}, 
-      {state: 'item', name: 'Item', type: 'sub'}, 
-     ]},
-      {state: 'purchaseorder', name: 'Purchase Order', type: 'sub'}, 
-      {state: 'crm', name: 'Receive', type: 'sub'},
-      {state: 'crm', name: 'Issue', type: 'sub'},
-      {state: 'crm', name: 'Inventory Status', type: 'sub'},
-    ]
-  },
   
 ];
 

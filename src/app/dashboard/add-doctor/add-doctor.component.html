@@ -1,0 +1,76 @@
+<section class="container">
+    <div class="card">
+        <div class="card-header">
+          {{'Add Doctor' | translate}}
+        </div>
+        <form #form="ngForm" (ngSubmit)="Add(form.value)">
+        <div class="card-body ">
+            <div class="container ml-5">
+                <section class="row">
+                    <section class="col-md-6">
+                        <mat-form-field>
+                            <input matInput placeholder=" {{'Enter Name in English' | translate}}" name="EName" [(ngModel)] = "EName">
+                        </mat-form-field>
+                    </section>
+                    <section class="col-md-6">
+                        <mat-form-field>
+                            <input matInput placeholder=" الاسم بالعربى" name="AName" [(ngModel)] = "AName">
+                        </mat-form-field>
+                    </section>
+                </section>
+                <section class="row">
+                  <section class="col-md-6">
+                      <mat-form-field>
+                          <input matInput placeholder="{{'Enter Title in English' | translate}}" name="ETitle" [(ngModel)] = "ETitle">
+                      </mat-form-field>
+                  </section>
+                  <section class="col-md-6">
+                      <mat-form-field>
+                          <input matInput placeholder="اللقب بالعربى" name="ATitle" [(ngModel)] = "ATitle">
+                      </mat-form-field>
+                  </section>
+              </section>
+              <section class="row">
+                <section class="col-md-6">
+                    <mat-form-field>
+                        <input matInput placeholder=" {{'Enter Bio in English' | translate}}" name="EBio" [(ngModel)] = "EBio">
+                    </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                    <mat-form-field>
+                        <input matInput placeholder=" اللقب بالعربى" name="ABio" [(ngModel)] = "ABio">
+                    </mat-form-field>
+                </section>
+            </section>
+            <section class="row">
+              <section class="col-md-6">
+                  <mat-form-field>
+                      <input matInput placeholder=" {{'Enter address in English' | translate}}" name="EAddress" [(ngModel)] = "EAddress">
+                  </mat-form-field>
+              </section>
+              <section class="col-md-6">
+                  <mat-form-field>
+                      <input matInput placeholder=" العنوان بالعربى" name="AAddress" [(ngModel)] = "AAddress">
+                  </mat-form-field>
+              </section>
+          </section>
+          <section class="row">
+              <div class="image-upload">
+                <img [src]="imageSrc" style="max-width:100px;max-height:100px"/>
+                <input name="imageUrl" type="file" accept="image/*" (change)="handleInputChange($event)" />
+            </div> 
+          </section>
+    </div>
+        </div>
+        <div class="card-footer">
+            <section class="row">
+                <section class="col-md-9"></section>
+                <section class="col-md-3">
+                    <button class="primary-bg btn-block" mat-raised-button>{{'Save' | translate}}</button>
+                </section>
+            </section>
+            
+        </div>
+    </form>
+      </div>
+    </section>

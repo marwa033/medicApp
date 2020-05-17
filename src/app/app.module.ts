@@ -34,6 +34,8 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { WidgetComponentModule } from './widget-component/widget-component.module';
 import { SideBarComponent } from './Shared/side-bar/side-bar.component';
 import { FooterComponent } from './Shared/footer/footer.component';
+import { NgxSpinnerModule } from "ngx-spinner";
+
 
 export const firebaseConfig = {
 	apiKey: "AIzaSyCE0po6Q8jGuBEds-A903KEU4U6Cerojzo",
@@ -69,7 +71,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		PerfectScrollbarModule,
 		MenuToggleModule,
       HttpClientModule,
-      MatSlideToggleModule,
+	  MatSlideToggleModule,
+	  NgxSpinnerModule,
 		TranslateModule.forRoot({
          loader: {
 				provide: TranslateLoader,

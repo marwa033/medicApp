@@ -1,0 +1,23 @@
+
+table{
+    transition: none !important;
+    box-shadow: none !important;
+}
+.example-container{
+    overflow: auto;
+}
+
+.mat-header-cell, .mat-cell {
+    min-width: 100px;
+    word-wrap: break-word;
+}
+
+h4{
+    text-align: center;
+}
+.pointer{
+    cursor: pointer;
+}
+.mat-row:hover {
+    background-color: rgb(240, 239, 239);
+  }

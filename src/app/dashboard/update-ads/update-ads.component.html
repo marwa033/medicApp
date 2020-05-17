@@ -1,0 +1,54 @@
+
+    <section class="container">
+        <div class="card">
+            <div class="card-header">
+              {{'Update Ads' | translate}}
+            </div>
+            <form #form="ngForm" (ngSubmit)="Update(form.value)">
+            <div class="card-body ">
+                <div class="container ml-5">
+                    <section class="row rid">
+                        <section class="col-md-6">
+                          <mat-form-field>
+                            <input matInput placeholder="ID" readonly name="id" [(ngModel)] = "id">
+                        </mat-form-field> 
+                        </section>
+                        <section class="col-md-6">
+                            <mat-form-field>
+                              <input matInput placeholder="Doctor ID" readonly name="updoctorId" [(ngModel)] = "doctorId">
+                          </mat-form-field> 
+                          </section>
+                      </section>
+                <section class="row">
+                    <section class="col-md-6">
+                        <mat-form-field>
+                            <input matInput placeholder="{{'Enter Title in Englis' | translate}}" name="upETitle" [(ngModel)] = "editETitle">
+                        </mat-form-field>
+                    </section>
+                    <section class="col-md-6">
+                        <mat-form-field>
+                            <input matInput placeholder="ادخل اللقب بالعربى" name="upATitle" [(ngModel)] = "editATitle">
+                        </mat-form-field>
+                    </section>
+                </section>
+                <section class="row">
+                    <section class="col-md-6">
+                        
+                            <input type="file"(change)="onFileSelected($event)" name="upimage" [(ngModel)] = "editimage">
+                        
+                    </section>
+                </section>
+        </div>
+            </div>
+            <div class="card-footer">
+                <section class="row">
+                    <section class="col-md-9"></section>
+                    <section class="col-md-3">
+                        <button class="primary-bg btn-block" mat-raised-button>{{'Save' | translate}}</button>
+                    </section>
+                </section>
+                
+            </div>
+        </form>
+          </div>
+        </section>

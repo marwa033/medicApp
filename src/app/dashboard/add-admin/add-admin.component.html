@@ -1,0 +1,48 @@
+<section class="container">
+    <div class="card">
+        <div class="card-header">
+          {{'Add Admin' | translate}}
+          <!-- fe django betb2a {% w baktb hena el 7aga ely hatgebeha %}
+          agbha mnen , el add admin da bt3 el translate el kelma ely btban -->
+        </div>
+        <form #form="ngForm" (ngSubmit)="Add(form.value)">
+        <div class="card-body ">
+            <div class="container ml-5">
+        <section class="row">
+            <section class="col-md-6">
+                <mat-form-field>
+                    <input matInput placeholder="{{'Enter Name' | translate}}" name="name" [(ngModel)] = "name">
+                </mat-form-field>
+            </section>
+            <section class="col-md-6">
+                <mat-form-field>
+                    <input matInput type="email" placeholder="{{'Enter E-mail' | translate}}" name="email" [(ngModel)] = "email">
+                </mat-form-field>
+            </section>
+        </section>
+        <section class="row">
+            <section class="col-md-6">
+                <mat-form-field>
+                    <input matInput placeholder="{{'Enter Phone Number' | translate}}" name="phone" [(ngModel)] = "phone">
+                </mat-form-field>
+            </section>
+            <section class="col-md-6">
+                <mat-form-field>
+                    <input matInput type="password" placeholder="{{'Enter Password' | translate}}" name="password" [(ngModel)] = "password">
+                </mat-form-field>
+            </section>
+        </section>
+    </div>
+        </div>
+        <div class="card-footer">
+            <section class="row">
+                <section class="col-md-9"></section>
+                <section class="col-md-3">
+                    <button class="primary-bg btn-block" mat-raised-button>{{'Save' | translate}}</button>
+                </section>
+            </section>
+            
+        </div>
+    </form>
+      </div>
+    </section>

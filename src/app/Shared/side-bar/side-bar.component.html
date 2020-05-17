@@ -2,26 +2,21 @@
    <mat-toolbar class="sidebar-logo">
       <div class="gene-logo">
          <a href="javascript:void(0)" (click)="onClick()">
-            <div class="logo-sign inline-block"><img src="assets/img/logo.png" width="50" height="50"></div>
-            <div class="logo-text inlinesidenavOpen-block"><h1 style="font-size:30px;color: white;">HPS</h1></div>
+            <!-- <div class="logo-sign inline-block"><img src="assets/img/logo.png" width="50" height="50"></div>
+            <div class="logo-text inlinesidenavOpen-block"><h1 style="font-size:30px;color: white;">HPS</h1></div> -->
          </a>
       </div>
    </mat-toolbar>
    <perfect-scrollbar>
       <div class="sidebar-container">
-         <div class="gene-user-thumb text-center">
+         <!-- <div class="gene-user-thumb text-center">
             <img class="img-responsive img-circle" src="assets/img/logo.png" width="107" height="107" alt="user list image">
-            </div>
-         <div style="color: white;" *ngFor="let information of informations">
-            <label class="fill">Center :<span> {{information.CenterName}}</span></label><br>
-            <label class="fill">Name :<span> {{information.EmployeeName}}</span></label><br>    
-            <label class="fill">PriceList :<span> {{information.CenterDefaultPriceList}}</span></label><br>
-         </div>
+            </div> -->
          <div class="sidenav-scrollbar-container" fxLayout="column">
             <ng-container *ngIf="verticalMenuStatus; else horizontalMenuStatus">
                <mat-nav-list fxLayout="column" menuToggleDirective class="navigation">
                   <mat-list-item menuToggleLink *ngFor="let menuitem of menuList.getAll()">
-                     <!-- <a menuToggle class="gene-relative" mat-ripple *ngIf="menuitem.type === 'button'" routerLinkActive="active-link"      [routerLink]="['/horizontal/dashboard/crm']">
+                     <a menuToggle class="gene-relative" mat-ripple *ngIf="menuitem.type === 'button'" routerLinkActive="active-link"  [routerLink]="['/dashboard/crm']">
                      <mat-icon>{{ menuitem.icon }}</mat-icon>
                      <span>{{ menuitem.name | translate }}</span>
                      <ng-container *ngIf="menuitem.label">
@@ -34,8 +29,13 @@
                      <ng-container *ngIf="menuitem.label">
                         <span class="sidebar-label">{{ menuitem.label}}</span>
                      </ng-container>
-                     </a> -->
+                     </a>
                      <span></span>
+                     <!-- <a menuToggle class="gene-relative"  href="dashboard/crm">
+                        <mat-icon>home</mat-icon>
+                        <span>{{ Home | translate }}</span>
+                        <mat-icon class="menu-caret">chevron_right</mat-icon>
+                     </a> -->
                      <a menuToggle class="gene-relative" mat-ripple href="javascript:void(0)" *ngIf="menuitem.type === 'sub'">
                         <mat-icon>{{ menuitem.icon }}</mat-icon>
                         <span>{{ menuitem.name | translate }}</span>

@@ -1,0 +1,56 @@
+<section class="container">
+    <div class="card">
+        <div class="card-header">
+         {{'Add Ads' | translate}}
+        </div>
+        <form #form="ngForm" (ngSubmit)="Add(form.value)">
+        <div class="card-body ">
+            <div class="container ml-5">
+                <!-- <section class="row">
+                    <section class="col-md-6">
+                        <mat-form-field>
+                            <input matInput placeholder="Doctor ID" readonly name="id" [(ngModel)] = "id">
+                        </mat-form-field>
+                    </section>
+                </section> -->
+        <section class="row">
+            <section class="col-md-6">
+                <mat-form-field>
+                    <input matInput placeholder="{{'Enter Title in English' | translate}}" name="ETitle" [(ngModel)] = "ETitle">
+                </mat-form-field>
+            </section>
+            <section class="col-md-6">
+                <mat-form-field>
+                    <input matInput type="email" placeholder="ادخل اللقب بالعربى" name="ATitle" [(ngModel)] = "ATitle">
+                </mat-form-field>
+            </section>
+        </section>
+        <section class="row">
+            <section class="col-md-6">
+                <mat-form-field>
+                    <mat-select placeholder="{{'Doctor' | translate}}" name="doctors" [(ngModel)] = "selectedDoctor">
+                      <mat-option *ngFor="let doctor of doctors" [value]="doctor._id">
+                        {{doctor.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </section>
+            <section class="col-md-6">
+                <input type="file"(change)="onFileSelected($event)" name="image" [(ngModel)] = "image">
+
+            </section>
+        </section>
+    </div>
+        </div>
+        <div class="card-footer">
+            <section class="row">
+                <section class="col-md-9"></section>
+                <section class="col-md-3">
+                    <button class="primary-bg btn-block" mat-raised-button>{{'Save' | translate}}</button>
+                </section>
+            </section>
+            
+        </div>
+    </form>
+      </div>
+    </section>

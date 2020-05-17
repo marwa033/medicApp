@@ -10,6 +10,7 @@ import { TourService } from 'ngx-tour-md-menu';
 import PerfectScrollbar from 'perfect-scrollbar';
 import { AuthService } from '../service/auth-service/auth.service';
 import { CoreService } from '../service/core/core.service';
+import { CellOptionsDialogService } from '@syncfusion/ej2-angular-documenteditor';
 declare var require: any
 
 const screenfull = require('screenfull');
@@ -329,12 +330,12 @@ export class MainComponent implements OnInit, OnDestroy {
 	/**
 	  * toggleFullscreen method is used to show a template in fullscreen.
 	//   */
-	// toggleFullscreen() {
-	// 	if (screenfull.enabled) {
-	// 		screenfull.toggle();
-	// 			this.isFullscreen = !this.isFullscreen;
-	// 	}
-	// }
+	toggleFullscreen() {
+		if (screenfull.enabled) {
+			screenfull.toggle();
+				this.isFullscreen = !this.isFullscreen;
+		}
+	}
 	
 	/**
 	  * customizerFunction is used to open and close the customizer.
@@ -378,6 +379,10 @@ body.classList.remove('dark-theme-active');
 	  */
 	logOut() {    
 		this.authService.logOut();
+	}
+	profile(){
+		console.log('*/************');
+		this.router.navigate(['dashboard/profile']);
 	}
 
 	/**

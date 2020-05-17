@@ -1,0 +1,103 @@
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+
+<div class="container">
+<h4>{{'Show All District' | translate}}</h4>
+  <mat-form-field class="ml-5">
+    <mat-label>{{'Filter' | translate}}</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Name" name="filter">
+  </mat-form-field>
+  <div class="mat-elevation-z8 example-container">
+
+  <table mat-table [dataSource]="dataSource" matSort >
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="state">
+      <th mat-header-cell *matHeaderCellDef> {{'State' | translate}} </th>
+      <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+    </ng-container>
+    
+      <!-- Position Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> {{'Name' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        
+      </ng-container>
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef> {{'Create' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'short'}} </td>
+      </ng-container>
+    
+      <!-- Weight Column -->
+      <ng-container matColumnDef="updatedAt">
+        <th mat-header-cell *matHeaderCellDef> {{'Update' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.updatedAt | date:'short'}} </td>
+      </ng-container>
+    
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="__v">
+        <th mat-header-cell *matHeaderCellDef> V </th>
+        <td mat-cell *matCellDef="let element"> {{element.__v}} </td>
+      </ng-container>
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef class="pointer"> {{'Action' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> 
+              <mat-icon style="color:dodgerblue"class="pointer"  title="edit" (click)="editRow(element)" (click)="openLg(content)" >
+                edit </mat-icon>  
+              <mat-icon style="color:#ffae00"class="pointer" title="inactive/active" (click)="Active(element)">error</mat-icon>  
+
+            </td>
+            </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  
+  </div>
+</div>
+<!--********************************************************************************-->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Update District</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form #form="ngForm" (ngSubmit)="Update(form.value)">
+
+  <div class="modal-body">
+    <section class="row rid">
+      <section class="col-md-6">
+        <mat-form-field>
+          <input matInput placeholder="ID"  name="id" [(ngModel)] = "id">
+      </mat-form-field> 
+      </section>
+    </section>
+<section class="row">
+<section class="col-md-6">
+  <mat-form-field>
+      <input matInput placeholder="{{'Enter Name in English' | translate}}" name="upEName" [(ngModel)] = "editEName">
+  </mat-form-field>
+</section>
+<section class="col-md-6">
+  <mat-form-field>
+      <input matInput placeholder="ادخل الاسم بالعربى" name="upAName" [(ngModel)] = "editAName">
+  </mat-form-field>
+</section>
+</section>
+ </div>
+  <div class="modal-footer">
+    <button class="primary-bg" mat-raised-button>{{'Save' | translate}}</button>
+    <!-- <button class="light-bg"  onClick="(window.location.reload(),500000);" type="button" mat-raised-button>{{'close' | translate}}</button> -->
+  
+  </div>
+</form> 
+</ng-template>

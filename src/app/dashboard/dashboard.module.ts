@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { MatIconModule,
@@ -39,96 +39,66 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { WidgetComponentModule } from '../widget-component/widget-component.module';
 import { SaasComponent } from './saas/saas.component';
 import { CrmComponent } from './crm/crm.component';
-import { OrderEntryComponent } from './order-entry/order-entry.component';
-import { CollectionComponent } from './collection/collection.component';
-import { AcceptanceComponent } from './acceptance/acceptance.component';
-import { GenerateInvoiceComponent } from './generate-invoice/generate-invoice.component';
-import { SearchInoviceComponent } from './search-inovice/search-inovice.component';
-import { GeneralLabComponent } from './general-lab/general-lab.component';
-import { ExplanatoryComponent } from './explanatory/explanatory.component';
-import { BacteriologyComponent } from './bacteriology/bacteriology.component';
-import { TestCategoryComponent } from './test-category/test-category.component';
-import { TestSubCategoryComponent } from './test-sub-category/test-sub-category.component';
-import { TestQuestionComponent } from './test-question/test-question.component';
-import { TestMethodologyComponent } from './test-methodology/test-methodology.component';
-import { ContainerComponent } from './container/container.component';
-import { SampleTypeComponent } from './sample-type/sample-type.component';
-import { TestComponent } from './test/test.component';
-import { ResultFieldComponent } from './result-field/result-field.component';
-import { ProfileComponent } from './profile/profile.component';
-import { CurrencyComponent } from './currency/currency.component';
-import { GrossPricelistComponent } from './gross-pricelist/gross-pricelist.component';
-import { PayerComponent } from './payer/payer.component';
-import { ClientCategoryComponent } from './client-category/client-category.component';
-import { CountryComponent } from './country/country.component';
-import { StateComponent } from './state/state.component';
-import { CityComponent } from './city/city.component';
-import { PriorityComponent } from './priority/priority.component';
-import { SpecialityComponent } from './speciality/speciality.component';
-import { ClinicComponent } from './clinic/clinic.component';
-import { DoctorComponent } from './doctor/doctor.component';
-import { TryComponent } from './try/try.component';
+
+
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { PriceInvoiceComponent } from './price-invoice/price-invoice.component';
-import { StoremodeComponent } from './storemode/storemode.component';
-import { LocationComponent } from './location/location.component';
-import { ItemComponent } from './item/item.component';
-import { SupplierComponent } from './supplier/supplier.component';
-import { UomComponent } from './uom/uom.component';
-import { PurchaseorderComponent } from './purchaseorder/purchaseorder.component';
-import { ArchivingComponent } from './archiving/archiving.component';
-import { LabInfoComponent } from './lab-info/lab-info.component';
-import { BranchComponent } from './branch/branch.component';
+
 // import { ModalModule } from '@bit/valor-software.ngx-bootstrap.modal';
 // import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ListViewModule } from '@syncfusion/ej2-angular-lists';
-import { PrintComponent } from './print/print.component';
+import { AddCategoryComponent } from './add-category/add-category.component';
+import { ShowDistrictComponent } from './show-district/show-district.component';
+import { AddDistrictComponent } from './add-district/add-district.component';
+import { GetAdminComponent } from './get-admin/get-admin.component';
+import { AddAdminComponent } from './add-admin/add-admin.component';
+import { BookingDoctorsComponent } from './booking-doctors/booking-doctors.component';
+import { BookingClientsComponent } from './booking-clients/booking-clients.component';
+import { ShowAdsComponent } from './show-ads/show-ads.component';
+import { AddAdsComponent } from './add-ads/add-ads.component';
+import { ShowPromoComponent } from './show-promo/show-promo.component';
+import { AddPromoComponent } from './add-promo/add-promo.component';
+import { UpdateCategoryComponent } from './update-category/update-category.component';
+import { UpdateDistrictComponent } from './update-district/update-district.component';
+import { UpdateAdminsComponent } from './update-admins/update-admins.component';
+import { UpdateAdsComponent } from './update-ads/update-ads.component';
+import { UpdatePromoComponent } from './update-promo/update-promo.component';
+import { AddSubscriptionComponent } from './add-subscription/add-subscription.component';
+import { ShowSubscriptionComponent } from './show-subscription/show-subscription.component';
+import { UpdateSubscriptionComponent } from './update-subscription/update-subscription.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ShowDoctorComponent } from './show-doctor/show-doctor.component';
+import { AddDoctorComponent } from './add-doctor/add-doctor.component';
+import { NgxSpinnerModule } from "ngx-spinner";
+
 
 
 @NgModule({
 	declarations: [
 		SaasComponent,
 		CrmComponent,
-		OrderEntryComponent,
-		CollectionComponent,
-		AcceptanceComponent,
-		GenerateInvoiceComponent,
-		SearchInoviceComponent,
-		PriceInvoiceComponent,
-		GeneralLabComponent,
-		ExplanatoryComponent,
-		BacteriologyComponent,
-		TestCategoryComponent,
-		TestSubCategoryComponent,
-		TestQuestionComponent,
-		TestMethodologyComponent,
-		ContainerComponent,
-		SampleTypeComponent,
-		TestComponent,
-		ResultFieldComponent,
+		AddCategoryComponent,
+		ShowDistrictComponent,
+		AddDistrictComponent,
+		GetAdminComponent,
+		AddAdminComponent,
+		BookingDoctorsComponent,
+		BookingClientsComponent,
+		ShowAdsComponent,
+		AddAdsComponent,
+		ShowPromoComponent,
+		AddPromoComponent,
+		UpdateCategoryComponent,
+		UpdateDistrictComponent,
+		UpdateAdminsComponent,
+		UpdateAdsComponent,
+		UpdatePromoComponent,
+		AddSubscriptionComponent,
+		ShowSubscriptionComponent,
+		UpdateSubscriptionComponent,
 		ProfileComponent,
-		CurrencyComponent,
-		GrossPricelistComponent,
-		PayerComponent,
-		ClientCategoryComponent,
-		CountryComponent,
-		StateComponent,
-		CityComponent,
-		PriorityComponent,
-		SpecialityComponent,
-		ClinicComponent,
-		DoctorComponent,
-		TryComponent,
-		StoremodeComponent,
-		LocationComponent,
-		ItemComponent,
-		SupplierComponent,
-		UomComponent,
-		PurchaseorderComponent,
-		ArchivingComponent,
-		LabInfoComponent,
-		BranchComponent,
-		PrintComponent
+		ShowDoctorComponent,
+		AddDoctorComponent,
+		
 	],
 	imports: [ GridModule,
 		ListViewModule ,
@@ -167,12 +137,14 @@ import { PrintComponent } from './print/print.component';
 		FormsModule,
 		ReactiveFormsModule,
 		MatSortModule,
+		NgxSpinnerModule,
 		AgmCoreModule.forRoot({apiKey: 'AIzaSyD4y2luRxfM8Q8yKHSLdOOdNpkiilVhD9k'})
 	],
 	providers: [
 		PageService, SortService, FilterService, GroupService,
 		{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
 		NgbModalConfig, NgbModal
-	  ]
+	  ],
+	  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class DashboardModule { }

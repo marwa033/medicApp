@@ -15,10 +15,7 @@ export class CrmComponent implements OnInit {
    constructor(public authService: AuthService,
               private pageTitleService: PageTitleService) { }
    
-   Search(value) {
-      this.authService.SearchPatient(value);
-   }
-
+ 
    ngOnInit() {
       this.pageTitleService.setTitle('CRM');
 
