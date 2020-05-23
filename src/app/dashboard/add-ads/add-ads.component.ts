@@ -12,6 +12,10 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class AddAdsComponent implements OnInit {
   tries: any;
   doctors: any;
+  ETitle: string = '';
+  ATitle: string = '';
+  selectedDoctor: string= '';
+  image : string= '' ;
 
   constructor(public translate: TranslateService,
     public authService: AuthService,

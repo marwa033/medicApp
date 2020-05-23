@@ -13,6 +13,8 @@ export class AddSubscriptionComponent implements OnInit {
   startDate : Date;
   endDate : Date;
   tries: any;
+  picker2: any;
+  picker: any;
 
   constructor(public translate: TranslateService,
     public authService: AuthService,

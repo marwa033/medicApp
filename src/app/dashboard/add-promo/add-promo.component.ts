@@ -12,6 +12,12 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class AddPromoComponent implements OnInit {
 
   tries: any;
+  code: string='';
+  Code: string='';
+  Date: string='';
+  Period: string='';
+  Users: string='';
+  Amount: string='';
 
   constructor(public translate: TranslateService,
     public authService: AuthService,

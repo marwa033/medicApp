@@ -10,6 +10,12 @@ table{
 .example-container{
     overflow: auto;
 }
+img{
+    width: 70px;
+    height: 70px;
+    padding:5px;
+    border-radius: 50%;
+}
 .rid{
     display: none;
 }

@@ -11,6 +11,10 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AddAdminComponent implements OnInit {
   tries: any;
+  name: string = '';
+  email: string = '';
+  phone: string = '';
+  password: string = '';
 
   constructor(public translate: TranslateService,
     public authService: AuthService,

@@ -24,7 +24,7 @@ const appRoutes: Routes = [
    },
    {
       path: '**',
-      redirectTo: 'session/loginV2'
+      redirectTo: 'session/login'
    }
 ]
 
