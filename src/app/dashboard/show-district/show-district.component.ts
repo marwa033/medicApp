@@ -22,8 +22,7 @@ export class ShowDistrictComponent implements OnInit {
   updatedAt = new Date();
 
   dataSource: MatTableDataSource<unknown>;
-  displayedColumns: string[] = [ 'state' ,
-   'name',  'createdAt' , 'updatedAt' , '__v' , 'action'];
+  displayedColumns: string[] = [ 'name','state' ,  'createdAt' , 'updatedAt' , 'action'];
 
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -76,9 +75,10 @@ export class ShowDistrictComponent implements OnInit {
                           });
               } 
               Close(){ 
+                this.modalService.dismissAll(); 
+                this.spinner.show();
                 window.location.reload();
-                this.modalService.dismissAll;
-                 }  
+                 } 
 
                  editRow(element)
                  {

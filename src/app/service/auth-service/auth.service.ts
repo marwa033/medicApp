@@ -47,6 +47,7 @@ export class AuthService {
   upProfileResults: any;
   getDoctorResults: any;
   adsDelete: any;
+  activeAdmin: any;
  
 
 
@@ -103,7 +104,7 @@ return this.districts;
 /////////////////////////////////////////
 async AddSubscription(value) {
   let log =this.userData['x-auth-token'];
-  const data = { startDate: value.startDate , endDate: value.endDate , vendorId : '5ead9a1af87af0111ca7fa51'};
+  const data = { startDate: value.startDate , endDate: value.endDate , vendorId : value.doctors};
 
   const bodyobj = JSON.stringify(data);
   const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
@@ -197,7 +198,7 @@ return this.Admin;
 async AddAds(value) {
 
   let log =this.userData['x-auth-token'];
-  const data = {title:{ en: value.ETitle , ar: value.ATitle} ,image : value.image , vendorId: value.doctors};
+  const data = {title:{ en: value.ETitle , ar: value.ATitle} ,image : value.imageSrc , vendorId: value.doctors};
 
   const bodyobj = JSON.stringify(data);
   const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
@@ -281,7 +282,11 @@ request.headers.append('x-auth-token', log);
 
         const response = await fetch( request);
   const editresponse = await response.json();
- console.log('from service');
+  // if(value.imageSrc == ""){
+  //   value.imageSrc == editresponse.data[value.id].image;
+  // }
+
+ console.log(value.imageSrc);
   this.editcategoryresult = editresponse;
   return this.editcategoryresult;
 }
@@ -453,8 +458,31 @@ console.log(log);
   const responseActivedata = await response.json();
   this.activeCategory = responseActivedata;
   this.toastr.info('Change State');
-  this.router.navigate(['/dashboard/showcategory']);
+  // this.router.navigate(['/dashboard/showcategory']);
   return this.activeCategory;
+}
+/////////////////////////////////////////
+async AdminActivation(element) {
+  let log =this.userData['x-auth-token'];
+  const data = {_id:element._id};
+const bodyobj = JSON.stringify(data);
+
+const request = new Request(baseURL + 'auth/users/changeState',
+{
+method: 'PUT',
+body: bodyobj
+});
+request.headers.delete('Content-Type');
+request.headers.append('Content-Type', 'application/json');
+request.headers.append('x-auth-token', log);
+console.log(log);
+        const response = await fetch( request);
+  const responseActiveAdmindata = await response.json();
+  this.activeAdmin = responseActiveAdmindata;
+  console.log(this.activeAdmin);
+  this.toastr.info('Change State');
+  // this.router.navigate(['/dashboard/showadmin']);
+  return this.activeAdmin;
 }
 /////////////////////////////////////////
 async AdsActivation(element) {
@@ -498,9 +526,8 @@ request.headers.append('x-auth-token', log);
 console.log(log);
         const response = await fetch( request);
   const responseAdsDelete = await response.json();
-  // let message = responseAds.message;
-
-    this.toastr.info('Change State');
+  let message = responseAdsDelete.message;
+  this.toastr.info(message);
     this.router.navigate(['/dashboard/showads']);
   this.adsDelete = responseAdsDelete;
 
@@ -565,10 +592,10 @@ async GetDoctor() {
   return this.getDoctorResults;
 }
 /////////////////////////////////////////
-async GetCategories(value) {
+async GetCategories(element) {
   const date = {}
   const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
-  const request = new Request(baseURL + 'components/categories?pageNumber=1&pageSize=100&state=active',
+  const request = new Request(baseURL + 'components/categories?pageNumber=1&pageSize=100&state=active&name=' + element.name,
   { method: 'GET',
   });
         request.headers.delete('Content-Type');
@@ -596,7 +623,7 @@ async GetAds() {
   return this.getAdsResults;
 }
 
-/////////////////////////////////////////responsegetpromo
+////////////////////////////+/////////////responsegetpromo
 async GetDistrict() {
   
   const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };

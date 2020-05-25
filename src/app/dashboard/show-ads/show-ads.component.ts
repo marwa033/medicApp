@@ -61,12 +61,11 @@ Ads(){
                   this.spinner.hide();
                 }, this.results);
               });}
-
-
               Close(){ 
+                this.modalService.dismissAll(); 
+                this.spinner.show();
                 window.location.reload();
-                this.modalService.dismissAll;
-                 }  
+                 } 
                  Update(value){
                   this.authService.UpdateAds(value).
                             then( responseUpAds => { this.tries = responseUpAds;

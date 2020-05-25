@@ -29,6 +29,9 @@ this.selectedFile = event.target.files[0];
   }
 
   Add(value){
+    if(this.imageSrc == ""){
+      this.imageSrc = "https://node-doctors.herokuapp.com/public/images/d2f20d8e-c560-4f89-8d55-8cccaa08f143.png"
+    }
     this.authService.ADDCategory(value);
   }
   handleInputChange(e) {

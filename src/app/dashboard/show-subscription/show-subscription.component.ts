@@ -47,9 +47,10 @@ export class ShowSubscriptionComponent implements OnInit {
     }
     
     Close(){ 
+      this.modalService.dismissAll(); 
+      this.spinner.show();
       window.location.reload();
-      this.modalService.dismissAll;
-       }  
+       } 
 
     Subscription(){
       this.authService.GetSubscription().

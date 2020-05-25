@@ -15,6 +15,7 @@ export class AddSubscriptionComponent implements OnInit {
   tries: any;
   picker2: any;
   picker: any;
+  doctors: string;
 
   constructor(public translate: TranslateService,
     public authService: AuthService,
@@ -27,7 +28,14 @@ export class AddSubscriptionComponent implements OnInit {
                   then( responseAddSubscription => { this.tries = responseAddSubscription;
                   });
       }  
+      Doctor(){
+        this.authService.GetDoctor().
+                  then( responsegetDoctor => { this.doctors = responsegetDoctor.data;
+                    console.log('doctor grt ' + this.doctors);
+                  });
+      } 
   ngOnInit() {
+    this.Doctor();
   }
 
 }

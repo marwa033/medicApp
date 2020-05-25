@@ -12,14 +12,8 @@ import { ShowAdsComponent } from './show-ads/show-ads.component';
 import { AddAdsComponent } from './add-ads/add-ads.component';
 import { ShowPromoComponent } from './show-promo/show-promo.component';
 import { AddPromoComponent } from './add-promo/add-promo.component';
-import { UpdateCategoryComponent } from './update-category/update-category.component';
-import { UpdateDistrictComponent } from './update-district/update-district.component';
-import { UpdateAdminsComponent } from './update-admins/update-admins.component';
-import { UpdatePromoComponent } from './update-promo/update-promo.component';
 import { ShowSubscriptionComponent } from './show-subscription/show-subscription.component';
 import { AddSubscriptionComponent } from './add-subscription/add-subscription.component';
-import { UpdateAdsComponent } from './update-ads/update-ads.component';
-import { UpdateSubscriptionComponent } from './update-subscription/update-subscription.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ShowDoctorComponent } from './show-doctor/show-doctor.component';
 import { AddDoctorComponent } from './add-doctor/add-doctor.component';
@@ -94,31 +88,6 @@ export const DashboardRoutes: Routes = [
             path: 'addsubscription',
             component : AddSubscriptionComponent
          },
-         {
-            path: 'updatecategory/:id',
-            component : UpdateCategoryComponent
-         },
-         {
-            path: 'updatedistrict/:name/:id',
-            component : UpdateDistrictComponent
-         },
-         {
-            path: 'updateadmins/:name/:id/:email/:phone',
-            component : UpdateAdminsComponent
-         },
-         {
-            path: 'updatepromo/:id/:code/:startdate/:day/:max/:amount',
-            component : UpdatePromoComponent
-         },
-         {
-            path: 'updateads/:id/:title/:vendorid',
-            component : UpdateAdsComponent
-         },
-         {
-            path: 'updatesubscription/:id/:startDate/:endDate/:vendorId',
-            component : UpdateSubscriptionComponent
-         }
-         ,
          {
             path: 'profile',
             component : ProfileComponent

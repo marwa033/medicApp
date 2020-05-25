@@ -74,10 +74,10 @@ export class ShowPromoComponent implements OnInit {
                             });
                 }  
 
-
                 Close(){ 
+                  this.modalService.dismissAll(); 
+                  this.spinner.show();
                   window.location.reload();
-                  this.modalService.dismissAll;
                    } 
 
  openLg(content) {

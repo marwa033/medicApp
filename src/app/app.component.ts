@@ -1,6 +1,5 @@
 import {Component, Optional, ViewEncapsulation} from '@angular/core';
 import { TranslateService} from '@ngx-translate/core';
-
 @Component({
   	selector: 'gene-app',
    template:`<router-outlet></router-outlet>

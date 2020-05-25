@@ -16,7 +16,7 @@ export class GetAdminComponent implements OnInit {
   public isCollapsed = false;
 
   dataSource: MatTableDataSource<unknown>;
-  displayedColumns: string[] = [ 'name' , 'email',  'phone' , 'action'];
+  displayedColumns: string[] = [ 'name' , 'email','state',  'phone' , 'action'];
 
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -28,6 +28,7 @@ export class GetAdminComponent implements OnInit {
   editName: any;
   editEmail: any;
   editpassword: any;
+  password: any;
   
   constructor(public translate: TranslateService,
     public authService: AuthService,
@@ -67,16 +68,25 @@ export class GetAdminComponent implements OnInit {
                             
                             }
                              else{
-                              this.toastr.success('Successfully Updated');             
+                              this.toastr.success('Successfully Updated');            
                               this.Close();               
                             }  
                           });
               }  
               Close(){ 
+                this.modalService.dismissAll(); 
+                this.spinner.show();
                 window.location.reload();
-                this.modalService.dismissAll;
                  }  
+                 Active(element){
 
+                  this.authService.AdminActivation(element).
+                  then( responseActiveAdmindata => { this.tries = responseActiveAdmindata;
+                     console.log("state is = " + this.tries.state);
+                     element.state = this.tries.state;
+                    //  this.Close();   
+                  });
+               }
 
  openLg(content) {
   this.modalService.open(content, { size: 'lg' });
@@ -87,6 +97,7 @@ export class GetAdminComponent implements OnInit {
   this.editName = element.user.name;
   this.editEmail = element.user.email;
   this.editPhone = element.user.phone;
+  this.password = "";
 }
 // Active(element){
 //   this.authService.AdminsActive(element).

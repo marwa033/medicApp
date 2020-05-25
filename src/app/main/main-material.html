@@ -69,29 +69,6 @@
          <div class="full-wid" fxFlex="100">
             <router-outlet (activate)="onActivate($event, scrollContainer)"></router-outlet>
             <ng-container>
-               <!-- <tour-step-template>
-                  <ng-template let-step="step">
-                     <div (click)="$event.stopPropagation()" class="popover bs-popover-bottom">
-                        <div class="popover-header">
-                           {{step?.title}}
-                        </div>
-                        <div class="popover-body">
-                           <p class="tour-step-content">
-                              {{step?.content}}
-                           </p>
-                        </div>
-                        <div class="tour-step-navigation">
-                           <button mat-icon-button [disabled]="!tourService.hasPrev(step)" (click)="tourService.prev()">
-                           <mat-icon>chevron_left</mat-icon>
-                           </button>
-                           <button mat-icon-button [disabled]="!tourService.hasNext(step)" (click)="tourService.next()">
-                           <mat-icon>chevron_right</mat-icon>
-                           </button>
-                           <button mat-button (click)="tourService.end()">End</button>
-                        </div>
-                     </div>
-                  </ng-template>
-               </tour-step-template> -->
             </ng-container>
          </div>
          <div class="footer-wrap pad-t-none full-wid" fxFLex="100">

@@ -48,6 +48,7 @@ export class SaasComponent implements OnInit  {
    image: any;
    message = 'anything';
    X: void;
+  src: any;
  
    constructor(public translate: TranslateService,
                public authService: AuthService,
@@ -62,6 +63,9 @@ export class SaasComponent implements OnInit  {
                }
            
                Update(value){
+                //  if(this.imageSrc == ""){
+                //    this.imageSrc == this.results;
+                //  }
                   this.authService.editCategories(value).
                             then( editresponse => { this.tries = editresponse;
                               let message = editresponse.message;
@@ -76,28 +80,35 @@ export class SaasComponent implements OnInit  {
                             });
                 }  
                 Close(){ 
-                    window.location.reload();
-                    this.modalService.dismissAll;
-               }
+                  this.modalService.dismissAll(); 
+                  this.spinner.show();
+                  window.location.reload();
+                   } 
      
            applyFilter(event: Event) {
             const filterValue = (event.target as HTMLInputElement).value;
             this.dataSource.filter = filterValue.trim().toLowerCase();
           }
+          // nameFilter(element){
+          //   this.authService.GetCategories(element).
+          //   then( responsedata => { this.results = responsedata.data;});
+          // }
+
           selectedRow(element){
+            console.log("ehhhh"+ element.image);
              this.id = element._id;
              this.editEName = element.name;
              this.editColor = element.color;
-            //  this.imageSrc = element.image;
+             this.imageSrc = element.image;
           }
 
-Categories(value){
-     this.authService.GetCategories(value).
-               then( responsedata => { this.results = responsedata;
+Categories(element){
+     this.authService.GetCategories(element).
+               then( responsedata => { this.results = responsedata.data;
                   this.dataSource = new MatTableDataSource(responsedata.data);
                   this.dataSource.paginator = this.paginator;
                   this.dataSource.sort = this.sort; 
-                  console.log( this.results );
+                  console.log( this.results);
                   setTimeout(() => {
                      this.spinner.hide();
                    }, this.results);

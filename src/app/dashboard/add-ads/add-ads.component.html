@@ -36,8 +36,11 @@
                   </mat-form-field>
             </section>
             <section class="col-md-6">
-                <input type="file"name="image" [(ngModel)] = "image">
-
+                <img [src]="imageSrc"  style="max-width:300px;max-height:300px"/><br>
+                <input  type="file" name="imageSrc" accept="image/*" (change)="handleInputChange($event)" />
+            <mat-form-field class="rid">
+                <input matInput placeholder="Color" name="imageSrc" [(ngModel)] = "imageSrc">
+            </mat-form-field>
             </section>
         </section>
     </div>

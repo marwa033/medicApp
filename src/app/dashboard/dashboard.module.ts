@@ -57,14 +57,8 @@ import { ShowAdsComponent } from './show-ads/show-ads.component';
 import { AddAdsComponent } from './add-ads/add-ads.component';
 import { ShowPromoComponent } from './show-promo/show-promo.component';
 import { AddPromoComponent } from './add-promo/add-promo.component';
-import { UpdateCategoryComponent } from './update-category/update-category.component';
-import { UpdateDistrictComponent } from './update-district/update-district.component';
-import { UpdateAdminsComponent } from './update-admins/update-admins.component';
-import { UpdateAdsComponent } from './update-ads/update-ads.component';
-import { UpdatePromoComponent } from './update-promo/update-promo.component';
 import { AddSubscriptionComponent } from './add-subscription/add-subscription.component';
 import { ShowSubscriptionComponent } from './show-subscription/show-subscription.component';
-import { UpdateSubscriptionComponent } from './update-subscription/update-subscription.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ShowDoctorComponent } from './show-doctor/show-doctor.component';
 import { AddDoctorComponent } from './add-doctor/add-doctor.component';
@@ -87,14 +81,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
 		AddAdsComponent,
 		ShowPromoComponent,
 		AddPromoComponent,
-		UpdateCategoryComponent,
-		UpdateDistrictComponent,
-		UpdateAdminsComponent,
-		UpdateAdsComponent,
-		UpdatePromoComponent,
 		AddSubscriptionComponent,
 		ShowSubscriptionComponent,
-		UpdateSubscriptionComponent,
 		ProfileComponent,
 		ShowDoctorComponent,
 		AddDoctorComponent,
