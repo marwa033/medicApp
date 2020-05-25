@@ -3,7 +3,7 @@ import 'hammerjs';
 import { BrowserModule} from '@angular/platform-browser';
 import { BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { CommonModule } from '@angular/common';
-import { HttpClientModule, HttpClient} from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Routes } from '@angular/router';
@@ -124,12 +124,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		MenuItems,
 		BreadcrumbService,
 		PageTitleService,
+		AuthGuard,
 		AuthService,
 		{
 			provide: PERFECT_SCROLLBAR_CONFIG,
 			useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-		},
-		AuthGuard
+		}
 	],
    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

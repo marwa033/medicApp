@@ -16,6 +16,7 @@ export class AddSubscriptionComponent implements OnInit {
   picker2: any;
   picker: any;
   doctors: string;
+  selectedDoctor : any;
 
   constructor(public translate: TranslateService,
     public authService: AuthService,
