@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core'
 })
 export class LanguageDropDownComponent implements OnInit {
 
+	layout                : any = 'ltr';
    currentLang = 'en';
    selectImage = 'assets/img/en.png';
 
@@ -16,12 +17,7 @@ export class LanguageDropDownComponent implements OnInit {
          img:"assets/img/en.png",
          name:"English",
          value	: "en"
-      },     
-      {  
-         img:"assets/img/france.png",
-         name:"French",
-         value:"fr"
-      },      
+      },
       {  
          img:"assets/img/ar.png",
          name:"Arabic",
@@ -31,7 +27,13 @@ export class LanguageDropDownComponent implements OnInit {
    ];
 
 	constructor(public translate : TranslateService) { }
-
+	changeRTL(name) {
+		if(name == "Arabic") {
+			this.layout = "rtl"
+		} else {
+			this.layout = "ltr"
+		}
+	}
 	ngOnInit() {
 	}
 

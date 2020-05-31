@@ -50,6 +50,36 @@ export class AddDoctorComponent implements OnInit {
               });
   }  
   ngOnInit() {
+    $(document).ready(function() {
+
+      $('.sunday').click(function() {
+         $('.sun').toggle();
+       });
+       $('.monday').click(function() {
+        $('.mon').toggle();
+      });
+      $('.tuesday').click(function() {
+        $('.tue').toggle();
+      });
+      $('.wednesday').click(function() {
+        $('.wed').toggle();
+      });
+      $('.thursday').click(function() {
+        $('.thru').toggle();
+      });
+      $('.friday').click(function() {
+        $('.fri').toggle();
+      });
+      $('.saturday').click(function() {
+        $('.sat').toggle();
+      });
+      $('.work').click(function() {
+        $('.days').toggle();
+      });
+   
+    });
+   
+   
   }
 
 }

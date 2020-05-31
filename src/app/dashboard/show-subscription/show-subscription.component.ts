@@ -58,7 +58,7 @@ export class ShowSubscriptionComponent implements OnInit {
                    this.dataSource = new MatTableDataSource(responseSubscription.data);
                    this.dataSource.paginator = this.paginator;
                    this.dataSource.sort = this.sort; 
-                   console.log( this.results );
+                  //  console.log( this.results );
                    setTimeout(() => {
                     this.spinner.hide();
                   }, this.results);
@@ -87,7 +87,7 @@ export class ShowSubscriptionComponent implements OnInit {
               Doctor(){
                 this.authService.GetDoctor().
                           then( responsegetDoctor => { this.doctors = responsegetDoctor.data;
-                            console.log('doctor grt ' + this.doctors);
+                            // console.log('doctor grt ' + this.doctors);
                           });
               }                                              
 

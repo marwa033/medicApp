@@ -1,3 +1,16 @@
+<!-- <ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner> -->
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true">
+   <p style="color: white" > Loading... </p></ngx-spinner>
+
+
+
 <div class="gene-login gene-session pad-y-xl">
    <div fxLayout="row" fxLayoutAlign="center start">
       <div fxLayout="column" fxFlex.xl="540px" fxFlex.lg="540px" fxFlex.md="540px" fxFlex.sm="540px" fxFlex.xs="100">
@@ -11,21 +24,20 @@
                </div>
                <form #form="ngForm" (ngSubmit)="login(form.value)">
                <div fxLayout="column" fxLayoutAlign="start stretch">
-                  <mat-form-field class="full-wid mrgn-b-md">
-                     <input matInput placeholder="E-Mail" type="text" name="email" required [(ngModel)]="email">
-                  </mat-form-field>
-                  <mat-form-field class="full-wid mrgn-b-md ">
-                     <input matInput placeholder="Password" type="password" name="password" required [(ngModel)]="password">
-                  </mat-form-field>
-                  <div fxLayout="row" fxLayoutAlign="start center">
-                     <div fxLayout="column">
-                        <mat-checkbox class="remember-me">Remember Me</mat-checkbox>
-                     </div>
-                     <span fxFlex></span>
-                     <div><a [routerLink]="['/session/forgot-password']">Forgot Password?</a></div>
-                  </div>
-                  <button class="success-bg" mat-raised-button [disabled]="!form.valid">SIGN IN</button>
-                  <p class="text-center">Don't have an account? <a [routerLink]="['/session/register']" class="primary-text">Click here to create one</a></p>
+                 <mat-form-field [class.has-error]="emailControl.invalid && emailControl.touched">
+                  <input matInput placeholder="Enter your email" name="mail" required email [(ngModel)]="mail" #emailControl="ngModel" autocomplete="off">
+               </mat-form-field>
+               <span style="font-size: smaller;" class="text-danger" *ngIf="emailControl.errors?.required && emailControl.touched">E-mail is required</span>
+               <span style="font-size: smaller;" class="text-danger" *ngIf="emailControl.errors?.email && emailControl.touched">E-mail is invalid</span>
+
+                <mat-form-field [class.has-error]="passwordControl.invalid && passwordControl.touched">
+                  <input matInput placeholder="Enter password" type="password" required min="6" #passwordControl="ngModel" name="passcode"  [(ngModel)]="passcode">
+               </mat-form-field>
+               <span style="font-size: smaller;" class="text-danger" *ngIf="passwordControl.errors?.required && passwordControl.touched">Password is required</span>
+               <span style="font-size: smaller;" class="text-danger" *ngIf="passwordControl.errors?.min && passwordControl.touched"> Password must be at least 6 characters long.</span>
+
+                  <button class="success-bg" mat-raised-button [disabled]="!form.valid" >SIGN IN</button>
+                  <!-- <p class="text-center">Don't have an account? <a [routerLink]="['/session/register']" class="primary-text">Click here to create one</a></p> -->
                </div>
                </form>
             </div>

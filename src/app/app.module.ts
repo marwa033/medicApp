@@ -21,6 +21,7 @@ import { MatSlideToggleModule,MatButtonModule, MatBadgeModule, MatCardModule, Ma
 			MatTableModule, MatExpansionModule, MatSelectModule, MatSnackBarModule, MatTooltipModule, MatChipsModule, MatListModule, MatSidenavModule, 
 			MatTabsModule, MatProgressBarModule,MatCheckboxModule, MatSliderModule,MatRadioModule,MatDialogModule,MatGridListModule
 } from '@angular/material';
+
 import { RoutingModule } from "./app-routing.module";
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarModule } from '@ngx-loading-bar/core';

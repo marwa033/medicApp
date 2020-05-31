@@ -13,7 +13,8 @@ import { MatCardModule,
 			MatChipsModule,
 			MatListModule,
 			MatTableModule,
-			MatExpansionModule
+			MatExpansionModule,
+			MatCheckboxModule
 		} from '@angular/material';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -27,6 +28,7 @@ import { LanguageDropDownComponent } from './global/language-drop-down/language-
 		LanguageDropDownComponent
 	],
 	imports: [
+		MatCheckboxModule,
 		RouterModule,
 		CommonModule,
 		MatCardModule,

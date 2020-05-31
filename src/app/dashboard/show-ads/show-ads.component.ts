@@ -13,10 +13,10 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./show-ads.component.scss']
 })
 export class ShowAdsComponent implements OnInit {
-
+  // endDate = new Date();
 
   dataSource: MatTableDataSource<unknown>;
-  displayedColumns: string[] = ['image', 'state' , 'title' , 'action'];
+  displayedColumns: string[] = ['count' , 'image',   'title' ,'endDate', 'action'];
 
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -26,7 +26,6 @@ export class ShowAdsComponent implements OnInit {
   results: any;
   tries: any;
   updated: any;
-  toastr: any;
   editETitle: any;
   id: any;
   doctorId: any;
@@ -34,11 +33,13 @@ export class ShowAdsComponent implements OnInit {
   delete: any;
   doctors: string;
   imageSrc: any;
+  editDate: any;
 
   constructor(public translate: TranslateService,
     public authService: AuthService,
    private pageTitleService: PageTitleService ,
-     config: NgbModalConfig,
+   private toastr: ToastrService,
+   config: NgbModalConfig,
      private spinner: NgxSpinnerService,
       private modalService: NgbModal) {
        config.backdrop = 'static';
@@ -56,34 +57,46 @@ Ads(){
                  this.dataSource = new MatTableDataSource(responsegetads.data);
                  this.dataSource.paginator = this.paginator;
                  this.dataSource.sort = this.sort; 
-                 console.log( this.results );
+                //  console.log( this.results );
                  setTimeout(() => {
                   this.spinner.hide();
                 }, this.results);
               });}
-              Close(){ 
-                this.modalService.dismissAll(); 
-                this.spinner.show();
-                window.location.reload();
-                 } 
+
+              
+FilterAds(value){
+  this.spinner.show();
+  this.authService.GetAdsFilter(value).
+            then( responsegetadsfilter => { this.results = responsegetadsfilter;
+               this.dataSource = new MatTableDataSource(responsegetadsfilter.data);
+               this.dataSource.paginator = this.paginator;
+               this.dataSource.sort = this.sort; 
+              //  console.log( this.results );
+               setTimeout(() => {
+                this.spinner.hide();
+              }, this.results);
+            });}
+              
                  Update(value){
                   this.authService.UpdateAds(value).
                             then( responseUpAds => { this.tries = responseUpAds;
+                              
                               let message = responseUpAds.message;
                               if (message) {
                                 this.toastr.error(message);
                               
                               }
                                else{
-                                this.toastr.success('Successfully Updated');
-                                this.Close();
-                               }
+                                this.toastr.success('Successfully Updated');  
+                                      this.Close();
+                              }
                             });
-                }  
+                }
+                             
                 Doctor(){
                   this.authService.GetDoctor().
                             then( responsegetDoctor => { this.doctors = responsegetDoctor.data;
-                              console.log('doctor grt ' + this.doctors);
+                              // console.log('doctor grt ' + this.doctors);
                             });
                 } 
                 handleInputChange(e) {
@@ -110,20 +123,27 @@ Active(element){
   this.authService.AdsActivation(element).
   then( responseAds => { this.tries = responseAds;
     //  element.state = this.tries.state;
+    this.Close();
   });
 }
 Delete(element){
   this.authService.DeleteAds(element).
   then( responseAdsDelete => { this.delete = responseAdsDelete;
-    //  element.state = this.tries.state;
+    this.Close();
   });
 }
-
+Close(){ 
+  this.modalService.dismissAll(); 
+  this.spinner.show();
+  window.location.reload();   
+   } 
 selectedRow(element){
-  console.log('edit*********');
+  // console.log('edit*********');
   this.id = element._id;
   this.doctorId = element.vendorId;
   this.editETitle = element.title;
+  this.editDate = new Date(element.endDate);
+  this.imageSrc = element.image;
 }
 openLg(content) {
   this.modalService.open(content, { size: 'lg' });

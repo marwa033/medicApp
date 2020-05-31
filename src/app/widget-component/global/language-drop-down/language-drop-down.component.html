@@ -15,10 +15,11 @@
          <div  fxLayout="row wrap" class="pad-all-xs">
          	<ng-container *ngFor="let lang of translate.getLangs()">
                <ng-container *ngFor="let language of langArray">
-                  <mat-card class="mat-pad-none lang-wrap" *ngIf="language.value == lang" fxFlex="calc(50% - 0.5rem)" >
+                  <mat-card class="mat-pad-none lang-wrap" *ngIf="language.value == lang" fxFlex="calc(70% - 0.7rem)" >
+                     
                      <a class="pad-all-xs gene-block" href="javascript:void(0)" (click)="setLang(lang)">
                         <img class="mrgn-r-xs" width="25" height="14" src="{{language.img}}">
-                        <span>{{language.name}}</span>
+                        <span >{{language.name}}</span>
                      </a>
                   </mat-card>
                </ng-container>

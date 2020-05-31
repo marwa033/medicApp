@@ -16,7 +16,7 @@ export class GetAdminComponent implements OnInit {
   public isCollapsed = false;
 
   dataSource: MatTableDataSource<unknown>;
-  displayedColumns: string[] = [ 'name' , 'email','state',  'phone' , 'action'];
+  displayedColumns: string[] = ['count' , 'name' , 'email',  'phone' , 'action'];
 
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -29,6 +29,7 @@ export class GetAdminComponent implements OnInit {
   editEmail: any;
   editpassword: any;
   password: any;
+  leeh = JSON.parse(localStorage.getItem('try'));
   
   constructor(public translate: TranslateService,
     public authService: AuthService,
@@ -52,12 +53,26 @@ export class GetAdminComponent implements OnInit {
                    this.dataSource = new MatTableDataSource(responseAdminsData.data);
                    this.dataSource.paginator = this.paginator;
                    this.dataSource.sort = this.sort; 
-                   console.log( this.results );
+                  //  console.log( this.results );
                    setTimeout(() => {
                     this.spinner.hide();
                   }, this.results);
                 });
                }
+
+               
+FilterAdmins(value){
+  this.spinner.show();
+  this.authService.GetAdminsFilter(value).
+            then( responseAdminsfilter => { this.results = responseAdminsfilter;
+               this.dataSource = new MatTableDataSource(responseAdminsfilter.data);
+               this.dataSource.paginator = this.paginator;
+               this.dataSource.sort = this.sort; 
+              //  console.log( this.results );
+               setTimeout(() => {
+                this.spinner.hide();
+              }, this.results);
+            });}
                
                Update(value){
                 this.authService.UpdateAdmins(value).
@@ -82,9 +97,9 @@ export class GetAdminComponent implements OnInit {
 
                   this.authService.AdminActivation(element).
                   then( responseActiveAdmindata => { this.tries = responseActiveAdmindata;
-                     console.log("state is = " + this.tries.state);
+                    //  console.log("state is = " + this.tries.state);
                      element.state = this.tries.state;
-                    //  this.Close();   
+                     this.Close();   
                   });
                }
 
@@ -104,10 +119,10 @@ export class GetAdminComponent implements OnInit {
 //   then( responseActiveAdmins => { this.tries = responseActiveAdmins;
 //   });
 // }
-  ngOnInit() {
+  ngOnInit() {  
     this.Admins();
     this.spinner.show();
-
+console.log(this.leeh);
   }
 
 }

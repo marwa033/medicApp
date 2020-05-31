@@ -17,6 +17,7 @@ import { AddSubscriptionComponent } from './add-subscription/add-subscription.co
 import { ProfileComponent } from './profile/profile.component';
 import { ShowDoctorComponent } from './show-doctor/show-doctor.component';
 import { AddDoctorComponent } from './add-doctor/add-doctor.component';
+import { ShowClientsComponent } from './show-clients/show-clients.component';
 
 
 export const DashboardRoutes: Routes = [
@@ -99,6 +100,10 @@ export const DashboardRoutes: Routes = [
          {
             path: 'adddoctor',
             component : AddDoctorComponent
+         },
+         {
+            path: 'showclient',
+            component : ShowClientsComponent
          }
       ]
    }

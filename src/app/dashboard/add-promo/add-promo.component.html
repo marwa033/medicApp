@@ -1,22 +1,19 @@
 <section class="container">
     <div class="card">
-        <div class="card-header">
+        <div class="card-header" mat-raised-button>
           {{'Add Promo Code' | translate}}
         </div>
         <form #form="ngForm" (ngSubmit)="Add(form.value)">
         <div class="card-body ">
-            <div class="container ml-5">
-                <section class="row">
-                    <section class="col-md-6">
+            <div class="container ">
+                <section class="row justify-content-center">
+                    <section class="col-md-4">
                         
                         <mat-form-field>
                             <input matInput placeholder="{{'Code' | translate}}" name="Code" [(ngModel)] = "Code">
                         </mat-form-field>
                     </section>
-                    <section class="col-md-6">
-                        <!-- <mat-form-field>
-                            <input matInput placeholder="Start Date" type="date" name="Date" [(ngModel)] = "Date">
-                        </mat-form-field> -->
+                    <section class="col-md-4">
                         <mat-form-field>
                             <mat-label>{{'Start Date' | translate}}</mat-label>
                             <input matInput [matDatepicker]="picker" name="Date" [(ngModel)] = "Date">
@@ -27,20 +24,20 @@
                           </mat-form-field>
                     </section>
                 </section>
-        <section class="row">
-            <section class="col-md-6">
+        <section class="row justify-content-center">
+            <section class="col-md-4">
                 <mat-form-field>
                     <input matInput placeholder="{{'Period' | translate}}" name="Period" type="number" [(ngModel)] = "Period">
                 </mat-form-field>
             </section>
-            <section class="col-md-6">
+            <section class="col-md-4">
                 <mat-form-field>
                     <input matInput placeholder="{{'Max Number Of Users' | translate}}"  name="Users" type="number" [(ngModel)] = "Users">
                 </mat-form-field>
             </section>
         </section>
-        <section class="row">
-            <section class="col-md-6">
+        <section class="row justify-content-center">
+            <section class="col-md-4">
                 <mat-form-field>
                     <input matInput placeholder="{{'Amount' | translate}}" name="Amount" type="number" [(ngModel)] = "Amount">
                 </mat-form-field>

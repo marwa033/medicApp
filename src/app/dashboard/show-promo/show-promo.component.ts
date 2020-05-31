@@ -15,7 +15,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class ShowPromoComponent implements OnInit {
   
   dataSource: MatTableDataSource<unknown>;
-  displayedColumns: string[] = [ 'code' ,
+  displayedColumns: string[] = [ 'count' , 'code' ,
    'startDate',  'daysPeriod'  , 'maxNumberOfUses' , 'amount' , 'type' , 'forAllClients' , 'forAllVendors' , 'action'];
 
 
@@ -54,7 +54,7 @@ export class ShowPromoComponent implements OnInit {
                    this.dataSource = new MatTableDataSource(responsegetpromo.data);
                    this.dataSource.paginator = this.paginator;
                    this.dataSource.sort = this.sort; 
-                   console.log( this.results );
+                  //  console.log( this.results );
                    setTimeout(() => {
                     this.spinner.hide();
                   }, this.results);
@@ -63,7 +63,7 @@ export class ShowPromoComponent implements OnInit {
                 Update(value){
                   this.authService.UpdatePromo(value).
                             then( responseupPromo => { this.tries = responseupPromo;
-                              console.log(this.tries);
+                              // console.log(this.tries);
                               let message = responseupPromo.message;
                                 if (message) {
                                   this.toastr.error(message);

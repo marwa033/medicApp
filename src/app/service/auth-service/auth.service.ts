@@ -48,13 +48,18 @@ export class AuthService {
   getDoctorResults: any;
   adsDelete: any;
   activeAdmin: any;
+  getfilterDistrictResult: any;
+  getCategoryFilter: any;
+  getClientResults: any;
+  AdsResultsfilter: any;
+  getAdminsfilter: any;
  
 
 
    constructor(private firebaseAuth: AngularFireAuth,
                private router: Router,
-               private toastr: ToastrService
-            , private http: HttpClient) {
+               private toastr: ToastrService,
+                private http: HttpClient) {
           this.user = firebaseAuth.authState;
    }
 
@@ -162,10 +167,10 @@ return this.PromoCode;
 }
 /////////////////////////////////////////
 async AddAdmin(value) {
-  console.log(value.name);
-  console.log(value.email);
-  console.log(value.phone);
-  console.log(value.password);
+  // console.log(value.name);
+  // console.log(value.email);
+  // console.log(value.phone);
+  // console.log(value.password);
   let log =this.userData['x-auth-token'];
   const data = {user:{ name: value.name , email: value.email ,phone: value.phone , password: value.password }};
 // Role
@@ -196,9 +201,11 @@ return this.Admin;
 }
 /////////////////////////////////////////
 async AddAds(value) {
-
+console.log("english title = > " + value.ETitle);console.log("arabic title => " + value.ATitle);
+console.log("end date = > " + value.endDate);console.log("image => " + value.imageSrc);
+console.log("doctor id => " + value.doctors);
   let log =this.userData['x-auth-token'];
-  const data = {title:{ en: value.ETitle , ar: value.ATitle} ,image : value.imageSrc , vendorId: value.doctors};
+  const data = {title:{ en: value.ETitle , ar: value.ATitle} , endDate:value.endDate ,image : value.imageSrc , vendorId: value.doctors};
 
   const bodyobj = JSON.stringify(data);
   const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
@@ -209,7 +216,7 @@ async AddAds(value) {
 request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
 request.headers.append('x-auth-token', log);
-
+console.log(data);
 const response = await fetch( request);
 const responseAdsresult = await response.json();
 let message = responseAdsresult.message;
@@ -228,8 +235,12 @@ return this.addAds;
 /////////////////////////////////////////
 async ADDCategory(value) {
   let log =this.userData['x-auth-token'];
+  console.log(value.imageSrc);
 const data = { image: value.imageSrc, color: value.Color , "name": { en : value.EName , ar : value.AName} 
  };
+//  if(value.imageSrc == ""){
+//   value.imageSrc == 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAF3CAMAAABkLEnOAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAMiaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjMtYzAxMSA2Ni4xNDU2NjEsIDIwMTIvMDIvMDYtMTQ6NTY6MjcgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzYgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjBGRkQxRDNDOTFDNTExRTRCOUY3QzlGMTNGNzUwMjQ2IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjBGRkQxRDNEOTFDNTExRTRCOUY3QzlGMTNGNzUwMjQ2Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MEZGRDFEM0E5MUM1MTFFNEI5RjdDOUYxM0Y3NTAyNDYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MEZGRDFEM0I5MUM1MTFFNEI5RjdDOUYxM0Y3NTAyNDYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5+2M54AAAC2VBMVEVMaXG3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7e3t7fD4v+rAAAA8nRSTlMAAwECcNDABBAuBvAKDwx466Hkv4AtzPr+/AnjxPcUHlocgyrJV/YTwqjg6ssH7/QLHySqKTOFTPE8ZSdQmJ2iIUUmMHM1WX0gY8po8/gVugVI2OLnI6np11b73J5g5gj1vEDlxmnV+YJJ7rDU/a/TGb5Cis0SN73hRpMXZKyxEdqcXqvPL1PZWJveoD5Di844e8OkyOyujw6z8ii4mRhbfx1BhCJqrY4NstZ0t9vB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'
+//  }
 const bodyobj = JSON.stringify(data);
 
 const request = new Request(baseURL + 'components/categories',
@@ -250,7 +261,7 @@ await fetch( request)
 
 }
 getAddCategoryResponse( resposne) {
-console.log(resposne);
+// console.log(resposne);
 let message = resposne.message;
 if (message) {
   this.toastr.error(message);
@@ -258,7 +269,7 @@ if (message) {
 }
  else{
   this.toastr.success('Successfully Added');
-  this.router.navigate(['/dashboard/showcategory']);
+  // this.router.navigate(['/dashboard/showcategory']);
 }this.addCategoryResult = resposne;
 }
 
@@ -286,7 +297,7 @@ request.headers.append('x-auth-token', log);
   //   value.imageSrc == editresponse.data[value.id].image;
   // }
 
- console.log(value.imageSrc);
+//  console.log(value.imageSrc);
   this.editcategoryresult = editresponse;
   return this.editcategoryresult;
 }
@@ -335,7 +346,7 @@ request.headers.append('x-auth-token', log);
 
 /////////////////////////////////////////
 async UpdatePromo(value) {
-  console.log(value.upid);
+  // console.log(value.upid);
   let log =this.userData['x-auth-token'];
   const data = { _id:value.id , code : value.upCode , startDate: value. upDate , daysPeriod : value.upDays , maxNumberOfUses: value.upUsers,
     amount: value.upAmount };
@@ -359,7 +370,7 @@ request.headers.append('x-auth-token', log);
 /////////////////////////////////////////
 async UpdateAdmins(value) {
   let log =this.userData['x-auth-token'];
-  const data = {_id:value.id, "user": { name : value.upName , email : value.upEmail , phone: value.upPhone , password : value.password} };
+  const data = {_id:value.id, "user": { name : value.upName , email : value.upEmail , phone: value.upPhone  } };
 const bodyobj = JSON.stringify(data);
 
 const request = new Request(baseURL + 'auth/admins',
@@ -413,16 +424,16 @@ request.headers.append('x-auth-token', log);
 
 /////////////////////////////////////////
 async UpdateAds(value) {
-  console.log(value.id);
-  console.log(value.upETitle);
-  console.log(value.upATitle);
-  console.log(value.editimage);
-  console.log(value.doctorId);
+  // console.log(value.id);
+  // console.log(value.upETitle);
+  // console.log(value.upATitle);
+  // console.log(value.editimage);
+  // console.log(value.doctorId);
 
   let log =this.userData['x-auth-token'];
   const data = {_id:value.id, title: { en : value.upETitle , ar : value.upATitle} ,
-      image : value.upimage ,
-       vendorId: value.updoctorId};
+      image : value.imageSrc , endDate:value.endDate,
+       vendorId: value.doctors};
 const bodyobj = JSON.stringify(data);
 
 const request = new Request(baseURL + 'components/ads',
@@ -433,9 +444,17 @@ body: bodyobj
 request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
 request.headers.append('x-auth-token', log);
+const response = await fetch( request);
+const responseUpAds = await response.json();
+// let message = responseUpAds.message;
+// if (message) {
+//   this.toastr.error(message);
 
-        const response = await fetch( request);
-  const responseUpAds = await response.json();
+// }
+//  else{
+//   this.toastr.success('Successfully Updated');  
+//   // this.Close();       
+// }
     this.upAdsTesult = responseUpAds;
   return this.upAdsTesult;
 }
@@ -453,7 +472,7 @@ body: bodyobj
 request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
 request.headers.append('x-auth-token', log);
-console.log(log);
+// console.log(log);
         const response = await fetch( request);
   const responseActivedata = await response.json();
   this.activeCategory = responseActivedata;
@@ -475,13 +494,10 @@ body: bodyobj
 request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
 request.headers.append('x-auth-token', log);
-console.log(log);
         const response = await fetch( request);
   const responseActiveAdmindata = await response.json();
   this.activeAdmin = responseActiveAdmindata;
-  console.log(this.activeAdmin);
   this.toastr.info('Change State');
-  // this.router.navigate(['/dashboard/showadmin']);
   return this.activeAdmin;
 }
 /////////////////////////////////////////
@@ -498,7 +514,7 @@ body: bodyobj
 request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
 request.headers.append('x-auth-token', log);
-console.log(log);
+// console.log(log);
         const response = await fetch( request);
   const responseAds = await response.json();
   // let message = responseAds.message;
@@ -515,7 +531,7 @@ async DeleteAds(element) {
   const data = {};
 const bodyobj = JSON.stringify(data);
 
-const request = new Request(baseURL + 'api/components/ads/' + element._id,
+const request = new Request(baseURL + 'components/ads/'+element._id,
 {
 method: 'DELETE',
 body: bodyobj
@@ -523,11 +539,11 @@ body: bodyobj
 request.headers.delete('Content-Type');
 request.headers.append('Content-Type', 'application/json');
 request.headers.append('x-auth-token', log);
-console.log(log);
+// console.log(log);
         const response = await fetch( request);
   const responseAdsDelete = await response.json();
-  let message = responseAdsDelete.message;
-  this.toastr.info(message);
+  // let message = responseAdsDelete.message;
+  this.toastr.info('successfully deleted');
     this.router.navigate(['/dashboard/showads']);
   this.adsDelete = responseAdsDelete;
 
@@ -553,7 +569,7 @@ request.headers.append('x-auth-token', log);
         const response = await fetch( request);
   const responseActivedistrict = await response.json();
   this.activeDistrict = responseActivedistrict;
-  console.log(this.activeDistrict);
+  // console.log(this.activeDistrict);
   this.toastr.info('Change State');
   this.router.navigate(['/dashboard/showdistrict']);
   return this.activeDistrict;
@@ -578,56 +594,106 @@ async GetProfile() {
 async GetDoctor() {
   let log =this.userData['x-auth-token'];
   const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
-  const request = new Request(baseURL + 'auth/vendors/subscriptions?pageNumber=1&pageSize=100&state=active',
+  const request = new Request(baseURL + 'auth/vendors/subscriptions?pageNumber=1&pageSize=100',
   { method: 'GET',
   });
         request.headers.delete('Content-Type');
         request.headers.append('Content-Type', 'application/json');
         request.headers.append('x-auth-token', log);
-        request.headers.append('lang', 'ar');
+        request.headers.append('lang', 'en');
         const response = await fetch( request);
   const responsegetDoctor = await response.json();
 
   this.getDoctorResults = responsegetDoctor;
   return this.getDoctorResults;
 }
+
+
+
 /////////////////////////////////////////
-async GetCategories(element) {
+async GetClients() {
+  let log =this.userData['x-auth-token'];
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'auth/clients?pageNumber=1&pageSize=100',
+  { method: 'GET',
+  });
+        request.headers.delete('Content-Type');
+        request.headers.append('Content-Type', 'application/json');
+        request.headers.append('x-auth-token', log);
+        // request.headers.append('lang', 'ar');
+        const response = await fetch( request);
+  const responsegetClients = await response.json();
+
+  this.getClientResults = responsegetClients;
+  return this.getClientResults;
+}
+/////////////////////////////////////////
+async GetCategories() {
   const date = {}
   const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
-  const request = new Request(baseURL + 'components/categories?pageNumber=1&pageSize=100&state=active&name=' + element.name,
+  const request = new Request(baseURL + 'components/categories?pageNumber=1&pageSize=100&',
   { method: 'GET',
   });
         request.headers.delete('Content-Type');
         request.headers.append('lang', 'en');
         const response = await fetch( request);
   const responsedata = await response.json();
-  console.log('from the another function categories');
+  // console.log('from the another function categories');
   this.getCategoryResult = responsedata;
   return this.getCategoryResult;
+}
+/////////////////////////////////////////
+async GetFilterCategories(value) {
+  const date = {}
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'components/categories?pageNumber=1&pageSize=100&state='+value.status + '&name=' + value.filter,
+  { method: 'GET',
+  });
+        request.headers.delete('Content-Type');
+        request.headers.append('lang', 'en');
+        const response = await fetch( request);
+  const responsedatafilter = await response.json();
+  // console.log('from the another function categories');
+  this.getCategoryFilter = responsedatafilter;
+  return this.getCategoryFilter;
 }
 
 /////////////////////////////////////////
 async GetAds() {
   
   const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
-  const request = new Request(baseURL + 'components/ads?state=active',
+  const request = new Request(baseURL + 'components/ads?',
   { method: 'GET',
   });
         request.headers.delete('Content-Type');
         request.headers.append('lang', 'en');
         const response = await fetch( request);
   const responsegetads = await response.json();
-  console.log('from the another function categories');
+  // console.log('from the another function categories');
   this.getAdsResults = responsegetads;
   return this.getAdsResults;
 }
 
-////////////////////////////+/////////////responsegetpromo
-async GetDistrict() {
+/////////////////////////////////////////
+async GetAdsFilter(value) {
   
   const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
-  const request = new Request(baseURL + 'components/districts?pageNumber=1&pageSize=100&state=active' ,
+  const request = new Request(baseURL + 'components/ads?state=' + value.status,
+  { method: 'GET',
+  });
+        request.headers.delete('Content-Type');
+        request.headers.append('lang', 'en');
+        const response = await fetch( request);
+  const responsegetadsfilter = await response.json();
+  // console.log('from the another function categories');
+  this.AdsResultsfilter = responsegetadsfilter;
+  return this.AdsResultsfilter;
+}
+
+////////////////////////////+/////////////responsegetpromo
+async GetDistrict() {
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'components/districts?pageNumber=1&pageSize=100',
   { method: 'GET',}
   );
         request.headers.delete('Content-Type');
@@ -637,6 +703,20 @@ async GetDistrict() {
   
   this.getDistrictResult = responsedistrictdata;
   return this.getDistrictResult;
+}
+//////////////////////////////////////////////
+async GetFilterDistrict(value) {
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'components/districts?pageNumber=1&pageSize=100&state='+value.status+'&name='+value.filter,
+  { method: 'GET',}
+  )
+        request.headers.delete('Content-Type');
+        request.headers.append('lang', 'en');
+        const response = await fetch( request);
+  const responsedistrictfilter = await response.json();
+  
+  this.getfilterDistrictResult = responsedistrictfilter;
+  return this.getfilterDistrictResult;
 }
 /////////////////////////////////////////
 async GetSubscription() {
@@ -674,7 +754,7 @@ async GetPromo() {
 async GetAdmins() {
   let log =this.userData['x-auth-token'];
   const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
-  const request = new Request(baseURL + 'auth/admins?pageNumber=1&pageSize=100&state=active',
+  const request = new Request(baseURL + 'auth/admins?pageNumber=1&pageSize=100',
   { method: 'GET',
   });
         request.headers.delete('Content-Type');
@@ -683,6 +763,20 @@ async GetAdmins() {
   const responseAdminsData = await response.json();
   this.getAdminsResults = responseAdminsData;
   return this.getAdminsResults;
+}
+/////////////////////////////////////////
+async GetAdminsFilter(value) {
+  let log =this.userData['x-auth-token'];
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'auth/admins?pageNumber=1&pageSize=100&state=' + value.status,
+  { method: 'GET',
+  });
+        request.headers.delete('Content-Type');
+        request.headers.append('x-auth-token', log );
+        const response = await fetch( request);
+  const responseAdminsfilter = await response.json();
+  this.getAdminsfilter = responseAdminsfilter;
+  return this.getAdminsfilter;
 }
 /////////////////////////////////////////
 async GetBookingDoctors() {
@@ -696,7 +790,7 @@ async GetBookingDoctors() {
         const response = await fetch( request);
   const responseBookDoctor = await response.json();
   this.bookingDoctorResult = responseBookDoctor;
-  console.log(this.bookingDoctorResult);
+  // console.log(this.bookingDoctorResult);
   return this.bookingDoctorResult;
 }
 /////////////////////////////////////////
@@ -711,18 +805,18 @@ async GetBookingClients() {
         const response = await fetch( request);
   const responseBookClient = await response.json();
   this.bookingClientsResult = responseBookClient;
-  console.log(this.bookingClientsResult);
+  // console.log(this.bookingClientsResult);
   return this.bookingClientsResult;
 }
 
 
 ////////////////////////////////////////
   async loginUser(value) {
-      console.log(value.username);
-      console.log(value.password);
-      console.log(value.centers);
+      console.log(value.mail);
+      console.log(value.passcode);
+      // console.log(value.centers);
 
-      const data = {email: value.email, password: value.password};
+      const data = {email: value.mail, password: value.passcode};
       const bodyobj = JSON.stringify(data);
       const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
       const request = new Request(baseURL + 'auth/users/login/email', {
@@ -735,6 +829,7 @@ async GetBookingClients() {
     const responsedata = await response.json();
     let message = responsedata.message;
     if (message) {
+      
       this.toastr.error(message);
       this.router.navigate(['/session/login']);
 
@@ -742,19 +837,16 @@ async GetBookingClients() {
      else{
       this.getrsponse(responsedata);
     }
-
+    // this.getrsponse(responsedata);
    }
    getrsponse(resposne) {
  
       this.setLocalUserProfile(resposne);
  this.toastr.success('Successfully Logged In!');
  this.router.navigate(['/']);
-    
-    //  this.userData = resposne;
-    //  console.log("--> = "+ this.userData);
     this.userData = resposne['x-auth-token'];
-console.log('userdata = ' + this.userData);
-console.log('response["x-auth-token"]');
+// console.log('userdata = ' + this.userData);
+// console.log('response["x-auth-token"]');
   }
 
 

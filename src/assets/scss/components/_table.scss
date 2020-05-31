@@ -86,6 +86,9 @@ body .ngx-datatable.material .datatable-footer .datatable-pager li.active a {
     background-position: 0 0;
     background-repeat: repeat-y;
 }
+[dir=rtl] th.mat-header-cell {
+    text-align: center;
+}
 @media(max-width:1500px) {
    .gene-img-table .datatable-body-cell img:nth-last-child(-n+3) {
       display: none;

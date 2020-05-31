@@ -32,7 +32,7 @@ export class AddSubscriptionComponent implements OnInit {
       Doctor(){
         this.authService.GetDoctor().
                   then( responsegetDoctor => { this.doctors = responsegetDoctor.data;
-                    console.log('doctor grt ' + this.doctors);
+                    // console.log('doctor grt ' + this.doctors);
                   });
       } 
   ngOnInit() {

@@ -19,7 +19,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 import { LoginComponent } from './login/login.component';
-
+import { NgxSpinnerModule } from "ngx-spinner";
 import { SessionRoutes } from './session.routing';
 
 
@@ -28,6 +28,7 @@ import { SessionRoutes } from './session.routing';
 		LoginComponent,
 	],
 	imports: [
+		NgxSpinnerModule,
 		CommonModule,
 		MatInputModule,
 		MatFormFieldModule,

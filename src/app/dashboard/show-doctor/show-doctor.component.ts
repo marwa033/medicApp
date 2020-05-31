@@ -22,7 +22,7 @@ export class ShowDoctorComponent implements OnInit {
   updatedAt = new Date();
 
   dataSource: MatTableDataSource<unknown>;
-  displayedColumns: string[] = [ '_id' , 'name',  'title' , 'action'];
+  displayedColumns: string[] = [ 'name',  'title' , 'bookings' , 'action'];
 
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -64,7 +64,7 @@ this.editAAddress = element.address;
                    this.dataSource = new MatTableDataSource(responsegetDoctor.data);
                    this.dataSource.paginator = this.paginator;
                    this.dataSource.sort = this.sort; 
-                   console.log( this.results );
+                  //  console.log( this.results );
                    setTimeout(() => {
                     this.spinner.hide();
                   }, this.results);
@@ -77,12 +77,7 @@ this.editAAddress = element.address;
                  }  
 
 Active(element){
-  console.log('ACTIVE/INACTIVE');
-  this.authService.DistrictActive(element).
-  then( responseActivedistrict => { this.tries = responseActivedistrict;
-    element.state = this.tries.state;
 
-  });
 }
   ngOnInit() {
     this.spinner.show();

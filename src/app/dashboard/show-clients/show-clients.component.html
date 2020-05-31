@@ -1,0 +1,68 @@
+<ngx-spinner bdColor = "rgba(51, 51, 51, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p></ngx-spinner>
+  
+  <div class="container-fluide">
+  <h4 >{{'Show All Clients' | translate}}</h4>
+    <mat-form-field class="ml-5">
+      <mat-label>{{'Filter' | translate}}</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Name">
+    </mat-form-field>
+    <div class="mat-elevation-z8 example-container">
+  
+    <table mat-table [dataSource]="dataSource" matSort >
+      <ng-container matColumnDef="count">
+        <th mat-header-cell *matHeaderCellDef> {{'ID' | translate}} </th>
+        <td mat-cell *matCellDef="let element; let i = index;"> {{paginator.pageIndex * paginator.pageSize + i + 1}} </td>
+      </ng-container>
+      <!-- Position Column -->
+      <ng-container matColumnDef="adminType">
+        <th mat-header-cell *matHeaderCellDef> {{'Admin' | translate}} </th>
+        <td mat-cell *matCellDef="let element" > {{element.user.adminType}}</td>
+      </ng-container>
+     
+      <!-- Weight Column -->
+      <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef> {{'phone' | translate}} </th>
+          <td mat-cell *matCellDef="let element"> {{element.user.phone}} </td>
+        </ng-container>
+      <!-- Weight Column -->
+        <!-- Weight Column -->
+        <ng-container matColumnDef="userType">
+            <th mat-header-cell *matHeaderCellDef> {{'user' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.user.userType}} </td>
+          </ng-container>
+        <!-- Weight Column -->
+          <!-- Weight Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> {{'Name' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.user.name}} </td>
+      </ng-container>
+    <!-- Weight Column -->
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef> {{'Created' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.user.createdAt | date:'short'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="updatedAt">
+        <th mat-header-cell *matHeaderCellDef> {{'Updated' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.user.updatedAt | date:'short'}} </td>
+      </ng-container>
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="pointer"> {{'Action' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> 
+                  <!-- <mat-icon style="color:dodgerblue" class="pointer"  (click)="selectedRow(element)" (click)="openLg(content)" >edit </mat-icon>   -->
+                  <mat-icon style="color:#ffae00"class="pointer" name="inactive" title="inactive" *ngIf="element.state === 'inActive'" (click)="Active(element)">highlight_off</mat-icon>  
+                  <mat-icon style="color:green"class="pointer" name="active" title="active" *ngIf="element.state === 'active'" (click)="Active(element)">check_circle_outline</mat-icon>
+                <!-- <mat-icon style="color:red"class="pointer" title="delete" (click)="Delete(element)">delete</mat-icon>   -->
+              </td>
+              </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns" style="text-align: center;"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    
+    </div>
+  </div>
+  
+  

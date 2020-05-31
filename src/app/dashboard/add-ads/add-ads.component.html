@@ -13,20 +13,20 @@
                         </mat-form-field>
                     </section>
                 </section> -->
-        <section class="row">
-            <section class="col-md-6">
+        <section class="row justify-content-center">
+            <section class="col-md-4">
                 <mat-form-field>
-                    <input matInput placeholder="{{'Enter Title in English' | translate}}" name="ETitle" [(ngModel)] = "ETitle">
+                    <input matInput placeholder="{{'Enter Title in English' | translate}}" name="ETitle" autocomplete="off" [(ngModel)] = "ETitle">
                 </mat-form-field>
             </section>
-            <section class="col-md-6">
+            <section class="col-md-4">
                 <mat-form-field>
-                    <input matInput type="email" placeholder="ادخل اللقب بالعربى" name="ATitle" [(ngModel)] = "ATitle">
+                    <input matInput type="email" placeholder="{{'Enter Name in Arabic' | translate}}" name="ATitle" autocomplete="off" [(ngModel)] = "ATitle">
                 </mat-form-field>
             </section>
         </section>
-        <section class="row">
-            <section class="col-md-6">
+        <section class="row justify-content-center">
+            <section class="col-md-4">
                 <mat-form-field>
                     <mat-select placeholder="{{'Doctor' | translate}}" name="doctors" [(ngModel)] = "selectedDoctor">
                       <mat-option *ngFor="let doctor of doctors" [value]="doctor._id">
@@ -35,12 +35,29 @@
                     </mat-select>
                   </mat-form-field>
             </section>
-            <section class="col-md-6">
-                <img [src]="imageSrc"  style="max-width:300px;max-height:300px"/><br>
+            <section class="col-md-4">
+                <img [src]="imageSrc" class="rid" style="max-width:300px;max-height:300px"/><br>
                 <input  type="file" name="imageSrc" accept="image/*" (change)="handleInputChange($event)" />
             <mat-form-field class="rid">
                 <input matInput placeholder="Color" name="imageSrc" [(ngModel)] = "imageSrc">
             </mat-form-field>
+            </section>
+        </section>
+        <section class="row justify-content-center">
+            <section class="col-md-4">
+                <mat-form-field>
+                    <mat-label>{{'End Date' | translate}}</mat-label>
+                    <input matInput [matDatepicker]="picker" name="endDate" [(ngModel)] = "endDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker">
+                        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                      </mat-datepicker-toggle>
+                 <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+            </section>
+            <section class="col-md-4">
+                <mat-form-field class="rid">
+                    <input matInput placeholder="Color" name="imageSrc" [(ngModel)] = "imageSrc">
+                </mat-form-field>
             </section>
         </section>
     </div>

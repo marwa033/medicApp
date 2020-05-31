@@ -6,12 +6,18 @@ table{
 .example-container{
     overflow: auto;
 }
+.mat-elevation-z8{
+    transition: none !important;
+    box-shadow: none !important;
+}
 
 .mat-header-cell, .mat-cell {
     min-width: 100px;
     word-wrap: break-word;
 }
-
+.container-fluide{
+    padding: 20px;
+}
 h4{
     text-align: center;
 }
@@ -21,3 +27,6 @@ h4{
 .rid{
     display: none;
 }
+.mat-row:hover {
+    background-color: rgb(240, 239, 239);
+  }

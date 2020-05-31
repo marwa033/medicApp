@@ -47,7 +47,7 @@ export class BookingDoctorsComponent implements OnInit {
                    this.dataSource = new MatTableDataSource(responseBookDoctor.data);
                    this.dataSource.paginator = this.paginator;
                    this.dataSource.sort = this.sort; 
-                   console.log( this.results );
+                  //  console.log( this.results );
                    setTimeout(() => {
                     this.spinner.hide();
                   }, this.results);

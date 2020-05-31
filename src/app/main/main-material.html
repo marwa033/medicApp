@@ -11,20 +11,50 @@
       </div>
       <span fxFlex></span>
       <div class="secondary-menu">
-         <!-- <button fxHide="true" fxHide.gt-sm="false" mat-button class="fullscreen-toggle" (click)="toggleFullscreen()" tourAnchor="tour-full-screen">
+         <button fxHide="true" fxHide.gt-sm="false" mat-button class="fullscreen-toggle" (click)="toggleFullscreen()" tourAnchor="tour-full-screen">
             <mat-icon *ngIf="!isFullscreen">fullscreen</mat-icon>
             <mat-icon *ngIf="isFullscreen">fullscreen_exit</mat-icon>
-         </button> -->
+         </button>
          <button class="user-button" mat-button [matMenuTriggerFor]="menu">
             <div fxLayout="row" fxLayoutAlign="center center">
                <mat-icon>account_circle</mat-icon>
             </div>
          </button>
       
-         <ms-language-drop-down></ms-language-drop-down>
+         <!-- <ms-language-drop-down></ms-language-drop-down> -->
+         <div class="language-dropdown-wrap">
+            <button mat-button [matMenuTriggerFor]="menu_activator">
+              <img width="24" height="24" [src]="selectImage">
+            </button>
+            <mat-menu #menu_activator>
+               <div class="gene-lang-popup">
+                  <div class="language-title pad-all-sm primary-bg" fxLayout="row wrap" fxLayoutAlign="space-between center">
+                     <div class="sec-title" fxFlex="60">
+                        <h4 class="mrgn-b-none">{{'Languages'|translate}}</h4>
+                     </div>
+                     <div fxFlex="40" class="text-right">   
+                        <span class="gene-text-md">{{langArray.length}} NEW</span>
+                     </div>   
+                  </div>
+                  <div  fxLayout="row wrap" class="pad-all-xs">
+                     <ng-container *ngFor="let lang of translate.getLangs()">
+                        <ng-container *ngFor="let language of langArray">
+                           <mat-card class="mat-pad-none lang-wrap" *ngIf="language.value == lang" fxFlex="calc(70% - 0.7rem)" >
+                              
+                              <a class="pad-all-xs gene-block" href="javascript:void(0)" (click)="setLang(lang)">
+                                 <img class="mrgn-r-xs" width="25" height="14" src="{{language.img}}">
+                                 <span >{{language.name}}</span>
+                              </a>
+                           </mat-card>
+                        </ng-container>
+                     </ng-container>
+                  </div>
+               </div>
+            </mat-menu>
+         </div>
       </div>
    </mat-toolbar>
-   <mat-sidenav #end position="end" class="chat-panel" mode="over" opened="false">
+   <!-- <mat-sidenav #end position="end" class="chat-panel" mode="over" opened="false">
       <div class="scroll">
          <mat-toolbar class="primary-bg">
             <h3>{{'Notifications'|translate}}</h3>
@@ -63,7 +93,7 @@
             </mat-list-item>
          </mat-nav-list>
       </div>
-   </mat-sidenav>
+   </mat-sidenav> -->
    <div class="gene-base-container" #scrollContainer>
       <div class="inner-container" fxLayout="row wrap">
          <div class="full-wid" fxFlex="100">
@@ -97,16 +127,16 @@
          <div>
             <mat-checkbox (change)="changeRTL($event.checked)" >{{'RTL'| translate }}</mat-checkbox>
          </div>
-         <div>
+         <!-- <div>
             <mat-select placeholder="Language" class="mt-1" [(ngModel)]="currentLang" #langSelect="ngModel" (ngModelChange)="translate.use(currentLang)">
             <mat-option *ngFor="let lang of translate.getLangs()" [value]="lang">{{ lang }}</mat-option>
             </mat-select>
-         </div>
+         </div> -->
       
       </mat-card-content>
    </div>
 </div>
-<div class="gene-chat-wrap" id ="gene-chat">
+<!-- <div class="gene-chat-wrap" id ="gene-chat">
    <mat-card class="people-list">
       <mat-tab-group class="height-full">
          <mat-tab label="Chat" class="height-full">
@@ -266,7 +296,7 @@
          </mat-form-field>
       </mat-card-actions>
    </mat-card>
-</div>
+</div> -->
 </div>
 <mat-menu class="user-menu" x-position="before" y-position="below" #menu="matMenu">
     <button (click)="profile()" mat-menu-item>
@@ -285,23 +315,5 @@
    <button (click)="logOut()" mat-menu-item>
       <mat-icon>exit_to_app</mat-icon>
       <span>{{'Logout'|translate}}</span>
-   </button>
-</mat-menu>
-<mat-menu class="apps-menu" x-position="after" y-position="below" #appsmenu="matMenu">
-   <button mat-menu-item>
-      <mat-icon>storage</mat-icon>
-      <span>{{'Total App Memory'|translate}}</span>
-   </button>
-   <button mat-menu-item>
-      <mat-icon>memory</mat-icon>
-      <span>{{'Total Memory Used'|translate}}</span>
-   </button>
-   <button mat-menu-item>
-      <mat-icon>mail</mat-icon>
-      <span>{{'12 Unread Mail'|translate}}</span>
-   </button>
-   <button mat-menu-item>
-      <mat-icon>feedback</mat-icon>
-      <span>{{'2 Feedback'|translate}}</span>
    </button>
 </mat-menu>

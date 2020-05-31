@@ -22,14 +22,14 @@ export class ShowDistrictComponent implements OnInit {
   updatedAt = new Date();
 
   dataSource: MatTableDataSource<unknown>;
-  displayedColumns: string[] = [ 'name','state' ,  'createdAt' , 'updatedAt' , 'action'];
+  displayedColumns: string[] = ['count', 'name',  'createdAt' , 'updatedAt' , 'action'];
 
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   results: any;
   tries: any;
-  filter: any;
+  filter: string="";
   editEName: any;
   
   constructor(public translate: TranslateService,
@@ -48,12 +48,31 @@ export class ShowDistrictComponent implements OnInit {
     }
  
     Districts(){
+      // if(value.filter == "" || value.filter == undefined){
+      //    value.filter = "";
+      //   }
       this.authService.GetDistrict().
-                then( responsedistrictdata => { this.results = responsedistrictdata;
+                then( responsedistrictdata => { this.results = responsedistrictdata.data;
                    this.dataSource = new MatTableDataSource(responsedistrictdata.data);
                    this.dataSource.paginator = this.paginator;
-                   this.dataSource.sort = this.sort; 
-                   console.log( this.results );
+                   this.dataSource.sort = this.sort;
+                   setTimeout(() => {
+                    this.spinner.hide();
+                  }, this.results);
+                });
+               }
+
+               
+    FilterDistrict(value){
+      if(value.Status == "" ||value.Status == undefined){
+        value.Status = "";
+      }
+      this.spinner.show();
+      this.authService.GetFilterDistrict(value).
+                then( responsedistrictfilter => { this.results = responsedistrictfilter.data;
+                   this.dataSource = new MatTableDataSource(responsedistrictfilter.data);
+                   this.dataSource.paginator = this.paginator;
+                   this.dataSource.sort = this.sort;
                    setTimeout(() => {
                     this.spinner.hide();
                   }, this.results);
@@ -85,9 +104,13 @@ export class ShowDistrictComponent implements OnInit {
                    this.id = element._id;
                    this.editEName = element.name;
                  }
-
+                 function(value){
+                  if(value.filter==undefined){
+                    value.filter = "";
+                        }
+                 }
 Active(element){
-  console.log('ACTIVE/INACTIVE');
+  // console.log('ACTIVE/INACTIVE');
   this.authService.DistrictActive(element).
   then( responseActivedistrict => { this.tries = responseActivedistrict;
     element.state = this.tries.state;
@@ -96,8 +119,8 @@ Active(element){
 }
   ngOnInit() {
     this.spinner.show();
-
     this.Districts();
+    // this.function(this.filter);   
   }
 
 }

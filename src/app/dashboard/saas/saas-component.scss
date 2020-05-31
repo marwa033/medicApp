@@ -1,14 +1,23 @@
 
-.dash{
-    border-right: 2px solid red;
-}
-
 table{
     transition: none !important;
     box-shadow: none !important;
+    text-align: center !important;
 }
 .example-container{
     overflow: auto;
+}
+.mat-elevation-z8{
+    transition: none !important;
+    box-shadow: none !important;
+}
+
+.mat-header-cell, .mat-cell {
+    min-width: 100px;
+    text-align: center;
+}
+th.mat-header-cell{
+    text-align: center !important;
 }
 img{
     width: 70px;
@@ -20,10 +29,6 @@ img{
     display: none;
 }
 
-.mat-header-cell, .mat-cell {
-    min-width: 100px;
-    word-wrap: break-word;
-}
 
 h4{
     text-align: center;

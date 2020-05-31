@@ -25,7 +25,7 @@ const screenfull = require('screenfull');
 	}
 })
 
-export class MainComponent implements OnInit, OnDestroy {
+export class MainComponent implements OnInit {
 	chatList              : any;
 	currentUrl            : any;
 	root                  : any = 'ltr';
@@ -47,9 +47,40 @@ export class MainComponent implements OnInit, OnDestroy {
 	sidebarColor          : any;
 	url                   : string;
 	windowSize            : number;
+	
+	selectImage = 'assets/img/en.png';
 	private _routerEventsSubscription  : Subscription;
 	private _router                    : Subscription;
 	@ViewChild('sidenav',{static : true}) sidenav;
+
+	langArray : any [] = [
+		{  
+		   img:"assets/img/en.png",
+		   name:"English",
+		   value	: "en"
+		},
+		{  
+		   img:"assets/img/ar.png",
+		   name:"Arabic",
+		   value:"ar"
+		},
+  
+	 ];
+  
+	setLang(lang) {
+		for(let data of this.langArray) {
+		   if(data.value == lang) {
+			  this.selectImage = data.img;
+			  if(lang == 'ar'){
+				  this.layout = 'rtl';
+			  }else{
+				  this.layout = 'ltr';
+			  }
+			  break;
+		   }
+		}
+		this.translate.use(lang);
+	 }
 
 	sideBarFilterClass : any = [
 		{
@@ -143,182 +174,15 @@ export class MainComponent implements OnInit, OnDestroy {
 
 		const browserLang: string = translate.getBrowserLang();
 		translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
-	 
-		// this.tourService.initialize([{
-		// 	anchorId: 'start.tour',
-		// 	content: 'Welcome to Gene admin panel!',
-		// 	placement: 'below',
-		// 	title: 'Welcome to Gene',
-		// },
-		// {
-		// 	anchorId: 'tour-search',
-		// 	content: 'Enjoying Search box with sugestion and many more things',
-		// 	placement: 'below',
-		// 	title: 'Search Box',
-		// },
-		// {
-		// 	anchorId: 'tour-full-screen',
-		// 	content: 'By pressing this button you can switch to fullscreen mode.',
-		// 	placement: 'below',
-		// 	title: 'Full Screen',
-		// },
-		// {
-		// 	anchorId: 'tour-ui',
-		// 	content: 'Show your site stats with unique designed cards',
-		// 	placement: 'below',
-		// 	title: 'Stats Cards',
-		// }]);
-
-		// if(window.innerWidth>1199) {
-		// 	this.tourService.start();
-		// }
 
 		breadcrumbService.addFriendlyNameForRoute('/dashboard', 'Dashboard');
 		breadcrumbService.addFriendlyNameForRoute('/dashboard/saas', 'SAAS');
-		breadcrumbService.addFriendlyNameForRoute('/dashboard/web-analytics', 'Web Analytics');
-		breadcrumbService.addFriendlyNameForRoute('/inbox', '');
-		breadcrumbService.addFriendlyNameForRoute('/chat', '');
-		breadcrumbService.addFriendlyNameForRoute('/calendar', '');
-		breadcrumbService.addFriendlyNameForRoute('/taskboard', '');
-		breadcrumbService.addFriendlyNameForRoute('/editor', 'Editor');
-		breadcrumbService.addFriendlyNameForRoute('/video-player', 'Editor');
-		breadcrumbService.addFriendlyNameForRoute('/editor/wysiwyg', 'Wysiwyg');
-		breadcrumbService.addFriendlyNameForRoute('/editor/ckeditor', 'Ckeditor');
-		breadcrumbService.addFriendlyNameForRoute('/icons', '');
-		breadcrumbService.addFriendlyNameForRoute('/components', 'Components');
-		breadcrumbService.addFriendlyNameForRoute('/components/buttons', 'Buttons');
-		breadcrumbService.addFriendlyNameForRoute('/components/cards', 'Cards');
-		breadcrumbService.addFriendlyNameForRoute('/components/grid', 'Grid');
-		breadcrumbService.addFriendlyNameForRoute('/components/list', 'List');
-		breadcrumbService.addFriendlyNameForRoute('/components/menu', 'Menu');
-		breadcrumbService.addFriendlyNameForRoute('/components/slider', 'Slider');
-		breadcrumbService.addFriendlyNameForRoute('/components/snackbar', 'Snackbar');
-		breadcrumbService.addFriendlyNameForRoute('/components/dialog', 'Dialog');
-		breadcrumbService.addFriendlyNameForRoute('/components/select', 'Select');
-		breadcrumbService.addFriendlyNameForRoute('/components/input', 'Input');
-		breadcrumbService.addFriendlyNameForRoute('/components/colorpicker', 'Colorpicker');
-		breadcrumbService.addFriendlyNameForRoute('/checkbox', 'Checkbox');
-		breadcrumbService.addFriendlyNameForRoute('/components/radio', 'Radio');
-		breadcrumbService.addFriendlyNameForRoute('/components/toolbar', 'Toolbar');
-		breadcrumbService.addFriendlyNameForRoute('/components/progress', 'Progress');
-		breadcrumbService.addFriendlyNameForRoute('/components/tabs', 'Tabs');
-		breadcrumbService.addFriendlyNameForRoute('/dragndrop', 'Drag and Drop');
-		breadcrumbService.addFriendlyNameForRoute('/dragndrop/dragula', 'Dragula');
-		breadcrumbService.addFriendlyNameForRoute('/dragndrop/sortable', 'SortableJS');
-		breadcrumbService.addFriendlyNameForRoute('/chart', 'Charts');
-		breadcrumbService.addFriendlyNameForRoute('/chart/ng2-charts', 'NG2 Charts');
-		breadcrumbService.addFriendlyNameForRoute('/chart/easy-pie-chart', 'Easy Pie');
-		breadcrumbService.addFriendlyNameForRoute('/tables', 'Table');
-		breadcrumbService.addFriendlyNameForRoute('/tables/fullscreen', 'Full Screen');
-		breadcrumbService.addFriendlyNameForRoute('/tables/selection', 'Selection');
-		breadcrumbService.addFriendlyNameForRoute('/tables/pinning', 'Pinning');
-		breadcrumbService.addFriendlyNameForRoute('/tables/sorting', 'Sorting');
-		breadcrumbService.addFriendlyNameForRoute('/tables/Paging', 'Paging');
-		breadcrumbService.addFriendlyNameForRoute('/tables/editing', 'Editing');
-		breadcrumbService.addFriendlyNameForRoute('/tables/filter', 'Filter');
-		breadcrumbService.addFriendlyNameForRoute('/tables/responsive', 'Responsive');
-		breadcrumbService.addFriendlyNameForRoute('/forms', 'Forms');
-		breadcrumbService.addFriendlyNameForRoute('/forms/form-wizard', 'Form Wizard');
-		breadcrumbService.addFriendlyNameForRoute('/forms/form-validation', 'Form Validation');
-		breadcrumbService.addFriendlyNameForRoute('/forms/form-upload', 'Form Upload');
-		breadcrumbService.addFriendlyNameForRoute('/forms/form-tree', 'Tree');
-		breadcrumbService.addFriendlyNameForRoute('/maps', 'Maps');
-		breadcrumbService.addFriendlyNameForRoute('/maps/googlemap', 'Google Map');
-		breadcrumbService.addFriendlyNameForRoute('/maps/leafletmap', 'Leaflet Map');
-		breadcrumbService.addFriendlyNameForRoute('/pages', 'Pages');
-		breadcrumbService.addFriendlyNameForRoute('/pages/media', 'Gallery');
-		breadcrumbService.addFriendlyNameForRoute('/pages/pricing', 'Pricing');
-		breadcrumbService.addFriendlyNameForRoute('/pages/blank', 'Blank');
-		breadcrumbService.addFriendlyNameForRoute('/pages/mediaV2', 'Gallery V2');
-		breadcrumbService.addFriendlyNameForRoute('/pages/pricing-1', 'Pricing-1');
-		breadcrumbService.addFriendlyNameForRoute('/pages/timeline', 'Timeline');
-		breadcrumbService.addFriendlyNameForRoute('/pages/faq', 'FAQ');
-		breadcrumbService.addFriendlyNameForRoute('/pages/feedback', 'Feedback');
-		breadcrumbService.addFriendlyNameForRoute('/pages/about', 'About');
-		breadcrumbService.addFriendlyNameForRoute('/pages/contact', 'Contact');
-		breadcrumbService.addFriendlyNameForRoute('/pages/search', 'Search');
-		breadcrumbService.addFriendlyNameForRoute('/pages/comingsoon', 'Coming Soon');
-		breadcrumbService.addFriendlyNameForRoute('/pages/maintenance', 'Maintenance');
-		breadcrumbService.addFriendlyNameForRoute('/users', 'Users');
-		breadcrumbService.addFriendlyNameForRoute('/users/userprofile', 'User Profile');
-		breadcrumbService.addFriendlyNameForRoute('/users/userlist', 'User List');
-		breadcrumbService.addFriendlyNameForRoute('/session', 'Session');
-		breadcrumbService.addFriendlyNameForRoute('/session/login', 'Login');
-		breadcrumbService.addFriendlyNameForRoute('/session/register', 'Register');
-		breadcrumbService.addFriendlyNameForRoute('/session/forgot-password', 'Forgot');
-		breadcrumbService.addFriendlyNameForRoute('/session/lockscreen', 'Lock Screen');
-		breadcrumbService.addFriendlyNameForRoute('/courses', 'Courses');
-		breadcrumbService.addFriendlyNameForRoute('/dashboard/courses', 'Courses');
-		breadcrumbService.addFriendlyNameForRoute('/courses/courses-list', 'Courses List');
-		breadcrumbService.addFriendlyNameForRoute('/courses/course-detail', 'Course Detail');
-		breadcrumbService.addFriendlyNameForRoute('/courses/signin', 'Sign In');
-		breadcrumbService.addFriendlyNameForRoute('/courses/payment', 'Payment');
-		breadcrumbService.addFriendlyNameForRoute('/ecommerce', 'Ecommerce');
-		breadcrumbService.addFriendlyNameForRoute('/ecommerce/shop', 'Shop');
-		breadcrumbService.addFriendlyNameForRoute('/ecommerce/cart', 'Cart');
-		breadcrumbService.addFriendlyNameForRoute('/ecommerce/checkout', 'Checkout');
-		breadcrumbService.addFriendlyNameForRoute('/ecommerce/cards', 'Cards');
-		breadcrumbService.addFriendlyNameForRoute('/ecommerce/invoice', 'Invoice');
-		breadcrumbService.addFriendlyNameForRoute('/users/userprofilev2', 'User Profile V2');
-		breadcrumbService.addFriendlyNameForRoute('/user-management', 'Management');
-		breadcrumbService.addFriendlyNameForRoute('/user-management/usermanagelist', 'User List');
-		breadcrumbService.addFriendlyNameForRoute('/user-management/usergridlist', 'User Grid');
-		breadcrumbService.addFriendlyNameForRoute('/video-player', '');
-
-		breadcrumbService.addFriendlyNameForRoute('/crypto', 'Crypto');
-		breadcrumbService.addFriendlyNameForRoute('/dashboard/crypto', 'Crypto');
-		breadcrumbService.addFriendlyNameForRoute('/crypto/marketcap', 'Market Cap');
-		breadcrumbService.addFriendlyNameForRoute('/crypto/wallet', 'Wallet');
-		breadcrumbService.addFriendlyNameForRoute('/crypto/trade', 'Trade');
-		breadcrumbService.addFriendlyNameForRoute('/crm', 'CRM');
-		breadcrumbService.addFriendlyNameForRoute('/crm/dasboard', 'Dasboard');
-		breadcrumbService.addFriendlyNameForRoute('/crm/projects', 'Projects');
-		breadcrumbService.addFriendlyNameForRoute('/crm/project-detail', 'Project Details');
-		breadcrumbService.addFriendlyNameForRoute('/crm/clients', 'Clients');
-		breadcrumbService.addFriendlyNameForRoute('/crm/reports', 'Reports');
-		breadcrumbService.addFriendlyNameForRoute('/dashboard/crm', 'CRM');
-		breadcrumbService.addFriendlyNameForRoute('/ecommerce/products', 'Products');
-		breadcrumbService.addFriendlyNameForRoute('/ecommerce/edit-products', 'Edit Products');
-		breadcrumbService.addFriendlyNameForRoute('/ecommerce/product-add', 'Product Add');
-		breadcrumbService.addFriendlyNameForRoute('/crm/reports', 'Reports');
-		breadcrumbService.addFriendlyNameForRoute('/crm/reports', 'Reports');
-
 	}
 
 	ngOnInit() {
-		if((this.router.url == '/dashboard/courses' || this.router.url === '/courses/courses-list' || this.router.url === '/courses/course-detail' || this.router.url === '/ecommerce/shop' || this.router.url === '/ecommerce/checkout' || this.router.url === '/ecommerce/invoice') && window.innerWidth<1920) {
-				this.coreService.sidenavOpen = false;
-			}
-	  
-		this.coreService.collapseSidebarStatus = this.coreService.collapseSidebar;
-		this.pageTitleService.title.subscribe((val: string) => {
-			this.header = val;
-		});
 
-		this._router = this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
-			this.coreService.collapseSidebarStatus = this.coreService.collapseSidebar;
-			this.url = event.url;
-			this.customizeSidebar();
-		});
-		this.url = this.router.url;
-		this.customizeSidebar();
-	  
-		setTimeout(()=>{ 
-			this.windowSize = window.innerWidth;
-			this.resizeSideBar();
-		},0)
-
-
-		this._routerEventsSubscription = this.router.events.subscribe((event) => {
-			if (event instanceof NavigationEnd && this.isMobile) {
-				this.sidenav.close();
-			}
-		});
 	}
 
-	ngOnDestroy() {
-		this._router.unsubscribe();
-	}
 	 
 	/**
 	  *As router outlet will emit an activate event any time a new component is being instantiated.

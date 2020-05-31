@@ -11,6 +11,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from "ngx-spinner";
+import { Color } from '@angular-material-components/color-picker';
 
 
 
@@ -26,14 +27,15 @@ export class SaasComponent implements OnInit  {
    id: string="";
    editEName: string ='anything';
    editAName: string = '';
-   editColor: string='';
+   editColor : any;
    editimage: string='';
    createdAt = new Date();
    updatedAt = new Date();
-
+   no : any;
+   count = 0;
+   addcount = this.count++;
    dataSource: MatTableDataSource<unknown>;
-   displayedColumns: string[] = ['image', 'color' , 'state' ,
-    'name',  'createdAt' , 'updatedAt' , '__v' , 'action'];
+   displayedColumns: string[] = [ 'addcount','image', 'color' , 'name',  'createdAt' , 'updatedAt' , 'action'];
 
 
    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -89,26 +91,37 @@ export class SaasComponent implements OnInit  {
             const filterValue = (event.target as HTMLInputElement).value;
             this.dataSource.filter = filterValue.trim().toLowerCase();
           }
-          // nameFilter(element){
-          //   this.authService.GetCategories(element).
-          //   then( responsedata => { this.results = responsedata.data;});
-          // }
 
           selectedRow(element){
-            console.log("ehhhh"+ element.image);
+            
+  this.setcategoryID(element);
              this.id = element._id;
              this.editEName = element.name;
-             this.editColor = element.color;
+             this.editColor =  (element.color);
              this.imageSrc = element.image;
           }
+          FilterCategory(value){
+            this.spinner.show();
+            if(value.filter == undefined){
+              value.filter = "";
+            }
+            this.authService.GetFilterCategories(value).
+                      then( responsedata => { this.results = responsedata.data;
+                         this.dataSource = new MatTableDataSource(responsedata.data);
+                         this.dataSource.paginator = this.paginator;
+                         this.dataSource.sort = this.sort;
+                         setTimeout(() => {
+                            this.spinner.hide();
+                          }, this.results);
+                      });
+       }
 
-Categories(element){
-     this.authService.GetCategories(element).
-               then( responsedata => { this.results = responsedata.data;
-                  this.dataSource = new MatTableDataSource(responsedata.data);
+Categories(){
+     this.authService.GetCategories().
+               then( responsedatafilter => { this.results = responsedatafilter.data;
+                  this.dataSource = new MatTableDataSource(responsedatafilter.data);
                   this.dataSource.paginator = this.paginator;
-                  this.dataSource.sort = this.sort; 
-                  console.log( this.results);
+                  this.dataSource.sort = this.sort;
                   setTimeout(() => {
                      this.spinner.hide();
                    }, this.results);
@@ -133,35 +146,28 @@ handleInputChange(e) {
  }
 
 Active(element){
-
    this.authService.Activation(element).
    then( responseActivedata => { this.tries = responseActivedata;
-      console.log("state is = " + this.tries.state);
+      // console.log("state is = " + this.tries.state);
       element.state = this.tries.state;
       this.Close();   
    });
 }
+
 openLg(content) {
    this.modalService.open(content, { size: 'lg' });
  }
 
-
-
-
-
-
-
-
+ setcategoryID(value) {
+  localStorage.setItem('try', JSON.stringify(value));
+  var x = JSON.parse(localStorage.getItem('try'));
+console.log(x);
+console.log('x => ' + x);
+}
    ngOnInit() {
+     
       this.spinner.show();
- 
-      // setTimeout(() => {
-      //   this.spinner.hide();
-      // }, 5000);
-
-
-// this.Category('input');
-this.Categories('value');
+this.Categories();
 $(document).ready(function() {
 
    $('.pointer').click(function() {
