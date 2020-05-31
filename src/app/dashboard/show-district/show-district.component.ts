@@ -20,6 +20,7 @@ export class ShowDistrictComponent implements OnInit {
   upaName: string = '';
   createdAt = new Date();
   updatedAt = new Date();
+  selectedstatus : any;
 
   dataSource: MatTableDataSource<unknown>;
   displayedColumns: string[] = ['count', 'name',  'createdAt' , 'updatedAt' , 'action'];

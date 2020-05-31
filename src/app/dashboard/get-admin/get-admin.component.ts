@@ -29,6 +29,7 @@ export class GetAdminComponent implements OnInit {
   editEmail: any;
   editpassword: any;
   password: any;
+  selectedstatus: any;
   leeh = JSON.parse(localStorage.getItem('try'));
   
   constructor(public translate: TranslateService,

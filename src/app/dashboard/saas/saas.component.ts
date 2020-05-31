@@ -11,7 +11,6 @@ import {MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from "ngx-spinner";
-import { Color } from '@angular-material-components/color-picker';
 
 
 
@@ -31,9 +30,9 @@ export class SaasComponent implements OnInit  {
    editimage: string='';
    createdAt = new Date();
    updatedAt = new Date();
-   no : any;
-   count = 0;
-   addcount = this.count++;
+   filter : any;
+   selectedstatus : any;
+  //  addcount = this.count++;
    dataSource: MatTableDataSource<unknown>;
    displayedColumns: string[] = [ 'addcount','image', 'color' , 'name',  'createdAt' , 'updatedAt' , 'action'];
 

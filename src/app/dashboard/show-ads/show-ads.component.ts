@@ -34,7 +34,8 @@ export class ShowAdsComponent implements OnInit {
   doctors: string;
   imageSrc: any;
   editDate: any;
-
+  selectedstatus: any;
+  endDate:any;
   constructor(public translate: TranslateService,
     public authService: AuthService,
    private pageTitleService: PageTitleService ,

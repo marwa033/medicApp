@@ -22,7 +22,7 @@ import { MatIconModule,
 			import { GridModule, PageService, SortService, FilterService, GroupService } from '@syncfusion/ej2-angular-grids';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
-import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker';
+// import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
 import { ChartsModule } from 'ng2-charts';
@@ -64,7 +64,6 @@ import { ProfileComponent } from './profile/profile.component';
 import { ShowDoctorComponent } from './show-doctor/show-doctor.component';
 import { AddDoctorComponent } from './add-doctor/add-doctor.component';
 import { NgxSpinnerModule } from "ngx-spinner";
-import { MatColorPickerModule } from 'mat-color-picker';
 import { ShowClientsComponent } from './show-clients/show-clients.component';
 
 @NgModule({
@@ -92,8 +91,6 @@ import { ShowClientsComponent } from './show-clients/show-clients.component';
 	],
 	imports: [ GridModule,
 		ListViewModule ,
-		MatColorPickerModule,
-		NgxMatColorPickerModule,
 		MatTableModule ,
 		ButtonModule,
 		MatDatepickerModule,
@@ -134,7 +131,7 @@ import { ShowClientsComponent } from './show-clients/show-clients.component';
 	],
 	providers: [
 		PageService, SortService, FilterService, GroupService,
-		{ provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS },
+		// { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS },
 		{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
 		NgbModalConfig, NgbModal
 	  ],

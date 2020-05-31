@@ -17,6 +17,7 @@ export class AddAdsComponent implements OnInit {
   selectedDoctor: string= '';
   image : string= '' ;
   imageSrc: any;
+  endDate: any;
 
   constructor(public translate: TranslateService,
     public authService: AuthService,
