@@ -11,9 +11,7 @@ table{
     transition: none !important;
     box-shadow: none !important;
 }
-.container-fluide{
-    padding: 20px;
-}
+
 .mat-header-cell, .mat-cell {
     min-width: 100px;
     text-align: center;
@@ -21,6 +19,10 @@ table{
 th.mat-header-cell{
     text-align: center !important;
 }
+.mat-row:hover {
+    background-color: rgb(240, 239, 239);
+  }
+
 .container-fluide{
     padding: 20px;
 }
@@ -33,6 +35,3 @@ h4{
 .rid{
     display: none;
 }
-.mat-row:hover {
-    background-color: rgb(240, 239, 239);
-  }

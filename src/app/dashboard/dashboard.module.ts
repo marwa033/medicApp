@@ -65,6 +65,9 @@ import { ShowDoctorComponent } from './show-doctor/show-doctor.component';
 import { AddDoctorComponent } from './add-doctor/add-doctor.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ShowClientsComponent } from './show-clients/show-clients.component';
+import { BookingComponent } from './booking/booking.component';
+import { GroupComponent } from './group/group.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
 	declarations: [
@@ -87,7 +90,9 @@ import { ShowClientsComponent } from './show-clients/show-clients.component';
 		ShowDoctorComponent,
 		AddDoctorComponent,
 		ShowClientsComponent,
-		
+		BookingComponent,
+		GroupComponent,
+		MessagesComponent,		
 	],
 	imports: [ GridModule,
 		ListViewModule ,

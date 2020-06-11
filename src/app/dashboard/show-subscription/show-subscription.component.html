@@ -1,99 +1,357 @@
 <ngx-spinner bdColor = "rgba(51, 51, 51, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true">
   <p style="color: white" > Loading... </p></ngx-spinner>
-
-<div class="container">
-<h4>{{'Show All Subscriptions' | translate}}</h4>
-  <mat-form-field class="ml-5">
-    <mat-label>{{'Filter' | translate}}</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Name">
-  </mat-form-field>
-  <div class="mat-elevation-z8 example-container">
-
-  <table mat-table [dataSource]="dataSource" matSort >
-    
-      <!-- Weight Column -->
-      <ng-container matColumnDef="startDate">
-        <th mat-header-cell *matHeaderCellDef> {{'Start Date' | translate}} </th>
-        <td mat-cell *matCellDef="let element"> {{element.startDate  | date:'short'}} </td>
-      </ng-container>
-    
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="endDate">
-        <th mat-header-cell *matHeaderCellDef> {{'End Date' | translate}} </th>
-        <td mat-cell *matCellDef="let element"> {{element.endDate  | date:'short'}} </td>
-      </ng-container>
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="action">
-              <th mat-header-cell *matHeaderCellDef > {{'Action' | translate}} </th>
-              <td mat-cell *matCellDef="let element"> 
-              <mat-icon style="color:dodgerblue" class="pointer" (click)="selectedRow(element)" (click)="openLg(content)">edit</mat-icon>  
-              <!-- <mat-icon style="color:#ffae00" class="pointer btn" title="inactive/active" (click)="Active(element)">error</mat-icon>    -->
-            </td>
-            </ng-container>
   
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-  
-  </div>
-</div>
-
-
-    <!--********************************************************************************-->
-    <ng-template #content let-modal>
-      <div class="modal-header">
-        <h4 class="modal-title">Update Admin</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-          <span aria-hidden="true">&times;</span>
-        </button>
+<div class="container-fluide">
+      <section class="card">
+        <div class="card-header">{{'Doctor Info' | translate}}          
       </div>
-      <form #form="ngForm" (ngSubmit)="Update(form.value)">
-    
-      <div class="modal-body">
-        <section class="row ">
-          <section class="col-md-6 rid">
-            <mat-form-field>
-              <input matInput placeholder="ID" readonly name="id" [(ngModel)] = "id">
-          </mat-form-field> 
+      <div class="card-body">
+        <p>{{bio}}</p>
+        <p>{{ABio}}</p>
+        <mat-divider></mat-divider><br>
+        <section class="row justify-content-center">
+          <section class="col-md-4 dash">
+            <div class="row">
+              <div class="col-md-6 mt-2 ml-2">
+               <h5> {{'Personal Information' | translate}}</h5>
+              </div>
+              <div class="col-md-6"></div>
+            </div>
+            <section class="row justify-content-center">
+            <img [src]='image'>
+          </section>
+          <section class="row justify-content-center">
+            <section class="col-md-1"></section>
+          <section class="col-md-5">
+            <label>{{'Name in english'}} :</label>
           </section>
           <section class="col-md-6">
-            <mat-form-field>
-              <mat-select placeholder="{{'Doctor' | translate}}" name="doctors" [(ngModel)] = "selectedDoctor">
-                <mat-option *ngFor="let doctor of doctors" [value]="doctor._id">{{doctor.name}}
-                </mat-option>
-              </mat-select>
-              </mat-form-field>
-            </section>
+          <span>{{name}}</span>
         </section>
-<section class="row">
-  <section class="col-md-6">
-      <mat-form-field>
-          <mat-label>{{'Start Date' | translate}}</mat-label>
-          <input matInput [matDatepicker]="picker" name="startDate"  [(ngModel)] = "startDate">
-          <mat-datepicker-toggle matSuffix [for]="picker">
-              <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-            </mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-  </section>
-  <section class="col-md-6">
-      <mat-form-field>
-          <mat-label>{{'End Date' | translate}}</mat-label>
-          <input matInput [matDatepicker]="picker2" name="endDate" [(ngModel)] = "endDate">
-          <mat-datepicker-toggle matSuffix [for]="picker2">
-              <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-            </mat-datepicker-toggle>
+        <!-- <section class="col-md-1"></section> -->
 
-          <mat-datepicker #picker2></mat-datepicker>
-        </mat-form-field>
+        </section>
+        <section class="row justify-content-center">
+          <section class="col-md-1"></section>
+        <section class="col-md-5">
+          <label>{{'Name in arabic'}} :</label>
+        </section>
+        <section class="col-md-6">
+        <span>{{AName}}</span>
+      </section>
+      <!-- <section class="col-md-1"></section> -->
+
+      </section>
+        <section class="row justify-content-center">
+          <section class="col-md-1"></section>
+        <section class="col-md-5">
+          <label>{{'Title in english' | translate}} :</label>
+        </section>
+        <section class="col-md-6">
+        <span>{{title}}</span>
+      </section>
+      <section class="col-md-1"></section>
+
+      </section> 
+      <section class="row justify-content-center">
+        <section class="col-md-1"></section>
+      <section class="col-md-5">
+        <label>{{'Title in arabic' | translate}} :</label>
+      </section>
+      <section class="col-md-6">
+      <span>{{ATitle}}</span>
+    </section>
+    <section class="col-md-1"></section>
+
+    </section>    
+        
+            <!-- <section class="row">
+              <section class="col-md-1"></section>
+            <section class="col-md-4">
+              <label>Address :</label>
+            </section>
+            <section class="col-md-6">
+            <span>{{address}}</span>
+          </section>
+          <section class="col-md-1"></section>
+  
+          </section> -->
+          </section>
+
+
+          <section class="col-md-4 dash" >
+            <div class="row">
+              <div class="col-md-6 mt-2 ml-2">
+               <h5> {{'Clinic Information' | translate}}</h5>
+              </div>
+              <div class="col-md-6"></div>
+            </div>
+            <section class="row justify-content-center">
+            <img [src]='logo'>
+          </section>
+            <section class="row">
+              <section class="col-md-1"></section>
+              <section class="col-md-4">
+                <label>{{'Price' | translate}} :</label>
+              </section>
+              <section class="col-md-4">
+              <span>{{price}}</span>
+            </section>
+            <section class="col-md-3"></section>
+
+            </section>
+            <section class="row">
+            <section class="col-md-1"></section>
+            <section class="col-md-4">
+              <label>{{'District' | translate}} :</label>
+            </section>
+            <section class="col-md-4">
+            <span>{{district}}</span>
+          </section>
+          <section class="col-md-3"></section>
+          </section> 
+
+          <section class="row">
+            <section class="col-md-1"></section>
+          <section class="col-md-4">
+            <label>{{'Bookings' | translate}} :</label>
+          </section>
+          <section class="col-md-4">
+          <span>{{booking}}</span>
+        </section>
+        <section class="col-md-3"></section>
+
+        </section>
+          </section>
+
+<!-- 
+          <section class="col-md-3 dash" >
+            <div class="row">
+              <div class="col-md-6 mt-2 ml-2">
+               <h5>Working Hours</h5>
+              </div>
+              <div class="col-md-6"></div>
+            </div>
+   
+          </section> -->
+        </section><br>
+        <mat-divider></mat-divider><br>
+<section class="row justify-content-center">
+  <section class="col-md-3">
+<h5>{{'Working Hours' | translate}}</h5>
   </section>
+  <section class="col-md-9"></section>
 </section>
-     </div>
-      <div class="modal-footer">
-        <button class="primary-bg" mat-raised-button>{{'Save' | translate}}</button>
-        <!-- <button class="light-bg"  onClick="(window.location.reload(),500000);" type="button" mat-raised-button>{{'close' | translate}}</button> -->
+        <section class=""  >
+     
+          <section class="row justify-content-center">
+              <section class="col-md-3" >
+                  <section class="card" >
+                  <div class="card-header">{{'Sunday' | translate}}
+                    </div> 
+                    <div class="card-body" >
+                        <section *ngFor="let try of work">
+                        <section *ngIf="try.day == 1" style="border-bottom: 1px solid #ddd;">
+                          <div class="">
+                            <!-- <section class="col-md-6"></section> -->
+                            <!-- <section class="col-md-6"> -->
+                              <!-- <mat-icon style="font-size: small;cursor: pointer;" (click)="openLg(content)" title="edit"(click)="editRow(try)">edit</mat-icon> -->
+                              <mat-icon style="font-size: small;;cursor: pointer" title="close" (click)="onRemove(try)">close</mat-icon>
+                          <!-- </section> -->
+                          
+                          <!-- <mat-icon>close</mat-icon> -->
+                          <div class="row">
+                              <label class="col-md-4">{{'From' | translate}} : </label>
+                              <p class="col-md-4">{{try.from}}</p>
+                              <p class="col-md-4"> </p>
+                          </div>
+                          <div class="row">
+                              <label class="col-md-4">{{'To' | translate}} : </label>
+                              <p class="col-md-4">{{try.to}}</p>
+                              <p class="col-md-4"></p>
+                          </div>
+                          <div class="row">
+                              <label class="col-md-4">{{'Max' | translate}} : </label>
+                              <p class="col-md-4">{{try.max}}</p>
+                              <p class="col-md-4"></p>
+                          </div>
+                        </div>
+                        <!-- <label>From :<span>{{try.from}}</span> </label><br>
+                        <label>To : <span>{{try.to}}</span></label><br>
+                        <label>Max: <span>{{try.max}}</span></label> -->
+                      </section>
+                  </section>
+                    </div>
+                  </section> 
+              </section>
+              <section class="col-md-3">
+                  <section class="card">
+                  <div class="card-header">{{'Monday' | translate}}
+                    </div> 
+                    <div class="card-body" >
+                        <section *ngFor="let try of work">
+                      <section *ngIf="try.day == 2" style="border-bottom: 1px solid #ddd;">
+                          <div class="row">
+                              <label class="col-md-4">{{'translate'}} : </label>
+                              <p class="col-md-4">{{try.from}}</p>
+                              <p class="col-md-4"></p>
+                          </div>
+                          <div class="row">
+                              <label class="col-md-4">{{'To' | translate}} : </label>
+                              <p class="col-md-4">{{try.to}}</p>
+                              <p class="col-md-4"></p>
+                          </div>
+                          <div class="row">
+                              <label class="col-md-4">{{'Max' | translate}} : </label>
+                              <p class="col-md-4">{{try.max}}</p>
+                              <p class="col-md-4"></p>
+                          </div>
+                        </section>
+                      </section>
+                  </div>
+                  </section> 
+              </section>
+              <section class="col-md-3">
+                  <section class="card">
+                  <div class="card-header">{{'Tuesday' | translate}}
+                    </div>
+                    <div class="card-body">
+                        <section  *ngFor="let try of work">
+                      <section *ngIf="try.day == 3" style="border-bottom: 1px solid #ddd;">
+                        <div class="row">
+                          <label class="col-md-4">{{'translate'}} : </label>
+                          <p class="col-md-4">{{try.from}}</p>
+                          <p class="col-md-4"></p>
+                      </div>
+                      <div class="row">
+                          <label class="col-md-4">{{'To' | translate}} : </label>
+                          <p class="col-md-4">{{try.to}}</p>
+                          <p class="col-md-4"></p>
+                      </div>
+                      <div class="row">
+                          <label class="col-md-4">{{'Max' | translate}} : </label>
+                          <p class="col-md-4">{{try.max}}</p>
+                          <p class="col-md-4"></p>
+                      </div>
+                        </section>
+                      </section>
+                  </div> 
+                  </section> 
+              </section>
+              <section class="col-md-3">
+                  <section class="card">
+                  <div class="card-header">{{'Wednesday' | translate}}
+                    </div>
+                    <div class="card-body">
+                        <section  *ngFor="let try of work">
+                      <section *ngIf="try.day == 4" style="border-bottom: 1px solid #ddd;">
+                        <div class="row">
+                          <label class="col-md-4">{{'translate'}} : </label>
+                          <p class="col-md-4">{{try.from}}</p>
+                          <p class="col-md-4"></p>
+                      </div>
+                      <div class="row">
+                          <label class="col-md-4">{{'To' | translate}} : </label>
+                          <p class="col-md-4">{{try.to}}</p>
+                          <p class="col-md-4"></p>
+                      </div>
+                      <div class="row">
+                          <label class="col-md-4">{{'Max' | translate}} : </label>
+                          <p class="col-md-4">{{try.max}}</p>
+                          <p class="col-md-4"></p>
+                      </div>
+                        </section>
+                      </section>
+                  </div> 
+                  </section> 
+              </section>
+          </section>
+          <br>
+          <section class="row justify-content-center">
+              <section class="col-md-3">
+                  <section class="card">
+                  <div class="card-header">{{'Thursday' | translate}}
+                    </div> 
+                    <div class="card-body" >
+                        <section *ngFor="let try of work">
+                      <section *ngIf="try.day == 5" style="border-bottom: 1px solid #ddd;">
+                        <div class="row">
+                          <label class="col-md-4">{{'translate'}} : </label>
+                          <p class="col-md-4">{{try.from}}</p>
+                          <p class="col-md-4"></p>
+                      </div>
+                      <div class="row">
+                          <label class="col-md-4">{{'To' | translate}} : </label>
+                          <p class="col-md-4">{{try.to}}</p>
+                          <p class="col-md-4"></p>
+                      </div>
+                      <div class="row">
+                          <label class="col-md-4">{{'Max' | translate}} : </label>
+                          <p class="col-md-4">{{try.max}}</p>
+                          <p class="col-md-4"></p>
+                      </div>
+                        </section>
+                      </section>
+                    </div>
+                  </section> 
+              </section>
       
+              <section class="col-md-3">
+                  <section class="card" >
+                  <div class="card-header">{{'Friday' | translate}}
+                    </div> 
+                    <div class="card-body">
+                        <section *ngFor="let try of work">
+                      <section *ngIf="try.day == 6" style="border-bottom: 1px solid #ddd;">
+                        <div class="row">
+                          <label class="col-md-4">{{'translate'}} : </label>
+                          <p class="col-md-4">{{try.from}}</p>
+                          <p class="col-md-4"></p>
+                      </div>
+                      <div class="row">
+                          <label class="col-md-4">{{'To' | translate}} : </label>
+                          <p class="col-md-4">{{try.to}}</p>
+                          <p class="col-md-4"></p>
+                      </div>
+                      <div class="row">
+                          <label class="col-md-4">{{'Max' | translate}} : </label>
+                          <p class="col-md-4">{{try.max}}</p>
+                          <p class="col-md-4"></p>
+                      </div>
+                        </section>
+                      </section>
+                    </div>
+                  </section> 
+              </section>
+              <section class="col-md-3">
+                  <section class="card">
+                  <div class="card-header">{{'Saturday' | translate}}
+                    </div> 
+                    <div class="card-body" >
+                        <section *ngFor="let try of work">    
+                        <section *ngIf="try.day == 7" style="border-bottom: 1px solid #ddd;">
+                          <div class="row">
+                            <label class="col-md-4">{{'translate'}} : </label>
+                            <p class="col-md-4">{{try.from}}</p>
+                            <p class="col-md-4"></p>
+                        </div>
+                        <div class="row">
+                            <label class="col-md-4">{{'To' | translate}} : </label>
+                            <p class="col-md-4">{{try.to}}</p>
+                            <p class="col-md-4"></p>
+                        </div>
+                        <div class="row">
+                            <label class="col-md-4">{{'Max' | translate}} : </label>
+                            <p class="col-md-4">{{try.max}}</p>
+                            <p class="col-md-4"></p>
+                        </div>
+                    </section>
+                  </section>
+                  </div>
+                  </section> 
+              </section>
+          </section>
+          </section>
       </div>
-    </form> 
-    </ng-template>
+      </section>
+</div>

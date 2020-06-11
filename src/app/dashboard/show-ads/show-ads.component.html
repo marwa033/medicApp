@@ -5,19 +5,19 @@
 <h4 >{{'Show All Ads' | translate}}</h4>
 <form #form="ngForm" (ngSubmit)="FilterAds(form.value)">
   <section class="row">
-  <section class="col-md-4 ml-5">
+  <section class="col-md-3 ml-5">
     <mat-form-field>
       <mat-select name="status" placeholder="Status" [(ngModel)]="selectedstatus">
-        <mat-option value="">All</mat-option>
-        <mat-option value="active">Active</mat-option>
-        <mat-option value="inActive">inActive</mat-option>
+        <mat-option value=" ">{{'All' | translate}}</mat-option>
+        <mat-option value="active">{{'Active' | translate}}</mat-option>
+        <mat-option value="inActive">{{'In active' | translate}}</mat-option>
       </mat-select>
     </mat-form-field>
   </section>
-  <section class="col-md-4">
+  <section class="col-md-3">
     <button class="secondary-bg mt-3" mat-raised-button>{{'Save' | translate}}</button>
   </section>
-  
+  <section class="col-md-6">  </section>
 </section>
   <div class="mat-elevation-z8 example-container">
 

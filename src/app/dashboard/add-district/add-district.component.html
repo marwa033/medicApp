@@ -1,18 +1,23 @@
 <section class="container">
     <div class="card">
-        <div class="card-header">
+        <div class="card-header ">
+            <div class="row">
+            <section class="col-md-3">
           {{'Add District' | translate}}
+        </section>
+        <section class="col-md-9"></section>
+    </div>
         </div>
         <form #form="ngForm" (ngSubmit)="Add(form.value)">
         <div class="card-body ">
             <div class="container ml-5">
-        <section class="row">
-            <section class="col-md-6">
+        <section class="row justify-content-center">
+            <section class="col-md-4">
                 <mat-form-field>
                     <input matInput placeholder="{{'Enter Name in English' | translate}}" name="Ename" [(ngModel)] = "Ename">
                 </mat-form-field>
             </section>
-            <section class="col-md-6">
+            <section class="col-md-4">
                 <mat-form-field>
                     <input matInput placeholder="{{'Enter Name in Arabic' | translate}}" name="Aname" [(ngModel)] = "Aname">
                 </mat-form-field>

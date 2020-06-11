@@ -13,22 +13,21 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./show-subscription.component.scss']
 })
 export class ShowSubscriptionComponent implements OnInit {
-
-  startDate = new Date();
-  endDate = new Date();
-
-  dataSource: MatTableDataSource<unknown>;
-  displayedColumns: string[] = [ 'startDate' , 'endDate','action'];
-
-
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  results: any;
-  tries: any;
-  doctorid: any;
-  id: any;
-  doctors: any;
   
+  x = JSON.parse(localStorage.getItem('editDoctor'));
+  image : string='';
+  name: string='';
+  bio: string='';
+  address : string='';
+  title: string='';
+  logo : string='';
+  price : string='';
+  district : string='';
+  booking : string='';
+  work: any;
+  ABio: any;
+  AName: any;
+  ATitle: any;
   constructor(public translate: TranslateService,
     public authService: AuthService,
    private pageTitleService: PageTitleService ,
@@ -39,74 +38,45 @@ export class ShowSubscriptionComponent implements OnInit {
        config.backdrop = 'static';
        config.keyboard = false;
     }  
+    Detials(){
+      this.authService.GetIDDoctor().
+then( responseDoctorID => { this.x = responseDoctorID;
+  console.log(this.x)
 
-    
-    applyFilter(event: Event) {
-      const filterValue = (event.target as HTMLInputElement).value;
-      this.dataSource.filter = filterValue.trim().toLowerCase();
-    }
-    
-    Close(){ 
-      this.modalService.dismissAll(); 
-      this.spinner.show();
-      window.location.reload();
-       } 
-
-    Subscription(){
-      this.authService.GetSubscription().
-                then( responseSubscription => { this.results = responseSubscription;
-                   this.dataSource = new MatTableDataSource(responseSubscription.data);
-                   this.dataSource.paginator = this.paginator;
-                   this.dataSource.sort = this.sort; 
-                  //  console.log( this.results );
-                   setTimeout(() => {
-                    this.spinner.hide();
-                  }, this.results);
-                });
-               }
-
-               selectedRow(element){
-                 this.id = element._id;
-                 this.doctorid = element.vendorId;
-                 this.startDate = new Date (element.startDate);
-                 this.endDate = new Date (element.endDate);
-               }
-
-               Update(value){
-                this.authService.UpdateSubscription(value).
-                          then( responseUpSubscription => { this.tries = responseUpSubscription;
-                            let message = responseUpSubscription.message;
-                              if (message) {
-                                    this.toastr.error(message);
-                                    }   else{
-                                          this.toastr.success('Successfully Updated');
-                                          this.Close();
-                                          }
-                          });
-              }  
-              Doctor(){
-                this.authService.GetDoctor().
-                          then( responsegetDoctor => { this.doctors = responsegetDoctor.data;
-                            // console.log('doctor grt ' + this.doctors);
-                          });
-              }                                              
-
-
-Active(element){
-  this.authService.DistrictActive(element).
-  then( responseActivedistrict => { this.tries = responseActivedistrict;
-    element.state = this.tries.state;
-
-  });
+  this.name = this.x.name.en
+  this.AName = this.x.name.ar
+  this.title =this.x.title.en
+  this.bio = this.x.bio.en
+  this.address =this.x.address.en
+  this.ATitle =this.x.title.ar
+  this.ABio = this.x.bio.ar
+  // this.AAddress =this.x.address.ar
+  this.price = this.x.price
+  // this.lat = this.x.lat
+  // this.lang = this.x.lng
+  // this.time = this.x.estimateTime
+  // this.selectedCategory = this.x.categoryId
+  this.district = this.x.district.name.en
+  // this.cphone = this.x.clinicPhones
+  this.image = this.x.image
+  this.logo = this.x.logo
+  // this.name = this.x.user.name
+  // this.phone = this.x.user.phone
+  this.work = this.x.workingHours
+  this.booking = this.x.numberOfBookingDays
+  // this.id = this.x._id
+  // this.startDate = new Date(this.x.subscription.startDate)
+  // this.endDate = new Date(this.x.subscription.endDate)
+  // this.subID = this.x.subscription._id
+  setTimeout(() => {
+    this.spinner.hide();
+  }, this.x);
+});
 }
-
-openLg(content) {
-  this.modalService.open(content, { size: 'lg' });
-}
-  ngOnInit() {
+  ngOnInit() {   
+    this.Detials();
     this.spinner.show();
-    this.Doctor();
-this.Subscription();
   }
 
 }
+ 

@@ -6,25 +6,25 @@
 <h4>{{'Show All Category' | translate}}</h4>
 <form #form="ngForm" (ngSubmit)="FilterCategory(form.value)">
   <section class="row">
-    <section class="col-md-4">
+    <section class="col-md-3">
   <mat-form-field class="ml-5 mt-1">
     <mat-label>{{'Filter' | translate}}</mat-label>
     <input matInput placeholder="Name" name="filter" [(ngModel)]="filter">
   </mat-form-field>
     </section>
-  <section class="col-md-4">
+  <section class="col-md-3">
     <mat-form-field>
       <mat-select name="status" placeholder="Status" [(ngModel)]="selectedstatus">
-        <mat-option value=" ">All</mat-option>
-        <mat-option value="active">Active</mat-option>
-        <mat-option value="inActive">inActive</mat-option>
+        <mat-option value=" ">{{'All' | translate}}</mat-option>
+        <mat-option value="active">{{'Active' | translate}}</mat-option>
+        <mat-option value="inActive">{{'In active' | translate}}</mat-option>
       </mat-select>
     </mat-form-field>
   </section>
-  <section class="col-md-4">
+  <section class="col-md-3">
     <button class="secondary-bg mt-3" mat-raised-button>{{'Save' | translate}}</button>
   </section>
-  
+  <section class="col-md-3"></section>
 </section>
   <div class="mat-elevation-z8 example-container">
     
@@ -95,6 +95,8 @@
 </div>
 <!--********************************************************************************-->
 <ng-template #content let-modal>
+  <ngx-spinner bdColor = "rgba(51, 51, 51, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p></ngx-spinner>
   <div class="modal-header">
     <h4 class="modal-title">Update Category</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">

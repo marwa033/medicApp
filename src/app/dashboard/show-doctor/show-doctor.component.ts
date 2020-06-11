@@ -6,6 +6,7 @@ import { PageTitleService } from 'app/core/page-title/page-title.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class ShowDoctorComponent implements OnInit {
   updatedAt = new Date();
 
   dataSource: MatTableDataSource<unknown>;
-  displayedColumns: string[] = [ 'name',  'title' , 'bookings' , 'action'];
+  displayedColumns: string[] = [ 'count' ,'name', 'district' , 'title' , 'bookings' , 'action'];
 
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -35,9 +36,11 @@ export class ShowDoctorComponent implements OnInit {
   editATitle: any;
   editABio: any;
   editAAddress: any;
+  try: any;
   
   constructor(public translate: TranslateService,
     public authService: AuthService,
+    private router: Router,
    private pageTitleService: PageTitleService ,
    private toastr: ToastrService,
      config: NgbModalConfig,
@@ -50,12 +53,20 @@ export class ShowDoctorComponent implements OnInit {
       this.modalService.open(content, { size: 'lg' });
     }
 
+    detialRow(element){
+      this.router.navigate(['/dashboard/showsubscription']);
+      this.setID(element._id);
+    }
     editRow(element){
-this.editAName = element.name;
-this.id = element._id;
-this.editATitle = element.title;
-this.editABio = element.bio;
-this.editAAddress = element.address;
+this.setID(element._id);
+      this.router.navigate(['/dashboard/bookingdoctor']);
+      
+    }
+    setID(value) {
+      localStorage.setItem('editDoctor', JSON.stringify(value));
+      var x = JSON.parse(localStorage.getItem('editDoctor'));
+    console.log(x);
+    console.log('x => ' + x);
     }
  
     Doctor(){

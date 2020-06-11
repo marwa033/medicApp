@@ -24,7 +24,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 
 export class SaasComponent implements OnInit  {
    id: string="";
-   editEName: string ='anything';
+   editEName: string ='';
    editAName: string = '';
    editColor : any;
    editimage: string='';
@@ -50,6 +50,7 @@ export class SaasComponent implements OnInit  {
    message = 'anything';
    X: void;
   src: any;
+  try: any;
  
    constructor(public translate: TranslateService,
                public authService: AuthService,
@@ -92,12 +93,19 @@ export class SaasComponent implements OnInit  {
           }
 
           selectedRow(element){
-            
-  this.setcategoryID(element);
-             this.id = element._id;
-             this.editEName = element.name;
-             this.editColor =  (element.color);
-             this.imageSrc = element.image;
+            this.spinner.show();
+            this.authService.GetIDCategories(element).
+            then( responsedataID => { this.try = responsedataID;
+              console.log(this.try.name.en)
+              this.id = this.try._id;
+              this.editEName =this.try.name.en;
+              this.editAName =this.try.name.ar;
+              this.editColor =this.try.color;
+             this.imageSrc = this.try.image;
+             setTimeout(() => {
+              this.spinner.hide();
+            }, this.try);
+            });
           }
           FilterCategory(value){
             this.spinner.show();
@@ -157,12 +165,7 @@ openLg(content) {
    this.modalService.open(content, { size: 'lg' });
  }
 
- setcategoryID(value) {
-  localStorage.setItem('try', JSON.stringify(value));
-  var x = JSON.parse(localStorage.getItem('try'));
-console.log(x);
-console.log('x => ' + x);
-}
+
    ngOnInit() {
      
       this.spinner.show();

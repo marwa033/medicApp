@@ -32,6 +32,8 @@ export class ShowDistrictComponent implements OnInit {
   tries: any;
   filter: string="";
   editEName: any;
+  editAName: any;
+  try: any;
   
   constructor(public translate: TranslateService,
     public authService: AuthService,
@@ -102,8 +104,19 @@ export class ShowDistrictComponent implements OnInit {
 
                  editRow(element)
                  {
-                   this.id = element._id;
-                   this.editEName = element.name;
+                  this.spinner.show();
+                  this.authService.GetIDDistrict(element).
+                  then( responsedistrictID => { this.try = responsedistrictID;
+                    console.log(this.try)
+                    this.id = this.try._id;
+                    this.editEName =this.try.name.en;
+                    this.editAName =this.try.name.ar;
+                   setTimeout(() => {
+                    this.spinner.hide();
+                  }, this.try);
+                  });
+                  //  this.id = element._id;
+                  //  this.editEName = element.name;
                  }
                  function(value){
                   if(value.filter==undefined){

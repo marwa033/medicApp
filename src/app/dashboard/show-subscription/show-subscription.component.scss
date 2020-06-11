@@ -1,23 +1,30 @@
 
-table{
-    transition: none !important;
-    box-shadow: none !important;
+img{
+    width: 100px;
+    height: 100px;
+    padding:5px;
+    border-radius: 50%;
 }
-.example-container{
-    overflow: auto;
+.container-fluide{
+    padding: 20px;
 }
-
-.mat-header-cell, .mat-cell {
-    min-width: 100px;
-    word-wrap: break-word;
-}
-
-h4{
+.card-header{
     text-align: center;
 }
-.pointer{
-    cursor: pointer;
+p{
+    text-align: center;
+    font-size: small;
+    font-weight: lighter;
 }
-.rid{
-    display: none;
+label{
+    font-weight: 700;
+}
+span{
+    font-weight: normal;
+}
+.dash{
+    border: 1px solid rgb(196, 194, 194);
+    border-radius: 20px;
+    padding: 5px;
+    margin: 5px
 }

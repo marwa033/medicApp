@@ -1,259 +1,383 @@
-<!-- <section class="container">
+<section class="container">
     <div class="card">
         <div class="card-header">
-          {{'Add Doctor' | translate}}
+            <section class="row">
+                <section class="col-md-3">
+                    {{'Add Doctor' | translate}}
+                </section>
+                <section class="col-md-9"></section>
+            </section>
         </div>
         <form #form="ngForm" (ngSubmit)="Add(form.value)">
         <div class="card-body ">
             <div class="container">
-                <section class="row">
-                    <section class="col-md-3">
+                <section style="border-bottom: 1px solid #ddd;">
+                <section class="row ml-5">
+                    <section class="col-md-4">
                         <mat-form-field>
                             <input matInput placeholder=" {{'Enter Name in English' | translate}}" name="EName" [(ngModel)] = "EName">
                         </mat-form-field>
                     </section>
-                    <section class="col-md-3">
+                    <section class="col-md-4">
                         <mat-form-field>
                             <input matInput placeholder="{{'Enter Name in Arabic' | translate}}" name="AName" [(ngModel)] = "AName">
                         </mat-form-field>
                     </section>
-                    <section class="col-md-3">
+                    <section class="col-md-4">
                         <mat-form-field>
                             <input matInput placeholder="{{'Enter Title in English' | translate}}" name="ETitle" [(ngModel)] = "ETitle">
                         </mat-form-field>
                     </section>
-                    <section class="col-md-3">
-                        <mat-form-field>
-                            <input matInput placeholder="{{'Enter Title in Arabic' | translate}}" name="ATitle" [(ngModel)] = "ATitle">
-                        </mat-form-field>
-                    </section>
                 </section>
-              <section class="row">
-                <section class="col-md-3">
+              <section class="row ml-5">
+                  
+                <section class="col-md-4">
                     <mat-form-field>
-                        <input matInput placeholder=" {{'Enter Bio in English' | translate}}" name="EBio" [(ngModel)] = "EBio">
+                        <input matInput placeholder="{{'Enter Title in Arabic' | translate}}" name="ATitle" [(ngModel)] = "ATitle">
                     </mat-form-field>
                 </section>
-                <section class="col-md-3">
+                <section class="col-md-4">
                     <mat-form-field>
-                        <input matInput placeholder="{{'Enter Name in Arabic' | translate}}" name="ABio" [(ngModel)] = "ABio">
+                        <textarea matInput placeholder=" {{'Enter Bio in English' | translate}}" name="EBio" [(ngModel)] = "EBio"></textarea>
+                    </mat-form-field>
+                </section>
+                <section class="col-md-4">
+                    <mat-form-field>
+                        <textarea matInput placeholder="{{'Enter Bio in Arabic' | translate}}" name="ABio" [(ngModel)] = "ABio"></textarea>
                     </mat-form-field>
                 </section>
                 
-              <section class="col-md-3">
-                <mat-form-field>
-                    <input matInput placeholder=" {{'Enter address in English' | translate}}" name="EAddress" [(ngModel)] = "EAddress">
-                </mat-form-field>
+          
             </section>
-            <section class="col-md-3">
-                <mat-form-field>
-                    <input matInput placeholder="{{'Enter Address in Arabic' | translate}}" name="AAddress" [(ngModel)] = "AAddress">
-                </mat-form-field>
-            </section>
-            </section>
-              <section class="row">
-                <section class="col-md-3">
+            <section class="row ml-5">
+                <section class="col-md-4">
+                    <mat-form-field>
+                        <input matInput placeholder=" {{'Enter address in English' | translate}}" name="EAddress" [(ngModel)] = "EAddress">
+                    </mat-form-field>
+                </section>
+                <section class="col-md-4">
+                    <mat-form-field>
+                        <input matInput placeholder="{{'Enter Address in Arabic' | translate}}" name="AAddress" [(ngModel)] = "AAddress">
+                    </mat-form-field>
+                </section>
+                
+                <section class="col-md-4">
                     <mat-form-field>
                         <input matInput placeholder=" {{'price' | translate}}" name="price" [(ngModel)] = "price" type="number">
                     </mat-form-field>
                 </section>
-                <section class="col-md-3">
+            </section>
+              <section class="row ml-5">
+                <section class="col-md-4">
                     <mat-form-field>
                         <input matInput placeholder="{{'lat' | translate}}" name="lat" [(ngModel)] = "lat" type="number">
                     </mat-form-field>
                 </section>
                 
-              <section class="col-md-3">
+              <section class="col-md-4">
                 <mat-form-field>
-                    <input matInput placeholder=" {{'lang' | translate}}" name="lang" [(ngModel)] = "lang" type="number">
+                    <input matInput placeholder=" {{'lng' | translate}}" name="lang" [(ngModel)] = "lang" type="number">
                 </mat-form-field>
             </section>
-            <section class="col-md-3">
+            <section class="col-md-4">
                 <mat-form-field>
                     <input matInput placeholder="{{'time' | translate}}" name="time" [(ngModel)] = "time" type="number">
                 </mat-form-field>
             </section>
             </section>
-            <div class="work">Working hours
-            </div>
-            <section class="days">
-                    <div class="card row">
-                        <div class="card-header sunday">
-                          Sunday
-                        </div>
-                        <section class="sun">
-                        <section class=" container row ">
-                            <section class="col-md-4">
-                <mat-form-field>
-                    <input matInput placeholder="{{'from' | translate}}" name="sunfrom" [(ngModel)] = "sunfrom" type="time">
-                </mat-form-field>
-                            </section>
-                            <section class="col-md-4">
-                <mat-form-field>
-                    <input matInput placeholder="{{'from' | translate}}" name="sunto" [(ngModel)] = "sunto" type="time">
-                </mat-form-field>
-                            </section>
-                            <section class="col-md-4">
-                <mat-form-field>
-                    <input matInput placeholder="{{'max' | translate}}" name="sunmax" [(ngModel)] = "sunmax" type="number">
-                </mat-form-field>
-                            </section>
+            <section class="row ml-5">
+                <section class="col-md-4">
+                    <mat-form-field>
+                        <mat-select placeholder="{{'Category' | translate}}" name="categories" [(ngModel)] = "selectedCategory">
+                          <mat-option *ngFor="let category of categories" [value]="category._id">
+                            {{category.name}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </section>
+                <section class="col-md-4">
+                    <mat-form-field>
+                        <mat-select placeholder="{{'District' | translate}}" name="districts" [(ngModel)] = "selecteddistricts">
+                          <mat-option *ngFor="let district of districts" [value]="district._id">
+                            {{district.name}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </section>
+                <section class="col-md-4 mt-2">
+                    <mat-form-field>
+                        <input matInput placeholder="{{'Clinic Phone' | translate}}" name="cphone" [(ngModel)] = "cphone">
+                    </mat-form-field>
+                </section>
+            </section>
+            <section class="row ml-5">
+                <section class="col-md-4 mt-5">
+                    <mat-form-field>
+                      <input matInput placeholder="{{'Booking' | translate}}" name="booking" type="number" [(ngModel)] = "booking">
+                  </mat-form-field>
+                  </section>
+                <section class="col-md-4">
+                    <label>{{'Image' | translate}}</label>
+                <img [src]="imageSrc" class="rid" style="max-width:300px;max-height:300px"/><br>
+                <input  type="file" name="imageSrc" accept="image/*" (change)="handleInputChange($event)" />
+            <mat-form-field class="rid">
+                <input matInput placeholder="Color" name="imageSrc" [(ngModel)] = "imageSrc">
+            </mat-form-field>
+                </section>
+                
+                <section class="col-md-4">
+                    <label>{{'Logo' | translate}}</label>
+                <img [src]="imageSrcLogo" class="rid" style="max-width:300px;max-height:300px"/><br>
+                <input  type="file" name="imageSrcLogo" accept="image/*" (change)="handleInput($event)" />
+            <mat-form-field class="rid">
+                <input matInput placeholder="Color" name="imageSrcLogo" [(ngModel)] = "imageSrcLogo">
+            </mat-form-field>
+                </section>
+            </section>
+            <br> 
+            <section class="row">
+                <section class="col-md-3">
+                    <label>{{'User Information' | translate}}</label>
+                </section>
+                <section class="col-md-9"></section>
+            </section>
+<section class="row ml-5">
+    <section class="col-md-4">
+     <mat-form-field>
+         <input matInput placeholder="{{'Name' | translate}}" name="name" [(ngModel)] = "name">
+     </mat-form-field>
+    </section>
+    <section class="col-md-4">
+     <mat-form-field>
+         <input matInput placeholder="{{'Phone' | translate}}" name="phone" [(ngModel)] = "phone">
+     </mat-form-field>
+    </section>
+    
+    <section class="col-md-4">
+     <mat-form-field>
+         <input matInput placeholder="{{'Password' | translate}}" name="password" [(ngModel)] = "password" type="password">
+     </mat-form-field>
+    </section>
+</section>
+<br>
+        </section>
+        <br>
+        <div class="row ml-5">
+            <section class="col-md-4" >
+                <button mat-button (click)="openLg(content)" type="button">
+                    <mat-icon>add</mat-icon>
+                    {{'Add Working hours' | translate}}
+                </button>
+            </section>
+            <section class="col-md-8"></section>
+        </div><br>
+        <section class=""  >
+       
+            <section class="row justify-content-center">
+                <section class="col-md-3" >
+                    <section class="card" >
+                    <div class="card-header">{{'Sunday' | translate}}
+                      </div> 
+                      <div class="card-body" >
+                          <section *ngFor="let try of selectedFeatures">
+                          <section *ngIf="try.day == 1" style="border-bottom: 1px solid #ddd;">
+                            <!-- <mat-icon>close</mat-icon> -->
+                            <div class="row">
+                                <label class="col-md-4">{{'From' | translate}} : </label>
+                                <p class="col-md-4">{{try.from}}</p>
+                                <p class="col-md-4"></p>
+                            </div>
+                            <div class="row">
+                                <label class="col-md-4">{{'To' | translate}} : </label>
+                                <p class="col-md-4">{{try.to}}</p>
+                                <p class="col-md-4"></p>
+                            </div>
+                            <div class="row">
+                                <label class="col-md-4">{{'Max' | translate}} : </label>
+                                <p class="col-md-4">{{try.max}}</p>
+                                <p class="col-md-4"></p>
+                            </div>
+                          <!-- <label>From :<span>{{try.from}}</span> </label><br>
+                          <label>To : <span>{{try.to}}</span></label><br>
+                          <label>Max: <span>{{try.max}}</span></label> -->
                         </section>
                     </section>
                       </div>
-            
-                      <div class="card row">
-                        <div class="card-header monday">
-                          Monday
-                        </div>
-                        <section class="mon">
-                        <section class=" container row">
-                            <section class="col-md-4">
-                <mat-form-field>
-                    <input matInput placeholder="{{'from' | translate}}" name="monfrom" [(ngModel)] = "monfrom" type="time">
-                </mat-form-field>
-                            </section>
-                            <section class="col-md-4">
-                <mat-form-field>
-                    <input matInput placeholder="{{'from' | translate}}" name="monto" [(ngModel)] = "monto" type="time">
-                </mat-form-field>
-                            </section>
-                            <section class="col-md-4">
-                <mat-form-field>
-                    <input matInput placeholder="{{'max' | translate}}" name="monmax" [(ngModel)] = "monmax" type="number">
-                </mat-form-field>
-                            </section>
+                    </section> 
+                </section>
+                <section class="col-md-3">
+                    <section class="card">
+                    <div class="card-header">{{'Monday' | translate}}
+                      </div> 
+                      <div class="card-body" >
+                          <section *ngFor="let try of selectedFeatures">
+                        <section *ngIf="try.day == 2" style="border-bottom: 1px solid #ddd;">
+                            <div class="row">
+                                <label class="col-md-4">{{'From' | translate}} : </label>
+                                <p class="col-md-4">{{try.from}}</p>
+                                <p class="col-md-4"></p>
+                            </div>
+                            <div class="row">
+                                <label class="col-md-4">{{'To' | translate}} : </label>
+                                <p class="col-md-4">{{try.to}}</p>
+                                <p class="col-md-4"></p>
+                            </div>
+                            <div class="row">
+                                <label class="col-md-4">{{'Max' | translate}} : </label>
+                                <p class="col-md-4">{{try.max}}</p>
+                                <p class="col-md-4"></p>
+                            </div>
+                          </section>
                         </section>
-                    </section>
+                    </div>
+                    </section> 
+                </section>
+                <section class="col-md-3">
+                    <section class="card">
+                    <div class="card-header">{{'Tuesday' | translate}}
                       </div>
-                      
-                    <div class="card row">
-                        <div class="card-header tuesday">
-                          Tuesday
-                        </div>
-                        <section class="tue">
-                        <section class=" container row">
-                            <section class="col-md-4">
-                <mat-form-field>
-                    <input matInput placeholder="{{'from' | translate}}" name="tuefrom" [(ngModel)] = "tuefrom" type="time">
-                </mat-form-field>
-                            </section>
-                            <section class="col-md-4">
-                <mat-form-field>
-                    <input matInput placeholder="{{'from' | translate}}" name="tueto" [(ngModel)] = "tueto" type="time">
-                </mat-form-field>
-                            </section>
-                            <section class="col-md-4">
-                <mat-form-field>
-                    <input matInput placeholder="{{'max' | translate}}" name="tuemax" [(ngModel)] = "tuemax" type="number">
-                </mat-form-field>
-                            </section>
+                      <div class="card-body">
+                          <section  *ngFor="let try of selectedFeatures">
+                        <section *ngIf="try.day == 3" style="border-bottom: 1px solid #ddd;">
+                            <div class="row">
+                                <label class="col-md-4">{{'From' | translate}} : </label>
+                                <p class="col-md-4">{{try.from}}</p>
+                                <p class="col-md-4"></p>
+                            </div>
+                            <div class="row">
+                                <label class="col-md-4">{{'To' | translate}} : </label>
+                                <p class="col-md-4">{{try.to}}</p>
+                                <p class="col-md-4"></p>
+                            </div>
+                            <div class="row">
+                                <label class="col-md-4">{{'Max' | translate}} : </label>
+                                <p class="col-md-4">{{try.max}}</p>
+                                <p class="col-md-4"></p>
+                            </div>
+                          </section>
                         </section>
-                    </section>
+                    </div> 
+                    </section> 
+                </section>
+                <section class="col-md-3">
+                    <section class="card">
+                    <div class="card-header">{{'Wednesday' | translate}}
                       </div>
-                      
-                    <div class="card row">
-                        <div class="card-header wednesday">
-                            wednesday
-                        </div>
-                        <section class="wed">
-                        <section class=" container row wed">
-                            <section class="col-md-4">
-                <mat-form-field>
-                    <input matInput placeholder="{{'from' | translate}}" name="wedfrom" [(ngModel)] = "wedfrom" type="time">
-                </mat-form-field>
-                            </section>
-                            <section class="col-md-4">
-                <mat-form-field>
-                    <input matInput placeholder="{{'from' | translate}}" name="wedto" [(ngModel)] = "wedto" type="time">
-                </mat-form-field>
-                            </section>
-                            <section class="col-md-4">
-                <mat-form-field>
-                    <input matInput placeholder="{{'max' | translate}}" name="wedmax" [(ngModel)] = "wedmax" type="number">
-                </mat-form-field>
-                            </section>
+                      <div class="card-body">
+                          <section  *ngFor="let try of selectedFeatures">
+                        <section *ngIf="try.day == 4" style="border-bottom: 1px solid #ddd;">
+                            <div class="row">
+                                <label class="col-md-4">{{'From' | translate}} : </label>
+                                <p class="col-md-4">{{try.from}}</p>
+                                <p class="col-md-4"></p>
+                            </div>
+                            <div class="row">
+                                <label class="col-md-4">{{'To' | translate}} : </label>
+                                <p class="col-md-4">{{try.to}}</p>
+                                <p class="col-md-4"></p>
+                            </div>
+                            <div class="row">
+                                <label class="col-md-4">{{'Max' | translate}} : </label>
+                                <p class="col-md-4">{{try.max}}</p>
+                                <p class="col-md-4"></p>
+                            </div>
+                          </section>
                         </section>
-                    </section>
-                      </div>
-                      
-                    <div class="card row">
-                        <div class="card-header Thursday">
-                          Thursday
-                        </div>
-                        <section class="thur">
-                        <section class=" container row">
-                            <section class="col-md-4">
-                <mat-form-field>
-                    <input matInput placeholder="{{'from' | translate}}" name="thrufrom" [(ngModel)] = "thrufrom" type="time">
-                </mat-form-field>
-                            </section>
-                            <section class="col-md-4">
-                <mat-form-field>
-                    <input matInput placeholder="{{'from' | translate}}" name="thruto" [(ngModel)] = "thruto" type="time">
-                </mat-form-field>
-                            </section>
-                            <section class="col-md-4">
-                <mat-form-field>
-                    <input matInput placeholder="{{'max' | translate}}" name="thrumax" [(ngModel)] = "thrumax" type="number">
-                </mat-form-field>
-                            </section>
+                    </div> 
+                    </section> 
+                </section>
+            </section>
+            <br>
+            <section class="row justify-content-center">
+                <section class="col-md-3">
+                    <section class="card">
+                    <div class="card-header">{{'Thursday' | translate}}
+                      </div> 
+                      <div class="card-body" >
+                          <section *ngFor="let try of selectedFeatures">
+                        <section *ngIf="try.day == 5" style="border-bottom: 1px solid #ddd;">
+                            <div class="row">
+                                <label class="col-md-4">{{'From' | translate}} : </label>
+                                <p class="col-md-4">{{try.from}}</p>
+                                <p class="col-md-4"></p>
+                            </div>
+                            <div class="row">
+                                <label class="col-md-4">{{'To' | translate}} : </label>
+                                <p class="col-md-4">{{try.to}}</p>
+                                <p class="col-md-4"></p>
+                            </div>
+                            <div class="row">
+                                <label class="col-md-4">{{'Max' | translate}} : </label>
+                                <p class="col-md-4">{{try.max}}</p>
+                                <p class="col-md-4"></p>
+                            </div>
+                          </section>
                         </section>
-                    </section>
                       </div>
-                      
-                    <div class="card row">
-                        <div class="card-header friday">
-                          Friday
-                        </div>
-                        <section class="fri">
-                        <section class=" container row ">
-                            <section class="col-md-4">
-                <mat-form-field>
-                    <input matInput placeholder="{{'from' | translate}}" name="frifrom" [(ngModel)] = "frifrom" type="time">
-                </mat-form-field>
-                            </section>
-                            <section class="col-md-4">
-                <mat-form-field>
-                    <input matInput placeholder="{{'from' | translate}}" name="frito" [(ngModel)] = "frito" type="time">
-                </mat-form-field>
-                            </section>
-                            <section class="col-md-4">
-                <mat-form-field>
-                    <input matInput placeholder="{{'max' | translate}}" name="frimax" [(ngModel)] = "frimax" type="number">
-                </mat-form-field>
-                            </section>
+                    </section> 
+                </section>
+        
+                <section class="col-md-3">
+                    <section class="card" >
+                    <div class="card-header">{{'Friday' | translate}}
+                      </div> 
+                      <div class="card-body">
+                          <section *ngFor="let try of selectedFeatures">
+                        <section *ngIf="try.day == 6" style="border-bottom: 1px solid #ddd;">
+                            <div class="row">
+                                <label class="col-md-4">{{'From' | translate}} : </label>
+                                <p class="col-md-4">{{try.from}}</p>
+                                <p class="col-md-4"></p>
+                            </div>
+                            <div class="row">
+                                <label class="col-md-4">{{'To' | translate}} : </label>
+                                <p class="col-md-4">{{try.to}}</p>
+                                <p class="col-md-4"></p>
+                            </div>
+                            <div class="row">
+                                <label class="col-md-4">{{'Max' | translate}} : </label>
+                                <p class="col-md-4">{{try.max}}</p>
+                                <p class="col-md-4"></p>
+                            </div>
+                          </section>
                         </section>
-                    </section>
                       </div>
-                      
-                    <div class="card row">
-                        <div class="card-header Saturday">
-                          Saturday
-                        </div>
-                        <section class="sat">
-                        <section class=" container row ">
-                            <section class="col-md-4">
-                <mat-form-field>
-                    <input matInput placeholder="{{'from' | translate}}" name="satfrom" [(ngModel)] = "satfrom" type="time">
-                </mat-form-field>
-                            </section>
-                            <section class="col-md-4">
-                <mat-form-field>
-                    <input matInput placeholder="{{'from' | translate}}" name="satto" [(ngModel)] = "satto" type="time">
-                </mat-form-field>
-                            </section>
-                            <section class="col-md-4">
-                <mat-form-field>
-                    <input matInput placeholder="{{'max' | translate}}" name="satmax" [(ngModel)] = "satmax" type="number">
-                </mat-form-field>
-                            </section>
-                        </section>
+                    </section> 
+                </section>
+                <section class="col-md-3">
+                    <section class="card">
+                    <div class="card-header">{{'Saturday' | translate}}
+                      </div> 
+                      <div class="card-body" >
+                          <section *ngFor="let try of selectedFeatures">    
+                          <section *ngIf="try.day == 7" style="border-bottom: 1px solid #ddd;">
+                            <div class="row">
+                                <label class="col-md-4">{{'From' | translate}} : </label>
+                                <p class="col-md-4">{{try.from}}</p>
+                                <p class="col-md-4"></p>
+                            </div>
+                            <div class="row">
+                                <label class="col-md-4">{{'To' | translate}} : </label>
+                                <p class="col-md-4">{{try.to}}</p>
+                                <p class="col-md-4"></p>
+                            </div>
+                            <div class="row">
+                                <label class="col-md-4">{{'Max' | translate}} : </label>
+                                <p class="col-md-4">{{try.max}}</p>
+                                <p class="col-md-4"></p>
+                            </div>
+                      </section>
                     </section>
-                      </div>
-                    </section>
+                    </div>
+                    </section> 
+                </section>
+            </section>
+            </section>
+<br>
+
     </div>
         </div>
+
         <div class="card-footer">
             <section class="row">
                 <section class="col-md-9"></section>
@@ -265,4 +389,115 @@
         </div>
     </form>
       </div>
-    </section> -->
+
+<br>
+      <div class="card">
+        <div class="card-header">
+            <section class="row">
+                <section class="col-md-3">
+                    {{'Add Subscription' | translate}}
+                </section>
+                <section class="col-md-9"></section>
+            </section>
+        </div>
+        
+        <form #formSub="ngForm" (ngSubmit)="AddSub(formSub.value)">
+        <div class="card-body">
+            <div class="container ml-5">
+                <section class="row justify-content-center">
+                    <section class="col-md-4">
+                        <mat-form-field>
+                            <mat-label>{{'Start Date' | translate}}</mat-label>
+                            <input matInput [matDatepicker]="picker2" name="startDate" [(ngModel)] = "startDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker2">
+                                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                              </mat-datepicker-toggle>
+                         <mat-datepicker #picker2></mat-datepicker>
+                          </mat-form-field>
+                    </section>
+                    <section class="col-md-4">
+                        <mat-form-field>
+                            <mat-label>{{'End Date' | translate}}</mat-label>
+                            <input matInput [matDatepicker]="picker" name="endDate" [(ngModel)] = "endDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker">
+                                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                              </mat-datepicker-toggle>
+                         <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+                    </section>
+                    <!-- <section class="col-md-4">
+                        <mat-form-field>
+                            <mat-label>{{'End Date' | translate}}</mat-label>
+                            <input matInput [matDatepicker]="picker2">
+                            <mat-datepicker-toggle  [for]="picker2" name="endDate" [(ngModel)]="endDate"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                          </mat-form-field>
+                    </section> -->
+                </section>
+            </div>
+        </div>
+        <div class="card-footer">
+            <section class="row">
+                <section class="col-md-9"></section>
+                <section class="col-md-3">
+                    <button class="primary-bg btn-block" mat-raised-button>{{'Save' | translate}}</button>
+                </section>
+            </section>
+            
+        </div>
+        </form>
+      </div>
+
+    </section> 
+
+
+
+
+    <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">{{'Add Working Hours' | translate}}</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form #form="ngForm" (ngSubmit)="Update(form.value)">
+        <div class="modal-body">
+            <section class="row">
+                <section class="col-md-6">
+                    <mat-form-field>
+                        <mat-label>choose Day</mat-label>
+                        <mat-select name="day"  [(ngModel)]="day">
+                          <mat-option value="1">{{'Sunday' | translate}}</mat-option>
+                          <mat-option value="2">{{'Monday' | translate}}</mat-option>
+                          <mat-option value="3">{{'Tuesday' | translate}}</mat-option>
+                          <mat-option value="4">{{'wednesday' | translate}}</mat-option>
+                          <mat-option value="5">{{'Thrusday' | translate}}</mat-option>
+                          <mat-option value="6">{{'Friday' | translate}}</mat-option>
+                          <mat-option value="7">{{'Saturday' | translate}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                    <mat-form-field>
+                        <input matInput placeholder="{{'Max' | translate}}" name="max"   [(ngModel)]="max">
+                    </mat-form-field>
+                </section>
+            </section>
+            <section class="row">
+                <section class="col-md-6">
+                    <mat-form-field>
+                        <input matInput placeholder="{{'From' | translate}}" name="from"  type="time"  [(ngModel)]="from">
+                    </mat-form-field>
+                </section>
+                <section class="col-md-6">
+                    <mat-form-field>
+                        <input matInput placeholder="{{'To' | translate}}" name="to" type="time"  [(ngModel)]="to">
+                    </mat-form-field>
+                </section>
+            </section>
+       </div>
+        <div class="modal-footer">
+          <button class="primary-bg" type="button" mat-raised-button (click)="onAdd()">{{'Save' | translate}}</button>
+        </div>
+      </form> 
+      </ng-template>

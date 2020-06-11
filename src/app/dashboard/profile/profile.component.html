@@ -4,7 +4,13 @@
     <section class="container">
         <div class="card">
             <div class="card-header">
-            {{'Profile Information' | translate}}    
+                <section class="row">
+                    <section class="col-md-3">
+
+                        {{'Profile Information' | translate}}  
+                    </section>
+                    <section class="col-md-9"></section>
+                </section>  
             </div>
             <form #form="ngForm" (ngSubmit)="Update(form.value)">
             <div class="card-body ">
@@ -16,24 +22,26 @@
                         </mat-form-field> 
                         </section>
                       </section>
-            <section class="row">
-                <section class="col-md-6">
+            <section class="row justify-content-center">
+                <section class="col-md-4">
                     <mat-form-field>
                         <input matInput placeholder="{{'Name' | translate}}"  name="name" [(ngModel)] = "name">
                     </mat-form-field> 
                 </section>
-                <section class="col-md-6">
+                <section class="col-md-4">
                     <mat-form-field>
                         <input matInput placeholder="{{'Email' | translate}}" type="email" name="email" [(ngModel)] = "email">
                     </mat-form-field> 
                 </section>
+                <section class="col-md-4"></section>
             </section>
-            <section class="row">
-                <section class="col-md-6">
+            <section class="row justify-content-center">
+                <section class="col-md-4">
                     <mat-form-field>
                         <input matInput placeholder="{{'Phone' | translate}}"  name="phone" [(ngModel)] = "phone">
                     </mat-form-field> 
                 </section>
+                <section class="col-ms-4"></section>
             </section>
         </div>
             </div>

@@ -18,6 +18,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { ShowDoctorComponent } from './show-doctor/show-doctor.component';
 import { AddDoctorComponent } from './add-doctor/add-doctor.component';
 import { ShowClientsComponent } from './show-clients/show-clients.component';
+import { BookingComponent } from './booking/booking.component';
+import { MessagesComponent } from './messages/messages.component';
+import { GroupComponent } from './group/group.component';
 
 
 export const DashboardRoutes: Routes = [
@@ -104,6 +107,19 @@ export const DashboardRoutes: Routes = [
          {
             path: 'showclient',
             component : ShowClientsComponent
+         },
+         {
+            path: 'booking',
+            component : BookingComponent
+         }
+         ,
+         {
+            path: 'group',
+            component : GroupComponent
+         },
+         {
+            path: 'message',
+            component : MessagesComponent
          }
       ]
    }

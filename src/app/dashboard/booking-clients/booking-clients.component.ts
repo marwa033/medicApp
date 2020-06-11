@@ -13,51 +13,45 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./booking-clients.component.scss']
 })
 export class BookingClientsComponent implements OnInit {
-
-
-
-  dataSource: MatTableDataSource<unknown>;
-  displayedColumns: string[] = [ 'completed' , 'state',  'date' , 'from' , 'to'];
-
-
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  results: any;
-  tries: any;
- 
-  
+  book = JSON.parse(localStorage.getItem('book'));  
+  cname : string='';
+  cphone : string='';
+  price: string='';
+  date = new Date();
+  from : any;
+  to: any;
+  name: any;
+  phone: any;
+  title: any;
+  address: any;
+  district: any;
+  phone1: any;
+  work: any;
   constructor(public translate: TranslateService,
     public authService: AuthService,
    private pageTitleService: PageTitleService ,
    private toastr: ToastrService,
      config: NgbModalConfig,
      private spinner: NgxSpinnerService,
-      private modalService: NgbModal) {
-       config.backdrop = 'static';
-       config.keyboard = false;
-    } 
-    applyFilter(event: Event) {
-      const filterValue = (event.target as HTMLInputElement).value;
-      this.dataSource.filter = filterValue.trim().toLowerCase();
-    }
-    Clients(){
-      this.authService.GetBookingClients().
-                then( responseBookClient => { this.results = responseBookClient;
-                   this.dataSource = new MatTableDataSource(responseBookClient.data);
-                   this.dataSource.paginator = this.paginator;
-                   this.dataSource.sort = this.sort; 
-                  //  console.log( this.results );
-                   setTimeout(() => {
-                    this.spinner.hide();
-                  }, this.results);
-                });
- } 
- Close(){ 
-  window.location.reload();
-  this.modalService.dismissAll;
-   } 
+      private modalService: NgbModal) { } 
+    
   ngOnInit() {
-    this.Clients();
-    this.spinner.show();
+    this.cname = this.book.client.user.name;
+    this.cphone = this.book.client.user.phone;
+    this.price = this.book.price;
+    this.to = this.book.to;
+    this.from = this.book.from;
+
+    this.name = this.book.vendor.name;
+    this.phone = this.book.vendor.clinicPhones[0];
+    this.phone1 = this.book.vendor.clinicPhones[1];
+    this.title = this.book.vendor.title;
+    this.address = this.book.vendor.address;
+    this.title = this.book.vendor.title;
+    this.district = this.book.vendor.district.name;
+    
+    this.work = this.book.vendor.workingHours;
+    this.date = new Date(this.book.date);
+    console.log(this.book);
   }
 }

@@ -1,7 +1,12 @@
 <section class="container">
     <div class="card">
-        <div class="card-header" mat-raised-button>
-          {{'Add Promo Code' | translate}}
+        <div class="card-header">
+            <section class="row">
+                <section class="col-md-3">
+                    {{'Add Promo Code' | translate}}
+                </section>
+                <section class="col-md-9"></section>
+            </section>
         </div>
         <form #form="ngForm" (ngSubmit)="Add(form.value)">
         <div class="card-body ">
@@ -42,30 +47,8 @@
                     <input matInput placeholder="{{'Amount' | translate}}" name="Amount" type="number" [(ngModel)] = "Amount">
                 </mat-form-field>
             </section>
-            <!-- <section class="col-md-6">
-                <mat-form-field>
-                    <input matInput placeholder="{{'Type' | translate}}" name="Type" [(ngModel)] = "Type">
-                </mat-form-field>
-            </section> -->
+            <section class="col-md-4"></section>
         </section>
-        <!-- <section class="row">
-            <section class="col-md-6">
-                <mat-form-field>
-                  <mat-select  placeholder="All Clients" name="Client" [(ngModel)] = "Client">
-                    <mat-option value="True">True</mat-option>
-                    <mat-option value="False">False</mat-option>
-                  </mat-select>
-                </mat-form-field>
-            </section>
-            <section class="col-md-6">
-              <mat-form-field>
-                <mat-select  placeholder="All Doctors" name="Doctor" [(ngModel)] = "Doctor">
-                  <mat-option value="True">True</mat-option>
-                  <mat-option value="False">False</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </section>
-          </section> -->
         
     </div>
         </div>

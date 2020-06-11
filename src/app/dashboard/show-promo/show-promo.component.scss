@@ -2,6 +2,7 @@
 table{
     transition: none !important;
     box-shadow: none !important;
+    text-align: center !important;
 }
 .example-container{
     overflow: auto;
@@ -13,7 +14,10 @@ table{
 
 .mat-header-cell, .mat-cell {
     min-width: 100px;
-    word-wrap: break-word;
+    text-align: center;
+}
+th.mat-header-cell{
+    text-align: center !important;
 }
 .container-fluide{
     padding: 20px;
@@ -24,9 +28,14 @@ h4{
 .pointer{
     cursor: pointer;
 }
+img{
+    width: 70px;
+    height: 70px;
+    padding:5px;
+    border-radius: 50%;
+}
 .rid{
     display: none;
-}
-.mat-row:hover {
+}.mat-row:hover {
     background-color: rgb(240, 239, 239);
   }

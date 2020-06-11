@@ -139,7 +139,6 @@ Close(){
   window.location.reload();   
    } 
 selectedRow(element){
-  // console.log('edit*********');
   this.id = element._id;
   this.doctorId = element.vendorId;
   this.editETitle = element.title;

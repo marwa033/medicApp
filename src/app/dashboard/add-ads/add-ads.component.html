@@ -1,7 +1,12 @@
 <section class="container">
     <div class="card">
         <div class="card-header">
-         {{'Add Ads' | translate}}
+            <section class="row">
+                <section class="col-md-3">
+                    {{'Add Ads' | translate}}
+                </section>
+                <section class="col-md-9"></section>
+            </section>
         </div>
         <form #form="ngForm" (ngSubmit)="Add(form.value)">
         <div class="card-body ">
@@ -24,6 +29,7 @@
                     <input matInput type="email" placeholder="{{'Enter Name in Arabic' | translate}}" name="ATitle" autocomplete="off" [(ngModel)] = "ATitle">
                 </mat-form-field>
             </section>
+            <!-- <section class="col-md-4"></section> -->
         </section>
         <section class="row justify-content-center">
             <section class="col-md-4">
@@ -42,6 +48,7 @@
                 <input matInput placeholder="Color" name="imageSrc" [(ngModel)] = "imageSrc">
             </mat-form-field>
             </section>
+            <!-- <section class="col-md-4"></section> -->
         </section>
         <section class="row justify-content-center">
             <section class="col-md-4">
@@ -54,6 +61,7 @@
                  <mat-datepicker #picker></mat-datepicker>
                   </mat-form-field>
             </section>
+            <!-- <section class="col-md-4"></section> -->
             <section class="col-md-4">
                 <mat-form-field class="rid">
                     <input matInput placeholder="Color" name="imageSrc" [(ngModel)] = "imageSrc">

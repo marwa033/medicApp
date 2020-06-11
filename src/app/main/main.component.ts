@@ -80,7 +80,15 @@ export class MainComponent implements OnInit {
 		   }
 		}
 		this.translate.use(lang);
+		console.log(lang)
+		this.getlang(lang);
 	 }
+
+	 getlang(value) {
+		localStorage.setItem('language', JSON.stringify(value));
+		var lang = JSON.parse(localStorage.getItem('language'));
+	  console.log(lang)
+	  }
 
 	sideBarFilterClass : any = [
 		{

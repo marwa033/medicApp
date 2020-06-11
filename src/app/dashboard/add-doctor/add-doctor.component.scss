@@ -1,3 +1,17 @@
-.sun,.mon,.tue,.wed,.thur,.fri,.sat,.days{
+.sun,.mon,.tue,.wed,.thru,.fri,.sat,.days,.wdown,.sdown,.mdown,.tdown,.wedown,.thdown,.fdown,.stdown,.rid{
     display: none;
+}
+.work{
+    cursor: pointer;
+}
+.card-header{
+    cursor: pointer;
+}img{
+    width: 70px;
+    height: 70px;
+    padding:5px;
+    border-radius: 50%;
+}
+.header{
+    background-color: grey;
 }
