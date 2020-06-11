@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 export class BookingComponent implements OnInit {
   updatedAt = new Date();
   date = new Date();
+  selectedcomplete: any;
   dataSource: MatTableDataSource<unknown>;
   displayedColumns: string[] = ['count' , 'vname',   'cname' ,'date', 'price' , 'complete', 'action'];
 

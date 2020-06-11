@@ -44,6 +44,9 @@ export class AddDoctorComponent implements OnInit {
   max: any;
   result: any;
   to: any;
+  booking: any;
+  startDate: any;
+  endDate: any;
 
   constructor(public translate: TranslateService,
     public authService: AuthService,
