@@ -37,23 +37,7 @@ export class MessagesComponent implements OnInit {
     }       
 
 
-    Messages(){
-      this.authService.GetMessages().
-                then( responsegetMessage => { this.results = responsegetMessage;
-                   this.dataSource = new MatTableDataSource(responsegetMessage.data);
-                   this.dataSource.paginator = this.paginator;
-                   this.dataSource.sort = this.sort; 
-                  //  console.log( this.results );
-                   setTimeout(() => {
-                    this.spinner.hide();
-                  }, this.results);
-                });
-               }
-               
-
   ngOnInit() {
-    this.spinner.show();
-    this.Messages();
   }
 
 }

@@ -68,6 +68,7 @@ import { ShowClientsComponent } from './show-clients/show-clients.component';
 import { BookingComponent } from './booking/booking.component';
 import { GroupComponent } from './group/group.component';
 import { MessagesComponent } from './messages/messages.component';
+import { SupportComponent } from './support/support.component';
 
 @NgModule({
 	declarations: [
@@ -92,7 +93,8 @@ import { MessagesComponent } from './messages/messages.component';
 		ShowClientsComponent,
 		BookingComponent,
 		GroupComponent,
-		MessagesComponent,		
+		MessagesComponent,
+		SupportComponent,		
 	],
 	imports: [ GridModule,
 		ListViewModule ,

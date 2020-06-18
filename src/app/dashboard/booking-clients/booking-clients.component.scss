@@ -12,6 +12,11 @@ table{
     word-wrap: break-word;
 }
 
+.card-header{
+    background-color: #1fc6ad;
+    // border: 1px solid #ddd;
+    color: white;
+}
 h4{
     text-align: center;
 }
@@ -23,4 +28,5 @@ h4{
   }
   label{
     font-weight: 700;
+    color : #212741
 }

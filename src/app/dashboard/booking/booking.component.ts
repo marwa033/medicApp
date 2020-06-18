@@ -6,7 +6,7 @@ import { PageTitleService } from 'app/core/page-title/page-title.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'ms-booking',
@@ -18,7 +18,7 @@ export class BookingComponent implements OnInit {
   date = new Date();
   selectedcomplete: any;
   dataSource: MatTableDataSource<unknown>;
-  displayedColumns: string[] = ['count' , 'vname',   'cname' ,'date', 'price' , 'complete', 'action'];
+  displayedColumns: string[] = ['count' , 'vname',   'cname', 'visitor' ,'date', 'price' , 'complete'];
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   
@@ -26,12 +26,15 @@ export class BookingComponent implements OnInit {
   results: any;
   tries: any;
   day: any;
+  selectedID: any;
+  vendorID: any;
   constructor(public translate: TranslateService,
     public authService: AuthService,
    private pageTitleService: PageTitleService ,
    private toastr: ToastrService,
    config: NgbModalConfig,
    private router: Router,
+   private route: ActivatedRoute,
      private spinner: NgxSpinnerService,
       private modalService: NgbModal) { }
 
@@ -42,7 +45,7 @@ export class BookingComponent implements OnInit {
            this.dataSource = new MatTableDataSource(responsegetbooks.data);
            this.dataSource.paginator = this.paginator;
            this.dataSource.sort = this.sort; 
-          //  console.log( this.results );
+           console.log( this.results );
            setTimeout(() => {
             this.spinner.hide();
           }, this.results);
@@ -55,7 +58,8 @@ export class BookingComponent implements OnInit {
              setTimeout(() => {
               this.spinner.hide();
             }, this.tries);
-          });}
+          });
+        }
 
           editRow(element){
             this.router.navigate(['/dashboard/bookingclient']);
@@ -76,8 +80,33 @@ export class BookingComponent implements OnInit {
           }
 
   ngOnInit() {
-    
-    this.bookings();
+    this.route.params.subscribe(params => {
+     if (this.selectedID = params.id){
+      let val = this.selectedID   
+      this.authService.GetBookingClient(val).
+      then( responsegetbooksfilter => { this.tries = responsegetbooksfilter.data;
+        this.dataSource = new MatTableDataSource(responsegetbooksfilter.data);
+        this.dataSource.paginator = this.paginator;
+        console.log(this.tries)
+        setTimeout(() => {
+          this.spinner.hide();
+        }, this.tries);
+      });}
+      else if  (this.vendorID = params.vendorId){
+               let value = this.vendorID   
+       this.authService.GetBookingVendor(value).
+       then( responsegetbooksfilter => { this.tries = responsegetbooksfilter.data;
+         this.dataSource = new MatTableDataSource(responsegetbooksfilter.data);
+         this.dataSource.paginator = this.paginator;
+         console.log(this.tries)
+         setTimeout(() => {
+           this.spinner.hide();
+         }, this.tries);
+       });}else{
+         
+     this.bookings();
+      }
+     })
     this.spinner.show();
   }
 

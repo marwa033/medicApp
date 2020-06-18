@@ -14,9 +14,10 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class GetAdminComponent implements OnInit {
   public isCollapsed = false;
+  role = JSON.parse(localStorage.getItem('adminRole'));
 
   dataSource: MatTableDataSource<unknown>;
-  displayedColumns: string[] = ['count' , 'name' , 'email',  'phone' , 'action'];
+  displayedColumns: string[] = ['count' , 'name' , 'role' , 'email',  'phone' , 'action'];
 
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -30,7 +31,9 @@ export class GetAdminComponent implements OnInit {
   editpassword: any;
   password: any;
   selectedstatus: any;
+  selectedRole: any;
   leeh = JSON.parse(localStorage.getItem('try'));
+  delete: any;
   
   constructor(public translate: TranslateService,
     public authService: AuthService,
@@ -93,10 +96,17 @@ FilterAdmins(value){
 
                   this.authService.AdminActivation(element).
                   then( responseActiveAdmindata => { this.tries = responseActiveAdmindata;
-                    //  console.log("state is = " + this.tries.state);
-                     element.state = this.tries.state;
+                     console.log(element);
                      this.Close();   
                   });
+               }
+
+               deleteRow(element){
+                this.authService.AdminDelete(element).
+                then( responseDelete => { this.delete = responseDelete;
+                   console.log(element);
+                   this.Close();   
+                });
                }
 
  openLg(content) {
@@ -108,7 +118,7 @@ FilterAdmins(value){
   this.editName = element.user.name;
   this.editEmail = element.user.email;
   this.editPhone = element.user.phone;
-  this.password = "";
+  this.selectedRole = element.role
 }
 // Active(element){
 //   this.authService.AdminsActive(element).
@@ -118,7 +128,7 @@ FilterAdmins(value){
   ngOnInit() {  
     this.Admins();
     this.spinner.show();
-console.log(this.leeh);
+console.log(this.role);
   }
 
 }

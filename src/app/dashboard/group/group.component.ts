@@ -22,6 +22,8 @@ export class GroupComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   results: any;
+  tries: any;
+  delete: any;
  
   constructor(public translate: TranslateService,
     public authService: AuthService,
@@ -48,8 +50,26 @@ export class GroupComponent implements OnInit {
                   }, this.results);
                 });
                }
-               
+               Close(){ 
+                this.modalService.dismissAll(); 
+                this.spinner.show();
+                window.location.reload();
+                 }  
 
+               Active(element){
+                this.authService.GroupActivation(element).
+                then( responseActiveGroup => { this.tries = responseActiveGroup;
+                  //  console.log(element);
+                   this.Close();   
+                });
+               }
+               Delete(element){
+                this.authService.GroupDelete(element).
+                then( responseGroup => { this.delete = responseGroup;
+                  //  console.log(element);
+                   this.Close();   
+                });
+               }
                
   ngOnInit() {
     this.spinner.show();

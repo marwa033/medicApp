@@ -51,9 +51,6 @@ export class ShowDistrictComponent implements OnInit {
     }
  
     Districts(){
-      // if(value.filter == "" || value.filter == undefined){
-      //    value.filter = "";
-      //   }
       this.authService.GetDistrict().
                 then( responsedistrictdata => { this.results = responsedistrictdata.data;
                    this.dataSource = new MatTableDataSource(responsedistrictdata.data);

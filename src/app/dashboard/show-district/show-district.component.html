@@ -2,15 +2,14 @@
   <p style="color: white" > Loading... </p></ngx-spinner>
 
 <div class="container-fluide">
-<h4>{{'Show All District' | translate}}</h4>
-  <!-- <mat-form-field class="ml-5">
-    <mat-label>{{'Filter' | translate}}</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Name" name="filter">
-  </mat-form-field> -->
   <form #form="ngForm" (ngSubmit)="FilterDistrict(form.value)">
     <section class="row">
+      
+    <section class="col-md-3 mt-3">
+<p>{{'Show All District' | translate}}</p>
+    </section>
       <section class="col-md-3">
-    <mat-form-field class="ml-5 mt-1">
+    <mat-form-field class="mt-1">
       <mat-label>{{'Filter' | translate}}</mat-label>
       <input matInput placeholder="Name" name="filter" [(ngModel)]="filter">
     </mat-form-field>
@@ -25,9 +24,8 @@
       </mat-form-field>
     </section>
     <section class="col-md-3">
-      <button class="secondary-bg mt-3" mat-raised-button>{{'Save' | translate}}</button>
+      <button class="btn  btn-block mt-3">{{'Search' | translate}}</button>
     </section>
-    <section class="col-md-3"></section>
   </section>
   <div class="mat-elevation-z8 example-container">
 

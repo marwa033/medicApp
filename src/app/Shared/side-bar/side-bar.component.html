@@ -1,4 +1,4 @@
-<div class="sidebar-panel gene-sidenav" fxLayout="column">
+<div class="sidebar-panel gene-sidenav bg" fxLayout="column">
    <mat-toolbar class="sidebar-logo">
       <div class="gene-logo">
          <a href="javascript:void(0)" (click)="onClick()">
@@ -23,19 +23,7 @@
                         <span class="sidebar-label">{{ menuitem.label}}</span>
                      </ng-container>
                      </a>
-                     <a menuToggle class="gene-relative" mat-ripple [routerLink]="['/', menuitem.state]" routerLinkActive="active-link" *ngIf="menuitem.type === 'link'">
-                     <mat-icon>{{ menuitem.icon }}</mat-icon>
-                     <span>{{ menuitem.name | translate }}</span>
-                     <ng-container *ngIf="menuitem.label">
-                        <span class="sidebar-label">{{ menuitem.label}}</span>
-                     </ng-container>
-                     </a>
                      <span></span>
-                     <!-- <a menuToggle class="gene-relative"  href="dashboard/crm">
-                        <mat-icon>home</mat-icon>
-                        <span>{{ Home | translate }}</span>
-                        <mat-icon class="menu-caret">chevron_right</mat-icon>
-                     </a> -->
                      <a menuToggle class="gene-relative" mat-ripple href="javascript:void(0)" *ngIf="menuitem.type === 'sub'">
                         <mat-icon>{{ menuitem.icon }}</mat-icon>
                         <span>{{ menuitem.name | translate }}</span>
@@ -45,6 +33,7 @@
                         <span fxFlex></span>
                         <mat-icon class="menu-caret">chevron_right</mat-icon>
                      </a>
+                     
                      <mat-nav-list menuToggleDirective class="sub-menu" *ngIf="menuitem.type === 'sub'">
                         <mat-list-item menuToggleLink *ngFor="let childitem of menuitem.children" routerLinkActive="open">
                            <a menuToggle class="gene-relative" mat-ripple href="javascript:void(0)" *ngIf="childitem.type === 'sub2'">

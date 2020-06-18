@@ -36,6 +36,8 @@ export class ShowAdsComponent implements OnInit {
   editDate: any;
   selectedstatus: any;
   endDate:any;
+  try: any;
+  editATitle: any;
   constructor(public translate: TranslateService,
     public authService: AuthService,
    private pageTitleService: PageTitleService ,
@@ -139,11 +141,20 @@ Close(){
   window.location.reload();   
    } 
 selectedRow(element){
-  this.id = element._id;
-  this.doctorId = element.vendorId;
-  this.editETitle = element.title;
-  this.editDate = new Date(element.endDate);
-  this.imageSrc = element.image;
+  this.spinner.show();
+  this.authService.GetIDAds(element).
+  then( responseAdsID => { this.try = responseAdsID;
+    console.log(this.try)
+ this.editATitle = this.try.title.ar;
+  this.id = this.try._id;
+  this.doctorId = this.try.vendorId;
+  this.editETitle = this.try.title.en;
+  this.editDate = new Date(this.try.endDate);
+  this.imageSrc = this.try.image;
+  setTimeout(() => {
+    this.spinner.hide();
+  }, this.try);
+});
 }
 openLg(content) {
   this.modalService.open(content, { size: 'lg' });

@@ -2,10 +2,12 @@
   <p style="color: white" > Loading... </p></ngx-spinner>
 
 <div class="container-fluide">
-<h4 >{{'Show All Ads' | translate}}</h4>
 <form #form="ngForm" (ngSubmit)="FilterAds(form.value)">
   <section class="row">
-  <section class="col-md-3 ml-5">
+    <section class="col-md-3 mt-3">
+      <p>{{'Show All Ads' | translate}}</p>
+      </section>
+  <section class="col-md-3">
     <mat-form-field>
       <mat-select name="status" placeholder="Status" [(ngModel)]="selectedstatus">
         <mat-option value=" ">{{'All' | translate}}</mat-option>
@@ -15,9 +17,9 @@
     </mat-form-field>
   </section>
   <section class="col-md-3">
-    <button class="secondary-bg mt-3" mat-raised-button>{{'Save' | translate}}</button>
+    <button class="btn btn-block mt-3">{{'Search' | translate}}</button>
   </section>
-  <section class="col-md-6">  </section>
+  <section class="col-md-3">  </section>
 </section>
   <div class="mat-elevation-z8 example-container">
 
@@ -68,6 +70,8 @@
 
   <!--********************************************************************************-->
   <ng-template #content let-modal>
+    <ngx-spinner bdColor = "rgba(51, 51, 51, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true">
+      <p style="color: white" > Loading... </p></ngx-spinner>
     <div class="modal-header">
       <h4 class="modal-title">Update Ads</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">

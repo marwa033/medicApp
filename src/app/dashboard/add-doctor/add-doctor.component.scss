@@ -1,17 +1,71 @@
-.sun,.mon,.tue,.wed,.thru,.fri,.sat,.days,.wdown,.sdown,.mdown,.tdown,.wedown,.thdown,.fdown,.stdown,.rid{
-    display: none;
+
+
+h4{
+    text-align: center;
 }
-.work{
+.pointer{
     cursor: pointer;
 }
-.card-header{
-    cursor: pointer;
-}img{
+.mat-row:hover {
+    background-color: rgb(240, 239, 239);
+  }
+  .rid{
+      display: none;
+  }
+
+  img{
     width: 70px;
     height: 70px;
     padding:5px;
     border-radius: 50%;
 }
-.header{
-    background-color: grey;
+.container-fluide{
+    padding: 20px;
+}
+.try{
+    padding: 5px;
+    margin: 20px !important;
+}
+.title{
+    font-size: smaller;
+    border: 1px solid #ddd;
+}
+.card-header{
+    background-color: #1fc6ad;
+    // border: 1px solid #ddd;
+    color: white;
+}
+
+p{
+    font-size: smaller;
+    text-align: center;
+}
+.btn:hover{
+    background-color:#fdbc2c;
+    color: white;
+    border:none;
+    border: 2px solid #fdbc2c;
+    border-radius:10px;
+}
+.btn{
+    border: 2px solid #19a994;
+    border-radius:10px;
+    color: black;
+    background-color: rgb(245, 244, 244);
+}
+fieldset.scheduler-border {
+    border: 1px solid #fdbc2c !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;
+
+}
+legend.scheduler-border {
+    width:inherit; /* Or auto */
+    padding:0 10px; /* To give a bit of padding on the left and right */
+    border-bottom:none;
+    font-size: medium;
+    text-align: center;
+    color: #212741;
 }

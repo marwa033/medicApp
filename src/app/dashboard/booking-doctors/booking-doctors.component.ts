@@ -37,6 +37,8 @@ export class BookingDoctorsComponent implements OnInit {
   max: any;
   booking: any;
   selectedFeatures: any=[];
+  selectedPhone: any[];
+  phoneAdd: any;
   tries: any;
   id: any;
   try: any;
@@ -57,21 +59,37 @@ export class BookingDoctorsComponent implements OnInit {
        config.backdrop = 'static';
        config.keyboard = false;
     } 
-
+    opensm(contentsm) {
+      this.modalService.open(contentsm , { size: 'sm' });
+    }
     onAdd() {
       this.selectedFeatures.push({day:this.day , from:this.from , to:this.to , max:this.max});
-      
       this.modalService.dismissAll(); 
       this.UpdateWork(this.selectedFeatures);
     }
-    onRemove(element){
-      console.log(element);
-      this.selectedFeatures.pop(element);
+    addPhone() {
+      this.selectedPhone.push(this.phoneAdd);
+      console.log(this.selectedPhone)
+      this.modalService.dismissAll(); 
+      this.UpdatePhone(this.selectedPhone);
+    }
+    removeItem(i: number): void {
+      this.selectedFeatures.splice(i, 1);
+      this.UpdateWork(this.selectedFeatures);
+    }
+    removePhone(i: number): void{
+      this.selectedPhone.splice(i, 1);
+      this.UpdatePhone(this.selectedPhone);
     }
     UpdateWork(value) {
-      localStorage.setItem('upwork', JSON.stringify(value));
-      var upwork = JSON.parse(localStorage.getItem('upwork'));
+      localStorage.setItem('editWork', JSON.stringify(value));
+      var upwork = JSON.parse(localStorage.getItem('editWork'));
       console.log(upwork)    
+    }
+    UpdatePhone(value) {
+      localStorage.setItem('editPhone', JSON.stringify(value));
+      var upPhone = JSON.parse(localStorage.getItem('editPhone'));
+      // console.log(upwork)    
     }
     handleInputChange(e) {
       var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
@@ -145,6 +163,9 @@ export class BookingDoctorsComponent implements OnInit {
 then( responseDoctorID => { this.x = responseDoctorID;
   console.log(this.x)
 
+  setTimeout(() => {
+    this.spinner.hide();
+  }, this.x);
   this.getVendoeIdUpdate(this.x._id)
   this.EName = this.x.name.en
   this.AName = this.x.name.ar
@@ -161,7 +182,7 @@ then( responseDoctorID => { this.x = responseDoctorID;
   this.time = this.x.estimateTime
   this.selectedCategory = this.x.categoryId
   this.selecteddistricts = this.x.districtId
-  this.cphone = this.x.clinicPhones
+  this.selectedPhone = this.x.clinicPhones
   this.imageSrc = this.x.image
   this.imageSrcLogo = this.x.logo
   this.name = this.x.user.name
@@ -172,9 +193,6 @@ then( responseDoctorID => { this.x = responseDoctorID;
   this.startDate = new Date(this.x.subscription.startDate)
   this.endDate = new Date(this.x.subscription.endDate)
   this.subID = this.x.subscription._id
-  setTimeout(() => {
-    this.spinner.hide();
-  }, this.x);
 });
 }
   ngOnInit() {

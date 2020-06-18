@@ -23,6 +23,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 
 
 export class SaasComponent implements OnInit  {
+  
    id: string="";
    editEName: string ='';
    editAName: string = '';
@@ -167,16 +168,7 @@ openLg(content) {
 
 
    ngOnInit() {
-     
       this.spinner.show();
-this.Categories();
-$(document).ready(function() {
-
-   $('.pointer').click(function() {
-      $('.one').hide();
-    });
-
- });
-
-}
+      this.Categories();
+             }
 }

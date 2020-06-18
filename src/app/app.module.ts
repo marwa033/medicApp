@@ -1,4 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {enableProdMode} from '@angular/core';
 import 'hammerjs';
 import { BrowserModule} from '@angular/platform-browser';
 import { BrowserAnimationsModule} from "@angular/platform-browser/animations";

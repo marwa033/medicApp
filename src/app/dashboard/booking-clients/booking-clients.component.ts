@@ -36,8 +36,8 @@ export class BookingClientsComponent implements OnInit {
       private modalService: NgbModal) { } 
     
   ngOnInit() {
-    this.cname = this.book.client.user.name;
-    this.cphone = this.book.client.user.phone;
+    // this.cname = this.book.client.user.name;
+    // this.cphone = this.book.client.user.phone;
     this.price = this.book.price;
     this.to = this.book.to;
     this.from = this.book.from;

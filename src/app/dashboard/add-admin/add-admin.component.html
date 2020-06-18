@@ -38,13 +38,30 @@
             </section>
             <!-- <section class="col-md-4"></section> -->
         </section>
+        <section class="row justify-content-center">
+            <section class="col-md-4">
+                <!-- <mat-form-field>
+                    <input matInput placeholder="{{'Enter Admin Role' | translate}}" name="role" autocomplete="off" [(ngModel)] = "role">
+                </mat-form-field> -->
+                <mat-form-field>
+                    <mat-select name="role" placeholder="{{'Enter Admin Role' | translate}}" [(ngModel)]="selectedRole">
+                      <mat-option value="super">{{'Super' | translate}}</mat-option>
+                      <mat-option value="editor">{{'Editor' | translate}}</mat-option>
+                      <mat-option value="contributer">{{'Contributer' | translate}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </section>
+            <section class="col-md-4">
+            </section>
+            <!-- <section class="col-md-4"></section> -->
+        </section>
     </div>
         </div>
         <div class="card-footer">
             <section class="row">
                 <section class="col-md-9"></section>
                 <section class="col-md-3">
-                    <button class="primary-bg btn-block" mat-raised-button>{{'Save' | translate}}</button>
+                    <button class="btn  btn-block">{{'Save' | translate}}</button>
                 </section>
             </section>
             

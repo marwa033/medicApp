@@ -15,6 +15,7 @@ export class AddAdminComponent implements OnInit {
   email: string = '';
   phone: string = '';
   password: string = '';
+  selectedRole:  string='';
 
   constructor(public translate: TranslateService,
     public authService: AuthService,

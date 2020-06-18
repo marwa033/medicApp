@@ -35,15 +35,27 @@ export class ProfileComponent implements OnInit {
                 setTimeout(() => {
                   this.spinner.hide();
                 }, this.id);
+                this.getRole(getProfileResults.admin.role)
               });
 }
+
+getRole(value) {
+  localStorage.setItem('adminRole', JSON.stringify(value));
+  var role = JSON.parse(localStorage.getItem('adminRole'));
+  console.log(role)
+  }
 Update(value){
-  this.spinner.show();
   this.authService.UpdateProfile(value).
             then( responseUpProfile => { this.tries = responseUpProfile;
             });
+            this.Close()
 }  
 
+Close(){ 
+  this.modalService.dismissAll(); 
+  this.spinner.show();
+  window.location.reload();
+   }  
   ngOnInit() {
     this.spinner.show();
     this.Profile()

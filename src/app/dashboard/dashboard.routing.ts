@@ -21,6 +21,7 @@ import { ShowClientsComponent } from './show-clients/show-clients.component';
 import { BookingComponent } from './booking/booking.component';
 import { MessagesComponent } from './messages/messages.component';
 import { GroupComponent } from './group/group.component';
+import { SupportComponent } from './support/support.component';
 
 
 export const DashboardRoutes: Routes = [
@@ -111,6 +112,14 @@ export const DashboardRoutes: Routes = [
          {
             path: 'booking',
             component : BookingComponent
+         },
+         {
+            path: 'booking/:id',
+            component : BookingComponent
+         },
+          {
+            path: 'bookingVendor/:vendorId',
+            component : BookingComponent
          }
          ,
          {
@@ -120,6 +129,10 @@ export const DashboardRoutes: Routes = [
          {
             path: 'message',
             component : MessagesComponent
+         },
+         {
+            path: 'support',
+            component : SupportComponent
          }
       ]
    }

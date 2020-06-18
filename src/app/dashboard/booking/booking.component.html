@@ -2,11 +2,13 @@
     <p style="color: white" > Loading... </p></ngx-spinner>
   
   <div class="container-fluide">
-  <h4 >{{'Show All Bookings' | translate}}</h4>
   
   <form #form="ngForm" (ngSubmit)="FilterBooking(form.value)">
-  <section class="row ml-5">
-    <section class="col-md-4 "> 
+  <section class="row ">
+    <section class="col-md-3 mt-3">
+  <p >{{'Show All Bookings' | translate}}</p>
+    </section>
+    <section class="col-md-3"> 
         <mat-form-field>
         <mat-select name="complete" placeholder="{{'Complete' | translate}}" [(ngModel)]="selectedcomplete">
           <mat-option value=" ">{{'All' | translate}}</mat-option>
@@ -15,11 +17,11 @@
         </mat-select>
       </mat-form-field>
     </section>
-  <section class="col-md-4">
-    <button class="secondary-bg mt-3" mat-raised-button>{{'Save' | translate}}</button>
+  <section class="col-md-3">
+    <button class="btn btn-block mt-3" >{{'Save' | translate}}</button>
   </section>
   
-  <section class="col-md-4">
+  <section class="col-md-3">
   </section>
 </section>
     <div class="mat-elevation-z8 example-container">
@@ -38,13 +40,17 @@
       <!-- Weight Column -->
       <ng-container matColumnDef="cname">
           <th mat-header-cell *matHeaderCellDef> {{'Client name' | translate}} </th>
-          <td mat-cell *matCellDef="let element"> {{element.client.user.name}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.vendor.user.name}} </td>
         </ng-container>
 
+        <ng-container matColumnDef="visitor">
+          <th mat-header-cell *matHeaderCellDef> {{'Visitor name' | translate}} </th>
+          <td mat-cell *matCellDef="let element"> {{element.visitorName}} </td>
+        </ng-container>
               <!-- Position Column -->
       <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef> {{'Name' | translate}} </th>
-        <td mat-cell *matCellDef="let element" > {{element.date | date : 'short'}}</td>
+        <th mat-header-cell *matHeaderCellDef> {{'Date' | translate}} </th>
+        <td mat-cell *matCellDef="let element" > {{element.date}}</td>
       </ng-container>
      
       <!-- Weight Column -->
@@ -58,14 +64,14 @@
         <th mat-header-cell *matHeaderCellDef> {{'Complete' | translate}} </th>
         <td mat-cell *matCellDef="let element"> {{element.completed}} </td>
       </ng-container>
-
+<!-- 
               <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef class="pointer"> {{'Action' | translate}} </th>
                 <td mat-cell *matCellDef="let element"> 
                   <mat-icon style="color:green"class="pointer"  title="details"  (click)="editRow(element)">
                     details </mat-icon>  
               </td>
-              </ng-container>
+              </ng-container> -->
     
       <tr mat-header-row *matHeaderRowDef="displayedColumns" style="text-align: center;"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

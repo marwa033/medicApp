@@ -22,7 +22,9 @@ export class ShowClientsComponent implements OnInit {
   
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   results: any;
-
+  tries: any;
+  status: any;
+  selectedstatus: any;
   constructor(public translate: TranslateService,
     public authService: AuthService,
    private pageTitleService: PageTitleService ,
@@ -43,20 +45,34 @@ export class ShowClientsComponent implements OnInit {
                     }, this.results);
                   });}
 
+
+                  FilterClients(value){
+                    this.spinner.show();
+                    this.authService.GetFilterClients(value).
+                    then( responsegetClientsFilter => { this.results = responsegetClientsFilter;
+                       this.dataSource = new MatTableDataSource(responsegetClientsFilter.data);
+                       this.dataSource.paginator = this.paginator;
+                       this.dataSource.sort = this.sort; 
+                      //  console.log( this.results );
+                       setTimeout(() => {
+                        this.spinner.hide();
+                      }, this.results);
+                    });}
+
                   Close(){ 
                     this.modalService.dismissAll(); 
                     this.spinner.show();
                     window.location.reload();
                      }  
-                  //    Active(element){
+                     Active(element){
     
-                  //     this.authService.AdminActivation(element).
-                  //     then( responseActiveAdmindata => { this.tries = responseActiveAdmindata;
-                  //       //  console.log("state is = " + this.tries.state);
-                  //        element.state = this.tries.state;
-                  //       //  this.Close();   
-                  //     });
-                  //  }
+                      this.authService.AdminActivation(element).
+                      then( responseActiveAdmindata => { this.tries = responseActiveAdmindata;
+                        //  console.log("state is = " + this.tries.state);
+                         element.state = this.tries.state;
+                         this.Close();   
+                      });
+                   }
 
   ngOnInit() {
     this.Clients();

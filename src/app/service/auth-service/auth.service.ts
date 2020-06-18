@@ -66,6 +66,11 @@ export class AuthService {
   addSububscription: any;
   adddoctors: any;
   upSububscription: any;
+  getClientFilter: any;
+  deleteAdmin: any;
+  activeGroup: any;
+  deleteGroup: any;
+  getfilterDoctor: any;
 
 
    constructor(private firebaseAuth: AngularFireAuth,
@@ -123,6 +128,7 @@ return this.districts;
 async DoctorAdd(value) {
   let log =this.userData['x-auth-token'];
     var x = JSON.parse(localStorage.getItem('Hours'));
+    var phone = JSON.parse(localStorage.getItem('Phone'));
   const data = { name:{ en: value.EName , ar: value.AName}, 
   title:{en: value.ETitle, ar:value.ATitle },
   bio:{en: value.EBio, ar:value.ABio },
@@ -130,7 +136,7 @@ async DoctorAdd(value) {
     image : value.imageSrc ,logo:value.imageSrcLogo,
   price:value.price , lat : value.lat ,
    lng: value.lang , estimateTime: value.time ,
-  clinicPhones:[value.cphone] , categoryId:value.categories ,
+  clinicPhones:[phone] , categoryId:value.categories ,
    districtId: value.districts,
 user:{name: value.name , phone: value.phone ,password:value.password},numberOfBookingDays:value.booking ,
 workingHours :x
@@ -238,11 +244,12 @@ return this.upSububscription;
 /////////////////////////////////////////
 async UpdateDoctor(value) {
   let log =this.userData['x-auth-token'];
-  let  upwork = JSON.parse(localStorage.getItem('upwork'));
+  let  upwork = JSON.parse(localStorage.getItem('editWork'));
+  let upPhone = JSON.parse(localStorage.getItem('editPhone'));
   const data = { _id: value.id ,name:{ en: value.EName , ar: value.AName}, title:{en: value.ETitle, ar:value.ATitle },
   bio:{en: value.EBio, ar:value.ABio },  address:{en: value.EAddress, ar:value.AAddress }, image : value.imageSrc ,logo:value.imageSrcLogo,
   price:value.price , lat : value.lat , lng: value.lang , estimateTime: value.time ,
-  clinicPhones:[value.cphone] , categoryId:value.categories , districtId: value.districts,
+  clinicPhones:[upPhone] , categoryId:value.categories , districtId: value.districts,
 user:{name: value.name , phone: value.phone },numberOfBookingDays:value.booking ,
 workingHours :upwork
 
@@ -340,7 +347,7 @@ async AddAdmin(value) {
   // console.log(value.phone);
   // console.log(value.password);
   let log =this.userData['x-auth-token'];
-  const data = {user:{ name: value.name , email: value.email ,phone: value.phone , password: value.password }};
+  const data = {role: value.role , user:{ name: value.name , email: value.email ,phone: value.phone , password: value.password }};
 // Role
   const bodyobj = JSON.stringify(data);
   const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
@@ -516,7 +523,7 @@ request.headers.append('x-auth-token', log);
 /////////////////////////////////////////
 async UpdateAdmins(value) {
   let log =this.userData['x-auth-token'];
-  const data = {_id:value.id, "user": { name : value.upName , email : value.upEmail , phone: value.upPhone  } };
+  const data = {_id:value.id, role: value.role ,user: { name : value.upName , email : value.upEmail , phone: value.upPhone  } };
 const bodyobj = JSON.stringify(data);
 
 const request = new Request(baseURL + 'auth/admins',
@@ -629,7 +636,7 @@ request.headers.append('x-auth-token', log);
 /////////////////////////////////////////
 async AdminActivation(element) {
   let log =this.userData['x-auth-token'];
-  const data = {_id:element._id};
+  const data = {_id:element.user._id};
 const bodyobj = JSON.stringify(data);
 
 const request = new Request(baseURL + 'auth/users/changeState',
@@ -645,6 +652,59 @@ request.headers.append('x-auth-token', log);
   this.activeAdmin = responseActiveAdmindata;
   this.toastr.info('Change State');
   return this.activeAdmin;
+}
+/////////////////////////////////////////
+async GroupActivation(element) {
+  let log =this.userData['x-auth-token'];
+  const data = {_id:element._id};
+const bodyobj = JSON.stringify(data);
+
+const request = new Request(baseURL + 'chat/groups/changeState',
+{
+method: 'PUT',
+body: bodyobj
+});
+request.headers.delete('Content-Type');
+request.headers.append('Content-Type', 'application/json');
+request.headers.append('x-auth-token', log);
+        const response = await fetch( request);
+  const responseActiveGroup = await response.json();
+  this.activeGroup = responseActiveGroup;
+  this.toastr.info('Change State');
+  return this.activeGroup;
+}
+
+/////////////////////////////////////////
+async AdminDelete(element) {
+  let log =this.userData['x-auth-token'];
+const request = new Request(baseURL + 'auth/admins/' + element.user._id,
+{
+method: 'DELETE'
+});
+request.headers.delete('Content-Type');
+request.headers.append('Content-Type', 'application/json');
+request.headers.append('x-auth-token', log);
+        const response = await fetch( request);
+  const responseDelete = await response.json();
+  this.deleteAdmin = responseDelete;
+  this.toastr.info('Successfully Delete');
+  return this.deleteAdmin;
+}
+/////////////////////////////////////////
+async GroupDelete(element) {
+  let log =this.userData['x-auth-token'];
+const request = new Request(baseURL + 'auth/admins/' + element._id,
+{
+method: 'DELETE'
+});
+request.headers.delete('Content-Type');
+request.headers.append('Content-Type', 'application/json');
+request.headers.append('x-auth-token', log);
+        const response = await fetch( request);
+  const responseGroup = await response.json();
+  this.deleteGroup = responseGroup;
+  this.toastr.info('Successfully Delete');
+  return this.deleteGroup;
 }
 /////////////////////////////////////////
 async AdsActivation(element) {
@@ -730,7 +790,7 @@ async GetProfile() {
   });
         request.headers.delete('Content-Type');
         request.headers.append('Content-Type', 'application/json');
-        request.headers.append('x-auth-token', x);
+        request.headers.append('x-auth-token', log);
         const response = await fetch( request);
   const responsegetProfile = await response.json();
 
@@ -813,6 +873,25 @@ async GetClients() {
 }
 
 /////////////////////////////////////////
+async GetFilterClients(value) {
+  let log =this.userData['x-auth-token'];
+  let  x = JSON.parse(localStorage.getItem('language'));
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'auth/clients?pageNumber=1&pageSize=100&state=' + value.status,
+  { method: 'GET',
+  });
+        request.headers.delete('Content-Type');
+        request.headers.append('Content-Type', 'application/json');
+        request.headers.append('x-auth-token', log);
+        request.headers.append('lang', x);
+        const response = await fetch( request);
+  const responsegetClientsFilter = await response.json();
+
+  this.getClientFilter = responsegetClientsFilter;
+  return this.getClientFilter;
+}
+
+/////////////////////////////////////////
 async GetBooking() {
   let log =this.userData['x-auth-token'];
   let  x = JSON.parse(localStorage.getItem('language'));
@@ -849,7 +928,42 @@ async GetBookingfilter(value) {
   this.getBookfilterResults = responsegetbooksfilter;
   return this.getBookfilterResults;
 }
+/////////////////////////////////////////
+async GetBookingClient(val) {
+  let log =this.userData['x-auth-token'];
+  let  x = JSON.parse(localStorage.getItem('language'));
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'components/bookings?pageNumber=1&pageSize=100&clientId=' + val ,
+  { method: 'GET',
+  });
+        request.headers.delete('Content-Type');
+        request.headers.append('Content-Type', 'application/json');
+        request.headers.append('x-auth-token', log);
+        request.headers.append('lang', x);
+        const response = await fetch( request);
+  const responsegetbooksfilter = await response.json();
 
+  this.getBookfilterResults = responsegetbooksfilter;
+  return this.getBookfilterResults;
+}
+/////////////////////////////////////////
+async GetBookingVendor(value) {
+  let log =this.userData['x-auth-token'];
+  let  x = JSON.parse(localStorage.getItem('language'));
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'components/bookings?pageNumber=1&pageSize=100&vendorId='+ value,
+  { method: 'GET',
+  });
+        request.headers.delete('Content-Type');
+        request.headers.append('Content-Type', 'application/json');
+        request.headers.append('x-auth-token', log);
+        request.headers.append('lang', x);
+        const response = await fetch( request);
+  const responsegetbooksfilter = await response.json();
+
+  this.getBookfilterResults = responsegetbooksfilter;
+  return this.getBookfilterResults;
+}
 /////////////////////////////////////////
 async GetCategories() {
   let log =this.userData['x-auth-token'];
@@ -874,7 +988,8 @@ async GetFilterCategories(value) {
   let  x = JSON.parse(localStorage.getItem('language'));
   const date = {}
   const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
-  const request = new Request(baseURL + 'components/categories?pageNumber=1&pageSize=100&state='+value.status + '&name=' + value.filter,
+  const request = new Request(baseURL + 'components/categories?pageNumber=1&pageSize=100&state='+value.status 
+  + '&name=' + value.filter,
   { method: 'GET',
   });
         request.headers.delete('Content-Type');
@@ -903,6 +1018,24 @@ async GetIDCategories(element) {
   // console.log('from the another function categories');
   this.getCategoryID = responsedataID;
   return this.getCategoryID;
+}
+/////////////////////////////////////////
+async GetIDAds(element) {
+  let log =this.userData['x-auth-token'];
+  let  x = JSON.parse(localStorage.getItem('language'));
+  const date = {}
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'components/ads/' + element._id,
+  { method: 'GET',
+  });
+        request.headers.delete('Content-Type');
+        request.headers.append('x-auth-token', log);
+        request.headers.append('lang', x);
+        const response = await fetch( request);
+  const responseAdsID = await response.json();
+  // console.log('from the another function categories');
+  this.getAdsID = responseAdsID;
+  return this.getAdsID;
 }
 /////////////////////////////////////////
 async GetIDDistrict(element) {
@@ -1013,6 +1146,24 @@ async GetFilterDistrict(value) {
   
   this.getfilterDistrictResult = responsedistrictfilter;
   return this.getfilterDistrictResult;
+}
+//////////////////////////////////////////////
+async GetFilterDoctor(value) {
+  let log =this.userData['x-auth-token'];
+  let  x = JSON.parse(localStorage.getItem('language'));
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'auth/vendors/subscriptions?pageNumber=1&pageSize=100&state='+value.status+'&name='+value.filter
+  + '&categoryId=' + value.category + '&districtId=' + value.district + '&subscriptionDate' + value.subscription,
+  { method: 'GET',}
+  )
+        request.headers.delete('Content-Type');
+        request.headers.append('x-auth-token', log);
+        request.headers.append('lang', x);
+        const response = await fetch( request);
+  const responseDoctorfilter = await response.json();
+  
+  this.getfilterDoctor = responseDoctorfilter;
+  return this.getfilterDoctor;
 }
 /////////////////////////////////////////
 async GetSubscription() {

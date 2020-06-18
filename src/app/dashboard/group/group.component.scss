@@ -11,6 +11,13 @@ table{
     transition: none !important;
     box-shadow: none !important;
 }
+p{
+    text-align: center;
+    padding-top: 5px;
+    font-size: large;
+    font-weight: 500;
+    color: #212741;
+}
 
 .mat-header-cell, .mat-cell {
     min-width: 100px;
@@ -29,7 +36,7 @@ h4{
     cursor: pointer;
 }
 .mat-row:hover {
-    background-color: rgb(240, 239, 239);
+    background-color: #d2f9f3;
   }
   .rid{
       display: none;
