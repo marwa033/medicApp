@@ -12,6 +12,9 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class NotificationsComponent implements OnInit {
   tries: any;
+  nTitle: any;
+  type: any;
+  nBody: any; 
   constructor(public translate: TranslateService,
     public authService: AuthService,
     private spinner: NgxSpinnerService,
