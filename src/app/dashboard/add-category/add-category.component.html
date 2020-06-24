@@ -1,3 +1,5 @@
+<ngx-spinner bdColor = "rgba(51, 51, 51, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p></ngx-spinner>
 <section class="container">
 <div class="card">
     <div class="card-header">
@@ -33,7 +35,8 @@
             </mat-form-field>
         </section>
         <section class="col-md-4">
-                <img [src]="imageSrc" class="image" style="max-width:300px;max-height:300px"/><br>
+                <img [src]="imageSrc" class="image" style="max-width:300px;max-height:300px"
+                onerror= "this.src='assets/img/1274512-placeholder.png';"/><br>
                 <input  type="file" name="imageSrc" class="click" accept="image/*" (change)="handleInputChange($event)" />
             <mat-form-field class="rid">
                 <input matInput placeholder="Color" name="imageSrc" [(ngModel)] = "imageSrc">

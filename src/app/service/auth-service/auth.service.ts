@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
-import { Observable } from 'rxjs/Observable';
+import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import * as io from 'socket.io-client';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Http, Headers  } from '@angular/http';
-import { pipe } from 'rxjs';
-import { json } from 'd3';
 const baseURL = 'https://node-doctors.herokuapp.com/api/';
 
 @Injectable({
@@ -71,14 +69,37 @@ export class AuthService {
   activeGroup: any;
   deleteGroup: any;
   getfilterDoctor: any;
-
-
+  getMessagesResults: any;
+  private socket: SocketIOClient.Socket;
+  messageResult: any;
+  getHome: any;
+  notification: any;
    constructor(private firebaseAuth: AngularFireAuth,
                private router: Router,
                private toastr: ToastrService,
                 private http: HttpClient) {
-          this.user = firebaseAuth.authState;
-   }
+                }
+   
+
+ // EMITTER
+ sendMessage(msg: string , val , name , Id , time) {
+  this.socket = io('https://node-doctors.herokuapp.com/');
+  this.socket.emit('newMessage', {groupId: val , text: msg , userName: name ,userId:Id , dateTime: time});
+  console.log(this.socket)
+
+}
+
+// HANDLER
+onNewMessage(val) {
+  this.socket = io('https://node-doctors.herokuapp.com/');
+  return Observable.create(observer => {
+    this.socket.on('newMessage/'+ val , msg => {
+      observer.next(msg);
+      console.log(this.socket)
+    });
+  });
+}
+
 
    /*
     *  getLocalStorageUser function is used to get local user profile data.
@@ -93,6 +114,24 @@ export class AuthService {
          return false;
       }
    }
+
+
+   /////////////////////////////////////////
+async homeAnalytics() {
+  let log =this.userData['x-auth-token'];
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'core/analytics', {
+    method: 'GET'
+});
+request.headers.delete('Content-Type');
+request.headers.append('Content-Type', 'application/json');
+request.headers.append('x-auth-token', log);
+
+const response = await fetch( request);
+const getHomeAnalytics = await response.json();
+this.getHome = getHomeAnalytics;
+return this.getHome;
+}
 
 /////////////////////////////////////////
 async AddDistrict(value) {
@@ -124,6 +163,26 @@ this.districts = getAddDistrict;
 return this.districts;
 }
 /////////////////////////////////////////
+
+/////////////////////////////////////////
+async sendYourMessage(val , text , time) {
+  let log =this.userData['x-auth-token'];
+  const data = {text: text , dateTime: time , groupId: val};
+  const bodyobj = JSON.stringify(data);
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'chat/messages/send', {
+    method: 'POST',
+    body: bodyobj
+});
+request.headers.delete('Content-Type');
+request.headers.append('Content-Type', 'application/json');
+request.headers.append('x-auth-token', log);
+
+const response = await fetch( request);
+const sendMessageResult = await response.json();
+this.messageResult = sendMessageResult;
+return this.messageResult;
+}
 /////////////////////////////////////////
 async DoctorAdd(value) {
   let log =this.userData['x-auth-token'];
@@ -136,7 +195,7 @@ async DoctorAdd(value) {
     image : value.imageSrc ,logo:value.imageSrcLogo,
   price:value.price , lat : value.lat ,
    lng: value.lang , estimateTime: value.time ,
-  clinicPhones:[phone] , categoryId:value.categories ,
+  clinicPhones:phone , categoryId:value.categories ,
    districtId: value.districts,
 user:{name: value.name , phone: value.phone ,password:value.password},numberOfBookingDays:value.booking ,
 workingHours :x
@@ -209,11 +268,42 @@ return this.addSububscription;
 }
 
 /////////////////////////////////////////
-async UpdateSubscription(value) {
+async editAddSubscription(value,val) {
   let log =this.userData['x-auth-token'];
-  let Id = JSON.parse(localStorage.getItem('upVendor'));
-  console.log(Id)
-  const data = { _id: value.subID,startDate: value.startDate , endDate: value.endDate ,vendorId :Id }
+  // let vID = JSON.parse(localStorage.getItem('upVendor'));
+  const data = {startDate: value.startDate , endDate: value.endDate ,vendorId :val }
+
+  const bodyobj = JSON.stringify(data);
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'payments/Subscriptions', {
+    method: 'POST',
+    body: bodyobj
+});
+request.headers.delete('Content-Type');
+request.headers.append('Content-Type', 'application/json');
+request.headers.append('x-auth-token', log);
+
+const response = await fetch( request);
+const getAddSubscription = await response.json();
+let message = getAddSubscription.message;
+if (message) {
+  this.toastr.error(message);
+
+}
+ else{
+  this.toastr.success('Successfully Added Subscription');
+  // this.router.navigate(['/dashboard/showdoctor']);
+}
+this.addSububscription = getAddSubscription;
+return this.addSububscription;
+}
+
+
+/////////////////////////////////////////
+async UpdateSubscription(value , val) {
+  let log =this.userData['x-auth-token'];
+  // console.log(Id)
+  const data = { _id: value.subID,startDate: value.startDate , endDate: value.endDate ,vendorId :val }
 
   const bodyobj = JSON.stringify(data);
   const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
@@ -249,7 +339,7 @@ async UpdateDoctor(value) {
   const data = { _id: value.id ,name:{ en: value.EName , ar: value.AName}, title:{en: value.ETitle, ar:value.ATitle },
   bio:{en: value.EBio, ar:value.ABio },  address:{en: value.EAddress, ar:value.AAddress }, image : value.imageSrc ,logo:value.imageSrcLogo,
   price:value.price , lat : value.lat , lng: value.lang , estimateTime: value.time ,
-  clinicPhones:[upPhone] , categoryId:value.categories , districtId: value.districts,
+  clinicPhones:upPhone , categoryId:value.categories , districtId: value.districts,
 user:{name: value.name , phone: value.phone },numberOfBookingDays:value.booking ,
 workingHours :upwork
 
@@ -310,6 +400,34 @@ return this.updoctors;
 // this.Subscription = responseAddSubscription;
 // return this.Subscription;
 // }
+/////////////////////////////////////////
+async sendNotification(value) {
+  let log =this.userData['x-auth-token'];
+  const data = {title: value.nTitle , body:value.nBody};
+
+  const bodyobj = JSON.stringify(data);
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'components/notifications/sendMessage?lang=ar&type=' + value.type, {
+    method: 'POST',
+    body: bodyobj
+});
+request.headers.delete('Content-Type');
+request.headers.append('Content-Type', 'application/json');
+request.headers.append('x-auth-token', log);
+
+const responseAddPromo = await fetch( request);
+const sendNotificationResult = await responseAddPromo.json();
+let message = sendNotificationResult.message;
+if (message) {
+  this.toastr.success(message);
+// console.log('***')
+}
+ else{
+  this.toastr.success('Successfully Send');
+}
+this.notification = sendNotificationResult;
+return this.notification;
+}
 /////////////////////////////////////////
 async AddPromo(value) {
   let log =this.userData['x-auth-token'];
@@ -376,9 +494,9 @@ return this.Admin;
 }
 /////////////////////////////////////////
 async AddAds(value) {
-console.log("english title = > " + value.ETitle);console.log("arabic title => " + value.ATitle);
-console.log("end date = > " + value.endDate);console.log("image => " + value.imageSrc);
-console.log("doctor id => " + value.doctors);
+// console.log("english title = > " + value.ETitle);console.log("arabic title => " + value.ATitle);
+// console.log("end date = > " + value.endDate);console.log("image => " + value.imageSrc);
+// console.log("doctor id => " + value.doctors);
   let log =this.userData['x-auth-token'];
   const data = {title:{ en: value.ETitle , ar: value.ATitle} , endDate:value.endDate ,image : value.imageSrc , vendorId: value.doctors};
 
@@ -947,6 +1065,24 @@ async GetBookingClient(val) {
   return this.getBookfilterResults;
 }
 /////////////////////////////////////////
+async getMessages(val) {
+  let log =this.userData['x-auth-token'];
+  let  x = JSON.parse(localStorage.getItem('language'));
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'chat/messages/group/' + val + '?pageNumber=1&pageSize=100',
+  { method: 'GET',
+  });
+        request.headers.delete('Content-Type');
+        request.headers.append('Content-Type', 'application/json');
+        request.headers.append('x-auth-token', log);
+        request.headers.append('lang', x);
+        const response = await fetch( request);
+  const responseGetMessages = await response.json();
+
+  this.getMessagesResults = responseGetMessages;
+  return this.getMessagesResults;
+}
+/////////////////////////////////////////
 async GetBookingVendor(value) {
   let log =this.userData['x-auth-token'];
   let  x = JSON.parse(localStorage.getItem('language'));
@@ -992,6 +1128,7 @@ async GetFilterCategories(value) {
   + '&name=' + value.filter,
   { method: 'GET',
   });
+  this.getlang(x);
         request.headers.delete('Content-Type');
         request.headers.append('x-auth-token', log);
         request.headers.append('lang', x);
@@ -1000,6 +1137,10 @@ async GetFilterCategories(value) {
   // console.log('from the another function categories');
   this.getCategoryFilter = responsedatafilter;
   return this.getCategoryFilter;
+}
+getlang(value) {
+  localStorage.setItem('language', JSON.stringify(value));
+
 }
 /////////////////////////////////////////
 async GetIDCategories(element) {
@@ -1056,14 +1197,12 @@ async GetIDDistrict(element) {
 }
 
 /////////////////////////////////////////
-async GetIDDoctor() {
+async GetIDDoctor(val) {
   let log =this.userData['x-auth-token'];
   let  lang = JSON.parse(localStorage.getItem('language'));
-  
- let x = JSON.parse(localStorage.getItem('editDoctor')); 
   const date = {}
   const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
-  const request = new Request(baseURL + 'auth/vendors/' + x,
+  const request = new Request(baseURL + 'auth/vendors/' + val,
   { method: 'GET',
   });
         request.headers.delete('Content-Type');
@@ -1271,10 +1410,6 @@ async GetBookingClients() {
 
 ////////////////////////////////////////
   async loginUser(value) {
-      console.log(value.mail);
-      console.log(value.passcode);
-      // console.log(value.centers);
-
       const data = {email: value.mail, password: value.passcode};
       const bodyobj = JSON.stringify(data);
       const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
@@ -1304,18 +1439,19 @@ async GetBookingClients() {
  this.toastr.success('Successfully Logged In!');
  this.router.navigate(['/']);
     this.userData = resposne['x-auth-token'];
-// console.log('userdata = ' + this.userData);
-// console.log('response["x-auth-token"]');
   }
 
 
 
 
    logOut() {
+     
+  var layout = JSON.parse(localStorage.getItem('layout'));
       this.firebaseAuth
       .auth
       .signOut();
       localStorage.removeItem('userProfile');
+      localStorage.setItem('language', JSON.stringify('en'));
       this.isLoggedIn = false;
       this.toastr.success('Successfully logged out!');
       this.router.navigate(['/session/login']);

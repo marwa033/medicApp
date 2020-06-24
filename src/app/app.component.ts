@@ -8,11 +8,16 @@ import { TranslateService} from '@ngx-translate/core';
 })
 
 export class GeneAppComponent {
-   constructor(translate: TranslateService) {
-      translate.addLangs(['en', 'fr', 'he', 'ru' , 'ar' , 'zh' ,'de' , 'es', 'ja', 'ko' , 'it' ,'hu']);
+   userLoggedIn: string='anything';
+  lang = JSON.parse(localStorage.getItem('language'));
+   constructor(translate: TranslateService,) {
+      translate.addLangs(['en' , 'ar' ]);
+      if(this.lang === 'ar'){
+      translate.setDefaultLang('ar');
+   }else{
       translate.setDefaultLang('en');
-
+   }
       const browserLang: string = translate.getBrowserLang();
-      translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
+      translate.use(browserLang.match(/en|ar/) ? browserLang : 'en');
    }
 }

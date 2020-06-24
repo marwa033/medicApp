@@ -1,3 +1,5 @@
+<!-- <ngx-spinner bdColor = "rgba(51, 51, 51, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true">
+   <p style="color: white" > Loading... </p></ngx-spinner> -->
 <div id = "main-app" class="app sidebar-color-dark header-color-dark" [dir]="layout" [ngClass]="{'app-dark': dark, 'collapsed-sidebar': coreService.collapseSidebar, 'compact-sidebar': compactSidebar, 'customizer-in': customizerIn}" [class.side-panel-opened]="coreService.sidenavOpen" [class.side-panel-closed]="!coreService.sidenavOpen">
 <mat-sidenav-container class="gene-container">
    <mat-sidenav #sidenav [(mode)]="coreService.sidenavMode" [(opened)]="coreService.sidenavOpen" class="sidebar-area">
@@ -39,6 +41,7 @@
                               <a class="pad-all-xs gene-block" href="javascript:void(0)" (click)="setLang(lang)">
                                  <img class="mrgn-r-xs" width="25" height="14" src="{{language.img}}">
                                  <span >{{language.name}}</span>
+                                 
                               </a>
                            </mat-card>
                         </ng-container>
@@ -52,9 +55,8 @@
    <div class="gene-base-container" #scrollContainer>
       <div class="inner-container" fxLayout="row wrap">
          <div class="full-wid" fxFlex="100">
-            <router-outlet ></router-outlet>
-            <ng-container>
-            </ng-container>
+            <router-outlet></router-outlet>
+            <!-- <ngx-loading-bar></ngx-loading-bar> -->
          </div>
          <div class="footer-wrap pad-t-none full-wid" fxFLex="100">
             <ms-footer></ms-footer>

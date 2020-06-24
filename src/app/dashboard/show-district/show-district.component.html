@@ -10,13 +10,13 @@
     </section>
       <section class="col-md-3">
     <mat-form-field class="mt-1">
-      <mat-label>{{'Filter' | translate}}</mat-label>
-      <input matInput placeholder="Name" name="filter" [(ngModel)]="filter">
+      <!-- <mat-label>{{'Filter' | translate}}</mat-label> -->
+      <input matInput placeholder="{{'Name' | translate}}" name="filter" [(ngModel)]="filter">
     </mat-form-field>
       </section>
     <section class="col-md-3">
       <mat-form-field>
-        <mat-select name="status" placeholder="Status" [(ngModel)]="selectedstatus">
+        <mat-select name="status" placeholder="{{'Status' | translate}}" [(ngModel)]="selectedstatus">
           <mat-option value=" ">{{'All' | translate}}</mat-option>
           <mat-option value="active">{{'Active' | translate}}</mat-option>
           <mat-option value="inActive">{{'In active' | translate}}</mat-option>

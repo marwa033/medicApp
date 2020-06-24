@@ -1,5 +1,5 @@
 import {filter} from 'rxjs/operators';
-import { Component, OnInit, OnDestroy, ViewChild, HostListener, ViewEncapsulation} from '@angular/core';
+import { Component, OnInit, AfterContentChecked, ViewChild, HostListener, ViewEncapsulation, Injectable, ChangeDetectorRef} from '@angular/core';
 import { MenuItems } from '../core/menu/menu-items/menu-items';
 import { BreadcrumbService } from 'ng5-breadcrumb';
 import { PageTitleService } from '../core/page-title/page-title.service';
@@ -10,11 +10,20 @@ import { TourService } from 'ngx-tour-md-menu';
 import PerfectScrollbar from 'perfect-scrollbar';
 import { AuthService } from '../service/auth-service/auth.service';
 import { CoreService } from '../service/core/core.service';
+import { Location } from '@angular/common'
 import { CellOptionsDialogService } from '@syncfusion/ej2-angular-documenteditor';
+import { SaasComponent } from '../dashboard/saas/saas.component';
+import { MatTableDataSource } from '@angular/material';
+import { NgxSpinnerService } from "ngx-spinner";
+import { ShowAdsComponent } from '../dashboard/show-ads/show-ads.component';
+import { GetAdminComponent } from '../dashboard/get-admin/get-admin.component';
 declare var require: any
 
 const screenfull = require('screenfull');
 
+@Injectable({
+	providedIn: 'root'
+  })
 @Component({
 	selector: 'gene-layout',
 	templateUrl:'./main-material.html',
@@ -25,12 +34,12 @@ const screenfull = require('screenfull');
 	}
 })
 
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, AfterContentChecked {
 	chatList              : any;
 	currentUrl            : any;
-	root                  : any = 'ltr';
-	layout                : any = 'ltr';
-	currentLang           : any = 'en';
+	root                  : any ;
+	layout                : any ;
+	currentLang           : any ;
 	customizerIn          : boolean = false;
 	showSettings          : boolean = false;
 	chatpanelOpen         : boolean = false;
@@ -48,6 +57,7 @@ export class MainComponent implements OnInit {
 	url                   : string;
 	windowSize            : number;
 	
+	dataSource: MatTableDataSource<unknown>;
 	selectImage = 'assets/img/en.png';
 	private _routerEventsSubscription  : Subscription;
 	private _router                    : Subscription;
@@ -69,50 +79,38 @@ export class MainComponent implements OnInit {
   
 	setLang(lang) {
 		for(let data of this.langArray) {
-		   if(data.value == lang) {
+		   if(lang == data.value) {
 			  this.selectImage = data.img;
-			  if(lang == 'ar'){
+			  if(lang === 'ar'){
 				  this.layout = 'rtl';
+				alert("You will start from the home page again")
+					this.router.navigate(['dashboard/crm'])
+					this.translate.setDefaultLang('ar')
 			  }else{
 				  this.layout = 'ltr';
-			  }
+				alert("You will start from the home page again")
+				  this.router.navigate(['dashboard/crm'])
+				  this.translate.setDefaultLang('en')
+			  }		
+			  
+			  this.getlang(lang);
+			  this.getLayout(this.layout);	
 			  break;
+			  
 		   }
 		}
 		this.translate.use(lang);
-		console.log(lang)
-		this.getlang(lang);
-	 }
-
-	 getlang(value) {
+	 } 
+	 getLayout(value) {
+		localStorage.setItem('layout', JSON.stringify(value));
+		var  layout = JSON.parse(localStorage.getItem('layout'));
+		// console.log(layout)
+	}	 
+	  getlang(value) {
 		localStorage.setItem('language', JSON.stringify(value));
-		var lang = JSON.parse(localStorage.getItem('language'));
-	  console.log(lang)
-	  }
-
-	sideBarFilterClass : any = [
-		{
-			sideBarSelect  :"sidebar-color-1",
-			colorSelect    :"sidebar-color-dark"
-		},
-		{
-			sideBarSelect  :"sidebar-color-2",
-			colorSelect    :"sidebar-color-primary",
-		},
-		{
-			sideBarSelect  :"sidebar-color-3",
-			colorSelect    :"sidebar-color-accent"
-		},
-		{
-			sideBarSelect  :"sidebar-color-4",
-			colorSelect    :"sidebar-color-warn"
-		},
-		{
-			sideBarSelect  :"sidebar-color-5",
-			colorSelect    :"sidebar-color-green"
-		}
-	]
-
+		var  lang = JSON.parse(localStorage.getItem('language'));
+		// console.log(lang)
+	}
 	headerFilterClass : any = [
 		{
 			headerSelect  :"header-color-1",
@@ -136,41 +134,13 @@ export class MainComponent implements OnInit {
 		}
 	]
 
-	// chatList : any [] = [
-	// 	{
-	// 		image : "assets/img/user-1.jpg",
-	// 		name: "John Smith",
-	// 		chat : "Lorem ipsum simply dummy",
-	// 		mode : "online"
-	// 	},
-	// 	{
-	// 		image : "assets/img/user-2.jpg",
-	// 		name: "Amanda Brown",
-	// 		chat : "Lorem ipsum simply dummy",
-	// 		mode : "online"
-	// 	},
-	// 	{
-	// 		image : "assets/img/user-3.jpg",
-	// 		name: "Justin Randolf",
-	// 		chat : "Lorem ipsum simply dummy",
-	// 		mode : "offline"
-	// 	},
-	// 	{
-	// 		image : "assets/img/user-4.jpg",
-	// 		name: "Randy SunSung",
-	// 		chat : "Lorem ipsum simply dummy",
-	// 		mode : "online"
-	// 	},
-	// 	{
-	// 		image : "assets/img/user-5.jpg",
-	// 		name: "Lisa Myth",
-	// 		chat : "Lorem ipsum simply dummy",
-	// 		mode : "online"
-	// 	},
-	// ]
-
 	constructor(public tourService: TourService, 
 					public menuItems: MenuItems, 
+					public location: Location, 
+					private route: ActivatedRoute,
+					private Category :  SaasComponent,
+					private admin :  GetAdminComponent,
+					private spinner: NgxSpinnerService,
 					private breadcrumbService: BreadcrumbService, 
 					private pageTitleService: PageTitleService, 
 					public translate: TranslateService, 
@@ -184,9 +154,11 @@ export class MainComponent implements OnInit {
 		translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
 
 		breadcrumbService.addFriendlyNameForRoute('/dashboard', 'Dashboard');
-		breadcrumbService.addFriendlyNameForRoute('/dashboard/saas', 'SAAS');
+		breadcrumbService.addFriendlyNameForRoute('/dashboard/saas', 'showcategory');
 	}
-
+	ngAfterContentChecked() {
+        // this.changeDetectorRefs.detectChanges();
+    }
 	ngOnInit() {
 
 	}
@@ -260,16 +232,7 @@ body.classList.remove('dark-theme-active');
 	/**
 	  * sidebarFilter function filter the color for sidebar section.
 	  */
-	sidebarFilter(selectedFilter) {
-		for(var i = 0; i<this.sideBarFilterClass.length; i++) {
-			document.getElementById('main-app').classList.remove(this.sideBarFilterClass[i].colorSelect);
-			if(this.sideBarFilterClass[i].colorSelect == selectedFilter.colorSelect) {
-				document.getElementById('main-app').classList.add(this.sideBarFilterClass[i].colorSelect);
-			}
-		}
-		document.querySelector('.radius-circle').classList.remove('radius-circle');
-		document.getElementById(selectedFilter.sideBarSelect).classList.add('radius-circle');
-	}
+
 
 	/**
 	  * headerFilter function filter the color for header section.

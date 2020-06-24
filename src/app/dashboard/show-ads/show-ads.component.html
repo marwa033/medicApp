@@ -9,7 +9,7 @@
       </section>
   <section class="col-md-3">
     <mat-form-field>
-      <mat-select name="status" placeholder="Status" [(ngModel)]="selectedstatus">
+      <mat-select name="status" placeholder="{{'Status' | translate}}" [(ngModel)]="selectedstatus">
         <mat-option value=" ">{{'All' | translate}}</mat-option>
         <mat-option value="active">{{'Active' | translate}}</mat-option>
         <mat-option value="inActive">{{'In active' | translate}}</mat-option>
@@ -32,8 +32,8 @@
     <ng-container matColumnDef="image">
       <th mat-header-cell *matHeaderCellDef> {{'image' | translate}} </th>
       <td mat-cell *matCellDef="let element" >
-        <img [src]="element.image">
-      
+        <img [src]="element.image"
+        onerror= "this.src='assets/img/1274512-placeholder.png';">      
       </td>
     </ng-container>
    
@@ -92,7 +92,7 @@
 <section class="row">
     <section class="col-md-6">
         <mat-form-field>
-            <input matInput placeholder="{{'Enter Title in Englis' | translate}}" name="upETitle" [(ngModel)] = "editETitle">
+            <input matInput placeholder="{{'Enter Title in English' | translate}}" name="upETitle" [(ngModel)] = "editETitle">
         </mat-form-field>
     </section>
     <section class="col-md-6">
@@ -126,7 +126,8 @@
 <section class="row">
   <section class="col-md-6">
     
-    <img [src]="imageSrc"  style="max-width:100px;max-height:100px"/>
+    <img [src]="imageSrc"  style="max-width:100px;max-height:100px"
+    onerror= "this.src='assets/img/1274512-placeholder.png';"/>
     <input  type="file" name="imageSrc" accept="image/*" (change)="handleInputChange($event)" />
   <mat-form-field class="rid">
     <input matInput placeholder="Color" name="imageSrc" [(ngModel)] = "imageSrc">

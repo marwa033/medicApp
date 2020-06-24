@@ -37,6 +37,9 @@ import { WidgetComponentModule } from './widget-component/widget-component.modul
 import { SideBarComponent } from './Shared/side-bar/side-bar.component';
 import { FooterComponent } from './Shared/footer/footer.component';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { SaasComponent } from './dashboard/saas/saas.component';
+import { ShowAdsComponent } from './dashboard/show-ads/show-ads.component';
+import { GetAdminComponent } from './dashboard/get-admin/get-admin.component';
 
 
 export const firebaseConfig = {
@@ -123,6 +126,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	bootstrap: [GeneAppComponent],
 	providers: [
 		
+		SaasComponent,
+		GetAdminComponent,
 		MenuItems,
 		BreadcrumbService,
 		PageTitleService,

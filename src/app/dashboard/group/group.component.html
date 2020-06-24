@@ -35,6 +35,9 @@
                     <mat-icon style="color:#ffae00"class="pointer" name="inactive" title="inactive" *ngIf="element.state === 'inActive'" (click)="Active(element)">highlight_off</mat-icon>  
                     <mat-icon style="color:green"class="pointer" name="active" title="active" *ngIf="element.state === 'active'" (click)="Active(element)">check_circle_outline</mat-icon>
                     <mat-icon style="color:red" class="pointer" title="delete" (click)="Delete(element)">delete</mat-icon>
+                    <mat-icon style="color:#19a994" class="pointer" title="open chat" (click)="Chat(element)">                      
+                    <a [routerLink]="['/dashboard/message/' + element._id +'/'+ element.user.name]">chat
+                    </a></mat-icon> 
               </td>
               </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

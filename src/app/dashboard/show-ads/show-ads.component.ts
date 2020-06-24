@@ -38,6 +38,7 @@ export class ShowAdsComponent implements OnInit {
   endDate:any;
   try: any;
   editATitle: any;
+  selectedDoctor: any;
   constructor(public translate: TranslateService,
     public authService: AuthService,
    private pageTitleService: PageTitleService ,
@@ -130,6 +131,7 @@ Active(element){
   });
 }
 Delete(element){
+  alert('Are you sure you want to delete that Advertising ?')
   this.authService.DeleteAds(element).
   then( responseAdsDelete => { this.delete = responseAdsDelete;
     this.Close();
@@ -147,7 +149,7 @@ selectedRow(element){
     console.log(this.try)
  this.editATitle = this.try.title.ar;
   this.id = this.try._id;
-  this.doctorId = this.try.vendorId;
+  this.selectedDoctor = this.try.vendorId;
   this.editETitle = this.try.title.en;
   this.editDate = new Date(this.try.endDate);
   this.imageSrc = this.try.image;

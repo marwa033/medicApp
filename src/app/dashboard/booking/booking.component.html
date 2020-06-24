@@ -12,8 +12,8 @@
         <mat-form-field>
         <mat-select name="complete" placeholder="{{'Complete' | translate}}" [(ngModel)]="selectedcomplete">
           <mat-option value=" ">{{'All' | translate}}</mat-option>
-          <mat-option value="true">{{'True' | translate}}</mat-option>
-          <mat-option value="false">{{'False' | translate}}</mat-option>
+          <mat-option value="true">{{'Completed' | translate}}</mat-option>
+          <mat-option value="false">{{'Not completed' | translate}}</mat-option>
         </mat-select>
       </mat-form-field>
     </section>
@@ -33,7 +33,7 @@
       </ng-container>
       <!-- Position Column -->
       <ng-container matColumnDef="vname">
-        <th mat-header-cell *matHeaderCellDef> {{'Name' | translate}} </th>
+        <th mat-header-cell *matHeaderCellDef> {{'Doctor name' | translate}} </th>
         <td mat-cell *matCellDef="let element" > {{element.vendor.name}}</td>
       </ng-container>
      

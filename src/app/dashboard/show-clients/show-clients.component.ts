@@ -16,7 +16,7 @@ export class ShowClientsComponent implements OnInit {
   updatedAt = new Date();
   createdAt = new Date();
   dataSource: MatTableDataSource<unknown>;
-  displayedColumns: string[] = ['count' , 'adminType',   'name' ,'phone', 'userType','createdAt', 'updatedAt' ,'action'];
+  displayedColumns: string[] = ['count' ,   'name' ,'phone', 'createdAt', 'updatedAt' ,'action'];
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   

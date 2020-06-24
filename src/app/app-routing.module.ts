@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainComponent }   from './main/main.component';
 import { AuthGuard } from './core/guards/auth.guard';
+import { config } from 'rxjs';
 
 const appRoutes: Routes = [
    {
@@ -29,7 +30,7 @@ const appRoutes: Routes = [
 ]
 
 @NgModule({
-  	imports: [RouterModule.forRoot(appRoutes)],
+  	imports: [RouterModule.forRoot(appRoutes , {onSameUrlNavigation: 'reload'})],
  	exports: [RouterModule],
   	providers: []
 })

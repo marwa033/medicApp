@@ -68,7 +68,7 @@ import { ShowClientsComponent } from './show-clients/show-clients.component';
 import { BookingComponent } from './booking/booking.component';
 import { GroupComponent } from './group/group.component';
 import { MessagesComponent } from './messages/messages.component';
-import { SupportComponent } from './support/support.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 @NgModule({
 	declarations: [
@@ -94,7 +94,7 @@ import { SupportComponent } from './support/support.component';
 		BookingComponent,
 		GroupComponent,
 		MessagesComponent,
-		SupportComponent,		
+		NotificationsComponent
 	],
 	imports: [ GridModule,
 		ListViewModule ,
@@ -138,7 +138,6 @@ import { SupportComponent } from './support/support.component';
 	],
 	providers: [
 		PageService, SortService, FilterService, GroupService,
-		// { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS },
 		{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
 		NgbModalConfig, NgbModal
 	  ],

@@ -10,11 +10,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
    styleUrls: ['./login-component.scss'],
    encapsulation: ViewEncapsulation.None,
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
    mail: string='';
    passcode: string='';
-//   email  =  new FormControl('', [Validators.required, Validators.email]);
-//   password = new FormControl('', [Validators.required, Validators.minLength(6)]);
    tries: any;
 
   constructor( public authService: AuthService,
@@ -27,31 +25,36 @@ export class LoginComponent {
       this.authService.loginUser(value).
       then( responsedata => { this.tries = responsedata;
       
+         this.Profile() 
          setTimeout(() => {
             this.spinner.hide();
           },this.tries);
       });
    }
 
-
-//   getErrorMessage() {
-//     if (this.email.hasError('required')) {
-//       return 'Please enter email';
-//     }
-
-//     return this.email.hasError('email') ? 'Not a valid email' : 'example@example.com';
-//   } 
+   Profile(){
+      this.authService.GetProfile().
+                then( getProfileResults => { getProfileResults
+                  this.getRole(getProfileResults.admin.role)
+                  this.getAdminId(getProfileResults.admin.userId)
+                });
+  }
   
-//   getErrorPassword() {
-//    if (this.password.hasError('required')) {
-//      return 'Please enter password';
-//    }else{
-//       return 'Not a valid password';
-//    }
+  getRole(value) {
+    localStorage.setItem('adminRole', JSON.stringify(value));
+    var role = JSON.parse(localStorage.getItem('adminRole'));
+    console.log(role)
+    }
+    getAdminId(value) {
+      localStorage.setItem('adminId', JSON.stringify(value));
+      var adminID = JSON.parse(localStorage.getItem('adminId'));
+      console.log(adminID)
+      }
+    ngOnInit(){
+    }
 
-   // return this.password.hasError('minLength(6)') ? 'Not a valid password' : '';
-//  } 
-	
+    
+
 }
 
 

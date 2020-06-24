@@ -3,6 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'app/service/auth-service/auth.service';
 import { PageTitleService } from 'app/core/page-title/page-title.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'ms-add-admin',
@@ -19,13 +20,18 @@ export class AddAdminComponent implements OnInit {
 
   constructor(public translate: TranslateService,
     public authService: AuthService,
+    private spinner: NgxSpinnerService,
    private pageTitleService: PageTitleService ,
      config: NgbModalConfig,
       private modalService: NgbModal) {}
       
   Add(value){
+    this.spinner.show();
     this.authService.AddAdmin(value).
               then( responseAdmin => { this.tries = responseAdmin;
+                setTimeout(() => {
+                  this.spinner.hide();
+                }, this.tries);
               });
   }  
   ngOnInit() {

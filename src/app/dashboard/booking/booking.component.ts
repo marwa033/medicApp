@@ -55,6 +55,9 @@ export class BookingComponent implements OnInit {
           this.spinner.show();
           this.authService.GetBookingfilter(value).
           then( responsegetbooksfilter => { this.tries = responsegetbooksfilter.data;
+            this.dataSource = new MatTableDataSource(responsegetbooksfilter.data);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort; 
              setTimeout(() => {
               this.spinner.hide();
             }, this.tries);

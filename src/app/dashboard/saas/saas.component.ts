@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, Input, OnChanges, SimpleChanges, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { PageTitleService } from '../../core/page-title/page-title.service';
 import {fadeInAnimation} from '../../core/route-animation/route.animation';
@@ -6,14 +6,11 @@ import { AuthService } from 'app/service/auth-service/auth.service';
 import * as $ from 'jquery';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MatPaginator, MatSort } from '@angular/material';
-import { SelectionModel } from '@angular/cdk/collections';
-import {MatTableDataSource} from '@angular/material/table';
+import {MatTableDataSource, MatTable} from '@angular/material/table';
+// import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from "ngx-spinner";
-
-
-
 
 @Component({
    selector: 'ms-dashboard',
@@ -21,10 +18,8 @@ import { NgxSpinnerService } from "ngx-spinner";
    styleUrls: ['./saas-component.scss']
 })
 
-
-export class SaasComponent implements OnInit  {
-  
-   id: string="";
+export class SaasComponent implements  OnInit{
+  id: string="";
    editEName: string ='';
    editAName: string = '';
    editColor : any;
@@ -37,22 +32,23 @@ export class SaasComponent implements OnInit  {
    dataSource: MatTableDataSource<unknown>;
    displayedColumns: string[] = [ 'addcount','image', 'color' , 'name',  'createdAt' , 'updatedAt' , 'action'];
 
-
    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
    
    @ViewChild(MatSort, {static: true}) sort: MatSort;
-
+   @ViewChild(MatTable, {static: true}) table: MatTable<any>;
    status: any;
    results: any;
    tries: any;
    updated: any;
    imageSrc: any;
-   image: any;
    message = 'anything';
    X: void;
   src: any;
   try: any;
- 
+  // lang: any;
+  // public href: string = "";
+  
+  
    constructor(public translate: TranslateService,
                public authService: AuthService,
               private pageTitleService: PageTitleService ,
@@ -66,9 +62,6 @@ export class SaasComponent implements OnInit  {
                }
            
                Update(value){
-                //  if(this.imageSrc == ""){
-                //    this.imageSrc == this.results;
-                //  }
                   this.authService.editCategories(value).
                             then( editresponse => { this.tries = editresponse;
                               let message = editresponse.message;
@@ -88,16 +81,12 @@ export class SaasComponent implements OnInit  {
                   window.location.reload();
                    } 
      
-           applyFilter(event: Event) {
-            const filterValue = (event.target as HTMLInputElement).value;
-            this.dataSource.filter = filterValue.trim().toLowerCase();
-          }
 
           selectedRow(element){
             this.spinner.show();
             this.authService.GetIDCategories(element).
             then( responsedataID => { this.try = responsedataID;
-              console.log(this.try.name.en)
+              console.log(this.try.image)
               this.id = this.try._id;
               this.editEName =this.try.name.en;
               this.editAName =this.try.name.ar;
@@ -108,6 +97,8 @@ export class SaasComponent implements OnInit  {
             }, this.try);
             });
           }
+
+
           FilterCategory(value){
             this.spinner.show();
             if(value.filter == undefined){
@@ -130,12 +121,13 @@ Categories(){
                   this.dataSource = new MatTableDataSource(responsedatafilter.data);
                   this.dataSource.paginator = this.paginator;
                   this.dataSource.sort = this.sort;
+                  // this.changeDetectorRefs.detectChanges();
+                  console.log(this.dataSource)
                   setTimeout(() => {
                      this.spinner.hide();
                    }, this.results);
                });
 }
-
 handleInputChange(e) {
    var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
    var pattern = /image-*/;
@@ -152,23 +144,21 @@ handleInputChange(e) {
    this.imageSrc = reader.result;
    console.log(this.imageSrc)
  }
-
 Active(element){
    this.authService.Activation(element).
    then( responseActivedata => { this.tries = responseActivedata;
-      // console.log("state is = " + this.tries.state);
       element.state = this.tries.state;
       this.Close();   
    });
 }
-
 openLg(content) {
    this.modalService.open(content, { size: 'lg' });
  }
-
-
    ngOnInit() {
-      this.spinner.show();
+    this.spinner.show();
       this.Categories();
-             }
+      // $(document).ready(function(){
+      //   location.reload();
+      // })
+   }
 }

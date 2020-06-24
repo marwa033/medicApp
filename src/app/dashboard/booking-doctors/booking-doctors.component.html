@@ -60,8 +60,11 @@
           </section>
            <section class="row ml-5 justify-content-center">
             <section class="col-md-4">
-                <label>{{'Image' | translate}}</label>
-            <img [src]="imageSrc" style="max-width:300px;max-height:300px"/><br>
+                <div class="row">
+                <label class="col-md-3">{{'Image' | translate}}</label>
+            <img [src]="imageSrc" class="col-md-2" style="max-width:300px;max-height:300px"
+            onerror= "this.src='assets/img/1274512-placeholder.png';"/>
+            </div>
             <input  type="file" name="imageSrc" accept="image/*" (change)="handleInputChange($event)" />
         <mat-form-field class="rid">
             <input matInput placeholder="Color" name="imageSrc" [(ngModel)] = "imageSrc">
@@ -69,12 +72,16 @@
             </section>
             
             <section class="col-md-4">
-                <label>{{'Logo' | translate}}</label>
-            <img [src]="imageSrcLogo"  style="max-width:300px;max-height:300px"/><br>
+                <div class="row">
+                <label class="col-md-3">{{'Logo' | translate}}</label>
+            <img [src]="imageSrcLogo" class="col-md-2"  style="max-width:300px;max-height:300px"
+            onerror= "this.src='assets/img/1274512-placeholder.png';"/>
+        </div>
             <input  type="file" name="imageSrcLogo" accept="image/*" (change)="handleInput($event)" />
         <mat-form-field class="rid">
             <input matInput placeholder="Color" name="imageSrcLogo" [(ngModel)] = "imageSrcLogo">
         </mat-form-field>
+        
             </section>
            </section>
            </fieldset>
@@ -143,25 +150,22 @@
               </section>
           </section>
           <section class="row ml-5">
-            <section class="col-md-2" >
+            <section class="col-md-3" >
                 <button mat-button (click)="opensm(contentsm)" type="button">
                     <mat-icon>add</mat-icon>
                     {{'Clinic Phone' | translate}}
                 </button>
             
             </section>
-            <section class="col-md-2 ml-3">   
-                <section *ngFor="let try of selectedPhone" class="row">
-                    <!-- <section class="col-md-11"> -->
-                    {{try}}
-                    <mat-icon style="font-size: small;color:red;cursor: pointer" title="delete" class="ml-3 mt-1"  (click)="removePhone(i)">delete</mat-icon>         
-                <!-- </section>
-                <section class="col-md-1">
-                    <mat-icon style="font-size: small;color:red;cursor: pointer" title="delete"  (click)="removeItem(i)">delete</mat-icon>         
-                </section> -->
+            <section class="col-md-6">   
+                <section *ngFor="let obj of selectedPhone; let i = index">
+                    <div *ngIf="obj">
+                  <span>{{obj}}</span>
+                    <mat-icon style="font-size: small;color:red;cursor: pointer" title="delete"  (click)="removePhone(i)">delete</mat-icon>         
+                </div>
                 </section>                 
             </section>
-            <section class="col-md-8"></section>
+            <!-- <section class="col-md-8"></section> -->
         </section>
           </fieldset>
           <fieldset class="scheduler-border">
@@ -200,22 +204,24 @@
                 <section class="card" style="border: none;">
                 <div class="card-header title">{{'Sunday' | translate}}
                   </div> 
-                  <section *ngFor="let try of selectedFeatures" >
+                  <section *ngFor="let try of selectedFeatures ; let i = index" >
                       <section  *ngIf="try.day == 1">
                   <div class="card-body" style="border: 1px solid #ddd;">
-                            <section class="row pl-5"> 
+                            <section class="row"> 
                               <mat-icon style="font-size: small;color:red;cursor: pointer" title="delete"  (click)="removeItem(i)">delete</mat-icon>
                             </section>
                         <div class="row">
+                            <mat-icon style="font-size: small" title="delete" class="mt-1"></mat-icon>
                             <p>{{try.from}}</p>
                         </div>
                         <mat-divider></mat-divider>
                         <div class="row">
+                            <mat-icon style="font-size: small" title="delete" class="mt-1"></mat-icon>
                             <p >{{try.to}}</p>
                         </div>
                         <mat-divider></mat-divider>
                         <div class="row">
-                          <mat-icon style="font-size: small" title="delete" class="mt-1" (click)="removeItem(i)">person</mat-icon>
+                          <mat-icon style="font-size: small" title="delete" class="mt-1">person</mat-icon>
                             <p>{{try.max}}</p>
                         </div>
                   </div> 
@@ -228,22 +234,24 @@
                 <section class="card" style="border: none">
                 <div class="card-header title">{{'Monday' | translate}}
                   </div> 
-                  <section *ngFor="let try of selectedFeatures" >
+                  <section *ngFor="let try of selectedFeatures ; let i = index" >
                       <section  *ngIf="try.day == 2">
                   <div class="card-body" style="border: 1px solid #ddd;">
-                            <section class="row pl-5"> 
+                            <section class="row"> 
                               <mat-icon style="font-size: small;color:red;cursor: pointer" title="delete"  (click)="removeItem(i)">delete</mat-icon>
                             </section>
-                        <div class="row">
+                        <div class="row ">
+                            <mat-icon style="font-size: small" title="delete" class="mt-1"></mat-icon>
                             <p>{{try.from}}</p>
                         </div>
                         <mat-divider></mat-divider>
                         <div class="row">
+                            <mat-icon style="font-size: small" title="delete" class="mt-1"></mat-icon>
                             <p>{{try.to}}</p>
                         </div>
                         <mat-divider></mat-divider>
                         <div class="row">
-                          <mat-icon style="font-size: small" title="delete" class="mt-1" (click)="removeItem(i)">person</mat-icon>
+                          <mat-icon style="font-size: small" title="delete" class="mt-1">person</mat-icon>
                             <p>{{try.max}}</p>
                         </div>
                   </div> 
@@ -256,22 +264,24 @@
                 <section class="card" style="border: none;">
                 <div class="card-header title">{{'Tuesday' | translate}}
                   </div>
-                  <section *ngFor="let try of selectedFeatures" >
+                  <section *ngFor="let try of selectedFeatures ; let i = index" >
                       <section  *ngIf="try.day == 3">
                   <div class="card-body" style="border: 1px solid #ddd;">
-                            <section class="row pl-5"> 
+                            <section class="row"> 
                               <mat-icon style="font-size: small;color:red;cursor: pointer" title="delete"  (click)="removeItem(i)">delete</mat-icon>
                             </section>
                         <div class="row">
+                            <mat-icon style="font-size: small" title="delete" class="mt-1"></mat-icon>
                             <p>{{try.from}}</p>
                         </div>
                         <mat-divider></mat-divider>
                         <div class="row">
+                            <mat-icon style="font-size: small" title="delete" class="mt-1"></mat-icon>
                             <p>{{try.to}}</p>
                         </div>
                         <mat-divider></mat-divider>
                         <div class="row">
-                          <mat-icon style="font-size: small" title="delete" class="mt-1" (click)="removeItem(i)">person</mat-icon>
+                          <mat-icon style="font-size: small" title="delete" class="mt-1">person</mat-icon>
                             <p>{{try.max}}</p>
                         </div>
                   </div> 
@@ -284,22 +294,24 @@
                 <section class="card" style="border: none;">
                 <div class="card-header">{{'Wednesday' | translate}}
                   </div>
-                  <section *ngFor="let try of selectedFeatures" >
+                  <section *ngFor="let try of selectedFeatures ;let i = index" >
                       <section  *ngIf="try.day == 4">
                   <div class="card-body" style="border: 1px solid #ddd;">
-                            <section class="row pl-5"> 
+                            <section class="row"> 
                               <mat-icon style="font-size: small;color:red;cursor: pointer" title="delete"  (click)="removeItem(i)">delete</mat-icon>
                             </section>
                         <div class="row">
+                            <mat-icon style="font-size: small" title="delete" class="mt-1"></mat-icon>
                             <p>{{try.from}}</p>
                         </div>
                         <mat-divider></mat-divider>
                         <div class="row">
+                            <mat-icon style="font-size: small" title="delete" class="mt-1"></mat-icon>
                             <p>{{try.to}}</p>
                         </div>
                         <mat-divider></mat-divider>
                         <div class="row">
-                          <mat-icon style="font-size: small" title="delete" class="mt-1" (click)="removeItem(i)">person</mat-icon>
+                          <mat-icon style="font-size: small" title="delete" class="mt-1">person</mat-icon>
                             <p>{{try.max}}</p>
                         </div>
                   </div> 
@@ -312,22 +324,24 @@
               <section class="card " style="border: none;">
               <div class="card-header title">{{'Thursday' | translate}}
                 </div> 
-                <section *ngFor="let try of selectedFeatures" >
+                <section *ngFor="let try of selectedFeatures; let i = index" >
                   <section  *ngIf="try.day == 5">
               <div class="card-body" style="border: 1px solid #ddd;">
-                        <section class="row pl-5"> 
+                        <section class="row"> 
                           <mat-icon style="font-size: small;color:red;cursor: pointer" title="delete"  (click)="removeItem(i)">delete</mat-icon>
                         </section>
                     <div class="row">
+                        <mat-icon style="font-size: small" title="delete" class="mt-1"></mat-icon>
                         <p>{{try.from}}</p>
                     </div>
                     <mat-divider></mat-divider>
                     <div class="row">
+                        <mat-icon style="font-size: small" title="delete" class="mt-1"></mat-icon>
                         <p>{{try.to}}</p>
                     </div>
                     <mat-divider></mat-divider>
                     <div class="row">
-                      <mat-icon style="font-size: small" title="delete" class="mt-1" (click)="removeItem(i)">person</mat-icon>
+                      <mat-icon style="font-size: small" title="delete" class="mt-1">person</mat-icon>
                         <p>{{try.max}}</p>
                     </div>
               </div> 
@@ -341,22 +355,24 @@
               <section class="card" style="border: none;">
               <div class="card-header title">{{'Friday' | translate}}
                 </div> 
-                <section *ngFor="let try of selectedFeatures" >
+                <section *ngFor="let try of selectedFeatures;let i = index" >
                   <section  *ngIf="try.day == 6">
               <div class="card-body" style="border: 1px solid #ddd;">
-                        <section class="row pl-5"> 
+                        <section class="row"> 
                           <mat-icon style="font-size: small;color:red;cursor: pointer" title="delete"  (click)="removeItem(i)">delete</mat-icon>
                         </section>
                     <div class="row">
+                        <mat-icon style="font-size: small" title="delete" class="mt-1"></mat-icon>
                         <p>{{try.from}}</p>
                     </div>
                     <mat-divider></mat-divider>
                     <div class="row">
+                        <mat-icon style="font-size: small" title="delete" class="mt-1"></mat-icon>
                         <p>{{try.to}}</p>
                     </div>
                     <mat-divider></mat-divider>
                     <div class="row">
-                      <mat-icon style="font-size: small" title="delete" class="mt-1" (click)="removeItem(i)">person</mat-icon>
+                      <mat-icon style="font-size: small" title="delete" class="mt-1" >person</mat-icon>
                         <p>{{try.max}}</p>
                     </div>
               </div> 
@@ -369,22 +385,24 @@
               <section class="card" style="border: none;">
               <div class="card-header title">{{'Saturday' | translate}}
                 </div> 
-                <section *ngFor="let try of selectedFeatures" >
+                <section *ngFor="let try of selectedFeatures; let i = index" >
                   <section  *ngIf="try.day == 7">
               <div class="card-body" style="border: 1px solid #ddd;">
-                        <section class="row pl-5"> 
+                        <section class="row"> 
                           <mat-icon style="font-size: small;color:red;cursor: pointer" title="delete"  (click)="removeItem(i)">delete</mat-icon>
                         </section>
                     <div class="row">
+                        <mat-icon style="font-size: small" title="delete" class="mt-1"></mat-icon>
                         <p>{{try.from}}</p>
                     </div>
                     <mat-divider></mat-divider>
                     <div class="row">
+                        <mat-icon style="font-size: small" title="delete" class="mt-1"></mat-icon>
                         <p>{{try.to}}</p>
                     </div>
                     <mat-divider></mat-divider>
                     <div class="row">
-                      <mat-icon style="font-size: small" title="delete" class="mt-1" (click)="removeItem(i)">person</mat-icon>
+                      <mat-icon style="font-size: small" title="delete" class="mt-1" >person</mat-icon>
                         <p>{{try.max}}</p>
                     </div>
               </div> 
@@ -396,7 +414,6 @@
         </section>
     
 <br>
-
   </div>
       </div>
 
@@ -412,7 +429,8 @@
   </form>
     </div>
     <br>
-    <div class="card">
+
+    <div class="card" >
         <div class="card-header">
             <section class="row">
                 <section class="col-md-3">
@@ -422,7 +440,7 @@
             </section>
         </div>
         
-        <form #formSub="ngForm" (ngSubmit)="UpdateSub(formSub.value)">
+        <form #formSub="ngForm" (ngSubmit)="AddSub(formSub.value)">
         <div class="card-body">
             <div class="container ml-5">
                 <section class="row justify-content-center">
@@ -432,21 +450,22 @@
                     <section class="col-md-4">
                         <mat-form-field>
                             <mat-label>{{'Start Date' | translate}}</mat-label>
-                            <input matInput [matDatepicker]="picker2" name="startDate" [(ngModel)] = "startDate">
-                            <mat-datepicker-toggle matSuffix [for]="picker2">
+                            <input matInput [matDatepicker]="start" name="startDate" [(ngModel)] = "startDate" id="startDate">
+                            <mat-datepicker-toggle matSuffix [for]="start">
                                 <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                               </mat-datepicker-toggle>
-                         <mat-datepicker #picker2></mat-datepicker>
+                         <mat-datepicker #start></mat-datepicker>
                           </mat-form-field>
+                          <!-- <input type="date" id="startDate" [(ngModel)]="startDate"> -->
                     </section>
                     <section class="col-md-4">
                         <mat-form-field>
                             <mat-label>{{'End Date' | translate}}</mat-label>
-                            <input matInput [matDatepicker]="picker" name="endDate" [(ngModel)] = "endDate">
-                            <mat-datepicker-toggle matSuffix [for]="picker">
+                            <input matInput [matDatepicker]="end" name="endDate" [(ngModel)] = "endDate">
+                            <mat-datepicker-toggle matSuffix [for]="end">
                                 <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                               </mat-datepicker-toggle>
-                         <mat-datepicker #picker></mat-datepicker>
+                         <mat-datepicker #end></mat-datepicker>
                           </mat-form-field>
                     </section>
                 </section>
@@ -463,6 +482,7 @@
         </div>
         </form>
       </div>
+
   </section>
  
 
@@ -470,7 +490,7 @@
 
   <ng-template #content let-modal>
       <div class="modal-header">
-        <h4 class="modal-title">{{'Add Working Hours' | translate}}</h4>
+        <h4 class="modal-title">{{'Add Working hours' | translate}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -479,40 +499,45 @@
       <div class="modal-body">
           <section class="row">
               <section class="col-md-6">
-                  <mat-form-field>
+                <mat-form-field [class.has-error]="dayControl.invalid && dayControl.touched">
                       <mat-label>choose Day</mat-label>
-                      <mat-select name="day"  [(ngModel)]="day">
+                      <mat-select name="day"  [(ngModel)]="day" required #dayControl="ngModel" >
                         <mat-option value="1">{{'Sunday' | translate}}</mat-option>
                         <mat-option value="2">{{'Monday' | translate}}</mat-option>
                         <mat-option value="3">{{'Tuesday' | translate}}</mat-option>
-                        <mat-option value="4">{{'wednesday' | translate}}</mat-option>
-                        <mat-option value="5">{{'Thrusday' | translate}}</mat-option>
+                        <mat-option value="4">{{'Wednesday' | translate}}</mat-option>
+                        <mat-option value="5">{{'Thursday' | translate}}</mat-option>
                         <mat-option value="6">{{'Friday' | translate}}</mat-option>
                         <mat-option value="7">{{'Saturday' | translate}}</mat-option>
                       </mat-select>
                     </mat-form-field>
+                    <span style="font-size: smaller;" class="text-danger" *ngIf="dayControl.errors?.required && dayControl.touched">Select a day is required</span>
               </section>
               <section class="col-md-6">
-                  <mat-form-field>
-                      <input matInput placeholder="{{'Max' | translate}}" name="max"   [(ngModel)]="max">
+                <mat-form-field [class.has-error]="maxControl.invalid && maxControl.touched">
+                      <input matInput placeholder="{{'Max' | translate}}" name="max" required #maxControl="ngModel"  [(ngModel)]="max">
                   </mat-form-field>
+                  <span style="font-size: smaller;" class="text-danger" *ngIf="maxControl.errors?.required && maxControl.touched">    Max number is required</span>
               </section>
           </section>
           <section class="row">
               <section class="col-md-6">
-                  <mat-form-field>
-                      <input matInput placeholder="{{'From' | translate}}" name="from"  type="time"  [(ngModel)]="from">
-                  </mat-form-field>
+                <mat-form-field [class.has-error]="timeControl.invalid && timeControl.touched">
+                      <input matInput placeholder="{{'From' | translate}}" name="from" required type="time" #timeControl="ngModel" [(ngModel)]="from">
+                  </mat-form-field><br>
+                  <span style="font-size: smaller;" class="text-danger" *ngIf="timeControl.errors?.required && timeControl.touched">From date is required</span>
               </section>
               <section class="col-md-6">
-                  <mat-form-field>
-                      <input matInput placeholder="{{'To' | translate}}" name="to" type="time"  [(ngModel)]="to">
-                  </mat-form-field>
+                  
+            <mat-form-field [class.has-error]="toControl.invalid && toControl.touched">
+                      <input matInput placeholder="{{'To' | translate}}" name="to" required type="time" #toControl="ngModel"  [(ngModel)]="to">
+                  </mat-form-field><br>
+                  <span style="font-size: smaller;" class="text-danger" *ngIf="toControl.errors?.required && toControl.touched">To date is required</span>
               </section>
           </section>
      </div>
       <div class="modal-footer">
-        <button class="primary-bg" type="button" mat-raised-button (click)="onAdd()">{{'Save' | translate}}</button>
+        <button class="primary-bg" mat-raised-button [disabled]="!form.valid" (click)="onAdd()">{{'Save' | translate}}</button>
       </div>
     </form> 
     </ng-template>
@@ -524,12 +549,16 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        <form #formPhone="ngForm" (ngSubmit)="Update(formPhone.value)">
         <div class="modal-body">
-            <mat-form-field>
-                <input matInput placeholder="{{'Phone' | translate}}" name="phoneAdd" type="number"  [(ngModel)]="phoneAdd">
+            <mat-form-field [class.has-error]="phoneControl.invalid && phoneControl.touched">
+                <input matInput placeholder="{{'Phone' | translate}}" name="phoneAdd" type="number" pattern=".{8,}" #phoneControl="ngModel" required  [(ngModel)]="phoneAdd">
             </mat-form-field>
+            <span style="font-size: smaller;" class="text-danger" *ngIf="phoneControl.errors?.required && phoneControl.touched">Clinic Phone is required</span>
+            <span style="font-size: smaller;" class="text-danger" *ngIf="phoneControl.errors?.pattern && phoneControl.touched">Must be between 8-11 numbers</span>
        </div>
         <div class="modal-footer">
-          <button class="primary-bg" type="button" mat-raised-button (click)="addPhone()">{{'Save' | translate}}</button>
+          <button class="primary-bg" mat-raised-button (click)="addPhone()" [disabled]="!formPhone.valid">{{'Save' | translate}}</button>
         </div>
+        </form>
       </ng-template>

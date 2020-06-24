@@ -45,16 +45,6 @@ const MENUITEMS = [
     ]
   },
 
-  // {
-  //   state: 'dashboard',
-  //   name: 'Bookings',
-  //   type: 'sub',
-  //   icon: 'booking',
-  //   children: [
-  //     {state: 'bookingdoctor', name: 'Doctors' , type: 'sub', icon: 'menu'},
-  //     {state: 'bookingclient', name: 'Clients' , type: 'sub', icon: 'menu'},
-  //   ]
-  // },
   {
     state: 'dashboard',
     name: 'Ads',
@@ -65,16 +55,7 @@ const MENUITEMS = [
       {state: 'addads', name: 'Add Ads' , type: 'sub', icon: 'menu'},
     ]
   },
-  // {
-  //   state: 'dashboard',
-  //   name: 'Subscriptions',
-  //   type: 'sub',
-  //   icon: 'subscriptions',
-  //   children: [
-  //     {state: 'showsubscription', name: 'Show Subscription' , type: 'sub', icon: 'menu'},
-  //     {state: 'addsubscription', name: 'Add Subscription' , type: 'sub', icon: 'menu'},
-  //   ]
-  // },
+
   {
     state: 'dashboard',
     name: 'Promo Codes',
@@ -129,7 +110,16 @@ const MENUITEMS = [
     icon: 'chat',
     children: [
       {state: 'group', name: 'Group Chat' , type: 'sub', icon: 'menu'},
-      {state: 'message', name: 'messages' , type: 'sub', icon: 'menu'}
+      // {state: 'message', name: 'messages' , type: 'sub', icon: 'menu'}
+    ]
+  },
+  {
+    state: 'dashboard',
+    name: 'Notifications',
+    type: 'sub',
+    icon: 'notifications',
+    children: [
+      {state: 'notification', name: 'Send Notifications' , type: 'sub', icon: 'menu'},
     ]
   }
 

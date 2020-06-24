@@ -14,7 +14,7 @@ styleUrls: ['./side-bar.component.scss']
 export class SideBarComponent implements OnInit {
    informations: true;
 @Input() menuList: any;
-  @Input() verticalMenuStatus: boolean;
+@Input() verticalMenuStatus: boolean;
 
 constructor( public translate: TranslateService,
                 private router: Router,

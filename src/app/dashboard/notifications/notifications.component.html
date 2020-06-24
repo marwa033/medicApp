@@ -1,0 +1,55 @@
+<ngx-spinner bdColor = "rgba(51, 51, 51, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p></ngx-spinner>
+
+    <section class="container">
+
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                <section class="col-md-3">
+              {{'Send Notifications' | translate}}
+            </section>
+            <section class="col-md-9"></section>
+        </div>
+            </div>
+            <form #form="ngForm" (ngSubmit)="notification(form.value)">
+            <div class="card-body ">
+                <div class="container ml-5">
+            <section class="row justify-content-center">
+                <section class="col-md-4">
+                    <mat-form-field>
+                        <input matInput placeholder="{{'Notification Title' | translate}}" name="nTitle" [(ngModel)] = "nTitle">
+                    </mat-form-field>
+                </section>
+                <section class="col-md-4">
+                    <mat-form-field>
+                        <mat-select placeholder="{{'Type' | translate}}" name="type" [(ngModel)] = "type">
+                          <mat-option value="user">{{'Users' | translate}}</mat-option>
+                          <mat-option value="vendor">{{'Doctors' | translate}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </section>
+            </section>
+            <section class="row " >
+                <section class="col-md-3"></section>
+                <section class="col-md-6">
+                <mat-form-field style="width: 80%;" >
+                    <textarea matInput placeholder=" {{'Notification Body' | translate}}" name="nBody" rows="" [(ngModel)] = "nBody"></textarea>
+                </mat-form-field>
+            </section>
+                <section class="col-md-3"></section>
+            </section>
+        </div>
+            </div>
+            <div class="card-footer">
+                <section class="row">
+                    <section class="col-md-9"></section>
+                    <section class="col-md-3">
+                        <button class="btn  btn-block">{{'Save' | translate}}</button>
+                    </section>
+                </section>
+                
+            </div>
+        </form>
+          </div>
+        </section>

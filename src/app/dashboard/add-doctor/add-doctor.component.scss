@@ -35,7 +35,16 @@ h4{
     // border: 1px solid #ddd;
     color: white;
 }
-
+.none{
+    cursor: pointer;
+    border: none;
+}
+img{
+    width: 70px;
+    height: 70px;
+    padding:5px;
+    border-radius: 50%;
+}
 p{
     font-size: smaller;
     text-align: center;

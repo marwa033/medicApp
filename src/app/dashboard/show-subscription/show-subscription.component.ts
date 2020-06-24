@@ -38,43 +38,43 @@ export class ShowSubscriptionComponent implements OnInit {
        config.backdrop = 'static';
        config.keyboard = false;
     }  
-    Detials(){
-      this.authService.GetIDDoctor().
-then( responseDoctorID => { this.x = responseDoctorID;
-  console.log(this.x)
+    // Detials(){
+//       this.authService.GetIDDoctor().
+// then( responseDoctorID => { this.x = responseDoctorID;
+//   console.log(this.x)
 
-  this.name = this.x.name.en
-  this.AName = this.x.name.ar
-  this.title =this.x.title.en
-  this.bio = this.x.bio.en
-  this.address =this.x.address.en
-  this.ATitle =this.x.title.ar
-  this.ABio = this.x.bio.ar
-  // this.AAddress =this.x.address.ar
-  this.price = this.x.price
-  // this.lat = this.x.lat
-  // this.lang = this.x.lng
-  // this.time = this.x.estimateTime
-  // this.selectedCategory = this.x.categoryId
-  this.district = this.x.district.name.en
-  // this.cphone = this.x.clinicPhones
-  this.image = this.x.image
-  this.logo = this.x.logo
-  // this.name = this.x.user.name
-  // this.phone = this.x.user.phone
-  this.work = this.x.workingHours
-  this.booking = this.x.numberOfBookingDays
-  // this.id = this.x._id
-  // this.startDate = new Date(this.x.subscription.startDate)
-  // this.endDate = new Date(this.x.subscription.endDate)
-  // this.subID = this.x.subscription._id
-  setTimeout(() => {
-    this.spinner.hide();
-  }, this.x);
-});
-}
+//   this.name = this.x.name.en
+//   this.AName = this.x.name.ar
+//   this.title =this.x.title.en
+//   this.bio = this.x.bio.en
+//   this.address =this.x.address.en
+//   this.ATitle =this.x.title.ar
+//   this.ABio = this.x.bio.ar
+//   // this.AAddress =this.x.address.ar
+//   this.price = this.x.price
+//   // this.lat = this.x.lat
+//   // this.lang = this.x.lng
+//   // this.time = this.x.estimateTime
+//   // this.selectedCategory = this.x.categoryId
+//   this.district = this.x.district.name.en
+//   // this.cphone = this.x.clinicPhones
+//   this.image = this.x.image
+//   this.logo = this.x.logo
+//   // this.name = this.x.user.name
+//   // this.phone = this.x.user.phone
+//   this.work = this.x.workingHours
+//   this.booking = this.x.numberOfBookingDays
+//   // this.id = this.x._id
+//   // this.startDate = new Date(this.x.subscription.startDate)
+//   // this.endDate = new Date(this.x.subscription.endDate)
+//   // this.subID = this.x.subscription._id
+//   setTimeout(() => {
+//     this.spinner.hide();
+//   }, this.x);
+// });
+// }
   ngOnInit() {   
-    this.Detials();
+    // this.Detials();
     this.spinner.show();
   }
 

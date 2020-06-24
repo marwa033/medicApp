@@ -21,7 +21,7 @@ import { ShowClientsComponent } from './show-clients/show-clients.component';
 import { BookingComponent } from './booking/booking.component';
 import { MessagesComponent } from './messages/messages.component';
 import { GroupComponent } from './group/group.component';
-import { SupportComponent } from './support/support.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 
 export const DashboardRoutes: Routes = [
@@ -62,7 +62,7 @@ export const DashboardRoutes: Routes = [
             component : AddAdminComponent
          },
          {
-            path: 'bookingdoctor',
+            path: 'bookingdoctor/:id',
             component : BookingDoctorsComponent
          },
          {
@@ -127,12 +127,12 @@ export const DashboardRoutes: Routes = [
             component : GroupComponent
          },
          {
-            path: 'message',
+            path: 'message/:id/:name',
             component : MessagesComponent
          },
          {
-            path: 'support',
-            component : SupportComponent
+            path: 'notification',
+            component : NotificationsComponent
          }
       ]
    }

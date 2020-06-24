@@ -12,7 +12,8 @@
     "outDir": "../out-tsc/app",
     "target" : "es5",
     "baseUrl": "",
-    "types": []
+    "types": [ "node"],
+    "typeRoots": [ "../node_modules/@types" ]
   },
   "include": [
     "main.ts",

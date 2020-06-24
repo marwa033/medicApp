@@ -32,6 +32,7 @@ export class GetAdminComponent implements OnInit {
   password: any;
   selectedstatus: any;
   selectedRole: any;
+  roles = JSON.parse(localStorage.getItem('adminRole'));
   leeh = JSON.parse(localStorage.getItem('try'));
   delete: any;
   
@@ -52,7 +53,7 @@ export class GetAdminComponent implements OnInit {
                    this.dataSource = new MatTableDataSource(responseAdminsData.data);
                    this.dataSource.paginator = this.paginator;
                    this.dataSource.sort = this.sort; 
-                  //  console.log( this.results );
+                   console.log( this.dataSource);
                    setTimeout(() => {
                     this.spinner.hide();
                   }, this.results);
@@ -66,8 +67,7 @@ FilterAdmins(value){
             then( responseAdminsfilter => { this.results = responseAdminsfilter;
                this.dataSource = new MatTableDataSource(responseAdminsfilter.data);
                this.dataSource.paginator = this.paginator;
-               this.dataSource.sort = this.sort; 
-              //  console.log( this.results );
+               this.dataSource.sort = this.sort;
                setTimeout(() => {
                 this.spinner.hide();
               }, this.results);
@@ -128,7 +128,7 @@ FilterAdmins(value){
   ngOnInit() {  
     this.Admins();
     this.spinner.show();
-console.log(this.role);
+// console.log(this.role);
   }
 
 }

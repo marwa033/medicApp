@@ -58,21 +58,6 @@ export class ShowDoctorComponent implements OnInit {
       this.modalService.open(content, { size: 'lg' });
     }
 
-    detialRow(element){
-      this.router.navigate(['/dashboard/showsubscription']);
-      this.setID(element._id);
-    }
-    editRow(element){
-this.setID(element._id);
-      this.router.navigate(['/dashboard/bookingdoctor']);
-      
-    }
-    setID(value) {
-      localStorage.setItem('editDoctor', JSON.stringify(value));
-      var x = JSON.parse(localStorage.getItem('editDoctor'));
-    console.log(x);
-    console.log('x => ' + x);
-    }
     Categories(){
       this.authService.GetCategories().
                 then( responsedatafilter => { this.categories = responsedatafilter.data;
@@ -111,7 +96,7 @@ this.setID(element._id);
                    this.dataSource = new MatTableDataSource(responsegetDoctor.data);
                    this.dataSource.paginator = this.paginator;
                    this.dataSource.sort = this.sort; 
-                  //  console.log( this.results );
+                   console.log( this.results);
                    setTimeout(() => {
                     this.spinner.hide();
                   }, this.results);
@@ -140,11 +125,6 @@ Active(element){
     this.Doctor();
     this.Categories();
     this.Districts();
-    $(document).ready(function(){
-      $('.search').click(function() {
-        $('.hide').toggle();
-      })
-    })
   }
 
 }
