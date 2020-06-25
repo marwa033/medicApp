@@ -555,7 +555,7 @@
         <div class="modal-body">
             <mat-form-field [class.has-error]="phoneControl.invalid && phoneControl.touched">
                 <input matInput placeholder="{{'Phone' | translate}}" name="phoneAdd" type="number" pattern=".{8,}" #phoneControl="ngModel" required  [(ngModel)]="phoneAdd">
-            </mat-form-field>
+            </mat-form-field><br>
             <span style="font-size: smaller;" class="text-danger" *ngIf="phoneControl.errors?.required && phoneControl.touched">Clinic Phone is required</span>
             <span style="font-size: smaller;" class="text-danger" *ngIf="phoneControl.errors?.pattern && phoneControl.touched">Must be between 8-11 numbers</span>
        </div>
@@ -589,13 +589,13 @@
                           <mat-option value="6">{{'Friday' | translate}}</mat-option>
                           <mat-option value="7">{{'Saturday' | translate}}</mat-option>
                         </mat-select>
-                      </mat-form-field>
+                      </mat-form-field><br>
                       <span style="font-size: smaller;" class="text-danger" *ngIf="dayControl.errors?.required && dayControl.touched">Select a day is required</span>
                 </section>
                 <section class="col-md-6">
                   <mat-form-field [class.has-error]="maxControl.invalid && maxControl.touched">
                         <input matInput placeholder="{{'Max' | translate}}" name="max" required #maxControl="ngModel"  [(ngModel)]="max">
-                    </mat-form-field>
+                    </mat-form-field><br>
                     <span style="font-size: smaller;" class="text-danger" *ngIf="maxControl.errors?.required && maxControl.touched">    Max number is required</span>
                 </section>
             </section>
