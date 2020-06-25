@@ -62,6 +62,7 @@ export class SaasComponent implements  OnInit{
                }
            
                Update(value){
+                 this.spinner.show()
                   this.authService.editCategories(value).
                             then( editresponse => { this.tries = editresponse;
                               let message = editresponse.message;

@@ -5,6 +5,7 @@ import { PageTitleService } from 'app/core/page-title/page-title.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ms-add-doctor',
@@ -57,6 +58,7 @@ export class AddDoctorComponent implements OnInit {
    private pageTitleService: PageTitleService ,
    private spinner: NgxSpinnerService,
    private toastr: ToastrService,
+   private router: Router,
      config: NgbModalConfig,
       private modalService: NgbModal) {}
       Category(){

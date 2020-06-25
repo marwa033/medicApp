@@ -58,6 +58,7 @@ this.selectedFile = event.target.files[0];
     console.log(this.imageSrc)
   }
   ngOnInit() {
+    
   }
 
 }

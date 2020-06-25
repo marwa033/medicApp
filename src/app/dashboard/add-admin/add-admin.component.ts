@@ -17,6 +17,7 @@ export class AddAdminComponent implements OnInit {
   phone: string = '';
   password: string = '';
   selectedRole:  string='';
+  roles = JSON.parse(localStorage.getItem('adminRole'));
 
   constructor(public translate: TranslateService,
     public authService: AuthService,

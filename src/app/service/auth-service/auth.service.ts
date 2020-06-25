@@ -222,6 +222,7 @@ if (message) {
 }
  else{
   this.toastr.success('Successfully Added');
+  this.toastr.info('Add subscription below');
   // this.router.navigate(['/dashboard/showdoctors']);
 }
 this.adddoctors = getDoctoradd;
@@ -261,7 +262,7 @@ if (message) {
 }
  else{
   this.toastr.success('Successfully Added Subscription');
-  // this.router.navigate(['/dashboard/showdoctor']);
+  this.router.navigate(['/dashboard/showdoctor']);
 }
 this.addSububscription = getAddSubscription;
 return this.addSububscription;
@@ -1292,7 +1293,7 @@ async GetFilterDoctor(value) {
   let  x = JSON.parse(localStorage.getItem('language'));
   const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
   const request = new Request(baseURL + 'auth/vendors/subscriptions?pageNumber=1&pageSize=100&state='+value.status+'&name='+value.filter
-  + '&categoryId=' + value.category + '&districtId=' + value.district + '&subscriptionDate' + value.subscription,
+  + '&categoryId=' + value.category + '&districtId=' + value.district + '&subscriptionDate=' + value.subscription,
   { method: 'GET',}
   )
         request.headers.delete('Content-Type');

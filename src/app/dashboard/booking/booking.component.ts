@@ -41,11 +41,13 @@ export class BookingComponent implements OnInit {
       
       bookings(){
         this.authService.GetBooking().
-        then( responsegetbooks => { this.results = responsegetbooks;
+        then( responsegetbooks => { this.results = responsegetbooks.data;
            this.dataSource = new MatTableDataSource(responsegetbooks.data);
            this.dataSource.paginator = this.paginator;
-           this.dataSource.sort = this.sort; 
-           console.log( this.results );
+           this.dataSource.sort = this.sort;
+          //  this.results.forEach(element => {
+          //    console.log(element.completed)
+          //  }); 
            setTimeout(() => {
             this.spinner.hide();
           }, this.results);

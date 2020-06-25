@@ -45,7 +45,7 @@
                               <span fxFlex></span>
                               <mat-icon class="menu-caret">chevron_right</mat-icon>
                            </a>
-                           <mat-nav-list class="sub-menu" *ngIf="childitem.type === 'sub2'">
+                           <!-- <mat-nav-list class="sub-menu" *ngIf="childitem.type === 'sub2'">
                               <mat-list-item *ngFor="let childitem of childitem.children" routerLinkActive="open">
                                  <a [routerLink]="['/'+menuitem.state+'/'+childitem.state ]" routerLinkActive="active-link" class="gene-relative" mat-ripple>
                                     {{ childitem.name | translate }}
@@ -54,13 +54,14 @@
                                     </ng-container>
                                  </a>
                               </mat-list-item>
-                           </mat-nav-list>
-                           <a [routerLink]="['/'+menuitem.state+'/'+childitem.state ]" routerLinkActive="active-link" class="gene-relative" *ngIf="childitem.type === 'sub'" mat-ripple>
+                           </mat-nav-list> -->
+                           <a [routerLink]="['/'+menuitem.state+'/'+childitem.state ]" routerLinkActive="active-link" class="gene-relative" mat-ripple>
                               {{ childitem.name | translate }}
                               <ng-container *ngIf="childitem.label">
                                  <span class="sidebar-label">{{childitem.label}}</span>
                               </ng-container>
                            </a>
+                           
                         </mat-list-item>
                      </mat-nav-list>
                   </mat-list-item>
