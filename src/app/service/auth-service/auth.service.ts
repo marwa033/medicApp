@@ -262,7 +262,7 @@ if (message) {
 }
  else{
   this.toastr.success('Successfully Added Subscription');
-  this.router.navigate(['/dashboard/showdoctor']);
+  this.router.navigate(['/dashboard/showdoctors']);
 }
 this.addSububscription = getAddSubscription;
 return this.addSububscription;
