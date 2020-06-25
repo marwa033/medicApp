@@ -131,11 +131,11 @@ Active(element){
   });
 }
 Delete(element){
-  alert('Are you sure you want to delete that Advertising ?')
+  if(confirm('Are you sure you want to delete that Advertising ?')){
   this.authService.DeleteAds(element).
   then( responseAdsDelete => { this.delete = responseAdsDelete;
     this.Close();
-  });
+  });}else{}
 }
 Close(){ 
   this.modalService.dismissAll(); 

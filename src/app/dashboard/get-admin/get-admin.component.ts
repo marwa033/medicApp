@@ -102,11 +102,12 @@ FilterAdmins(value){
                }
 
                deleteRow(element){
+                if(confirm("Are you sure you want to delete that Admin?")){
                 this.authService.AdminDelete(element).
                 then( responseDelete => { this.delete = responseDelete;
                    console.log(element);
                    this.Close();   
-                });
+                });}else{}
                }
 
  openLg(content) {

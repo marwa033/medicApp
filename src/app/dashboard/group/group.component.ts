@@ -64,11 +64,12 @@ export class GroupComponent implements OnInit {
                 });
                }
                Delete(element){
+                 if(confirm('Are you sure you want to delete that chat?')){
                 this.authService.GroupDelete(element).
                 then( responseGroup => { this.delete = responseGroup;
                   //  console.log(element);
                    this.Close();   
-                });
+                });}else{}
                }
                
   ngOnInit() {

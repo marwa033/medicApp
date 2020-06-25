@@ -812,7 +812,7 @@ request.headers.append('x-auth-token', log);
 /////////////////////////////////////////
 async GroupDelete(element) {
   let log =this.userData['x-auth-token'];
-const request = new Request(baseURL + 'auth/admins/' + element._id,
+const request = new Request(baseURL + 'chat/groups/' + element._id,
 {
 method: 'DELETE'
 });
