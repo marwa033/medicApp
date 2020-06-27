@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ActivatedRoute } from '@angular/router';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 @Component({
   selector: 'ms-booking-doctors',
@@ -53,6 +54,9 @@ export class BookingDoctorsComponent implements OnInit {
   subID: any;
   null: any;
   selectedID: any;
+  imgResultBeforeCompress;
+  imgResultAfterCompress;
+
   constructor(public translate: TranslateService,
     public authService: AuthService,
    private pageTitleService: PageTitleService ,
@@ -60,7 +64,8 @@ export class BookingDoctorsComponent implements OnInit {
      config: NgbModalConfig,
      private route: ActivatedRoute,
      private spinner: NgxSpinnerService,
-      private modalService: NgbModal) {
+      private modalService: NgbModal,
+      private imageCompress: NgxImageCompressService) {
        config.backdrop = 'static';
        config.keyboard = false;
     } 
@@ -88,14 +93,16 @@ export class BookingDoctorsComponent implements OnInit {
       this.phoneAdd="";
     }
     removeItem(index) {
+      if(confirm("Are you want to delete this date ?")){
       this.selectedFeatures.splice(index, 1);
-      alert("Are you want to delete that date ?")
       this.UpdateWork(this.selectedFeatures);
+    }else{}
     }
     removePhone(index){
+      if(confirm("Are you want to delete this phone?")){
       this.selectedPhone.splice(index, 1);
-      alert("Are you want to delete that phone?")
       this.UpdatePhone(this.selectedPhone);
+    }else{}
     }
     UpdateWork(value) {
       localStorage.setItem('editWork', JSON.stringify(value));
@@ -107,40 +114,37 @@ export class BookingDoctorsComponent implements OnInit {
       var upPhone = JSON.parse(localStorage.getItem('editPhone'));
       // console.log(upwork)    
     }
-    handleInputChange(e) {
-      var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
-      var pattern = /image-*/;
-      var reader = new FileReader();
-      if (!file.type.match(pattern)) {
-        alert('invalid format');
-        return;
-      }
-      reader.onload = this._handleReaderLoaded.bind(this);
-      reader.readAsDataURL(file);
-    }
-    _handleReaderLoaded(e) {
-      let reader = e.target;
-      this.imageSrc = reader.result;
-      console.log(this.imageSrc)
-    }
-  
-    handleInput(e) {
-      var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
-      var pattern = /image-*/;
-      var reader = new FileReader();
-      if (!file.type.match(pattern)) {
-        alert('invalid format');
-        return;
-      }
-      reader.onload = this._handleReaderLoadedlogo.bind(this);
-      reader.readAsDataURL(file);
-    }
-    _handleReaderLoadedlogo(e) {
-      let reader = e.target;
-      this.imageSrcLogo = reader.result;
-      console.log(this.imageSrcLogo)
-    }
-  
+
+    uploadFile(){
+      this.imageCompress.uploadFile().then(({image, orientation}) => {
+         
+           this.imgResultBeforeCompress = image;
+           console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
+           this.imageCompress.compressFile(image, null, 30, 30).then(
+             result => {
+               this.imageSrc = result;
+               this.imgResultAfterCompress = result;
+               console.warn('Size in bytes is now:', this.imageCompress.byteCount(result));
+               console.log(result)
+             }
+           );
+         });
+       }
+       uploadLogo(){
+        this.imageCompress.uploadFile().then(({image, orientation}) => {
+           
+             this.imgResultBeforeCompress = image;
+             console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
+             this.imageCompress.compressFile(image, null, 30, 30).then(
+               result => {
+                 this.imageSrcLogo = result;
+                 this.imgResultAfterCompress = result;
+                 console.warn('Size in bytes is now:', this.imageCompress.byteCount(result));
+                 console.log(result)
+               }
+             );
+           });
+         }
     openLg(content) {
       this.modalService.open(content, { size: 'lg' });
     }

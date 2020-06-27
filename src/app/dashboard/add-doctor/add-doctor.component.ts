@@ -6,6 +6,7 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 @Component({
   selector: 'ms-add-doctor',
@@ -52,6 +53,8 @@ export class AddDoctorComponent implements OnInit {
   startDate: any;
   endDate: any;
   phoneAdd: any;
+  imgResultBeforeCompress;
+  imgResultAfterCompress;
 
   constructor(public translate: TranslateService,
     public authService: AuthService,
@@ -60,7 +63,8 @@ export class AddDoctorComponent implements OnInit {
    private toastr: ToastrService,
    private router: Router,
      config: NgbModalConfig,
-      private modalService: NgbModal) {}
+      private modalService: NgbModal,
+      private imageCompress: NgxImageCompressService) {}
       Category(){
         this.authService.GetCategories().
                   then( responsedata => { this.categories = responsedata.data;
@@ -78,39 +82,36 @@ export class AddDoctorComponent implements OnInit {
       opensm(contentsm) {
         this.modalService.open(contentsm , { size: 'sm' });
       }
-  handleInputChange(e) {
-    var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
-    var pattern = /image-*/;
-    var reader = new FileReader();
-    if (!file.type.match(pattern)) {
-      alert('invalid format');
-      return;
-    }
-    reader.onload = this._handleReaderLoaded.bind(this);
-    reader.readAsDataURL(file);
-  }
-  _handleReaderLoaded(e) {
-    let reader = e.target;
-    this.imageSrc = reader.result;
-    console.log(this.imageSrc)
-  }
-
-  handleInput(e) {
-    var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
-    var pattern = /image-*/;
-    var reader = new FileReader();
-    if (!file.type.match(pattern)) {
-      alert('invalid format');
-      return;
-    }
-    reader.onload = this._handleReaderLoadedlogo.bind(this);
-    reader.readAsDataURL(file);
-  }
-  _handleReaderLoadedlogo(e) {
-    let reader = e.target;
-    this.imageSrcLogo = reader.result;
-    console.log(this.imageSrcLogo)
-  }
+      uploadFile(){
+        this.imageCompress.uploadFile().then(({image, orientation}) => {
+           
+             this.imgResultBeforeCompress = image;
+             console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
+             this.imageCompress.compressFile(image, null, 30, 30).then(
+               result => {
+                 this.imageSrc = result;
+                 this.imgResultAfterCompress = result;
+                 console.warn('Size in bytes is now:', this.imageCompress.byteCount(result));
+                 console.log(result)
+               }
+             );
+           });
+         }
+         uploadLogo(){
+          this.imageCompress.uploadFile().then(({image, orientation}) => {
+             
+               this.imgResultBeforeCompress = image;
+               console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
+               this.imageCompress.compressFile(image, null, 30, 30).then(
+                 result => {
+                   this.imageSrcLogo = result;
+                   this.imgResultAfterCompress = result;
+                   console.warn('Size in bytes is now:', this.imageCompress.byteCount(result));
+                   console.log(result)
+                 }
+               );
+             });
+           }
 
   addPhone() {
     this.selectedPhone.push(this.phoneAdd);

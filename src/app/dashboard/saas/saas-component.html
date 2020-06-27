@@ -121,10 +121,8 @@
 <section class="col-md-6">
   <img [src]="imageSrc"  style="max-width:100px;max-height:100px"
   onerror= "this.src='assets/img/1274512-placeholder.png';" />
-  <input  type="file" name="imageSrc" accept="image/*" (change)="handleInputChange($event)" />
-
-  <!-- <img [src]=" 'https://node-doctors.herokuapp.com/public/images/d2f20d8e-c560-4f89-8d55-8cccaa08f143.png'"  style="max-width:100px;max-height:100px"/> -->
-<mat-form-field class="rid">
+  <button (click)="uploadFile()" type="button" mat-raised-button >Upload</button>
+  <mat-form-field class="rid">
   <input matInput placeholder="Color" name="imageSrc" [(ngModel)] = "imageSrc">
 </mat-form-field>
 </section>

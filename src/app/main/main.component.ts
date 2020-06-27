@@ -15,8 +15,6 @@ import { CellOptionsDialogService } from '@syncfusion/ej2-angular-documenteditor
 import { SaasComponent } from '../dashboard/saas/saas.component';
 import { MatTableDataSource } from '@angular/material';
 import { NgxSpinnerService } from "ngx-spinner";
-import { ShowAdsComponent } from '../dashboard/show-ads/show-ads.component';
-import { GetAdminComponent } from '../dashboard/get-admin/get-admin.component';
 declare var require: any
 
 const screenfull = require('screenfull');
@@ -80,32 +78,29 @@ export class MainComponent implements OnInit, AfterContentChecked {
 	setLang(lang) {
 		for(let data of this.langArray) {
 		   if(lang == data.value) {
-			  this.selectImage = data.img;
 			  if(lang === 'ar'){
+				if(confirm("You will start from the home page again")){
+					this.selectImage = data.img;
 				  this.layout = 'rtl';
-				alert("You will start from the home page again")
 					this.router.navigate(['dashboard/crm'])
 					this.translate.setDefaultLang('ar')
+					this.translate.use(lang);}
 			  }else{
+				if(confirm("You will start from the home page again")){
+					this.selectImage = data.img;
 				  this.layout = 'ltr';
-				alert("You will start from the home page again")
 				  this.router.navigate(['dashboard/crm'])
 				  this.translate.setDefaultLang('en')
+				  this.translate.use(lang);
+				}
 			  }		
 			  
-			  this.getlang(lang);
-			  this.getLayout(this.layout);	
+			  this.getlang(lang);	
 			  break;
 			  
 		   }
 		}
-		this.translate.use(lang);
 	 } 
-	 getLayout(value) {
-		localStorage.setItem('layout', JSON.stringify(value));
-		var  layout = JSON.parse(localStorage.getItem('layout'));
-		// console.log(layout)
-	}	 
 	  getlang(value) {
 		localStorage.setItem('language', JSON.stringify(value));
 		var  lang = JSON.parse(localStorage.getItem('language'));
@@ -138,8 +133,6 @@ export class MainComponent implements OnInit, AfterContentChecked {
 					public menuItems: MenuItems, 
 					public location: Location, 
 					private route: ActivatedRoute,
-					private Category :  SaasComponent,
-					private admin :  GetAdminComponent,
 					private spinner: NgxSpinnerService,
 					private breadcrumbService: BreadcrumbService, 
 					private pageTitleService: PageTitleService, 

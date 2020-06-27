@@ -43,7 +43,6 @@ export class MessagesComponent implements OnInit {
     private route: ActivatedRoute,
    private pageTitleService: PageTitleService ,
    private toastr: ToastrService,
-  //  private socket:Socket.io,
      config: NgbModalConfig,
      private spinner: NgxSpinnerService,
       private modalService: NgbModal) {
@@ -53,7 +52,6 @@ export class MessagesComponent implements OnInit {
     onEnter(){
       let val = this.selectedID 
     this.sendMessage.push(this.message);
-    // this.sendMessage.reverse();
     this.sendYourMessage();
       this.authService.sendMessage(this.message , val , this.name ,this.userId,this.time);
       this.message='';

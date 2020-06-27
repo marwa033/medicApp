@@ -3,6 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'app/service/auth-service/auth.service';
 import { PageTitleService } from 'app/core/page-title/page-title.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgxImageCompressService} from 'ngx-image-compress';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -17,13 +18,15 @@ AName: string='' ;
 Color: string= '';
 image: string= '';
 imageSrc: string = '';
+imgResultBeforeCompress;
+imgResultAfterCompress;
 
 constructor(public translate: TranslateService,
   private spinner: NgxSpinnerService,
   public authService: AuthService,
  private pageTitleService: PageTitleService ,
    config: NgbModalConfig,
-    private modalService: NgbModal) {}
+   private imageCompress: NgxImageCompressService) {}
 
   onFileSelected(event){
 this.selectedFile = event.target.files[0];
@@ -41,22 +44,22 @@ this.selectedFile = event.target.files[0];
     this.authService.ADDCategory(value);
     
   }
-  handleInputChange(e) {
-    var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
-    var pattern = /image-*/;
-    var reader = new FileReader();
-    if (!file.type.match(pattern)) {
-      alert('invalid format');
-      return;
-    }
-    reader.onload = this._handleReaderLoaded.bind(this);
-    reader.readAsDataURL(file);
-  }
-  _handleReaderLoaded(e) {
-    let reader = e.target;
-    this.imageSrc = reader.result;
-    console.log(this.imageSrc)
-  }
+  uploadFile(){
+
+    this.imageCompress.uploadFile().then(({image, orientation}) => {
+       
+         this.imgResultBeforeCompress = image;
+         console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
+         this.imageCompress.compressFile(image, null, 30, 30).then(
+           result => {
+             this.imageSrc = result;
+             this.imgResultAfterCompress = result;
+             console.warn('Size in bytes is now:', this.imageCompress.byteCount(result));
+             console.log(result)
+           }
+         );
+       });
+     }
   ngOnInit() {
     
   }

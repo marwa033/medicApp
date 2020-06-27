@@ -6,6 +6,7 @@ import { PageTitleService } from 'app/core/page-title/page-title.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 @Component({
   selector: 'ms-show-ads',
@@ -39,13 +40,16 @@ export class ShowAdsComponent implements OnInit {
   try: any;
   editATitle: any;
   selectedDoctor: any;
+  imgResultBeforeCompress;
+  imgResultAfterCompress;
   constructor(public translate: TranslateService,
     public authService: AuthService,
    private pageTitleService: PageTitleService ,
    private toastr: ToastrService,
    config: NgbModalConfig,
      private spinner: NgxSpinnerService,
-      private modalService: NgbModal) {
+      private modalService: NgbModal,
+      private imageCompress: NgxImageCompressService) {
        config.backdrop = 'static';
        config.keyboard = false;
     }  
@@ -103,22 +107,22 @@ FilterAds(value){
                               // console.log('doctor grt ' + this.doctors);
                             });
                 } 
-                handleInputChange(e) {
-                  var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
-                  var pattern = /image-*/;
-                  var reader = new FileReader();
-                  if (!file.type.match(pattern)) {
-                    alert('invalid format');
-                    return;
-                  }
-                  reader.onload = this._handleReaderLoaded.bind(this);
-                  reader.readAsDataURL(file);
-                }
-                _handleReaderLoaded(e) {
-                  let reader = e.target;
-                  this.imageSrc = reader.result;
-                  console.log(this.imageSrc)
-                }
+                
+      uploadFile(){
+        this.imageCompress.uploadFile().then(({image, orientation}) => {
+           
+             this.imgResultBeforeCompress = image;
+             console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
+             this.imageCompress.compressFile(image, null, 30, 30).then(
+               result => {
+                 this.imageSrc = result;
+                 this.imgResultAfterCompress = result;
+                 console.warn('Size in bytes is now:', this.imageCompress.byteCount(result));
+                 console.log(result)
+               }
+             );
+           });
+         }
                
 
 
@@ -131,7 +135,7 @@ Active(element){
   });
 }
 Delete(element){
-  if(confirm('Are you sure you want to delete that Advertising ?')){
+  if(confirm('Are you sure you want to delete this Advertising ?')){
   this.authService.DeleteAds(element).
   then( responseAdsDelete => { this.delete = responseAdsDelete;
     this.Close();

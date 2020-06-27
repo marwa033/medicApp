@@ -11,6 +11,7 @@ import {MatTableDataSource, MatTable} from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from "ngx-spinner";
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 @Component({
    selector: 'ms-dashboard',
@@ -45,8 +46,8 @@ export class SaasComponent implements  OnInit{
    X: void;
   src: any;
   try: any;
-  // lang: any;
-  // public href: string = "";
+  imgResultBeforeCompress;
+  imgResultAfterCompress;
   
   
    constructor(public translate: TranslateService,
@@ -56,7 +57,8 @@ export class SaasComponent implements  OnInit{
               private toastr: ToastrService,
                 config: NgbModalConfig,
                 private spinner: NgxSpinnerService,
-                 private modalService: NgbModal) {
+                 private modalService: NgbModal,
+                 private imageCompress: NgxImageCompressService) {
                   config.backdrop = 'static';
                   config.keyboard = false;
                }
@@ -129,22 +131,21 @@ Categories(){
                    }, this.results);
                });
 }
-handleInputChange(e) {
-   var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
-   var pattern = /image-*/;
-   var reader = new FileReader();
-   if (!file.type.match(pattern)) {
-     alert('invalid format');
-     return;
+
+uploadFile(){
+  this.imageCompress.uploadFile().then(({image, orientation}) => {
+       this.imgResultBeforeCompress = image;
+       console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
+       this.imageCompress.compressFile(image, null, 30, 30).then(
+         result => {
+           this.imageSrc = result;
+           this.imgResultAfterCompress = result;
+           console.warn('Size in bytes is now:', this.imageCompress.byteCount(result));
+           console.log(result)
+         }
+       );
+     });       
    }
-   reader.onload = this._handleReaderLoaded.bind(this);
-   reader.readAsDataURL(file);
- }
- _handleReaderLoaded(e) {
-   let reader = e.target;
-   this.imageSrc = reader.result;
-   console.log(this.imageSrc)
- }
 Active(element){
    this.authService.Activation(element).
    then( responseActivedata => { this.tries = responseActivedata;

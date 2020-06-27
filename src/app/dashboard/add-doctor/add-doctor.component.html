@@ -62,7 +62,7 @@
                 <img [src]="imageSrc"class="col-md-2"style="max-width:300px;max-height:300px"
                 onerror= "this.src='assets/img/1274512-placeholder.png';"/><br>
             </div>
-                <input  type="file" name="imageSrc" accept="image/*" (change)="handleInputChange($event)" />
+            <button (click)="uploadFile()" type="button" mat-raised-button >Upload</button>
             <mat-form-field class="rid">
                 <input matInput placeholder="Color" name="imageSrc" [(ngModel)] = "imageSrc">
             </mat-form-field>
@@ -74,7 +74,7 @@
                 <img [src]="imageSrcLogo" class="col-md-2" style="max-width:300px;max-height:300px"
                 onerror= "this.src='assets/img/1274512-placeholder.png';"/><br>
             </div>
-                <input  type="file" name="imageSrcLogo" accept="image/*" (change)="handleInput($event)" />
+            <button (click)="uploadLogo()" type="button" mat-raised-button >Upload</button>
             <mat-form-field class="rid">
                 <input matInput placeholder="Color" name="imageSrcLogo" [(ngModel)] = "imageSrcLogo">
             </mat-form-field>

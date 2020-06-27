@@ -64,7 +64,7 @@ export class GroupComponent implements OnInit {
                 });
                }
                Delete(element){
-                 if(confirm('Are you sure you want to delete that chat?')){
+                 if(confirm('Are you sure you want to delete this chat?')){
                 this.authService.GroupDelete(element).
                 then( responseGroup => { this.delete = responseGroup;
                   //  console.log(element);
