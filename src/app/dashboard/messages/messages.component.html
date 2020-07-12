@@ -13,21 +13,31 @@
       </div>
       <div id="chat-message-list">
         <section>       
-        <div class="message-row" *ngFor="let try of tries">
-          <div class="message-text other-message" *ngIf="try.userId !== adminID">{{try.text}}</div>
-          <div class="message-time" *ngIf="try.userId !== adminID">{{try.dateTime}}</div>
-          <div class="message-text you-message" *ngIf="try.userId === adminID">{{try.text}}</div>
-          <div class="message-time" *ngIf="try.userId === adminID">{{try.dateTime}}</div>
+        <div class="" *ngFor="let try of tries">
+          <section class="message-row other-message">
+          <div class="message-text" *ngIf="try.userId !== adminID">{{try.text}}
+          <div class="message-time" *ngIf="try.userId !== adminID">{{try.dateTime}}</div></div>
+          <div class="message-time" *ngIf="try.userId !== adminID">{{try.user.name}}</div>
+        </section>
+          <section class="you-message message-row">
+          <div class="message-text" *ngIf="try.userId === adminID">{{try.text}}
+          <div class="message-time" *ngIf="try.userId === adminID">{{try.dateTime | date: 'short'}}</div></div>
+          <div class="message-time" *ngIf="try.userId === adminID">{{try.user.name}}</div>
+        </section>
         </div>
-        <div class="message-row " *ngFor="let text of sendMessage">  
-          <div class="message-text you-message">{{text}}</div>
+        <div class=" " *ngFor="let text of sendMessage">  
+          <section class="message-row you-message">
+          <div class="message-text">{{text}}
           <div class="message-time">{{currentTime | date: 'short'}}</div>
+        </div>
+          <div class="message-time">{{adminName}}</div>
+        </section>
         </div>
       </section>
       </div>
       <div id="chat-form">
         <input type="text" placeholder="Type a message" [(ngModel)]="message" (keyup.enter)="onEnter()"/>
-        <!-- <button id="send">send</button> -->
+        <button class="primary-bg ml-2" (click)="onEnter()" mat-raised-button>send</button>
       </div>
     </div>
    </section>

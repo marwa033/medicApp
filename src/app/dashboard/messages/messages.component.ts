@@ -36,6 +36,7 @@ export class MessagesComponent implements OnInit {
   userId: any;
   currentTime = new Date();
   adminID = JSON.parse(localStorage.getItem('adminId'));
+  adminName = JSON.parse(localStorage.getItem('adminName'));
 
   constructor(public translate: TranslateService,
     public authService: AuthService,
@@ -65,12 +66,13 @@ sendYourMessage(){
 
 
   ngOnInit() {
+    console.log(this.adminName)
     let val = this.selectedID 
     this.authService.onNewMessage(val).subscribe(msg => {
       console.log('got a msg: ' + msg);
       location.reload()
     });
-    
+    // 
     /////////////////////////////////////////////////
     this.route.params.subscribe(params => {
       if (this.selectedID = params.id,this.name = params.name){

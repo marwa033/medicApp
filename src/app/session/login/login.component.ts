@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit{
                 then( getProfileResults => { getProfileResults
                   this.getRole(getProfileResults.admin.role)
                   this.getAdminId(getProfileResults.admin.userId)
+                  this.getAdminName(getProfileResults.name)
                 });
   }
   
@@ -50,6 +51,11 @@ export class LoginComponent implements OnInit{
       var adminID = JSON.parse(localStorage.getItem('adminId'));
       console.log(adminID)
       }
+      getAdminName(value) {
+        localStorage.setItem('adminName', JSON.stringify(value));
+        var adminName = JSON.parse(localStorage.getItem('adminName'));
+        console.log(adminName)
+        }
     ngOnInit(){
     }
 

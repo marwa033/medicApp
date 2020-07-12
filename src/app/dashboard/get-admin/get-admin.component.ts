@@ -105,8 +105,14 @@ FilterAdmins(value){
                 if(confirm("Are you sure you want to delete this Admin?")){
                 this.authService.AdminDelete(element).
                 then( responseDelete => { this.delete = responseDelete;
-                   console.log(element);
-                   this.Close();   
+                  //  console.log(element);
+                  let message = this.delete.message
+                  if(message){
+                    this.toastr.error(message);
+                  }else{
+                    this.toastr.info('Successfully Delete');
+                    this.Close();   
+                  }
                 });}else{}
                }
 

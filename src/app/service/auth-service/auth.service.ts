@@ -806,7 +806,7 @@ request.headers.append('x-auth-token', log);
         const response = await fetch( request);
   const responseDelete = await response.json();
   this.deleteAdmin = responseDelete;
-  this.toastr.info('Successfully Delete');
+  // this.toastr.info('Successfully Delete');
   return this.deleteAdmin;
 }
 /////////////////////////////////////////
