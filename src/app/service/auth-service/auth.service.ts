@@ -184,10 +184,8 @@ this.messageResult = sendMessageResult;
 return this.messageResult;
 }
 /////////////////////////////////////////
-async DoctorAdd(value) {
+async DoctorAdd(value , hours , phones) {
   let log =this.userData['x-auth-token'];
-    var x = JSON.parse(localStorage.getItem('Hours'));
-    var phone = JSON.parse(localStorage.getItem('Phone'));
   const data = { name:{ en: value.EName , ar: value.AName}, 
   title:{en: value.ETitle, ar:value.ATitle },
   bio:{en: value.EBio, ar:value.ABio },
@@ -195,14 +193,14 @@ async DoctorAdd(value) {
     image : value.imageSrc ,logo:value.imageSrcLogo,
   price:value.price , lat : value.lat ,
    lng: value.lang , estimateTime: value.time ,
-  clinicPhones:phone , categoryId:value.categories ,
+  clinicPhones:phones , categoryId:value.categories ,
    districtId: value.districts,
 user:{name: value.name , phone: value.phone ,password:value.password},numberOfBookingDays:value.booking ,
-workingHours :x
+workingHours :hours
 
 // workingHours.append('day' , value.day)
 };
-console.log(x)
+
   const bodyobj = JSON.stringify(data);
   const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
   const request = new Request(baseURL + 'auth/vendors', {
@@ -333,16 +331,14 @@ return this.upSububscription;
 
 
 /////////////////////////////////////////
-async UpdateDoctor(value) {
+async UpdateDoctor(value , phones , hours) {
   let log =this.userData['x-auth-token'];
-  let  upwork = JSON.parse(localStorage.getItem('editWork'));
-  let upPhone = JSON.parse(localStorage.getItem('editPhone'));
   const data = { _id: value.id ,name:{ en: value.EName , ar: value.AName}, title:{en: value.ETitle, ar:value.ATitle },
   bio:{en: value.EBio, ar:value.ABio },  address:{en: value.EAddress, ar:value.AAddress }, image : value.imageSrc ,logo:value.imageSrcLogo,
   price:value.price , lat : value.lat , lng: value.lang , estimateTime: value.time ,
-  clinicPhones:upPhone , categoryId:value.categories , districtId: value.districts,
+  clinicPhones:phones , categoryId:value.categories , districtId: value.districts,
 user:{name: value.name , phone: value.phone },numberOfBookingDays:value.booking ,
-workingHours :upwork
+workingHours :hours
 
 // workingHours.append('day' , value.day)
 };

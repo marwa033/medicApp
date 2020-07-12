@@ -79,7 +79,7 @@ export class BookingDoctorsComponent implements OnInit {
     onAdd() {
       this.selectedFeatures.push({day:this.day , from:this.from , to:this.to , max:this.max});
       this.modalService.dismissAll(); 
-      this.UpdateWork(this.selectedFeatures);
+      // this.UpdateWork(this.selectedFeatures);
       this.day="";
       this.from="";
       this.to="";
@@ -89,38 +89,38 @@ export class BookingDoctorsComponent implements OnInit {
       this.selectedPhone.push(this.phoneAdd);
       console.log(this.selectedPhone)
       this.modalService.dismissAll(); 
-      this.UpdatePhone(this.selectedPhone);
+      // this.UpdatePhone(this.selectedPhone);
       this.phoneAdd="";
     }
     removeItem(index) {
       if(confirm("Are you want to delete this date ?")){
       this.selectedFeatures.splice(index, 1);
-      this.UpdateWork(this.selectedFeatures);
+      // this.UpdateWork(this.selectedFeatures);
     }else{}
     }
     removePhone(index){
       if(confirm("Are you want to delete this phone?")){
       this.selectedPhone.splice(index, 1);
-      this.UpdatePhone(this.selectedPhone);
+      // this.UpdatePhone(this.selectedPhone);
     }else{}
     }
-    UpdateWork(value) {
-      localStorage.setItem('editWork', JSON.stringify(value));
-      var upwork = JSON.parse(localStorage.getItem('editWork'));
-      console.log(upwork)    
-    }
-    UpdatePhone(value) {
-      localStorage.setItem('editPhone', JSON.stringify(value));
-      var upPhone = JSON.parse(localStorage.getItem('editPhone'));
-      // console.log(upwork)    
-    }
+    // UpdateWork(value) {
+    //   localStorage.setItem('editWork', JSON.stringify(value));
+    //   var upwork = JSON.parse(localStorage.getItem('editWork'));
+    //   console.log(upwork)    
+    // }
+    // UpdatePhone(value) {
+    //   localStorage.setItem('editPhone', JSON.stringify(value));
+    //   var upPhone = JSON.parse(localStorage.getItem('editPhone'));
+    //   console.log(upPhone)    
+    // }
 
     uploadFile(){
       this.imageCompress.uploadFile().then(({image, orientation}) => {
          
            this.imgResultBeforeCompress = image;
            console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
-           this.imageCompress.compressFile(image, null, 15, 15).then(
+           this.imageCompress.compressFile(image, null, 50, 50).then(
              result => {
                this.imageSrc = result;
                this.imgResultAfterCompress = result;
@@ -135,7 +135,7 @@ export class BookingDoctorsComponent implements OnInit {
            
              this.imgResultBeforeCompress = image;
              console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
-             this.imageCompress.compressFile(image, null, 15, 15).then(
+             this.imageCompress.compressFile(image, null, 50, 50).then(
                result => {
                  this.imageSrcLogo = result;
                  this.imgResultAfterCompress = result;
@@ -161,8 +161,10 @@ export class BookingDoctorsComponent implements OnInit {
                 });
     }
     Update(value){   
+      var hours = this.selectedFeatures
+      var phones = this.selectedPhone
       this.spinner.show();
-      this.authService.UpdateDoctor(value).
+      this.authService.UpdateDoctor(value , phones , hours).
                 then( getUpdateDoctor => { this.tries = getUpdateDoctor;
                   setTimeout(() => {
                     this.spinner.hide();
@@ -238,9 +240,10 @@ this.endDate = new Date(this.x.subscription.endDate)
 this.subID = this.x.subscription._id
 this.null = this.x.subscription
 console.log(this.null);
+console.log(this.selectedPhone)
+console.log(this.x.clinicPhones)
       });
     })
-
 
 // console(this.checkDate)
     this.spinner.show();
