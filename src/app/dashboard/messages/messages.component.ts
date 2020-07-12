@@ -75,6 +75,7 @@ sendYourMessage(){
     // 
     /////////////////////////////////////////////////
     this.route.params.subscribe(params => {
+      this.selectedID = params.id,this.name = params.name
       if (this.selectedID = params.id,this.name = params.name){
        let val = this.selectedID   
        this.spinner.show();

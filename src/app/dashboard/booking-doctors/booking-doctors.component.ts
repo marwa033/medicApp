@@ -120,7 +120,7 @@ export class BookingDoctorsComponent implements OnInit {
          
            this.imgResultBeforeCompress = image;
            console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
-           this.imageCompress.compressFile(image, null, 30, 30).then(
+           this.imageCompress.compressFile(image, null, 15, 15).then(
              result => {
                this.imageSrc = result;
                this.imgResultAfterCompress = result;
@@ -135,7 +135,7 @@ export class BookingDoctorsComponent implements OnInit {
            
              this.imgResultBeforeCompress = image;
              console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
-             this.imageCompress.compressFile(image, null, 30, 30).then(
+             this.imageCompress.compressFile(image, null, 15, 15).then(
                result => {
                  this.imageSrcLogo = result;
                  this.imgResultAfterCompress = result;
