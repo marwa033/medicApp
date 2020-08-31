@@ -23,7 +23,7 @@
                     <section class="col-md-4">
                         <mat-form-field>
                             <mat-label>{{'Start Date' | translate}}</mat-label>
-                            <input matInput [matDatepicker]="picker" name="Date" [(ngModel)] = "Date">
+                            <input matInput [matDatepicker]="picker" name="Date" [min]="todayDate" [(ngModel)] = "Date">
                             <mat-datepicker-toggle matSuffix [for]="picker">
                                 <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                               </mat-datepicker-toggle>
@@ -49,7 +49,16 @@
                     <input matInput placeholder="{{'Amount' | translate}}" name="Amount" type="number" [(ngModel)] = "Amount">
                 </mat-form-field>
             </section>
-            <section class="col-md-4"></section>
+            <section class="col-md-4">
+                <mat-form-field>
+                    <mat-select placeholder="{{'Doctor' | translate}}" multiple [(value)]= "selectedDoctor" name="doctors" [(ngModel)] = "selectedDoctor">
+                      <mat-option *ngFor="let doctor of doctors" [value]="doctor._id">
+                        {{doctor.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <!-- <p>selected : {{selectedDoctor}}</p> -->
+            </section>
         </section>
         
     </div>

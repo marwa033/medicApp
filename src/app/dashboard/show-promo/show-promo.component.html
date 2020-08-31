@@ -134,7 +134,15 @@
           <input matInput placeholder="{{'Amount' | translate}}" name="upAmount" type="number" [(ngModel)] = "editAmount">
       </mat-form-field>
   </section>
-
+<section class="col-md-6">
+  <mat-form-field>
+    <mat-select placeholder="{{'Doctor' | translate}}" multiple [(value)]= "selectedDoctor" name="doctors" [(ngModel)] = "selectedDoctor">
+      <mat-option *ngFor="let doctor of doctors" [value]="doctor._id">
+        {{doctor.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</section>
 </section>
    </div>
     <div class="modal-footer">

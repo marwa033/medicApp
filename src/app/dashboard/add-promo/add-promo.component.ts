@@ -19,6 +19,10 @@ export class AddPromoComponent implements OnInit {
   Period: string='';
   Users: string='';
   Amount: string='';
+  doctors: any;
+  selectedDoctor: any;
+   //today's date
+todayDate:Date = new Date();
 
   constructor(public translate: TranslateService,
     private spinner: NgxSpinnerService,
@@ -26,10 +30,17 @@ export class AddPromoComponent implements OnInit {
    private pageTitleService: PageTitleService ,
      config: NgbModalConfig,
       private modalService: NgbModal) {}
-
+ 
+      Doctor(){
+        this.authService.GetDoctor().
+                  then( responsegetDoctor => { this.doctors = responsegetDoctor.data;
+                  });
+      }
       Add(value){
+        console.log(this.selectedDoctor)
+        let doc = this.selectedDoctor
         this.spinner.show();
-        this.authService.AddPromo(value).
+        this.authService.AddPromo(value , doc).
                   then( responseAddPromo => { this.tries = responseAddPromo;
                   });
                   setTimeout(() => {
@@ -37,6 +48,7 @@ export class AddPromoComponent implements OnInit {
                   }, this.tries);
       }  
   ngOnInit() {
+    this.Doctor()
   }
 
 }

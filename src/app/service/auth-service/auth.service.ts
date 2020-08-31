@@ -74,6 +74,7 @@ export class AuthService {
   messageResult: any;
   getHome: any;
   notification: any;
+  getBookingResults: any;
    constructor(private firebaseAuth: AngularFireAuth,
                private router: Router,
                private toastr: ToastrService,
@@ -96,6 +97,16 @@ onNewMessage(val) {
     this.socket.on('newMessage/'+ val , msg => {
       observer.next(msg);
       console.log(this.socket)
+    });
+  });
+}
+
+// HANDLER
+NewMessage(id) {
+  this.socket = io('https://node-doctors.herokuapp.com/');
+  return Observable.create(observer => {
+    this.socket.on('newMessage/'+ id , msg => {
+      observer.next(msg);
     });
   });
 }
@@ -426,10 +437,10 @@ this.notification = sendNotificationResult;
 return this.notification;
 }
 /////////////////////////////////////////
-async AddPromo(value) {
+async AddPromo(value ,doc) {
   let log =this.userData['x-auth-token'];
   const data = {code: value.Code ,  startDate : value.Date , daysPeriod: value.Period , maxNumberOfUses: value.Users,
-    amount: value.Amount , type : value.Type , forAllClients : value.Client , forAllVendors: value.Doctor};
+    amount: value.Amount , type : value.Type , vendorIds: doc};
 
   const bodyobj = JSON.stringify(data);
   const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
@@ -613,11 +624,11 @@ request.headers.append('x-auth-token', log);
   return this.upDistrictresult;
 }
 /////////////////////////////////////////
-async UpdatePromo(value) {
+async UpdatePromo(value , doc) {
   // console.log(value.upid);
   let log =this.userData['x-auth-token'];
   const data = { _id:value.id , code : value.upCode , startDate: value. upDate , daysPeriod : value.upDays , maxNumberOfUses: value.upUsers,
-    amount: value.upAmount };
+    amount: value.upAmount , vendorIds : doc};
 const bodyobj = JSON.stringify(data);
 
 const request = new Request(baseURL + 'payments/promocodes',
@@ -1011,7 +1022,7 @@ async GetBooking() {
   let log =this.userData['x-auth-token'];
   let  x = JSON.parse(localStorage.getItem('language'));
   const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
-  const request = new Request(baseURL + 'components/bookings?pageNumber=1&pageSize=100',
+  const request = new Request(baseURL + 'components/bookings',
   { method: 'GET',
   });
         request.headers.delete('Content-Type');
@@ -1021,16 +1032,35 @@ async GetBooking() {
         const response = await fetch( request);
   const responsegetbooks = await response.json();
 
-  this.getBookResults = responsegetbooks;
-  return this.getBookResults;
+  this.getBookingResults = responsegetbooks.data;
+  return this.getBookingResults;
 }
 
+
+/////////////////////////////////////////
+async TryBooking() {
+  let log =this.userData['x-auth-token'];
+  let  x = JSON.parse(localStorage.getItem('language'));
+  const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  const request = new Request(baseURL + 'components/bookings',
+  { method: 'GET',
+  });
+        request.headers.delete('Content-Type');
+        request.headers.append('Content-Type', 'application/json');
+        request.headers.append('x-auth-token', log);
+        request.headers.append('lang', x);
+        const response = await fetch( request);
+  const tryResponse = await response.json();
+
+  this.getBookingResults = tryResponse;
+  return this.getBookingResults;
+}
 /////////////////////////////////////////
 async GetBookingfilter(value) {
   let log =this.userData['x-auth-token'];
   let  x = JSON.parse(localStorage.getItem('language'));
   const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
-  const request = new Request(baseURL + 'components/bookings?pageNumber=1&pageSize=100&completed=' + value.complete,
+  const request = new Request(baseURL + 'components/bookings?completed=' + value.complete,
   { method: 'GET',
   });
         request.headers.delete('Content-Type');
@@ -1048,7 +1078,7 @@ async GetBookingClient(val) {
   let log =this.userData['x-auth-token'];
   let  x = JSON.parse(localStorage.getItem('language'));
   const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
-  const request = new Request(baseURL + 'components/bookings?pageNumber=1&pageSize=100&clientId=' + val ,
+  const request = new Request(baseURL + 'components/bookings?clientId=' + val ,
   { method: 'GET',
   });
         request.headers.delete('Content-Type');
@@ -1066,7 +1096,7 @@ async getMessages(val) {
   let log =this.userData['x-auth-token'];
   let  x = JSON.parse(localStorage.getItem('language'));
   const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
-  const request = new Request(baseURL + 'chat/messages/group/' + val + '?pageNumber=1&pageSize=100',
+  const request = new Request(baseURL + 'chat/messages/group/' + val,
   { method: 'GET',
   });
         request.headers.delete('Content-Type');
@@ -1076,7 +1106,7 @@ async getMessages(val) {
         const response = await fetch( request);
   const responseGetMessages = await response.json();
 
-  this.getMessagesResults = responseGetMessages;
+  this.getMessagesResults = responseGetMessages.data;
   return this.getMessagesResults;
 }
 /////////////////////////////////////////

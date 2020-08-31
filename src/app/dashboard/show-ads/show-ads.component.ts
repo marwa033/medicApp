@@ -113,7 +113,7 @@ FilterAds(value){
            
              this.imgResultBeforeCompress = image;
              console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
-             this.imageCompress.compressFile(image, null, 30, 30).then(
+             this.imageCompress.compressFile(image, null, 60, 60).then(
                result => {
                  this.imageSrc = result;
                  this.imgResultAfterCompress = result;

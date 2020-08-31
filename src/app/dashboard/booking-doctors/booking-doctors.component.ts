@@ -93,15 +93,14 @@ export class BookingDoctorsComponent implements OnInit {
       this.phoneAdd="";
     }
     removeItem(index) {
-      if(confirm("Are you want to delete this date ?")){
+      if(confirm("Are you sure want to delete this date ?")){
       this.selectedFeatures.splice(index, 1);
       // this.UpdateWork(this.selectedFeatures);
     }else{}
     }
     removePhone(index){
-      if(confirm("Are you want to delete this phone?")){
+      if(confirm("Are sure you want to delete this phone?")){
       this.selectedPhone.splice(index, 1);
-      // this.UpdatePhone(this.selectedPhone);
     }else{}
     }
     // UpdateWork(value) {
@@ -120,7 +119,7 @@ export class BookingDoctorsComponent implements OnInit {
          
            this.imgResultBeforeCompress = image;
            console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
-           this.imageCompress.compressFile(image, null, 50, 50).then(
+           this.imageCompress.compressFile(image, null, 40, 40).then(
              result => {
                this.imageSrc = result;
                this.imgResultAfterCompress = result;
@@ -135,7 +134,7 @@ export class BookingDoctorsComponent implements OnInit {
            
              this.imgResultBeforeCompress = image;
              console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
-             this.imageCompress.compressFile(image, null, 50, 50).then(
+             this.imageCompress.compressFile(image, null, 30, 30).then(
                result => {
                  this.imageSrcLogo = result;
                  this.imgResultAfterCompress = result;

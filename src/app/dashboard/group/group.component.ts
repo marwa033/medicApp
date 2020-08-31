@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 export class GroupComponent implements OnInit {
 
   dataSource: MatTableDataSource<unknown>;
-  displayedColumns: string[] = [ 'count' ,'name', 'phone' , 'action'];
+  displayedColumns: string[] = [ 'count' ,'name', 'phone' , 'action' , 'any'];
 
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -24,6 +24,7 @@ export class GroupComponent implements OnInit {
   results: any;
   tries: any;
   delete: any;
+  name: any;
  
   constructor(public translate: TranslateService,
     public authService: AuthService,
@@ -43,8 +44,20 @@ export class GroupComponent implements OnInit {
                 then( getGroupResults => { this.results = getGroupResults;
                    this.dataSource = new MatTableDataSource(getGroupResults);
                    this.dataSource.paginator = this.paginator;
-                   this.dataSource.sort = this.sort; 
-                  //  console.log( this.results );
+                   this.dataSource.sort = this.sort;
+                   console.log(this.results)
+                  //  this.results.forEach(item => {
+                  //    let id = item._id
+                  //    console.log(id)
+                  //    this.authService.NewMessage(id).subscribe(msg => {
+                  //     console.log('got a msg: ' + msg);
+                  //     if(item._id == id){
+                  //       this.name = item.user.name
+                  //       console.log(this.name)
+                  //     }
+                  //     location.reload()
+                  //   });
+                  // }); 
                    setTimeout(() => {
                     this.spinner.hide();
                   }, this.results);
@@ -73,6 +86,9 @@ export class GroupComponent implements OnInit {
                }
                
   ngOnInit() {
+    for(let i=0; i<= this.results ; i++){
+      console.log(i)
+    }
     this.spinner.show();
     this.Group();
   }

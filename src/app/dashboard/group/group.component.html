@@ -1,6 +1,8 @@
 <ngx-spinner bdColor = "rgba(51, 51, 51, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true">
     <p style="color: white" > Loading... </p></ngx-spinner>
-  
+    <head>  
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    </head>
   <div class="container-fluide">
   <!-- <h4</h4> -->
   <section class="row ">
@@ -38,7 +40,14 @@
                     <mat-icon style="color:#19a994" class="pointer" title="open chat" (click)="Chat(element)">                      
                     <a [routerLink]="['/dashboard/message/' + element._id +'/'+ element.user.name]">chat
                     </a></mat-icon> 
+                  
               </td>
+              </ng-container>
+              <ng-container matColumnDef="any">
+                <th mat-header-cell *matHeaderCellDef> {{'' | translate}} </th>
+                <td mat-cell *matCellDef="let element">
+                  <mat-icon style="color:lightgreen" class="pointer"*ngIf="element.user.name == name" >stop_circle</mat-icon>
+                 </td>
               </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

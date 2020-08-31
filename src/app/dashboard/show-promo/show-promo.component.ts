@@ -33,6 +33,8 @@ export class ShowPromoComponent implements OnInit {
   editClient: any;
   editDoctor: any;
   startDate = new Date()
+  selectedDoctor: any;
+  doctors: any;
   
   constructor(public translate: TranslateService,
     public authService: AuthService,
@@ -61,7 +63,8 @@ export class ShowPromoComponent implements OnInit {
                 }); }
                 
                 Update(value){
-                  this.authService.UpdatePromo(value).
+                  let doc = this.selectedDoctor
+                  this.authService.UpdatePromo(value , doc).
                             then( responseupPromo => { this.tries = responseupPromo;
                               // console.log(this.tries);
                               let message = responseupPromo.message;
@@ -73,7 +76,12 @@ export class ShowPromoComponent implements OnInit {
                                     }
                             });
                 }  
-
+                
+      Doctor(){
+        this.authService.GetDoctor().
+                  then( responsegetDoctor => { this.doctors = responsegetDoctor.data;
+                  });
+      }
                 Close(){ 
                   this.modalService.dismissAll(); 
                   this.spinner.show();
@@ -86,6 +94,7 @@ export class ShowPromoComponent implements OnInit {
 
 
 selectedRow(element){
+  console.log(element)
   this.id = element._id;
   this.editCode = element.code;
   this.editDate =  new Date (element.startDate);
@@ -95,9 +104,11 @@ selectedRow(element){
   this.editType = element.type;
   this.editClient = element.forAllClients;
   this.editDoctor = element.forAllVendors;
+  this.selectedDoctor = element.vendorIds
 }
   ngOnInit() {
 this.PromoCodes();
+this.Doctor()
 this.spinner.show();
   }
 

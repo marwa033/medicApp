@@ -69,6 +69,7 @@ import { BookingComponent } from './booking/booking.component';
 import { GroupComponent } from './group/group.component';
 import { MessagesComponent } from './messages/messages.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { TryComponent } from './try/try.component';
 
 @NgModule({
 	declarations: [
@@ -94,7 +95,8 @@ import { NotificationsComponent } from './notifications/notifications.component'
 		BookingComponent,
 		GroupComponent,
 		MessagesComponent,
-		NotificationsComponent
+		NotificationsComponent,
+		TryComponent
 	],
 	imports: [ GridModule,
 		ListViewModule ,

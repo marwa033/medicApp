@@ -55,9 +55,14 @@
         </section>
         <section class="row justify-content-center">
             <section class="col-md-4">
+                <!-- <mat-form-field>
+                    <input matInput [matDatepicker]="picker" [min]="todayDate" placeholder="Appointment date" formControlName="appointment_date"> 
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field> -->
                 <mat-form-field>
                     <mat-label>{{'End Date' | translate}}</mat-label>
-                    <input matInput [matDatepicker]="picker" name="endDate" [(ngModel)] = "endDate">
+                    <input matInput [matDatepicker]="picker" name="endDate" [min]="todayDate" [(ngModel)] = "endDate">
                     <mat-datepicker-toggle matSuffix [for]="picker">
                         <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                       </mat-datepicker-toggle>

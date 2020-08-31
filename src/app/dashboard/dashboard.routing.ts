@@ -22,6 +22,7 @@ import { BookingComponent } from './booking/booking.component';
 import { MessagesComponent } from './messages/messages.component';
 import { GroupComponent } from './group/group.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { TryComponent } from './try/try.component';
 
 
 export const DashboardRoutes: Routes = [
@@ -133,6 +134,10 @@ export const DashboardRoutes: Routes = [
          {
             path: 'notification',
             component : NotificationsComponent
+         },
+         {
+            path: 'try',
+            component : TryComponent
          }
       ]
    }

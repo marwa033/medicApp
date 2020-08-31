@@ -41,16 +41,17 @@ export class BookingComponent implements OnInit {
       
       bookings(){
         this.authService.GetBooking().
-        then( responsegetbooks => { this.results = responsegetbooks.data;
-           this.dataSource = new MatTableDataSource(responsegetbooks.data);
+        then( getBookingResults => { this.tries = getBookingResults;
+           this.dataSource = new MatTableDataSource(getBookingResults);
            this.dataSource.paginator = this.paginator;
            this.dataSource.sort = this.sort;
-          //  this.results.forEach(element => {
-          //    console.log(element.completed)
-          //  }); 
+           
+          // this.results.forEach(element => {
+          //   console.log(element.client.user.name)
+          // });
            setTimeout(() => {
             this.spinner.hide();
-          }, this.results);
+          }, getBookingResults);
         });}
 
         FilterBooking(value){
@@ -66,23 +67,18 @@ export class BookingComponent implements OnInit {
           });
         }
 
-          editRow(element){
-            this.router.navigate(['/dashboard/bookingclient']);
-            this.setID(element);
-          }
+          // editRow(element){
+          //   this.router.navigate(['/dashboard/bookingclient']);
+          //   this.setID(element);
+          // }
 
-          setID(value) {
-            localStorage.setItem('book', JSON.stringify(value));
-            var x = JSON.parse(localStorage.getItem('book'));
-            // for(let i=0 ; i<x.vendor.workingHours.size ; i++)
-            // {
-            //   console.log(i);
-            // }
-            
-            this.day = x.vendor['workingHours'];
-          console.log(x.vendor.workingHours);
-          console.log(x);
-          }
+          // setID(value) {
+          //   localStorage.setItem('book', JSON.stringify(value));
+          //   var x = JSON.parse(localStorage.getItem('book'));
+          //   this.day = x.vendor['workingHours'];
+          // console.log(x.vendor.workingHours);
+          // console.log(x);
+          // }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
