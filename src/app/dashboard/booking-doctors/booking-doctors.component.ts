@@ -54,6 +54,7 @@ export class BookingDoctorsComponent implements OnInit {
   subID: any;
   null: any;
   selectedID: any;
+  selectedDoctor: any;
   imgResultBeforeCompress;
   imgResultAfterCompress;
 

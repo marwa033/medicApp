@@ -25,7 +25,7 @@
           <div class="message-time" *ngIf="try.userId === adminID">{{try.user.name}}</div>
         </section>
         </div>
-        <div class=" " *ngFor="let text of sendMessage">  
+        <div  *ngFor="let text of sendMessage">  
           <section class="message-row you-message">
           <div class="message-text">{{text}}
           <div class="message-time">{{currentTime | date: 'short'}}</div>

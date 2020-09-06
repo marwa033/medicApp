@@ -1060,7 +1060,7 @@ async GetBookingfilter(value) {
   let log =this.userData['x-auth-token'];
   let  x = JSON.parse(localStorage.getItem('language'));
   const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
-  const request = new Request(baseURL + 'components/bookings?completed=' + value.complete,
+  const request = new Request(baseURL + 'components/bookings?completed=' + value.complete + '&vendorId=' + value.doctors,
   { method: 'GET',
   });
         request.headers.delete('Content-Type');
@@ -1106,7 +1106,8 @@ async getMessages(val) {
         const response = await fetch( request);
   const responseGetMessages = await response.json();
 
-  this.getMessagesResults = responseGetMessages.data;
+  this.getMessagesResults = responseGetMessages;
+  console.log(this.getMessagesResults)
   return this.getMessagesResults;
 }
 /////////////////////////////////////////

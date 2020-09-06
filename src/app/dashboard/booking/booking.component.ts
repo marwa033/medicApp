@@ -28,6 +28,7 @@ export class BookingComponent implements OnInit {
   day: any;
   selectedID: any;
   vendorID: any;
+  doctors: any;
   constructor(public translate: TranslateService,
     public authService: AuthService,
    private pageTitleService: PageTitleService ,
@@ -66,6 +67,12 @@ export class BookingComponent implements OnInit {
             }, this.tries);
           });
         }
+        
+  Doctor(){
+    this.authService.GetDoctor().
+              then( responsegetDoctor => { this.doctors = responsegetDoctor.data;
+              });
+  } 
 
           // editRow(element){
           //   this.router.navigate(['/dashboard/bookingclient']);
@@ -81,6 +88,7 @@ export class BookingComponent implements OnInit {
           // }
 
   ngOnInit() {
+    this.Doctor()
     this.route.params.subscribe(params => {
      if (this.selectedID = params.id){
       let val = this.selectedID   

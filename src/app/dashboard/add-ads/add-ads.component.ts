@@ -47,7 +47,6 @@ todayDate:Date = new Date();
   Doctor(){
     this.authService.GetDoctor().
               then( responsegetDoctor => { this.doctors = responsegetDoctor.data;
-                // console.log('doctor grt ' + this.doctors);
               });
   } 
 

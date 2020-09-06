@@ -18,11 +18,18 @@
       </mat-form-field>
     </section>
   <section class="col-md-3">
+    <mat-form-field>
+      <mat-select placeholder="{{'Doctor' | translate}}" name="doctors" [(ngModel)] = "selectedDoctor">
+        <mat-option *ngFor="let doctor of doctors" [value]="doctor._id">
+          {{doctor.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </section>
+  <section class="col-md-3">
     <button class="btn btn-block mt-3" >{{'Save' | translate}}</button>
   </section>
   
-  <section class="col-md-3">
-  </section>
 </section>
 <!-- <table class="table">
   <thead>
@@ -83,7 +90,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns" style="text-align: center;"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator [pageSizeOptions]="[20]" showFirstLastButtons></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
     
     </div>
     </form>

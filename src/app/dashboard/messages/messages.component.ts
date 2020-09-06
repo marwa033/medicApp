@@ -51,17 +51,19 @@ export class MessagesComponent implements OnInit {
        config.keyboard = false;
     }       
     onEnter(){
+      // console.log(this.message)
       let val = this.selectedID 
     this.sendMessage.push(this.message);
-    this.sendYourMessage();
+    // console.log(this.sendMessage)
       this.authService.sendMessage(this.message , val , this.name ,this.userId,this.time);
+    this.sendYourMessage();
       this.message='';
     }
 sendYourMessage(){
   let val = this.selectedID 
   let text = this.message
   let time = this.currentTime
-  this.authService.sendYourMessage(val , text , time).then(sendMessageResult => { this.tries = sendMessageResult;});
+  this.authService.sendYourMessage(val , text , time);
 }
 
 
@@ -81,6 +83,7 @@ sendYourMessage(){
        this.spinner.show();
        this.authService.getMessages(val).
        then( responseGetMessages => { this.tries = responseGetMessages.data;
+        console.log(this.tries)
          setTimeout(() => {
           this.spinner.hide();
         }, this.tries);
